@@ -13,4 +13,9 @@ public class AppTest
     	assertEquals(Color.O, tile.getColor());
     	assertEquals(10, tile.getValue());
     }
+    
+    public void testDeck() {
+    	Deck deck = new Deck();
+    	assertEquals(104, deck.getSize());
+    }
 }
