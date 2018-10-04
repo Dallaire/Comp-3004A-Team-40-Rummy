@@ -21,10 +21,16 @@ public class AppTest
     }
     
     public void testPlayer() {
-    	
+    	Strategy first = new FirstStrategy();
+    	Player player = new Player("John", first);
+    	assertEquals("John", player.getName());
+    	assertEquals(first, player.getStrategy());
     }
     
     public void testAddTile() {
-    	
+    	Strategy first = new FirstStrategy();
+    	Player player = new Player("John", first);
+    	player.addTile(new Tile(Color.O, 10));
+    	assertEquals(1,player.getHand().size());
     }
 }
