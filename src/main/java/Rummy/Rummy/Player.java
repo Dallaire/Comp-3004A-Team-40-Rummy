@@ -35,8 +35,8 @@ public class Player {
 	
 	
 	//Functionality
-	public void addTile() {
-		
+	public void addTile(Tile aTile) {
+		this.getHand().add(aTile);
 	}
 	
 }
