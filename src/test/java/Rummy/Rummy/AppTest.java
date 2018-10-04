@@ -19,4 +19,12 @@ public class AppTest
     	Deck deck = new Deck();
     	assertEquals(104, deck.getSize());
     }
+    
+    public void testPlayer() {
+    	
+    }
+    
+    public void testAddTile() {
+    	
+    }
 }
