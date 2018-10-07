@@ -40,5 +40,9 @@ public class Table {
 		return players.size();
 	}
 	
+	public int getNumTiles() {
+		return deck.getSize();
+	}
+	
 	
 }
