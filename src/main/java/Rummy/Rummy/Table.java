@@ -1,13 +1,15 @@
 package Rummy.Rummy;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.Set;
 
 public class Table {
 	
 	private ArrayList<Player> players;
-	private Deck deck;
+	private Deck stock;
 	private Set<Tile> meld;
+	private Set<Set<Tile>> melds;
 	
 	public Table() {
 		Strategy stratPlayer = new FirstStrategy();
@@ -24,8 +26,10 @@ public class Table {
 		players.add(ai2);
 		players.add(ai3);
 		
-		deck = new Deck();
-		deck.Shuffle();
+		stock = new Deck();
+		stock.Shuffle();
+		
+		//setMelds(new Set<Set<Tile>>());
 		
 	}
 	public Table(int num_Players) {
@@ -41,7 +45,86 @@ public class Table {
 	}
 	
 	public int getNumTiles() {
-		return deck.getSize();
+		return stock.getSize();
+	}
+	public int getMelds() {
+		
+		return melds.size();
+	}
+//	private void setMelds(Set<Set<Tile>> melds) {
+//		this.melds = melds;
+//	}
+	
+	public boolean addMeld(Set<Tile> meld) {
+		return this.melds.add(meld);
+	}
+	
+	public void showMelds() {
+		//TODO show all the Melds, right now a poorly defined datastructure
+	}
+	
+	/**
+	 * Method to get a specific tile
+	 * @param c = colour of the Tile
+	 * @param v = the value of the Tile*/
+	public Tile getTile() {
+		//TODO prompt user to select a color and value
+		Tile tile = selectTile();
+		return stock.getTile(tile);
+	}
+	
+	public void displayStock() {
+		System.out.println(stock.toString());
+	}
+	
+	public Tile selectTile() {
+		String[] inputArray;
+		System.out.print("Please select a tile color followed by a value(separator = ,): \n");
+		Scanner scanner = new Scanner(System.in);
+		String input = scanner.nextLine();
+		inputArray = input.split(",");
+		
+		Color color = colorSelector(inputArray[0]);
+		int value = Integer.parseInt(inputArray[1]);
+		
+		Tile selected = new Tile(color, value);
+		System.out.println("You selected " + selected.toString());
+		
+		scanner.close();
+		
+		return selected;
+		
+	}
+	
+	/**
+	 * Check if the stock contains the specified tile
+	 * For testing purposes*/
+	public Boolean stockContains(Tile tile) {
+		// TODO Auto-generated method stub
+		
+		// return stock.contains(tile);
+		return null;
+	}
+	/**
+	 * Color selector: Given a string it will return a variable of Type Color
+	 * @param c = the String value of the color desired
+	 * @return Object of type Color or null if input is invalid
+	 * */
+	private Color colorSelector(String c) {
+		String color =  c.toUpperCase();
+		switch(color) {
+		case "R":
+			return Color.R;
+		case "B":
+			return Color.B;
+		case "G":
+			return Color.G;
+		case "O":
+			return Color.O;		
+		default:
+			return null;
+		}
+		
 	}
 	
 	
