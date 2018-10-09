@@ -39,4 +39,26 @@ public class Deck {
 		Collections.shuffle(this.tiles);
 	}
 	
+<<<<<<< HEAD
+=======
+	/**
+	 * Select a specific tile from the Deck*/
+	public Tile getTile(Tile tile) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public String toString() {
+		return null;
+		
+	}
+	/**
+	 * Check if a specific tile is in the Deck
+	 * for testing purposes atm*/
+	public Boolean contains(Tile tile) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+>>>>>>> 5375e486eba6afa082657ae342ec9cf788938a06
 }
