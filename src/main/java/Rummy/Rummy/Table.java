@@ -1,7 +1,6 @@
 package Rummy.Rummy;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
 
@@ -17,24 +16,15 @@ public class Table {
 	
 	private ArrayList<Player> players;
 	private Deck stock;
-<<<<<<< HEAD
-	private Set<Tile> meld;
-	private Set<Set<Tile>> melds;
 
-=======
-	private HashMap<Integer,Tile> meld;
-	private HashMap<Integer,HashMap<Integer,Tile>> melds;
+	private ArrayList<Tile> meld;
+	private ArrayList<ArrayList<Tile>> melds;
 	private boolean firstMeld = false;
->>>>>>> 5375e486eba6afa082657ae342ec9cf788938a06
+
 	
 	public Table() {
+		
 		Strategy stratPlayer = new FirstStrategy();
-		
-		players.add(ai2);
-		players.add(ai3);
-
-		stock=new Deck();
-		
 		Player gamer = new Player("Player 1", stratPlayer);
 		Strategy stratA1 = new FirstStrategy();
 		Player ai1 = new Player("AI 1", stratA1);
@@ -52,24 +42,11 @@ public class Table {
 		stock = new Deck();
 		stock.Shuffle();
 		
-		melds = new HashMap<Integer,HashMap<Integer,Tile>>();
+		melds = new ArrayList<ArrayList<Tile>>();
 		
 	}
-<<<<<<< HEAD
-	//public Table(int num_Players) {
-=======
+
 	
-	/**
-	 * Integer Constructor for a Table to pass in the number of player that will be playing the game
-	 * @param num_Players = number of players between 2 and 4 accepted*/
-	public Table(int num_Players) {
->>>>>>> 5375e486eba6afa082657ae342ec9cf788938a06
-//		for (int i = 0; i < num_Players; i++) {
-//			Player gamer = new Player("Player " + i);
-//			players.add(gamer);
-//		}
-			
-	//}
 	public void shareCards() {
 		for(int i=0;i<players.size();i++) {
 			for(int j=0;j<14;j++) {
@@ -77,18 +54,11 @@ public class Table {
 			}
 		}
 	}
-	public Tile getTile() {
-		return deck.draw();
-	}
-	public Player getPlayer(int i) {
-		return players.get(i);
-	}
-<<<<<<< HEAD
-=======
+
+
 	/**
 	 * Returns the number of players in the game
 	 * @param player = ArrayList of players*/
->>>>>>> 5375e486eba6afa082657ae342ec9cf788938a06
 	public int getNumPlayers() {
 		return players.size();
 	}
@@ -115,7 +85,7 @@ public class Table {
 	 * @param meld the meld to set
 	 * TODO: Maybe some error checking;
 	 */
-	public void addMeld(HashMap<Integer,Tile> meld) {
+	public void addMeld(ArrayList<Tile> meld) {
 		this.meld = meld;
 	}
 

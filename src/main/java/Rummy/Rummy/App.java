@@ -17,7 +17,8 @@ public class App
     }
     
     public static void gameSetup() {
-    	Scanner scanner=new Scanner(System.in);
+    	@SuppressWarnings("resource")
+		Scanner scanner=new Scanner(System.in);
     	
     	System.out.println("how many players are playing?");
         int input=scanner.nextInt();
