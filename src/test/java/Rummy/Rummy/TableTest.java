@@ -40,7 +40,7 @@ public class TableTest extends TestCase
      * Should be empty because no melds have been played*/
     public void testMelds() {
     	Table rummy = new Table();
-    	assertEquals(null, rummy.getMelds());
+    	assertEquals(null, rummy.getNumMelds());
 
     }
     

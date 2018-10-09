@@ -70,7 +70,7 @@ public class Table {
 	/**
 	 * Returns all the melds added to the table by the players
 	 * @param melds =  The HashMap of Melds*/
-	public int showMelds() {
+	public int getNumMelds() {
 		
 		return melds.size();
 	}
