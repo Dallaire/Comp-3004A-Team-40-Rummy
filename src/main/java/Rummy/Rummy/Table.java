@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
+
 /**
  * The Table class contains all the data structures used to represent game elements
  * The class is responsible for passing data between 
