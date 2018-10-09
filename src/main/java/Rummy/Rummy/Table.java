@@ -1,15 +1,24 @@
 package Rummy.Rummy;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.Scanner;
 
+/**
+ * The Table class contains all the data structures used to represent game elements
+ * The class is responsible for passing data between 
+ * @param ArrayList<Player> players = A list of players in the game
+ * @param stock = The initial set of 104 tiles used at the start of the game 
+ * @param meld = a single meld submitted by a player, which is refreshed after each turn
+ * @param melds = a collection of melds submitted
+ * @param firstMeld = boolean value of whether or not a valid 30 point melds is played to start the game*/
 public class Table {
 	
 	private ArrayList<Player> players;
 	private Deck stock;
-	private HashSet<Tile> meld;
-	private HashSet<HashSet<Tile>> melds;
+	private HashMap<Integer,Tile> meld;
+	private HashMap<Integer,HashMap<Integer,Tile>> melds;
+	private boolean firstMeld = false;
 	
 	public Table() {
 		Strategy stratPlayer = new FirstStrategy();
@@ -30,9 +39,13 @@ public class Table {
 		stock = new Deck();
 		stock.Shuffle();
 		
-		melds = new HashSet<HashSet<Tile>>();
+		melds = new HashMap<Integer,HashMap<Integer,Tile>>();
 		
 	}
+	
+	/**
+	 * Integer Constructor for a Table to pass in the number of player that will be playing the game
+	 * @param num_Players = number of players between 2 and 4 accepted*/
 	public Table(int num_Players) {
 //		for (int i = 0; i < num_Players; i++) {
 //			Player gamer = new Player("Player " + i);
@@ -40,30 +53,39 @@ public class Table {
 //		}
 			
 	}
-	
+	/**
+	 * Returns the number of players in the game
+	 * @param player = ArrayList of players*/
 	public int getNumPlayers() {
 		return players.size();
 	}
-	
+	/**
+	 * Returns the number tiles left in the stock
+	 * @param stock.getSize() =  the size of the stock on the table*/
 	public int getNumTiles() {
 		return stock.getSize();
 	}
-	public int getMelds() {
+	
+	/**
+	 * Returns all the melds added to the table by the players
+	 * @param melds =  The HashMap of Melds*/
+	public int showMelds() {
 		
 		return melds.size();
 	}
+	
 //	private void setMelds(Set<Set<Tile>> melds) {
 //		this.melds = melds;
 //	}
 	
-	public boolean addMeld(HashSet<Tile> meld) {
-		return this.melds.add(meld);
+	/**
+	 * @param meld the meld to set
+	 * TODO: Maybe some error checking;
+	 */
+	public void addMeld(HashMap<Integer,Tile> meld) {
+		this.meld = meld;
 	}
-	
-	public void showMelds() {
-		//TODO show all the Melds, right now a poorly defined datastructure
-	}
-	
+
 	/**
 	 * Method to get a specific tile
 	 * @param c = colour of the Tile
@@ -128,5 +150,16 @@ public class Table {
 		
 	}
 	
+	/**
+	 * Check if the meld has been played*/
+	public boolean checkFirst() {
+		return this.firstMeld;
+	}
+	/**
+	 * @param firstMeld the firstMeld to set
+	 */
+	public void setFirstMeld(boolean firstMeld) {
+		this.firstMeld = firstMeld;
+	}
 	
 }
