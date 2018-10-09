@@ -12,7 +12,7 @@ public class App
     public static void main( String[] args )
     {
     	gameSetup();
-    	
+    	table.shareCards();
     	
     }
     
@@ -22,12 +22,8 @@ public class App
     	System.out.println("how many players are playing?");
         int input=scanner.nextInt();
          System.out.println(input);
-    	 table= new Table();
+    	// table= new Table(input);
     	        
 	}
-    public static void shareCards() {
-		for(int i=0;i<14;i++) {
-			table.getPlayer(i).addTile(table.getTile());
-		}
-	}
+   
 }
