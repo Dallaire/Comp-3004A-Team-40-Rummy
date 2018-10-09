@@ -1,15 +1,15 @@
 package Rummy.Rummy;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
-import java.util.Set;
 
 public class Table {
 	
 	private ArrayList<Player> players;
 	private Deck stock;
-	private Set<Tile> meld;
-	private Set<Set<Tile>> melds;
+	private HashSet<Tile> meld;
+	private HashSet<HashSet<Tile>> melds;
 	
 	public Table() {
 		Strategy stratPlayer = new FirstStrategy();
@@ -21,6 +21,7 @@ public class Table {
 		Strategy stratA3 = new ThirdStrategy();
 		Player ai3 = new Player("AI 3", stratA3);
 		
+		players = new ArrayList<Player>();
 		players.add(gamer);
 		players.add(ai1);
 		players.add(ai2);
@@ -29,7 +30,7 @@ public class Table {
 		stock = new Deck();
 		stock.Shuffle();
 		
-		//setMelds(new Set<Set<Tile>>());
+		melds = new HashSet<HashSet<Tile>>();
 		
 	}
 	public Table(int num_Players) {
@@ -55,7 +56,7 @@ public class Table {
 //		this.melds = melds;
 //	}
 	
-	public boolean addMeld(Set<Tile> meld) {
+	public boolean addMeld(HashSet<Tile> meld) {
 		return this.melds.add(meld);
 	}
 	
@@ -99,11 +100,11 @@ public class Table {
 	/**
 	 * Check if the stock contains the specified tile
 	 * For testing purposes*/
-	public Boolean stockContains(Tile tile) {
+	public boolean stockContains(Tile tile) {
 		// TODO Auto-generated method stub
 		
 		// return stock.contains(tile);
-		return null;
+		return false;
 	}
 	/**
 	 * Color selector: Given a string it will return a variable of Type Color

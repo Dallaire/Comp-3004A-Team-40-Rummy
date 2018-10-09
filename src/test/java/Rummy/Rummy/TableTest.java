@@ -19,7 +19,7 @@ public class TableTest extends TestCase
     }
     
     public void testPlayer3() {
-    	Table rummy = new Table(4);
+    	Table rummy = new Table();
     	assertEquals(4,rummy.getNumPlayers());
     }
     
@@ -40,11 +40,20 @@ public class TableTest extends TestCase
     }
     
     /**
-     * Test if the tiles are removed from the deck*/
-    public void testTileSelector() {
+     * Test if the tiles is not removed from the deck*/
+    public void testTileSelector1() {
     	Table rummy = new Table();
-    	Tile selected = rummy.selectTile();
-    	boolean value = rummy.stockContains(selected);
-    	assertEquals(false, value);
+    	Tile selected = rummy.selectTile(); // select a tile from the stock
+    	boolean value = rummy.stockContains(selected); // Check if the tile is in the stock
+    	assertEquals(true, value); // should be false
+    }
+    
+    /**
+     * Test if the tiles are removed from the deck*/
+    public void testTileSelector2() {
+    	Table rummy = new Table();
+    	Tile selected = rummy.selectTile(); // select a tile from the stock
+    	boolean value = rummy.stockContains(selected); // Check if the tile is in the stock
+    	assertEquals(false, value); // should be false
     }
 }
