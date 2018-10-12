@@ -66,7 +66,7 @@ public class TableRummy extends Application {
                      drawOval(canvas.getGraphicsContext2D(), t.getX(),t.getY());
                  }
                  else {
-                	 //drawTile(canvas.getGraphicsContext2D(), new Tile(Rummy.Rummy.Color.R, 7));
+                	 drawTile(canvas.getGraphicsContext2D(), new Tile(Rummy.Rummy.Color.R, 7));
                  }
              }
          });
@@ -74,7 +74,8 @@ public class TableRummy extends Application {
         new AnimationTimer() {
         	public void handle(long currentNanoTime) {
         		double t = (currentNanoTime - startNanoTime) / 1000000000.0;
-        		drawTile(canvas.getGraphicsContext2D(), new Tile(Rummy.Rummy.Color.R, 7));
+        		//drawTile(canvas.getGraphicsContext2D(), new Tile(Rummy.Rummy.Color.R, 7));
+        		reset(canvas, Color.WHITESMOKE);
         		for(int i = 0; i < circles.size(); i++) {
         			circles.get(i).update(t);          		
                     drawOval(canvas.getGraphicsContext2D(), circles.get(i).getX(), circles.get(i).getY());

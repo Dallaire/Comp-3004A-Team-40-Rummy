@@ -10,6 +10,8 @@ public class Circle {
 	private double centreY;
 	private double phase;
 	private double f;
+	private double amp;
+	private double sign;
 	Random rn = new Random();
 	
 	public Circle(double x, double y, double cx, double cy) {
@@ -19,6 +21,13 @@ public class Circle {
 		this.centreY = cy;
 		this.phase = rn.nextDouble() * Math.PI;
 		this.f = rn.nextDouble();
+		this.amp = rn.nextDouble()*5;
+		if (rn.nextBoolean() == false) {
+			this.sign = -1.0;
+		}
+		else {
+			this.sign = 1.0;
+		}
 	}
 	
 	
@@ -29,8 +38,8 @@ public class Circle {
 	}
 	
 	public void update(double t) {
-        this.x = centreX + 40 * Math.cos((1/f)*t + this.phase);
-        this.y = centreY + 40 * Math.sin((1/f)*t + this.phase);
+        this.x =  centreX + this.sign *this.amp * 40 * Math.cos((1/f)*t + this.phase);
+        this.y =  centreY + this.sign *this.amp * 40 * Math.sin((1/f)*t + this.phase);
 	}
 
 	public double getX() {
