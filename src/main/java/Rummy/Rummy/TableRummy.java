@@ -11,8 +11,12 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.ArcType;
 import javafx.scene.input.MouseEvent;
+
+import java.util.ArrayList;
+import java.util.Random;
+
+import javafx.animation.AnimationTimer;
 
 
 /**
@@ -28,6 +32,8 @@ public class TableRummy extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		
+		// Initialize the variables which setup out stage
         primaryStage.setTitle("Tile Rummy");
         Group root = new Group();
         final Canvas canvas = new Canvas(720, 480);
@@ -35,18 +41,35 @@ public class TableRummy extends Application {
         drawShapes(gc);
         root.getChildren().add(canvas);
         
+        // Variable that we will be playing with
+        final long startNanoTime = System.nanoTime();
+        final ArrayList<Circle> circles = new ArrayList<Circle>();
+        final Random rn = new Random();
+        
+        
         // handle what happens when the user double-clicks
         canvas.addEventHandler(MouseEvent.MOUSE_CLICKED, 
          new EventHandler<MouseEvent>() {
              public void handle(MouseEvent t) {            
                  if (t.getClickCount() >0) {
-                     reset(canvas, Color.WHITE);
-                     drawOval(canvas.getGraphicsContext2D(), t);
+                     
+                     circles.add(new Circle(t.getX() + rn.nextDouble() * 30.0, t.getY() + rn.nextDouble() * 30.0,t.getX() ,t.getY()));
+                     drawOval(canvas.getGraphicsContext2D(), t.getX(),t.getY());
                  }  
              }
          });
         
-        
+        new AnimationTimer() {
+        	public void handle(long currentNanoTime) {
+        		double t = (currentNanoTime - startNanoTime) / 1000000000.0;
+        		reset(canvas, Color.WHITE);
+        		for(int i = 0; i < circles.size(); i++) {
+        			circles.get(i).update(t);          		
+                    drawOval(canvas.getGraphicsContext2D(), circles.get(i).getX(), circles.get(i).getY());
+        		}
+
+        	}
+        }.start();
         
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
@@ -61,9 +84,9 @@ public class TableRummy extends Application {
 		
 	}
 	
-	private void drawOval(GraphicsContext gc, MouseEvent e) {
+	private void drawOval(GraphicsContext gc, double x, double y) {
 		gc.setFill(Color.GREEN);
-		gc.fillOval(e.getX(), e.getY(), 30, 30);
+		gc.fillOval(x, y, 30, 30);
 	}
 	
     private void reset(Canvas canvas, Color color) {
@@ -71,5 +94,6 @@ public class TableRummy extends Application {
         gc.setFill(color);
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
     }
+    
 
 }
