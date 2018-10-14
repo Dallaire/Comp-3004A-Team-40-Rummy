@@ -77,4 +77,43 @@ public class TableTest extends TestCase
     	Table rummy = new Table();
     	assertEquals(false, rummy.checkFirst()); //
     }
+    
+    /**
+     * test to check if player input equals p
+     * test to check if player wants to play a new game
+     */
+    public void testPlayerPlay() {
+    	Game input = new Game();
+    	assertEquals("P", input.getGameInput());
+    }
+    
+    /**
+     * test to check if game input equals F
+     * test to check if the player doesn't want to play a new game
+     */
+    public void testPlayerNotPlay() {
+    	Game input = new Game();
+    	assertEquals("N", input.getGameInput());
+    }
+    
+    /**
+     * test to check if player input equals R
+     * test to check if the player decides to play a run
+     */
+    public void testPlayerRun() {
+    	Game input = new Game();
+    	assertEquals("R", input.getPlayerInput());
+    }
+    /**
+     * test to check if player input equals M
+     * test to check if the player decides to play a run
+     */
+    
+    public void testPlayerMeld() {
+    	Game input = new Game();
+    	assertEquals("M", input.getPlayerInput());
+    }
+    
+     
+     
 }
