@@ -22,4 +22,12 @@ public class Tile {
 	public String toString() {
 		return color.toString() + String.valueOf(value);
 	}
+	
+	public String valueToString() {
+		return String.valueOf(value);
+	}
+	
+	public String colorToString() {
+		return color.toString();
+	}
 }
