@@ -1,5 +1,7 @@
 package Rummy.Rummy;
 
+import java.util.ArrayList;
+
 import junit.framework.TestCase;
 
 /**
@@ -7,6 +9,7 @@ import junit.framework.TestCase;
  */
 public class TableTest extends TestCase
 {
+	/* Only case is that there is 4 players Irrelevent tests removed
     public void testPlayer() {
     	Table rummy = new Table();
     	assertEquals(2,rummy.getNumPlayers());
@@ -16,17 +19,17 @@ public class TableTest extends TestCase
     public void testPlayer2() {
     	Table rummy = new Table();
     	assertEquals(3,rummy.getNumPlayers());
-    }
+    }*/
     
     public void testPlayer3() {
     	Table rummy = new Table();
     	assertEquals(4,rummy.getNumPlayers());
     }
-    
+    /*
     public void testPlayer4() {
     	Table rummy = new Table();
     	assertEquals(null,rummy.getNumPlayers());
-    }
+    }*/
     
     /**
      * Test that tiles are created*/
@@ -40,7 +43,7 @@ public class TableTest extends TestCase
      * Should be empty because no melds have been played*/
     public void testMelds() {
     	Table rummy = new Table();
-    	assertEquals(null, rummy.getNumMelds());
+    	assertEquals(0, rummy.getNumMelds());
 
     }
     
@@ -50,7 +53,7 @@ public class TableTest extends TestCase
     	Table rummy = new Table();
     	Tile selected = rummy.selectTile(); // select a tile from the stock
     	boolean value = rummy.stockContains(selected); // Check if the tile is in the stock
-    	assertEquals(true, value); // should be false
+    	assertEquals(false, value); 
     }
     
     /**
@@ -119,5 +122,14 @@ public class TableTest extends TestCase
     }
     
      
+    public void testAddMeld() {
+    	Table table = new Table();
+    	ArrayList<Tile> meld = new ArrayList<Tile>();
+    	meld.add(new Tile(Color.O, 10)); 
+    	meld.add(new Tile(Color.B, 10)); 
+    	meld.add(new Tile(Color.G, 10));
+    	table.addMeld(meld);
+    	assertEquals(table.getMeld(0), meld);
+    }
      
 }

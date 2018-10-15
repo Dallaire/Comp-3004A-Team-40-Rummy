@@ -17,7 +17,7 @@ public class Table {
 	
 	private ArrayList<Player> players;
 	private Deck stock;
-	private ArrayList<ArrayList<Tile>> melds; //Refactored data structure -Jacob
+	private ArrayList<ArrayList<Tile>> melds = new ArrayList<ArrayList<Tile>>(); //Refactored data structure -Jacob
 	private boolean firstMeld = false;
 	
 	public Table() {
@@ -71,6 +71,13 @@ public class Table {
 	public int getNumMelds() {
 		
 		return melds.size();
+	}
+	
+	/*
+	 *  Gets a meld by its index
+	 */
+	public ArrayList<Tile> getMeld(int i){
+		return melds.get(i);
 	}
 	
 //	private void setMelds(Set<Set<Tile>> melds) {
@@ -158,9 +165,9 @@ public class Table {
 	*/
 	/**
 	 * @param firstMeld the firstMeld to set
-	 */
+	 
 	public void setFirstMeld(boolean firstMeld) {
 		this.firstMeld = firstMeld;
 	}
-	
+	*/
 }
