@@ -65,7 +65,9 @@ public class TableTest extends TestCase
     /**
      * Test to check if the first legitimate meld of over 30 points has been made
      * should be false by default because no tiles have been played
-     * First 30 by each player must be checked
+     * 
+     * First 30 by each player must be checked- Jacob
+     * 
     public void testCheckFirst1() {
     	Table rummy = new Table();
     	assertEquals(false, rummy.checkFirst()); //
