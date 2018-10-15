@@ -64,19 +64,21 @@ public class TableTest extends TestCase
     
     /**
      * Test to check if the first legitimate meld of over 30 points has been made
-     * should be false by default because no tiles have been played*/
+     * should be false by default because no tiles have been played
+     * First 30 by each player must be checked
     public void testCheckFirst1() {
     	Table rummy = new Table();
     	assertEquals(false, rummy.checkFirst()); //
     }
-    
+    */
     /**
      * Test to check if the first legitimate meld of over 30 points has been made
-     * should be false by default because no tiles have been played*/
+     * should be false by default because no tiles have been played
     public void testCheckFirst2() {
     	Table rummy = new Table();
     	assertEquals(false, rummy.checkFirst()); //
     }
+    */
     
     /**
      * test to check if player input equals p

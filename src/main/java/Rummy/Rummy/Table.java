@@ -17,7 +17,7 @@ public class Table {
 	
 	private ArrayList<Player> players;
 	private Deck stock;
-	private ArrayList<ArrayList<Tile>> melds;
+	private ArrayList<ArrayList<Tile>> melds; //Refactored data structure -Jacob
 	private boolean firstMeld = false;
 	
 	public Table() {
@@ -82,7 +82,7 @@ public class Table {
 	 * TODO: Maybe some error checking;
 	 */
 	public void addMeld(ArrayList<Tile> meld) {
-		this.melds.add(meld);					// Adding a new meld
+		this.melds.add(meld);					// Adding a new meld refactored - Jacob
 	}
 
 	/**
