@@ -10,7 +10,7 @@ import java.util.Scanner;
  * The class is responsible for passing data between 
  * @param ArrayList<Player> players = A list of players in the game
  * @param stock = The initial set of 104 tiles used at the start of the game 
- * @param meld = a single meld submitted by a player, which is refreshed after each turn
+ * @param meld = a single meld submitted by a player, which is refreshed after each turn - Removed -Jacob
  * @param melds = a collection of melds submitted
  * @param firstMeld = boolean value of whether or not a valid 30 point melds is played to start the game*/
 public class Table {
