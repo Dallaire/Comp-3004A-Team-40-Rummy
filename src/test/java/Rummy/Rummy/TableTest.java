@@ -84,7 +84,7 @@ public class TableTest extends TestCase
      */
     public void testPlayerPlay() {
     	Game input = new Game();
-    	assertEquals("P", input.getGameInput());
+    	assertEquals("Y", input.getGameInput());
     }
     
     /**
