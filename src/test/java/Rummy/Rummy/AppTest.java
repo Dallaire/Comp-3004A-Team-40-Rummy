@@ -25,6 +25,9 @@ public class AppTest
     	Player player = new Player("John", first);
     	assertEquals("John", player.getName());
     	assertEquals(first, player.getStrategy());
+    	assertFalse(player.getFirst30());
+    	player.setFirst30(true);
+    	assertTrue(player.getFirst30());
     }
     
     public void testAddTile() {
