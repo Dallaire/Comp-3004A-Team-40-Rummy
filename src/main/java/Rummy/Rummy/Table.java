@@ -17,12 +17,11 @@ public class Table {
 	
 	private ArrayList<Player> players;
 	private Deck stock;
-	private HashMap<Integer,Tile> meld;
-	private HashMap<Integer,HashMap<Integer,Tile>> melds;
+	private ArrayList<ArrayList<Tile>> melds;
 	private boolean firstMeld = false;
 	
 	public Table() {
-		Strategy stratPlayer = new FirstStrategy();
+		Strategy stratPlayer = new PlayerStrategy();
 		Player gamer = new Player("Player 1", stratPlayer);
 		Strategy stratA1 = new FirstStrategy();
 		Player ai1 = new Player("AI 1", stratA1);
@@ -40,7 +39,6 @@ public class Table {
 		stock = new Deck();
 		stock.Shuffle();
 		
-		melds = new HashMap<Integer,HashMap<Integer,Tile>>();
 		
 	}
 	
@@ -83,8 +81,8 @@ public class Table {
 	 * @param meld the meld to set
 	 * TODO: Maybe some error checking;
 	 */
-	public void addMeld(HashMap<Integer,Tile> meld) {
-		this.meld = meld;
+	public void addMeld(ArrayList<Tile> meld) {
+		this.melds.add(meld);					// Adding a new meld
 	}
 
 	/**
@@ -152,10 +150,12 @@ public class Table {
 	}
 	
 	/**
-	 * Check if the meld has been played*/
+	 * Check if the meld has been played
+	 * Needs refactoring into player to see if initial 30 is played
 	public boolean checkFirst() {
 		return this.firstMeld;
 	}
+	*/
 	/**
 	 * @param firstMeld the firstMeld to set
 	 */
