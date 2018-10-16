@@ -18,6 +18,8 @@ public class AppTest
     public void testDeck() {
     	Deck deck = new Deck();
     	assertEquals(104, deck.getSize());
+    	assertNotNull(deck.geTile(0));
+    	assertEquals(103, deck.getSize());
     }
     
     public void testPlayer() {

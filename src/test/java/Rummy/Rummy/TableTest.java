@@ -7,9 +7,9 @@ import junit.framework.TestCase;
 /**
  * Unit test for simple 
  */
-public class TableTest extends TestCase
-{
-	/* Only case is that there is 4 players Irrelevent tests removed
+public class TableTest extends Test
+
+
     public void testPlayer() {
     	Table rummy = new Table();
     	assertEquals(2,rummy.getNumPlayers());

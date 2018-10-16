@@ -17,6 +17,21 @@ public class Deck {
 			}
 		}
 	}
+	
+	public Tile geTile(int i) {
+		return tiles.remove(i);
+	}
+	/**
+	 * Check if a specific tile is in the Deck
+	 * for testing purposes atm*/
+	public Boolean contains(Tile tile) {
+		// TODO Auto-generated method stub
+		if(tiles.indexOf(tile)==-1) 
+			return false;
+		else
+			return true;
+	}
+	
 	public int getSize() {
 		return tiles.size();
 	}
@@ -25,6 +40,7 @@ public class Deck {
 		Collections.shuffle(this.tiles);
 	}
 	
+
 	/**
 	 * Select a specific tile from the Deck*/
 	public Tile getTile(Tile tile) {
@@ -37,11 +53,5 @@ public class Deck {
 		return null;
 		
 	}
-	/**
-	 * Check if a specific tile is in the Deck
-	 * for testing purposes atm*/
-	public Boolean contains(Tile tile) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 }
