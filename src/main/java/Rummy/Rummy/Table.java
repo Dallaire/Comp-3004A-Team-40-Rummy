@@ -9,7 +9,7 @@ import java.util.Scanner;
  * The class is responsible for passing data between 
  * @param ArrayList<Player> players = A list of players in the game
  * @param stock = The initial set of 104 tiles used at the start of the game 
- * @param meld = a single meld submitted by a player, which is refreshed after each turn
+ * @param meld = a single meld submitted by a player, which is refreshed after each turn - Removed -Jacob
  * @param melds = a collection of melds submitted
  * @param firstMeld = boolean value of whether or not a valid 30 point melds is played to start the game*/
 public class Table {
@@ -17,14 +17,12 @@ public class Table {
 	private ArrayList<Player> players;
 	private Deck stock;
 
-	private ArrayList<Tile> meld;
-	private ArrayList<ArrayList<Tile>> melds;
-	private boolean firstMeld = false;
+	private ArrayList<ArrayList<Tile>> melds = new ArrayList<ArrayList<Tile>>(); //Refactored data structure -Jacob
 
 	
 	public Table() {
-		
-		Strategy stratPlayer = new FirstStrategy();
+		Strategy stratPlayer = new PlayerStrategy();
+
 		Player gamer = new Player("Player 1", stratPlayer);
 		Strategy stratA1 = new FirstStrategy();
 		Player ai1 = new Player("AI 1", stratA1);
@@ -42,7 +40,6 @@ public class Table {
 		stock = new Deck();
 		stock.Shuffle();
 		
-		melds = new ArrayList<ArrayList<Tile>>();
 		
 	}
 
@@ -77,6 +74,13 @@ public class Table {
 		return melds.size();
 	}
 	
+	/*
+	 *  Gets a meld by its index
+	 */
+	public ArrayList<Tile> getMeld(int i){
+		return melds.get(i);
+	}
+	
 //	private void setMelds(Set<Set<Tile>> melds) {
 //		this.melds = melds;
 //	}
@@ -86,7 +90,8 @@ public class Table {
 	 * TODO: Maybe some error checking;
 	 */
 	public void addMeld(ArrayList<Tile> meld) {
-		this.meld = meld;
+
+		this.melds.add(meld);					// Adding a new meld refactored - Jacob
 	}
 
 	/**
@@ -154,15 +159,17 @@ public class Table {
 	}
 	
 	/**
-	 * Check if the meld has been played*/
+	 * Check if the meld has been played
+	 * Needs refactoring into player to see if initial 30 is played
 	public boolean checkFirst() {
 		return this.firstMeld;
 	}
+	*/
 	/**
 	 * @param firstMeld the firstMeld to set
-	 */
+	 
 	public void setFirstMeld(boolean firstMeld) {
 		this.firstMeld = firstMeld;
 	}
-	
+	*/
 }
