@@ -1,5 +1,7 @@
 package Rummy.Rummy;
 
+import java.util.Collections;
+
 import junit.framework.TestCase;
 
 /**
@@ -35,4 +37,16 @@ public class AppTest
     	player.addTile(new Tile(Color.O, 10));
     	assertEquals(1,player.getHand().size());
     }
+    public void testFirstStrategy() {
+    	
+    	Strategy stratPlayer = new FirstStrategy();
+		Player gamer = new Player("Player 1", stratPlayer);
+		stratPlayer.strategy(gamer.getHand());
+		
+		Collections.sort(gamer.getHand(),new CustomComparator());
+		for (int i = 0; i < gamer.getHand().size(); i++) {
+			System.out.println(gamer.getHand().get(i).getValue());
+		}
+
+	}
 }

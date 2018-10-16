@@ -41,7 +41,7 @@ public class Table {
 		
 		stock = new Deck();
 		stock.Shuffle();
-		
+		shareCards();
 		melds = new ArrayList<ArrayList<Tile>>();
 		
 	}
