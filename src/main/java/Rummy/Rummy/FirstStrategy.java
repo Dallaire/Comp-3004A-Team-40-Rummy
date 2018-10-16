@@ -8,19 +8,36 @@ public class FirstStrategy implements Strategy{
 
 	@Override
 	public void strategy(Player player,Table table) {
-		if(checkRun(player.getHand()).size()>checkSet(player.getHand()).size()&&
-				player.check30(checkRun(player.getHand()))) {
-			table.addMeld(checkRun(player.getHand()));
-			player.getHand().remove(checkRun(player.getHand()));
-		}else if (player.check30(checkSet(player.getHand()))) {
-			player.getHand().remove(checkSet(player.getHand()));
-		}else {
-			player.addTile(table.getTile());
+		while(firstPlay(player, table)) {
+			if(checkRun(player.getHand()).size()>checkSet(player.getHand()).size()) {
+				table.addMeld(checkRun(player.getHand()));
+				player.getHand().remove(checkRun(player.getHand()));
+			}else if (checkRun(player.getHand()).size()<checkSet(player.getHand()).size()) {
+				table.addMeld(checkSet(player.getHand()));
+				player.getHand().remove(checkSet(player.getHand()));
+			}else {
+				player.addTile(table.getTile());
+			}
 		}		
 	}
 	
 
-	
+	public boolean firstPlay(Player player, Table table) {
+		if(checkRun(player.getHand()).size()>checkSet(player.getHand()).size()&&
+				player.check30(checkRun(player.getHand()))) {
+			table.addMeld(checkRun(player.getHand()));
+			player.getHand().remove(checkRun(player.getHand()));
+			return true;
+		}else if (player.check30(checkSet(player.getHand()))) {
+			table.addMeld(checkSet(player.getHand()));
+			player.getHand().remove(checkSet(player.getHand()));
+			return true;
+		}else {
+			player.addTile(table.getTile());
+
+			return false;
+		}		
+	}
 	public ArrayList<Tile> checkRun(ArrayList<Tile> aHand) {
 		Collections.sort(aHand,new valueComparator());
 		ArrayList<Tile> meld = null;
