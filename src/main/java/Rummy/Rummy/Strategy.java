@@ -2,29 +2,42 @@ package Rummy.Rummy;
 
 
 import java.util.ArrayList;
-
+/**
+ * Abstract Class Strategy
+ * Contains implementations of player actions common to all players
+ * Abstract methods playturn() is implemented differently for each ai or player
+ * 
+ *  @param player - instance of the player
+ *  @param table - the table object 
+ *  @param meld - ?*/
 public abstract class Strategy {
+	
 	boolean firstPlay;
 	Player player;
 	Table table;
 	ArrayList<Tile> meld;
 	int meldSize;
+	
 	public  Strategy(Player player, Table table){
 		// TODO Auto-generated constructor stub
 		this.player=player;
 		this.table=table;
 		firstPlay=false;
 	}
+	
 	public Strategy(Player player) {
 		this.player=player;
 	}
-	//public abstract void gamePlay();
+	
+	/***/
 	public abstract void playTurn();
-	//plays the first meld >30
+	
+	
+	/**
+	 * Plays the first meld if possible
+	 * @return boolean - true on success and false on failure*/
 	public boolean firstPlay() {
-		/**
-		 * compares the run vs the set to take the bigger one and adds it to the table
-		 * */
+	
 		if(checkRun(player.getHand()).size()>checkSet(player.getHand()).size()&&
 				player.check30(checkRun(player.getHand()))) {
 			table.addMeld(checkRun(player.getHand()));
@@ -48,6 +61,7 @@ public abstract class Strategy {
 	public ArrayList<Tile> checkRun(ArrayList<Tile> aHand) {
 		meld = new ArrayList<Tile>();
 	    meldSize=0;
+	    
 		for(int i=aHand.size()-1; i>0;i--) {
 			meld.add(aHand.get(i));
 			meldSize++;
@@ -64,7 +78,8 @@ public abstract class Strategy {
 				return meld;
 			}
 			meld.clear();	
-}
+		}
+		
 		System.out.println("");
 		return null;
 	}	

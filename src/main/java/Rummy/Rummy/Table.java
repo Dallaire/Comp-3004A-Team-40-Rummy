@@ -1,19 +1,18 @@
 package Rummy.Rummy;
 
 import java.util.ArrayList;
-import java.util.Scanner;
-
-import org.xml.sax.ext.Attributes2;
 
 
 /**
  * The Table class contains all the data structures used to represent game elements
  * The class is responsible for passing data between 
- * @param ArrayList<Player> players = A list of players in the game
- * @param stock = The initial set of 104 tiles used at the start of the game 
- * @param meld = a single meld submitted by a player, which is refreshed after each turn - Removed -Jacob
- * @param melds = a collection of melds submitted
- * @param firstMeld = boolean value of whether or not a valid 30 point melds is played to start the game*/
+ * players - A list of players in the game
+ * stock - The initial set of 104 tiles used at the start of the game 
+ * meld - a single meld submitted by a player, which is refreshed after each turn - Removed -Jacob
+ * melds - a collection of melds submitted
+ * firstMeld - boolean value of whether or not a valid 30 point melds is played to start the game
+ * players - An ArrayList of players in on the table
+ * */
 public class Table {
 	
 	private ArrayList<Player> players;
@@ -23,18 +22,18 @@ public class Table {
 	private ArrayList<ArrayList<Tile>> melds;
 	private boolean firstMeld = false;
 
-	
+	/**
+	 * Table constructor
+	 * Initialise all table variables*/
 	public Table() {
 		
-				
 		loadPlayers();
 		loadDeck();
 		
-		
-		
 	}
+	
 	/**
-	 * loads the players*/
+	 * Hard coded instantiation of players to populate the list of players*/
 	public void loadPlayers() {
 		Strategy stratA1;
 		Player ai1 = new Player("AI 1");
@@ -72,34 +71,42 @@ public class Table {
 			}
 		}
 	}
-
+	
+	/**
+	 * Get a a player from the player collection
+	 * @param {Integer} i - the index of the player 
+	 * @return {Object} Player from index i*/
 	public Player getPlayer(int i) {
 		return players.get(i);
 		
 	}
 	/**
 	 * Returns the number of players in the game
-	 * @param player = ArrayList of players*/
+	 * player - ArrayList of players
+	 * @return Integer representation of the number of the */
 	public int getNumPlayers() {
 		return players.size();
 	}
 	/**
 	 * Returns the number tiles left in the stock
-	 * @param stock.getSize() =  the size of the stock on the table*/
+	 * stock.getSize() -  the size of the stock on the table
+	 * @return Integer representing the number of tiles in the stock*/
 	public int getNumTiles() {
 		return stock.getSize();
 	}
 	
 	/**
 	 * Returns all the melds added to the table by the players
-	 * @param melds =  The HashMap of Melds*/
+	 * melds -  The HashMap of Melds
+	 * @return Integer value of size of melds datastructure*/
 	public int getNumMelds() {
 		
 		return melds.size();
 	}
 	
-	/*
+	/**
 	 *  Gets a meld by its index
+	 *  @param i - index of tile
 	 */
 	public ArrayList<Tile> getMeld(int i){
 		return melds.get(i);
@@ -110,7 +117,7 @@ public class Table {
 //	}
 	
 	/**
-	 * @param meld the meld to set
+	 * @param meld - the meld to set
 	 * TODO: Maybe some error checking;
 	 */
 	public void addMeld(ArrayList<Tile> meld) {
@@ -119,9 +126,9 @@ public class Table {
 	}
 
 	/**
-	 * Method to get a specific tile
-	 * @param c = colour of the Tile
-	 * @param v = the value of the Tile*/
+	 * Method to get a random tile
+	 * @param stock - a collection of Tiles
+	 * */
 	public Tile getTile() {
 		//TODO prompt user to select a color and value
 		//Tile tile = selectTile();
@@ -131,25 +138,6 @@ public class Table {
 	public void displayStock() {
 		System.out.println(stock.toString());
 	}
-	
-//	public Tile selectTile() {
-//		String[] inputArray;
-//		System.out.print("Please select a tile color followed by a value(separator = ,): \n");
-//		Scanner scanner = new Scanner(System.in);
-//		String input = scanner.nextLine();
-//		inputArray = input.split(",");
-//		
-//		Color color = colorSelector(inputArray[0]);
-//		int value = Integer.parseInt(inputArray[1]);
-//		
-//		Tile selected = new Tile(color, value);
-//		System.out.println("You selected " + selected.toString());
-//		
-//		scanner.close();
-//		
-//		return selected;
-//		
-//	}
 	
 	/**
 	 * Check if the stock contains the specified tile
@@ -162,9 +150,10 @@ public class Table {
 	}
 	/**
 	 * Color selector: Given a string it will return a variable of Type Color
-	 * @param c = the String value of the color desired
+	 * @param c - the String value of the color desired
 	 * @return Object of type Color or null if input is invalid
 	 * */
+	@SuppressWarnings("unused")
 	private Color colorSelector(String c) {
 		String color =  c.toUpperCase();
 		switch(color) {
@@ -182,18 +171,4 @@ public class Table {
 		
 	}
 	
-	/**
-	 * Check if the meld has been played
-	 * Needs refactoring into player to see if initial 30 is played
-	public boolean checkFirst() {
-		return this.firstMeld;
-	}
-	*/
-	/**
-	 * @param firstMeld the firstMeld to set
-	 
-	public void setFirstMeld(boolean firstMeld) {
-		this.firstMeld = firstMeld;
-	}
-	*/
 }
