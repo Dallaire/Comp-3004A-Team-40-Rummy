@@ -43,6 +43,7 @@ public class Table {
 		Player ai2 = new Player("AI 2");
 		stratA2 = new SecondStrategy(ai2, this);
 		ai2.setStrategy(stratA2);
+		
 		Strategy stratA3;
 		Player ai3 = new Player("AI 3");
 		stratA3 = new ThirdStrategy(ai3, this);

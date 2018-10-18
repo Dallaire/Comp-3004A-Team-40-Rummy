@@ -5,11 +5,11 @@ public class Game {
 	
 	private String gameInput;
 	private String playerInput;
-	private int turns;
-	Table table;
+	private int turns = 0;
+	Table table = new Table();;
 
 	public Game() {
-		table = new Table();
+		
 	}
 	/**
 	 * Game Loop
@@ -39,8 +39,17 @@ public class Game {
 	public String getPlayerInput() {
 		return this.playerInput;
 	}
-	
-	public void start() {
+	/**
+	 * Cycle through players in the table*/
+	public void loop() {
+		
+		int n = table.getNumPlayers();
+		for (int i = 0; i < n; i++) {
+			this.turns++;
+			
+			//
+		}
+			
 		
 	}
 
@@ -51,11 +60,5 @@ public class Game {
 		return this.turns;
 	}
 
-	/**
-	 * @param turns the turns to set
-	 */
-	public void setTurns(int turns) {
-		this.turns = turns;
-	}
 	
 }
