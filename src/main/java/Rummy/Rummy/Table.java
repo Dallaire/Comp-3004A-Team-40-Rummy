@@ -149,9 +149,9 @@ public class Table {
 		//return false;
 	}
 	/**
-	 * Color selector: Given a string it will return a variable of Type Color
-	 * @param c - the String value of the color desired
-	 * @return Object of type Color or null if input is invalid
+	 * Colour selector: Given a string it will return a variable of Type Color
+	 * @param c - the String value of the colour desired
+	 * @return Object of type Colour or null if input is invalid
 	 * */
 	@SuppressWarnings("unused")
 	private Color colorSelector(String c) {

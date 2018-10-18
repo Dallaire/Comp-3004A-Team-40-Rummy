@@ -1,15 +1,14 @@
 package Rummy.Rummy;
 
 import java.util.ArrayList;
-
 import junit.framework.TestCase;
 
 /**
- * Unit test for simple 
+ * Unit test for 
  */
-public class TableTest extends Test
-
-
+public class TableTest extends TestCase
+{
+	
     public void testPlayer() {
     	Table rummy = new Table();
     	assertEquals(2,rummy.getNumPlayers());
@@ -19,17 +18,12 @@ public class TableTest extends Test
     public void testPlayer2() {
     	Table rummy = new Table();
     	assertEquals(3,rummy.getNumPlayers());
-    }*/
+    }
     
     public void testPlayer3() {
     	Table rummy = new Table();
     	assertEquals(4,rummy.getNumPlayers());
     }
-    /*
-    public void testPlayer4() {
-    	Table rummy = new Table();
-    	assertEquals(null,rummy.getNumPlayers());
-    }*/
     
     /**
      * Test that tiles are created*/
@@ -55,7 +49,7 @@ public class TableTest extends Test
      * Test if the tiles are removed from the deck*/
     public void testTileSelector2() {
     	Table rummy = new Table();
-    	Tile selected = rummy.selectTile(); // select a tile from the stock
+    	Tile selected = rummy.getTile(); // select a tile from the stock
     	//boolean value = rummy.stockContains(selected); // Check if the tile is in the stock
     	assertEquals(true, rummy.stockContains(selected)); // should be false
     }
