@@ -10,14 +10,15 @@ public class Player {
 	private Strategy strategy;
 	
 	//Constructor
-	public Player(String aName, Strategy aStrategy) {
+	public Player(String aName) {
 		this.name = aName;
-		this.setStrategy(aStrategy);
 	}
-	
+	public void playTurn() {
+		strategy.playTurn();
+	}
 	//Setter
 	public void setStrategy(Strategy aStrategy){
-		this.strategy = aStrategy;
+		strategy=aStrategy;
 	}
 	
 	
@@ -27,9 +28,15 @@ public class Player {
 	}
 	
 	public ArrayList<Tile> getHand(){
-		
+			
 		return this.hand;
 	}
+	public void getCards(Deck stock) {
+		for(int j=0;j<14;j++) {
+			addTile(stock.geTile(stock.getSize()-1));
+		}
+}
+
 	
 	public String getName() {
 		return this.name;
@@ -60,5 +67,25 @@ public class Player {
 		return false;
 		
 	}	
+	public void customFillHand() {
+		hand.add(new Tile(Color.B,1 ));
+		hand.add(new Tile(Color.B,2 ));
+		hand.add(new Tile(Color.O,6 ));
+		hand.add(new Tile(Color.O,7 ));
+		hand.add(new Tile(Color.O,8 ));
+		hand.add(new Tile(Color.O,12 ));
+		hand.add(new Tile(Color.G,5));
+		hand.add(new Tile(Color.G,7 ));
+		hand.add(new Tile(Color.G,8 ));
+		hand.add(new Tile(Color.R,1 ));
+		hand.add(new Tile(Color.R,4 ));
+		hand.add(new Tile(Color.R,8 ));
+		hand.add(new Tile(Color.R,9 ));
+		hand.add(new Tile(Color.R,10 ));
+		hand.add(new Tile(Color.R,11 ));
+		//hand.add(new Tile(Color.R,1 ));
+
+		
+	}
 		
 }
