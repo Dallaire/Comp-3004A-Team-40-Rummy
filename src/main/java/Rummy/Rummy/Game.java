@@ -5,11 +5,12 @@ public class Game {
 	
 	private String gameInput;
 	private String playerInput;
+	private Player p1,p2,p3,p4;
 	private int turns = 0;
 	Table table = new Table();;
 
 	public Game() {
-		
+		play();
 	}
 	/**
 	 * Game Loop
@@ -24,10 +25,14 @@ public class Game {
 				break;
 			}else {
 				/** 
-				 * while the player has cards to play ask if they want to play a run or meld
+				 * if game is won break else run the game.
 				 */
-				System.out.println("Would you like to play a Run(R) or Meld(M)");
-				playerInput = sc.nextLine().toUpperCase();
+				if() {
+					break;
+				}else {
+					run(p1,p2,p3,p4,this.table);
+				}
+				
 			}
 			
 		}
@@ -40,15 +45,30 @@ public class Game {
 		return this.playerInput;
 	}
 	/**
-	 * Cycle through players in the table*/
-	public void loop() {
-		
-		int n = table.getNumPlayers();
-		for (int i = 0; i < n; i++) {
-			this.turns++;
-			
-			//
+	 * Cycle through players in the table
+	 * It needs to be an infinite loop until the game ends
+	 */
+	public void run(Player human, Player stratOne, Player stratTwo, Player stratThree, Table board) {
+		if(this.turns == 0) {
+			human.playTurn();
+		}else if(this.turns == 1) {
+			stratOne.playTurn();
+		}else if(this.turns == 2) {
+			stratTwo.playTurn();
+		}else {
+			stratThree.playTurn();
 		}
+	}
+	public void loop() {
+		int n = table.getNumPlayers();
+		while(true) {
+			if(n==4) {
+				this.turns = 0;
+			}else {
+				this.turns++;
+			}
+		}
+		
 			
 		
 	}
