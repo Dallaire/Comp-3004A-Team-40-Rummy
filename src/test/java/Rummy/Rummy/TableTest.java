@@ -35,6 +35,7 @@ public class TableTest extends Test
      * Test that tiles are created*/
     public void testTiles() {
     	Table rummy = new Table();
+
     	assertEquals(104,rummy.getNumTiles() );
 
     }
@@ -49,20 +50,14 @@ public class TableTest extends Test
     
     /**
      * Test if the tiles is not removed from the deck*/
-    public void testTileSelector1() {
-    	Table rummy = new Table();
-    	Tile selected = rummy.selectTile(); // select a tile from the stock
-    	boolean value = rummy.stockContains(selected); // Check if the tile is in the stock
-    	assertEquals(false, value); 
-    }
-    
+
     /**
      * Test if the tiles are removed from the deck*/
     public void testTileSelector2() {
     	Table rummy = new Table();
     	Tile selected = rummy.selectTile(); // select a tile from the stock
-    	boolean value = rummy.stockContains(selected); // Check if the tile is in the stock
-    	assertEquals(false, value); // should be false
+    	//boolean value = rummy.stockContains(selected); // Check if the tile is in the stock
+    	assertEquals(true, rummy.stockContains(selected)); // should be false
     }
     
     /**
