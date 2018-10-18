@@ -6,6 +6,7 @@ public class Game {
 	private String gameInput;
 	private String playerInput;
 	private Player p1,p2,p3,p4;
+	private boolean won = false;
 	private int turns = 0;
 	Table table = new Table();;
 
@@ -21,13 +22,14 @@ public class Game {
 		while(true) {
 			System.out.println("Would you Like to play a new game?(Y/N)");
 			gameInput = sc.nextLine().toUpperCase();
-			if(gameInput.equals("N")) { 
+			if(gameInput.equals("N")) {
+				sc.close();
 				break;
 			}else {
 				/** 
 				 * if game is won break else run the game.
 				 */
-				if() {
+				if(won) {
 					break;
 				}else {
 					run(p1,p2,p3,p4,this.table);
@@ -37,6 +39,7 @@ public class Game {
 			
 		}
 	}
+	
 	
 	public String getGameInput() {
 		return this.gameInput;
@@ -48,23 +51,40 @@ public class Game {
 	 * Cycle through players in the table
 	 * It needs to be an infinite loop until the game ends
 	 */
-	public void run(Player human, Player stratOne, Player stratTwo, Player stratThree, Table board) {
-		if(this.turns == 0) {
-			human.playTurn();
-		}else if(this.turns == 1) {
-			stratOne.playTurn();
-		}else if(this.turns == 2) {
-			stratTwo.playTurn();
-		}else {
-			stratThree.playTurn();
-		}
+	 {
+		
 	}
-	public void loop() {
-		int n = table.getNumPlayers();
+	 public void run(Player human, Player stratOne, Player stratTwo, Player stratThree, Table board) {
+		int n = board.getNumPlayers();
 		while(true) {
 			if(n==4) {
 				this.turns = 0;
 			}else {
+				if(this.turns == 0) {
+					human.playTurn();
+					if(human.getHand().size() == 0) {
+						this.won = true;
+						break;
+					}
+				}else if(this.turns == 1) {
+					stratOne.playTurn();
+					if(stratOne.getHand().size() == 0) {
+						this.won = true;
+						break;
+					}
+				}else if(this.turns == 2) {
+					stratTwo.playTurn();
+					if(stratTwo.getHand().size() == 0) {
+						this.won = true;
+						break;
+					}
+				}else {
+					stratThree.playTurn();
+					if(stratThree.getHand().size() == 0) {
+						this.won = true;
+						break;
+					}
+				}
 				this.turns++;
 			}
 		}
