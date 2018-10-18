@@ -1,11 +1,18 @@
 package Rummy.Rummy;
 import java.util.Scanner;
+
 public class Game {
+	
 	private String gameInput;
 	private String playerInput;
+	private int turns;
+	Table table;
 
-	
+	public Game() {
+		table = new Table();
+	}
 	/**
+	 * Game Loop
 	 * takes in a p1 hand and asks them how they want them to play the game.
 	 */
 	public void play() {
@@ -31,6 +38,24 @@ public class Game {
 	}
 	public String getPlayerInput() {
 		return this.playerInput;
+	}
+	
+	public void start() {
+		
+	}
+
+	/**
+	 * @return the turns
+	 */
+	public int getTurns() {
+		return this.turns;
+	}
+
+	/**
+	 * @param turns the turns to set
+	 */
+	public void setTurns(int turns) {
+		this.turns = turns;
 	}
 	
 }
