@@ -1,0 +1,2 @@
+INDEX VERSION 1.130+Z:\Fall18\comp3004\Comp-3004A-Team-40-Rummy\.metadata\.plugins\org.eclipse.jdt.core
+3658565884.index
