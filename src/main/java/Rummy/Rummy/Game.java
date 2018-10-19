@@ -5,12 +5,14 @@ public class Game {
 	
 	private String gameInput;
 	private String playerInput;
+	private Player p1,p2,p3,p4;
+	private boolean won = false;
 	private int turns = 0;
 	Table table = new Table();
 	
 
 	public Game() {
-		
+		play();
 	}
 	/**
 	 * Game Loop
@@ -21,18 +23,24 @@ public class Game {
 		while(true) {
 			System.out.println("Would you Like to play a new game?(Y/N)");
 			gameInput = sc.nextLine().toUpperCase();
-			if(gameInput.equals("N")) { 
+			if(gameInput.equals("N")) {
+				sc.close();
 				break;
 			}else {
 				/** 
-				 * while the player has cards to play ask if they want to play a run or meld
+				 * if game is won break else run the game.
 				 */
-				System.out.println("Would you like to play a Run(R) or Meld(M)");
-				playerInput = sc.nextLine().toUpperCase();
+				if(won) {
+					break;
+				}else {
+					run(p1,p2,p3,p4,this.table);
+				}
+				
 			}
 			
 		}
 	}
+	
 	
 	public String getGameInput() {
 		return this.gameInput;
@@ -40,22 +48,44 @@ public class Game {
 	public String getPlayerInput() {
 		return this.playerInput;
 	}
-	/**
-	 * Cycle through players in the table
-	 * This is turns based system where a player plays and the render function is called after each play*/
-	public void loop() {
-		
-		int n = table.getNumPlayers();
-		
-		// loop
-		for (int i = 0; i < n; i++) {
-			// a chain of events required after each turn is played
-			this.turns++;
-			
-			// loop until the player makes a valid move
-			
-			// within the loop, we call the render proces  here
+
+
+	 public void run(Player human, Player stratOne, Player stratTwo, Player stratThree, Table board) {
+		int n = board.getNumPlayers();
+		while(true) {
+			if(n==4) {
+				this.turns = 0;
+			}else {
+				if(this.turns == 0) {
+					human.playTurn();
+					if(human.getHand().size() == 0) {
+						this.won = true;
+						break;
+					}
+				}else if(this.turns == 1) {
+					stratOne.playTurn();
+					if(stratOne.getHand().size() == 0) {
+						this.won = true;
+						break;
+					}
+				}else if(this.turns == 2) {
+					stratTwo.playTurn();
+					if(stratTwo.getHand().size() == 0) {
+						this.won = true;
+						break;
+					}
+				}else {
+					stratThree.playTurn();
+					if(stratThree.getHand().size() == 0) {
+						this.won = true;
+						break;
+					}
+				}
+				this.turns++;
+			}
+
 		}
+		
 			
 		
 	}
