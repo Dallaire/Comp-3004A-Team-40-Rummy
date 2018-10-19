@@ -6,7 +6,8 @@ public class Game {
 	private String gameInput;
 	private String playerInput;
 	private int turns = 0;
-	Table table = new Table();;
+	Table table = new Table();
+	
 
 	public Game() {
 		
@@ -40,14 +41,20 @@ public class Game {
 		return this.playerInput;
 	}
 	/**
-	 * Cycle through players in the table*/
+	 * Cycle through players in the table
+	 * This is turns based system where a player plays and the render function is called after each play*/
 	public void loop() {
 		
 		int n = table.getNumPlayers();
+		
+		// loop
 		for (int i = 0; i < n; i++) {
+			// a chain of events required after each turn is played
 			this.turns++;
 			
-			//
+			// loop until the player makes a valid move
+			
+			// within the loop, we call the render proces  here
 		}
 			
 		

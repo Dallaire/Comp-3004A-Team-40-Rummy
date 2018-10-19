@@ -24,5 +24,10 @@ public class GameTest extends TestCase {
 		assertEquals(table.getNumPlayers(), rummyKub.getTurns()); 
 
 	}
+	/***
+	 * A player is stuck in loop until they play a valid meld*/
+	public void testPlayerLoop() {
+		
+	}
 
 }

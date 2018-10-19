@@ -3,7 +3,7 @@ package Rummy.Rummy;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Player {
+public abstract class Player {
 	//Properties
 	private ArrayList<Tile> hand = new ArrayList<Tile>();
 	private String name;

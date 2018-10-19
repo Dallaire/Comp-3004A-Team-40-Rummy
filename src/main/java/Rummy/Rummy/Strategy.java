@@ -7,9 +7,9 @@ import java.util.ArrayList;
  * Contains implementations of player actions common to all players
  * Abstract methods playturn() is implemented differently for each ai or player
  * 
- *  @param player - instance of the player
- *  @param table - the table object 
- *  @param meld - ?*/
+ *   player - instance of the player
+ *   table - the table object 
+ *   meld - ?*/
 public abstract class Strategy {
 	
 	boolean firstPlay;
@@ -19,7 +19,7 @@ public abstract class Strategy {
 	int meldSize;
 	
 	public  Strategy(Player player, Table table){
-		// TODO Auto-generated constructor stub
+		
 		this.player=player;
 		this.table=table;
 		firstPlay=false;
