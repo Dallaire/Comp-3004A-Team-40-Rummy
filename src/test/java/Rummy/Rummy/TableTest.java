@@ -1,40 +1,36 @@
 package Rummy.Rummy;
 
 import java.util.ArrayList;
-
 import junit.framework.TestCase;
 
 /**
- * Unit test for simple 
+ * Unit test for 
  */
-public class TableTest extends Test
-
-
+public class TableTest extends TestCase
+{
+	
     public void testPlayer() {
     	Table rummy = new Table();
     	assertEquals(2,rummy.getNumPlayers());
 
     }
-    
+    /**
+     * Test that the table creates 4 players*/
     public void testPlayer2() {
     	Table rummy = new Table();
     	assertEquals(3,rummy.getNumPlayers());
-    }*/
+    }
     
     public void testPlayer3() {
     	Table rummy = new Table();
     	assertEquals(4,rummy.getNumPlayers());
     }
-    /*
-    public void testPlayer4() {
-    	Table rummy = new Table();
-    	assertEquals(null,rummy.getNumPlayers());
-    }*/
     
     /**
      * Test that tiles are created*/
     public void testTiles() {
     	Table rummy = new Table();
+
     	assertEquals(104,rummy.getNumTiles() );
 
     }
@@ -49,20 +45,14 @@ public class TableTest extends Test
     
     /**
      * Test if the tiles is not removed from the deck*/
-    public void testTileSelector1() {
-    	Table rummy = new Table();
-    	Tile selected = rummy.selectTile(); // select a tile from the stock
-    	boolean value = rummy.stockContains(selected); // Check if the tile is in the stock
-    	assertEquals(false, value); 
-    }
-    
+
     /**
      * Test if the tiles are removed from the deck*/
     public void testTileSelector2() {
     	Table rummy = new Table();
-    	Tile selected = rummy.selectTile(); // select a tile from the stock
-    	boolean value = rummy.stockContains(selected); // Check if the tile is in the stock
-    	assertEquals(false, value); // should be false
+    	Tile selected = rummy.getTile(); // select a tile from the stock
+    	//boolean value = rummy.stockContains(selected); // Check if the tile is in the stock
+    	assertEquals(true, rummy.stockContains(selected)); // should be false
     }
     
     /**
@@ -111,6 +101,7 @@ public class TableTest extends Test
     	Game input = new Game();
     	assertEquals("R", input.getPlayerInput());
     }
+    
     /**
      * test to check if player input equals M
      * test to check if the player decides to play a run

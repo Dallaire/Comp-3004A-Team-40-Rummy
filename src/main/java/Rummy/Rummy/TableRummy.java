@@ -77,6 +77,10 @@ public class TableRummy extends Application {
         		//drawTile(canvas.getGraphicsContext2D(), new Tile(Rummy.Rummy.Color.R, 7));
         		reset(canvas, Color.WHITESMOKE);
         		for(int i = 0; i < circles.size(); i++) {
+        			if(circles.size() > 20) {
+        				for(int j = 0; j < circles.size(); j++)
+        					circles.get(j).setTarget();
+        			}
         			circles.get(i).update(t);          		
                     drawOval(canvas.getGraphicsContext2D(), circles.get(i).getX(), circles.get(i).getY());
         		}
