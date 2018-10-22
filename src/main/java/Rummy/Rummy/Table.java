@@ -21,10 +21,12 @@ public class Table {
 	private ArrayList<Tile> meld;
 	private ArrayList<ArrayList<Tile>> melds;
 	private boolean firstMeld = false;
+	
+	private int whosTurn = 0;
 
 	/**
 	 * Table constructor
-	 * Initialise all table variables*/
+	 * Initialize all table variables*/
 	public Table() {
 		
 		loadPlayers();
@@ -33,22 +35,16 @@ public class Table {
 	}
 	
 	/**
-	 * Hard coded instantiation of players to populate the list of players*/
+	 * Hard coded instantiation of players to populate the list of players
+	 * @FirstStrategy - Plays 30 points as soon as it can
+	 * @SecondStrategy - 
+	 * @ThirdStrategy - */
 	public void loadPlayers() {
-		Strategy stratA1;
-		Player ai1 = new Player("AI 1");
-		stratA1 = new FirstStrategy(ai1, this);
-		ai1.setStrategy(stratA1);
-		Strategy stratA2;
-		Player ai2 = new Player("AI 2");
-		stratA2 = new SecondStrategy(ai2, this);
-		ai2.setStrategy(stratA2);
 		
-		Strategy stratA3;
-		Player ai3 = new Player("AI 3");
-		stratA3 = new ThirdStrategy(ai3, this);
-		ai1.setStrategy(stratA3);
-		
+		FirstStrategy ai1 = new FirstStrategy("AI 1");
+		SecondStrategy ai2 = new SecondStrategy("AI 2");	
+		ThirdStrategy ai3 = new ThirdStrategy("AI 3");
+
 		players = new ArrayList<Player>();
 		players.add(ai1);
 		players.add(ai2);
@@ -169,6 +165,24 @@ public class Table {
 		default:
 			return null;
 		}
+		
+	}
+
+	/**
+	 * Circular array cycling between 0 and 3
+	 * */
+	public void nextMove() {
+		// TODO Auto-generated method stub
+		this.whosTurn++;
+		this.whosTurn%=4;
+		
+	}
+	
+	/**
+	 * Returns the index of the next player to play
+	 * */
+	public int whosMove() {
+		return this.whosTurn;
 		
 	}
 	

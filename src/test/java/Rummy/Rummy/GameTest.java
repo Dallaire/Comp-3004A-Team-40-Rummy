@@ -11,14 +11,20 @@ import junit.framework.TestCase;
  */
 public class GameTest extends TestCase {
 
-
 	/**
-	 * Test Game loads te Table and cycles through players
+	 * Test that the game starts*/
+	public void testStart() {
+		
+	}
+	
+	
+	/**
+	 * Test Game loads the Table and cycles through players
 	 * game starts and cycles through the players to get the */
 	public void testGameLoop() {
 		Game rummyKub = new Game();
 		Table table = new Table();
-		rummyKub.loop();
+		rummyKub.play();
 		System.out.println(table.getNumPlayers());
 		System.out.println(rummyKub.getTurns());
 		assertEquals(table.getNumPlayers(), rummyKub.getTurns()); 
