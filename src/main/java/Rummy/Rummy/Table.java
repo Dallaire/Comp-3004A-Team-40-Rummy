@@ -169,12 +169,12 @@ public class Table {
 	}
 
 	/**
-	 * Circular aray cycling between 0 and 3
+	 * Circular array cycling between 0 and 3
 	 * */
 	public void nextMove() {
 		// TODO Auto-generated method stub
 		this.whosTurn++;
-		this.whosTurn%=3;
+		this.whosTurn%=4;
 		
 	}
 	
