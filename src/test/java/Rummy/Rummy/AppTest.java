@@ -37,23 +37,25 @@ public class AppTest extends TestCase
     	player.addTile(new Tile(Color.O, 10));
     	assertEquals(1,player.getHand().size());
     }
+    
+    /**
+     * Test the first strategy
+     * Play first 30 points as soon as possible
+     * */
     public void testStrategy() {
-    	//Table table= new Table();		
-    	//Strategy stratA1;
-    	
+
     	Deck stock = new Deck();
 		stock.Shuffle();
-		Player ai1 = new Player("AI 1");
-		Strategy stratA1 = new FirstStrategy(ai1);
+		FirstStrategy ai1 = new FirstStrategy("AI 1");
+		
 	//	ai1.setStrategy(stratA1);
     	//ArrayList<Tile> aHand= new ArrayList<Tile>();
-		ai1.getHand().add(new Tile(Color.O, 6));
-
-		ai1.getHand().add(new Tile(Color.G, 6));
-		ai1.getHand().add(new Tile(Color.R, 12));
-		ai1.getHand().add(new Tile(Color.B, 1));
-		ai1.getHand().add(new Tile(Color.B, 12));
-		ai1.getHand().add(new Tile(Color.G, 6));
+		ai1.addTile(new Tile(Color.O, 6));
+		ai1.addTile(new Tile(Color.G, 6));
+		ai1.addTile(new Tile(Color.R, 12));
+		ai1.addTile(new Tile(Color.B, 1));
+		ai1.addTile(new Tile(Color.B, 12));
+		ai1.addTile(new Tile(Color.G, 6));
 
 
     	//ai1.getCards(stock);

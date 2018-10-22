@@ -21,6 +21,8 @@ public class Table {
 	private ArrayList<Tile> meld;
 	private ArrayList<ArrayList<Tile>> melds;
 	private boolean firstMeld = false;
+	
+	private int whosTurn = 0;
 
 	/**
 	 * Table constructor
@@ -163,6 +165,24 @@ public class Table {
 		default:
 			return null;
 		}
+		
+	}
+
+	/**
+	 * Circular aray cycling between 0 and 3
+	 * */
+	public void nextMove() {
+		// TODO Auto-generated method stub
+		this.whosTurn++;
+		this.whosTurn%=3;
+		
+	}
+	
+	/**
+	 * Returns the index of the next player to play
+	 * */
+	public int whosMove() {
+		return this.whosTurn;
 		
 	}
 	
