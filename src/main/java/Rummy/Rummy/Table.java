@@ -6,12 +6,12 @@ import java.util.ArrayList;
 /**
  * The Table class contains all the data structures used to represent game elements
  * The class is responsible for passing data between 
- * players - A list of players in the game
- * stock - The initial set of 104 tiles used at the start of the game 
- * meld - a single meld submitted by a player, which is refreshed after each turn - Removed -Jacob
- * melds - a collection of melds submitted
- * firstMeld - boolean value of whether or not a valid 30 point melds is played to start the game
- * players - An ArrayList of players in on the table
+ * @players {Object} - A list of players in the game
+ * @stock - The initial set of 104 tiles used at the start of the game 
+ * @meld - a single meld submitted by a player, which is refreshed after each turn - Removed -Jacob
+ * @melds - a collection of melds submitted
+ * @firstMeld - boolean value of whether or not a valid 30 point melds is played to start the game
+ * @players - An ArrayList of players in on the table
  * */
 public class Table {
 	
