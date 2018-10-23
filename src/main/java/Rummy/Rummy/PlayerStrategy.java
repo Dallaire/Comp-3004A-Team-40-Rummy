@@ -1,14 +1,17 @@
 package Rummy.Rummy;
 
-public class PlayerStrategy extends Strategy {
+import java.util.ArrayList;
 
-	public PlayerStrategy(Player player) {
-		super(player);
-		// TODO Auto-generated constructor stub
+public class PlayerStrategy extends Player implements Strategy {
+
+	public PlayerStrategy(String aName) {
+		super(aName);
 	}
 
 	@Override
-	public void playTurn() {
+	public ArrayList<Tile> playTurn() {
+		
+		return null;
 		// TODO Auto-generated method stub
 		
 	}

@@ -40,4 +40,14 @@ public class TableTest2 extends TestCase {
     	rummy.nextMove();
     	assertEquals(0, rummy.whosMove());
     }
+    
+    /**
+     * TEst if the JRON is working*/
+    public void testJRON() {
+    	Table rummy = new Table();
+    	JRON data = new JRON(rummy.getMelds(), rummy.getFirst(), rummy.getThreeLess());
+    	assertEquals(false, data.getThreeLess());
+    	assertEquals(false, data.getFirstMeld());
+    	assertEquals(0, rummy.whosMove());
+    }
 }

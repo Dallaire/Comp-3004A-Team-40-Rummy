@@ -21,6 +21,7 @@ public class Table {
 	private ArrayList<Tile> meld;
 	private ArrayList<ArrayList<Tile>> melds;
 	private boolean firstMeld = false;
+	private boolean threeLess = false;
 	
 	private int whosTurn = 0;
 
@@ -184,6 +185,26 @@ public class Table {
 	public int whosMove() {
 		return this.whosTurn;
 		
+	}
+	
+	public ArrayList<ArrayList<Tile>> getMelds() {
+		return this.melds;
+	}
+ 
+	/**
+	 * Check if the first 30 point meld has been played
+	 * @return boolean - true if the first meld has been played*/
+	public boolean getFirst() {
+		
+		return this.firstMeld;
+	}
+	
+	/**
+	 * Check if any player has 3 less cards than Strategy3
+	 * @return boolean - true if there is a player who has 3 less than Strategy3*/
+	public boolean getThreeLess() {
+		
+		return this.threeLess;
 	}
 	
 }
