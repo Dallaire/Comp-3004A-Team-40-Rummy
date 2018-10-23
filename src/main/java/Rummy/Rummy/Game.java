@@ -50,10 +50,10 @@ public class Game {
 	}
 
 
-	 public void run(Player human, Player stratOne, Player stratTwo, Player stratThree, Table board) {
+	 public void run(PlayerStrategy human, FirstStrategy stratOne, SecondStrategy stratTwo, ThirdStrategy stratThree, Table board) {
 		int n = board.getNumPlayers();
 		while(true) {
-			if(n==4) {
+			if(this.turns==n) {
 				this.turns = 0;
 			}else {
 				if(this.turns == 0) {
