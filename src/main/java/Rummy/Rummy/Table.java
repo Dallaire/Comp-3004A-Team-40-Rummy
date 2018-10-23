@@ -207,4 +207,10 @@ public class Table {
 		return this.threeLess;
 	}
 	
+	/**
+	 * Update all subscribers on the state of the game
+	 * TODO: Cycle through all the players and send them update data packets*/
+	public void update() {
+		
+	}
 }
