@@ -1,14 +1,19 @@
 package Rummy.Rummy;
 
+import java.util.ArrayList;
 
-public class SecondStrategy extends Strategy{
-	public SecondStrategy(Player player, Table table) {
-		super(player, table);
-		// TODO Auto-generated constructor stub
+public class SecondStrategy extends Player implements Strategy{
+	
+	//Invoke super class constructor
+	public SecondStrategy(String name) {
+		super(name);
+		
 	}
+	
 	@Override
-	public void playTurn() {
-		// TODO Auto-generated method stub
+	public ArrayList<Tile> playTurn() {
+		return null;
+		// TODO  Override the playTurn method
 		
 	}
 }

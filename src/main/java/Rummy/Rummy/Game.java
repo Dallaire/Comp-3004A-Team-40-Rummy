@@ -8,7 +8,8 @@ public class Game {
 	private Player p1,p2,p3,p4;
 	private boolean won = false;
 	private int turns = 0;
-	Table table = new Table();;
+	Table table = new Table();
+	
 
 	public Game() {
 		play();
@@ -47,13 +48,8 @@ public class Game {
 	public String getPlayerInput() {
 		return this.playerInput;
 	}
-	/**
-	 * Cycle through players in the table
-	 * It needs to be an infinite loop until the game ends
-	 */
-	 {
-		
-	}
+
+
 	 public void run(Player human, Player stratOne, Player stratTwo, Player stratThree, Table board) {
 		int n = board.getNumPlayers();
 		while(true) {
@@ -87,6 +83,7 @@ public class Game {
 				}
 				this.turns++;
 			}
+
 		}
 		
 			

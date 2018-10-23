@@ -6,12 +6,12 @@ import java.util.ArrayList;
 /**
  * The Table class contains all the data structures used to represent game elements
  * The class is responsible for passing data between 
- * players - A list of players in the game
- * stock - The initial set of 104 tiles used at the start of the game 
- * meld - a single meld submitted by a player, which is refreshed after each turn - Removed -Jacob
- * melds - a collection of melds submitted
- * firstMeld - boolean value of whether or not a valid 30 point melds is played to start the game
- * players - An ArrayList of players in on the table
+ * @players {Object} - A list of players in the game
+ * @stock - The initial set of 104 tiles used at the start of the game 
+ * @meld - a single meld submitted by a player, which is refreshed after each turn - Removed -Jacob
+ * @melds - a collection of melds submitted
+ * @firstMeld - boolean value of whether or not a valid 30 point melds is played to start the game
+ * @players - An ArrayList of players in on the table
  * */
 public class Table {
 	
@@ -21,10 +21,13 @@ public class Table {
 	private ArrayList<Tile> meld;
 	private ArrayList<ArrayList<Tile>> melds;
 	private boolean firstMeld = false;
+	private boolean threeLess = false;
+	
+	private int whosTurn = 0;
 
 	/**
 	 * Table constructor
-	 * Initialise all table variables*/
+	 * Initialize all table variables*/
 	public Table() {
 		
 		loadPlayers();
@@ -33,22 +36,16 @@ public class Table {
 	}
 	
 	/**
-	 * Hard coded instantiation of players to populate the list of players*/
+	 * Hard coded instantiation of players to populate the list of players
+	 * @FirstStrategy - Plays 30 points as soon as it can
+	 * @SecondStrategy - 
+	 * @ThirdStrategy - */
 	public void loadPlayers() {
-		Strategy stratA1;
-		Player ai1 = new Player("AI 1");
-		stratA1 = new FirstStrategy(ai1, this);
-		ai1.setStrategy(stratA1);
-		Strategy stratA2;
-		Player ai2 = new Player("AI 2");
-		stratA2 = new SecondStrategy(ai2, this);
-		ai2.setStrategy(stratA2);
 		
-		Strategy stratA3;
-		Player ai3 = new Player("AI 3");
-		stratA3 = new ThirdStrategy(ai3, this);
-		ai1.setStrategy(stratA3);
-		
+		FirstStrategy ai1 = new FirstStrategy("AI 1");
+		SecondStrategy ai2 = new SecondStrategy("AI 2");	
+		ThirdStrategy ai3 = new ThirdStrategy("AI 3");
+
 		players = new ArrayList<Player>();
 		players.add(ai1);
 		players.add(ai2);
@@ -171,5 +168,49 @@ public class Table {
 		}
 		
 	}
+
+	/**
+	 * Circular array cycling between 0 and 3
+	 * */
+	public void nextMove() {
+		// TODO Auto-generated method stub
+		this.whosTurn++;
+		this.whosTurn%=4;
+		
+	}
 	
+	/**
+	 * Returns the index of the next player to play
+	 * */
+	public int whosMove() {
+		return this.whosTurn;
+		
+	}
+	
+	public ArrayList<ArrayList<Tile>> getMelds() {
+		return this.melds;
+	}
+ 
+	/**
+	 * Check if the first 30 point meld has been played
+	 * @return boolean - true if the first meld has been played*/
+	public boolean getFirst() {
+		
+		return this.firstMeld;
+	}
+	
+	/**
+	 * Check if any player has 3 less cards than Strategy3
+	 * @return boolean - true if there is a player who has 3 less than Strategy3*/
+	public boolean getThreeLess() {
+		
+		return this.threeLess;
+	}
+	
+	/**
+	 * Update all subscribers on the state of the game
+	 * TODO: Cycle through all the players and send them update data packets*/
+	public void update() {
+		
+	}
 }

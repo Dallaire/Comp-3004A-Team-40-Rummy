@@ -14,7 +14,8 @@ public class TableTest extends TestCase
     	assertEquals(2,rummy.getNumPlayers());
 
     }
-    
+    /**
+     * Test that the table creates 4 players*/
     public void testPlayer2() {
     	Table rummy = new Table();
     	assertEquals(3,rummy.getNumPlayers());
@@ -100,6 +101,7 @@ public class TableTest extends TestCase
     	Game input = new Game();
     	assertEquals("R", input.getPlayerInput());
     }
+    
     /**
      * test to check if player input equals M
      * test to check if the player decides to play a run
