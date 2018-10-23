@@ -8,7 +8,7 @@ public class Player {
 	private ArrayList<Tile> hand = new ArrayList<Tile>();
 	private String name;
 	private ArrayList<Tile> meld;
-
+	private JRON tableData = null;
 	
 	//Constructor
 	public Player(String aName) {
@@ -159,6 +159,10 @@ public class Player {
 			return true;
 		}
 		return false;
+	}
+	
+	public void update(JRON data) {
+		this.tableData = data;
 	}
 	
 		
