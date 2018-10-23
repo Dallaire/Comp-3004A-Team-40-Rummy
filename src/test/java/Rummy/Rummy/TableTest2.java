@@ -1,5 +1,7 @@
 package Rummy.Rummy;
 
+import java.util.ArrayList;
+
 import junit.framework.TestCase;
 
 public class TableTest2 extends TestCase {
@@ -39,5 +41,15 @@ public class TableTest2 extends TestCase {
     	rummy.nextMove();
     	rummy.nextMove();
     	assertEquals(0, rummy.whosMove());
+    }
+    
+    /**
+     * Test if the JRON is working*/
+    public void testJRON() {
+    	Table rummy = new Table();
+    	JRON data = new JRON(rummy.getMelds(), rummy.getFirst(), rummy.getThreeLess());
+    	assertEquals(false, data.getThreeLess());
+    	assertEquals(false, data.getFirstMeld());
+    	assertEquals(true, data.getMelds() instanceof ArrayList);
     }
 }

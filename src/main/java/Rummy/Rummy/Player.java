@@ -87,9 +87,7 @@ public class Player {
 		hand.add(new Tile(Color.R,9 ));
 		hand.add(new Tile(Color.R,10 ));
 		hand.add(new Tile(Color.R,11 ));
-		//hand.add(new Tile(Color.R,1 ));
-
-		
+		//hand.add(new Tile(Color.R,1 ));		
 	}
 
 	/**
