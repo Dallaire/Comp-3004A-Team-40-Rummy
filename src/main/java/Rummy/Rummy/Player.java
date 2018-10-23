@@ -96,19 +96,20 @@ public class Player {
 	 * checks for the run with the maximum sum ie O9,O10,O11,O12
 	 * TODO: Does checkrun remove the tiles from the hand
 	 **/
-	public ArrayList<Tile> checkRun(ArrayList<Tile> aHand) {
-		meld = new ArrayList<Tile>();
-	    int meldSize =0;
+	public ArrayList<Tile> createRun() {
+		//meld = new ArrayList<Tile>();
+	    //int meldSize =0;
 	    
-		for(int i=aHand.size()-1; i>0;i--) {
-			meld.add(aHand.get(i));
-			meldSize++;
+		for (int i=hand.size()-1; i>0;i--) {
+			
+			meld.add(hand.get(i));
+			//meldSize++;
 			for(int j=i-1;j>=0;j--) {
-				if(checkColor(meld.get(meldSize-1), aHand.get(j))
-				&&checkDifference(meld.get(meldSize-1), aHand.get(j))) {
-					if (!meld.contains(aHand.get(j))) {
-						meld.add(aHand.get(j));
-						meldSize++;
+				if(checkColor(meld.get(meld.size()-1), hand.get(j))
+				&&checkDifference(meld.get(meld.size()-1), hand.get(j))) {
+					if (!meld.contains(hand.get(j))) {
+						meld.add(hand.get(j));
+						//meldSize++;
 					}
 				}
 			}
@@ -121,30 +122,23 @@ public class Player {
 		System.out.println("");
 		return null;
 	}
-	
 	/**
 	 * checks if a player has a set ie O11,B11,R11,G11*/
-	public ArrayList<Tile> checkSet(ArrayList<Tile> aHand) {
-		meld = new ArrayList<Tile>();
-	    int meldSize=0;
-		for(int i=aHand.size()-1; i>0;i--) {
-			//System.out.println("im here");
-			meld.add(aHand.get(i));
-			meldSize++;
+	public ArrayList<Tile> createSet() {
+		ArrayList<Tile> temp= new ArrayList<Tile>();
+		for(int i=hand.size()-1; i>0;i--) {
+			temp.add(hand.get(i));
 			for(int j=i-1;j>=0;j--) {
-				//System.out.println("im here");
-			 //System.out.println("im here "+meld.get(meldSize).toString());
-				//System.out.println(meld.get(meldSize-1).toString());
-			if(meld.get(meldSize-1).getValue()==aHand.get(j).getValue()) {
-//					//System.out.print(","+aHand.get(j).toString());
-					meld.add(aHand.get(j));
-//					//System.out.println("im here");
-					meldSize++;
+			if(temp.get(temp.size()-1).getValue()==hand.get(j).getValue()) {
+					temp.add(hand.get(j));
 				}
 			}
-
+			if(temp.size()>=3) {
+				return temp;
+			}
+			temp.clear();
 		}
-		return null;
+		return temp;
 	}
 	
 	/**

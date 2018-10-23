@@ -46,7 +46,7 @@ public class AppTest extends TestCase
 
     	Deck stock = new Deck();
 		stock.Shuffle();
-		FirstStrategy ai1 = new FirstStrategy("AI 1");
+		Player ai1 = new Player("POE");
 		
 	//	ai1.setStrategy(stratA1);
     	//ArrayList<Tile> aHand= new ArrayList<Tile>();
@@ -55,7 +55,16 @@ public class AppTest extends TestCase
 		ai1.addTile(new Tile(Color.R, 12));
 		ai1.addTile(new Tile(Color.B, 1));
 		ai1.addTile(new Tile(Color.B, 12));
+		ai1.addTile(new Tile(Color.G, 13));
+		//ai1.addTile(new Tile(Color.R, 13));
+		//ai1.addTile(new Tile(Color.O, 13));
+		ai1.addTile(new Tile(Color.B, 13));
 		ai1.addTile(new Tile(Color.G, 6));
+	//	ai1.addTile(new Tile(Color.B, 13));
+		//ai1.addTile(new Tile(Color.B, 13));
+		//ai1.addTile(new Tile(Color.B, 13));
+
+		
 
 
     	//ai1.getCards(stock);
@@ -67,14 +76,14 @@ public class AppTest extends TestCase
 		for (int i = 0; i < ai1.getHand().size(); i++) {
 			System.out.println(ai1.getHand().get(i).toString());
 		}
-    	ArrayList<Tile> meld=stratA1.checkSet(ai1.getHand());
+		//ai1.createSet();
+    	ArrayList<Tile> meld=ai1.createSet();
     	
-   	for (int i = 0; i < meld.size(); i++) {
-   			
-    		System.out.print(","+meld.get(i).toString());
-	}
-    	
-    	assertEquals("AI 1", ai1.getName());
+	  	for (int i = 0; i < meld.size(); i++) {   			
+	    		System.out.print(","+meld.get(i).toString());
+		}
+//    	
+//    	assertEquals("AI 1", ai1.getName());
     	//ai1.playTurn();
     	
     }
