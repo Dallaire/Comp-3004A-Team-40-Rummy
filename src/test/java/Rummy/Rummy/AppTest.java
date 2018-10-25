@@ -1,8 +1,11 @@
 package Rummy.Rummy;
 
+import static org.junit.Assert.assertNotEquals;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
+import junit.framework.Assert;
 import junit.framework.TestCase;
 
 /**
@@ -39,53 +42,71 @@ public class AppTest extends TestCase
     }
     
     /**
-     * Test the first strategy
+     * Test createRun & createSet
      * Play first 30 points as soon as possible
      * */
-    public void testStrategy() {
+    public void testCreateRun() {
 
     	Deck stock = new Deck();
 		stock.Shuffle();
 		Player ai1 = new Player("POE");
-		
-	//	ai1.setStrategy(stratA1);
-    	//ArrayList<Tile> aHand= new ArrayList<Tile>();
 		ai1.addTile(new Tile(Color.O, 6));
-		ai1.addTile(new Tile(Color.G, 6));
+		ai1.addTile(new Tile(Color.B, 3));
 		ai1.addTile(new Tile(Color.R, 12));
-		ai1.addTile(new Tile(Color.B, 1));
-		ai1.addTile(new Tile(Color.B, 12));
+		ai1.addTile(new Tile(Color.B, 8));
+		ai1.addTile(new Tile(Color.R, 12));
 		ai1.addTile(new Tile(Color.G, 13));
-		//ai1.addTile(new Tile(Color.R, 13));
-		//ai1.addTile(new Tile(Color.O, 13));
-		ai1.addTile(new Tile(Color.B, 13));
+		ai1.addTile(new Tile(Color.R, 13));
+		ai1.addTile(new Tile(Color.O, 13));
+		ai1.addTile(new Tile(Color.O, 13));
 		ai1.addTile(new Tile(Color.G, 6));
-	//	ai1.addTile(new Tile(Color.B, 13));
-		//ai1.addTile(new Tile(Color.B, 13));
-		//ai1.addTile(new Tile(Color.B, 13));
-
-		
-
-
-    	//ai1.getCards(stock);
-		//ai1.customFillHand();
-//    	for (int i = 0; i < 14; i++) {
-//        	System.out.println(ai1.getHand().get(i).toString());
-//		}
+		ai1.addTile(new Tile(Color.B, 11));
+		ai1.addTile(new Tile(Color.B, 9));
+		ai1.addTile(new Tile(Color.B, 10));
 		Collections.sort(ai1.getHand(),new valueComparator());
-		for (int i = 0; i < ai1.getHand().size(); i++) {
-			System.out.println(ai1.getHand().get(i).toString());
-		}
-		//ai1.createSet();
-    	ArrayList<Tile> meld=ai1.createSet();
-    	
-	  	for (int i = 0; i < meld.size(); i++) {   			
-	    		System.out.print(","+meld.get(i).toString());
-		}
-//    	
-//    	assertEquals("AI 1", ai1.getName());
-    	//ai1.playTurn();
-    	
+    	ArrayList<Tile> temp=ai1.createRun();
+    	ArrayList<Tile> meld=new ArrayList<Tile>();
+    	meld.add(new Tile(Color.B, 11));
+    	meld.add(new Tile(Color.B, 10));
+    	meld.add(new Tile(Color.B, 9));
+    	meld.add(new Tile(Color.B, 8));
+    		 
+	  	for (int i = 0; i < meld.size(); i++) {   
+	  		assertEquals(meld.get(i).getValue(), temp.get(i).getValue());
+	  		assertEquals(meld.get(i).getColor(), temp.get(i).getColor());
+	  	}    	
+    }
+    
+    public void testCreateSet() {
+
+    	Deck stock = new Deck();
+		stock.Shuffle();
+		Player ai1 = new Player("POE");
+		ai1.addTile(new Tile(Color.O, 6));
+		ai1.addTile(new Tile(Color.B, 3));
+		ai1.addTile(new Tile(Color.R, 12));
+		ai1.addTile(new Tile(Color.B, 8));
+		ai1.addTile(new Tile(Color.R, 12));
+		ai1.addTile(new Tile(Color.G, 13));
+		ai1.addTile(new Tile(Color.R, 13));
+		ai1.addTile(new Tile(Color.O, 13));
+		ai1.addTile(new Tile(Color.O, 13));
+		ai1.addTile(new Tile(Color.G, 6));
+		ai1.addTile(new Tile(Color.B, 11));
+		ai1.addTile(new Tile(Color.B, 9));
+		ai1.addTile(new Tile(Color.B, 10));
+		Collections.sort(ai1.getHand(),new valueComparator());
+    	ArrayList<Tile> temp=ai1.createSet();
+    	ArrayList<Tile> meld=new ArrayList<Tile>();
+    	meld.add(new Tile(Color.G, 13));
+    	meld.add(new Tile(Color.R, 13));
+    	meld.add(new Tile(Color.O, 13));
+    	meld.add(new Tile(Color.O, 13));
+    		 
+	  	for (int i = 0; i < meld.size(); i++) {   
+	  		assertEquals(meld.get(i).getValue(), temp.get(i).getValue());
+	  		//assertEquals(meld.get(i).getColor(), temp.get(i).getColor());
+	  	}    	
     }
 
 }
