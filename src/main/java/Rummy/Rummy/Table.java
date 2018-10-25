@@ -211,6 +211,11 @@ public class Table {
 	 * Update all subscribers on the state of the game
 	 * TODO: Cycle through all the players and send them update data packets*/
 	public void update() {
+		JRON data = new JRON(this.getMelds(), this.getFirst(), this.getThreeLess());
+	       for (Player x:players) 
+	        { 
+	            x.update(data);; 
+	        } 
 		
 	}
 }
