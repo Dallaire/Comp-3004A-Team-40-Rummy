@@ -105,7 +105,6 @@ public class AppTest extends TestCase
     		 
 	  	for (int i = 0; i < meld.size(); i++) {   
 	  		assertEquals(meld.get(i).getValue(), temp.get(i).getValue());
-	  		//assertEquals(meld.get(i).getColor(), temp.get(i).getColor());
 	  	}    	
     }
 
