@@ -62,7 +62,7 @@ public class GamePlayTest extends TestCase{
  	}
 	
 	public void testPlayerTurn() {
-		PlayerStrategy p1 = new PlayerStrategy("dude");
+		
 		Table rummy = new Table();
 		rummy.init();
 		rummy.playNext();

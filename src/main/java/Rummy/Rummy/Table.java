@@ -210,7 +210,7 @@ public class Table {
 		} else {
 			
 		}
-		
+		players.get(whosMove()).printTiles();
 		nextMove();
 		update();
 	}

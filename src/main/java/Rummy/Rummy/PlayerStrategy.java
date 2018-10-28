@@ -1,6 +1,7 @@
 package Rummy.Rummy;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class PlayerStrategy extends Player implements Strategy {
@@ -18,6 +19,7 @@ public class PlayerStrategy extends Player implements Strategy {
 		
 		// create the meld using the indexes
 		for (int x: indexes) {
+			System.out.println(x);
 			meld.add(this.getHand().remove(x));
 		}
 
