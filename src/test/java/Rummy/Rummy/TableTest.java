@@ -138,5 +138,12 @@ public class TableTest extends TestCase
     	assertEquals(14, four.getHand().size());
     	
     }
+    
+    public void testInit() {
+    	Table rummy = new Table();
+    	rummy.init();
+    }
+    
+    
      
 }

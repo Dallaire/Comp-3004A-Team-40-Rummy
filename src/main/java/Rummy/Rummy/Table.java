@@ -34,6 +34,14 @@ public class Table {
 		loadDeck();
 		
 	}
+
+	/**
+	 * Print initial tiles for each player*/
+	public void init() {
+		for (Player x: players) {
+			x.printTiles();
+		}
+	}
 	
 	/**
 	 * Hard coded instantiation of players to populate the list of players
@@ -106,7 +114,7 @@ public class Table {
 	
 	/**
 	 *  Gets a meld by its index
-	 *  @param i - index of tile
+	 *  @i - index of tile
 	 */
 	public ArrayList<Tile> getMeld(int i){
 		return melds.get(i);
@@ -117,8 +125,8 @@ public class Table {
 //	}
 	
 	/**
-	 * @param meld - the meld to set
-	 * TODO: Maybe some error checking;
+	 * @meld - the meld to set
+	 * 
 	 */
 	public void addMeld(ArrayList<Tile> meld) {
 
@@ -127,11 +135,10 @@ public class Table {
 
 	/**
 	 * Method to get a random tile
-	 * @param stock - a collection of Tiles
+	 * @stock - a collection of Tiles
 	 * */
 	public Tile getTile() {
-		//TODO prompt user to select a color and value
-		//Tile tile = selectTile();
+
 		return stock.geTile(stock.getSize()-1);
 	}
 	
