@@ -130,6 +130,12 @@ public class Player {
 	public void update(JRON data) {
 		this.tableData = data;
 	}
+
+	/**
+	 * Print the tiles in the current players hand*/
+	public void printTiles() {
+		System.out.println(this.name + "'s cards: " + this.hand.toString());
+	}
 	
 		
 }
