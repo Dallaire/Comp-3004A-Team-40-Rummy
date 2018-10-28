@@ -48,9 +48,5 @@ public class PlayerStrategy extends Player implements Strategy {
 		return indexes;
 	}
 
-	public static Object get(int whosMove) {
-		// TODO Auto-generated method stub
-		return super(whosMove);
-	}
 
 }

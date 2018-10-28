@@ -65,11 +65,7 @@ public class GamePlayTest extends TestCase{
 		PlayerStrategy p1 = new PlayerStrategy("dude");
 		Table rummy = new Table();
 		rummy.init();
-		
-		
-		ArrayList<Tile> meld = new ArrayList<Tile>();
-		meld = p1.playTurn();
-		System.out.println(meld.toString());
+		rummy.playNext();
 		//assertArrayEquals(array2, array);
 		
  	}

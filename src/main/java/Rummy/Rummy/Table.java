@@ -206,6 +206,9 @@ public class Table {
 		
 		if(players.get(whosMove()) instanceof PlayerStrategy) {
 			((PlayerStrategy) players.get(whosMove())).playTurn();
+			
+		} else {
+			
 		}
 		
 		nextMove();
