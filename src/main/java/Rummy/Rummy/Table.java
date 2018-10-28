@@ -199,10 +199,12 @@ public class Table {
 	}
 	
 	/**
-	 * Initiate the next players move*/
+	 * Initiate the next players move
+	 * @update() - updates players with current state of the table*/
 	public void playNext() {
 		players.get(whosMove()).printTiles();
 		nextMove();
+		update();
 	}
 	
 	public ArrayList<ArrayList<Tile>> getMelds() {

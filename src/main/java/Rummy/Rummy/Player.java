@@ -7,12 +7,13 @@ public class Player {
 	//Properties
 	private ArrayList<Tile> hand = new ArrayList<Tile>();
 	private String name;
-	private ArrayList<Tile> meld;
+	protected ArrayList<Tile> meld;
 	private JRON tableData = null;
 	
 	//Constructor
 	public Player(String aName) {
 		this.name = aName;
+		meld = new ArrayList<Tile>();
 	}
 	
 	
