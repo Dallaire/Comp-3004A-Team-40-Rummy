@@ -123,6 +123,8 @@ public class TableTest extends TestCase
     	assertEquals(table.getMeld(0), meld);
     }
     
+    /**
+     * Test to assert that each player will receive 14 tiles*/
     public void testDealTiles() {
     	Table rummy = new Table();
     	Player one = rummy.getPlayer(0);
@@ -130,10 +132,10 @@ public class TableTest extends TestCase
     	Player three = rummy.getPlayer(2);
     	Player four = rummy.getPlayer(3);
     	
-    	assertEquals(13, one.getHand().size());
-    	assertEquals(13, two.getHand().size());
-    	assertEquals(13, three.getHand().size());
-    	assertEquals(13, four.getHand().size());
+    	assertEquals(14, one.getHand().size());
+    	assertEquals(14, two.getHand().size());
+    	assertEquals(14, three.getHand().size());
+    	assertEquals(14, four.getHand().size());
     	
     }
      

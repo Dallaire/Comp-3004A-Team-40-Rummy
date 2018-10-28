@@ -42,6 +42,7 @@ public class Table {
 	 * @ThirdStrategy - */
 	public void loadPlayers() {
 		
+		PlayerStrategy p1 = new PlayerStrategy("dude");
 		FirstStrategy ai1 = new FirstStrategy("AI 1");
 		SecondStrategy ai2 = new SecondStrategy("AI 2");	
 		ThirdStrategy ai3 = new ThirdStrategy("AI 3");
@@ -50,6 +51,7 @@ public class Table {
 		players.add(ai1);
 		players.add(ai2);
 		players.add(ai3);
+		players.add(p1);
 
 	}
 	/**
