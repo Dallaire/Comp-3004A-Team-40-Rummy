@@ -12,11 +12,14 @@ public class PlayerStrategy extends Player implements Strategy {
 	@Override
 	public ArrayList<Tile> playTurn() {
 		meld = null;
-		
+		int[] indexes = readInput();
 
 		return meld;
 	}
 	
+	/**
+	 * Read the input from the console of the Player
+	 * @return - an integer array of indexes the player wishes to create a meld from*/
 	public int[] readInput() {
 		
 		System.out.println("Create your meld, select the tiles by index in comma separated list: ");
