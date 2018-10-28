@@ -56,10 +56,11 @@ public class Table {
 		ThirdStrategy ai3 = new ThirdStrategy("AI 3");
 
 		players = new ArrayList<Player>();
+		players.add(p1);
 		players.add(ai1);
 		players.add(ai2);
 		players.add(ai3);
-		players.add(p1);
+		
 
 	}
 	/**
