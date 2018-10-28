@@ -20,9 +20,12 @@ public class PlayerStrategy extends Player implements Strategy {
 			
 			System.out.println(x);
 			System.out.println(this.getHand().size());
-			Tile temp = this.getHand().remove(x);
+			Tile temp = this.getHand().get(x);
 			meld.add(temp);
 		}
+		
+		// if the meld is legit remove it from the hand
+		removeTiles(indexes);
 
 		return meld;
 	}

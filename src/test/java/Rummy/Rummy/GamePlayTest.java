@@ -71,6 +71,17 @@ public class GamePlayTest extends TestCase{
  	}
 	
 	/**
+	 * Handle invalid input*/
+	public void testPlayerTurn_Error_Handled() {
+		
+		Table rummy = new Table();
+		rummy.init();
+		rummy.playNext();
+		//assertArrayEquals(array2, array);
+		
+ 	}
+	
+	/**
 	 * Check that the down casting works*/
 	public void testPlayerTypes() {
 		Table rummy = new Table();
@@ -79,6 +90,16 @@ public class GamePlayTest extends TestCase{
 		assertEquals(false, rummy.getPlayer(1) instanceof PlayerStrategy);
 		assertEquals(false, rummy.getPlayer(2) instanceof PlayerStrategy);
 		assertEquals(false, rummy.getPlayer(3) instanceof PlayerStrategy);
+	}
+	
+	/***/
+	public void testRemoveTile() {
+		Table rummy = new Table();
+		rummy.init();
+		PlayerStrategy p1 = (PlayerStrategy) rummy.getPlayer(0);
+		p1.printTiles();
+		
+		
 	}
 	
 
