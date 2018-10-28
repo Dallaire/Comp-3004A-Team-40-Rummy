@@ -63,5 +63,10 @@ public class TableTest2 extends TestCase {
 		ThirdStrategy ai3 = new ThirdStrategy("AI 3");
 		
 		System.out.println(p1.getClass());
+		assertEquals(p1.getClass(),p2.getClass());
+		assertEquals(true, p1.getClass().equals(p2.getClass()));
+		assertEquals(false, p1.getClass().equals(ai3.getClass()));
+		assertEquals(false, p1.getClass().equals(ai2.getClass()));
+		assertEquals(false, p1.getClass().equals(ai1.getClass()));
     }
 }
