@@ -52,4 +52,16 @@ public class TableTest2 extends TestCase {
     	assertEquals(false, data.getFirstMeld());
     	assertEquals(true, data.getMelds() instanceof ArrayList);
     }
+    
+    /**
+     * Test getting class types of Players*/
+    public void testClass() {
+		PlayerStrategy p1 = new PlayerStrategy("dude");
+		PlayerStrategy p2 = new PlayerStrategy("another dude");
+		FirstStrategy ai1 = new FirstStrategy("AI 1");
+		SecondStrategy ai2 = new SecondStrategy("AI 2");	
+		ThirdStrategy ai3 = new ThirdStrategy("AI 3");
+		
+		System.out.println(p1.getClass());
+    }
 }

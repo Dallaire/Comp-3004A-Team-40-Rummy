@@ -14,7 +14,7 @@ public class PlayerStrategy extends Player implements Strategy {
 		
 		// let the player select the tiles they wish to play
 		int[] indexes = readInput();
-		
+		meld.clear();
 		// create the meld using the indexes
 		for (int x: indexes) {
 			
@@ -25,7 +25,12 @@ public class PlayerStrategy extends Player implements Strategy {
 		}
 		
 		// if the meld is legit remove it from the hand
-		removeTiles(indexes);
+		if(MeldChecker.check30(meld)) {
+			System.out.println("Not enough points buddy.");
+			removeTiles(indexes);
+		} else {
+			
+		}
 
 		return meld;
 	}

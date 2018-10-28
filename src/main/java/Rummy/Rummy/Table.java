@@ -205,7 +205,7 @@ public class Table {
 		players.get(whosMove()).printTiles();
 		
 		if(players.get(whosMove()) instanceof PlayerStrategy) {
-			meld = ((PlayerStrategy) players.get(whosMove())).playTurn();
+			melds.add(((PlayerStrategy) players.get(whosMove())).playTurn());
 			
 		} else {
 			

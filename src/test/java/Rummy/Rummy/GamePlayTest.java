@@ -66,6 +66,7 @@ public class GamePlayTest extends TestCase{
 		Table rummy = new Table();
 		rummy.init();
 		rummy.playNext();
+		
 		//assertArrayEquals(array2, array);
 		
  	}
