@@ -1,7 +1,6 @@
 package Rummy.Rummy;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class PlayerStrategy extends Player implements Strategy {
@@ -12,15 +11,17 @@ public class PlayerStrategy extends Player implements Strategy {
 
 	@Override
 	public ArrayList<Tile> playTurn() {
-		meld = null;
 		
 		// let the player select the tiles they wish to play
 		int[] indexes = readInput();
 		
 		// create the meld using the indexes
 		for (int x: indexes) {
+			
 			System.out.println(x);
-			meld.add(this.getHand().remove(x));
+			System.out.println(this.getHand().size());
+			Tile temp = this.getHand().remove(x);
+			meld.add(temp);
 		}
 
 		return meld;
