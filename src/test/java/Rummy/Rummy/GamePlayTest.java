@@ -5,6 +5,8 @@ package Rummy.Rummy;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 import junit.framework.TestCase;
@@ -44,6 +46,7 @@ public class GamePlayTest extends TestCase{
 		Table rummy = new Table();
 		rummy.init();
 		rummy.playNext();
+		assertEquals(true, rummy.getPlayer(0) instanceof PlayerStrategy);
 		rummy.playNext();
 		rummy.playNext();
 		rummy.playNext();
@@ -57,6 +60,30 @@ public class GamePlayTest extends TestCase{
 		assertArrayEquals(array2, array);
 		
  	}
+	
+	public void testPlayerTurn() {
+		PlayerStrategy p1 = new PlayerStrategy("dude");
+		Table rummy = new Table();
+		rummy.init();
+		
+		
+		ArrayList<Tile> meld = new ArrayList<Tile>();
+		meld = p1.playTurn();
+		System.out.println(meld.toString());
+		//assertArrayEquals(array2, array);
+		
+ 	}
+	
+	/**
+	 * Check that the down casting works*/
+	public void testPlayerTypes() {
+		Table rummy = new Table();
+		rummy.init();
+		assertEquals(true, rummy.getPlayer(0) instanceof PlayerStrategy);
+		assertEquals(false, rummy.getPlayer(1) instanceof PlayerStrategy);
+		assertEquals(false, rummy.getPlayer(2) instanceof PlayerStrategy);
+		assertEquals(false, rummy.getPlayer(3) instanceof PlayerStrategy);
+	}
 	
 
 }

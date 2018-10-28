@@ -203,6 +203,11 @@ public class Table {
 	 * @update() - updates players with current state of the table*/
 	public void playNext() {
 		players.get(whosMove()).printTiles();
+		
+		if(players.get(whosMove()) instanceof PlayerStrategy) {
+			((PlayerStrategy) players.get(whosMove())).playTurn();
+		}
+		
 		nextMove();
 		update();
 	}

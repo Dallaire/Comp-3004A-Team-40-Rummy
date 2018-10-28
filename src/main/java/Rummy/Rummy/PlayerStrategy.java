@@ -12,7 +12,14 @@ public class PlayerStrategy extends Player implements Strategy {
 	@Override
 	public ArrayList<Tile> playTurn() {
 		meld = null;
+		
+		// let the player select the tiles they wish to play
 		int[] indexes = readInput();
+		
+		// create the meld using the indexes
+		for (int x: indexes) {
+			meld.add(this.getHand().remove(x));
+		}
 
 		return meld;
 	}
@@ -39,6 +46,11 @@ public class PlayerStrategy extends Player implements Strategy {
 		sc.close();
 		
 		return indexes;
+	}
+
+	public static Object get(int whosMove) {
+		// TODO Auto-generated method stub
+		return super(whosMove);
 	}
 
 }
