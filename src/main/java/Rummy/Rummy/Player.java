@@ -7,12 +7,13 @@ public class Player {
 	//Properties
 	private ArrayList<Tile> hand = new ArrayList<Tile>();
 	private String name;
-	private ArrayList<Tile> meld;
-
+	protected ArrayList<Tile> meld;
+	private JRON tableData = null;
 	
 	//Constructor
 	public Player(String aName) {
 		this.name = aName;
+		meld = new ArrayList<Tile>();
 	}
 	
 	
@@ -60,17 +61,7 @@ public class Player {
 	}
 	/**
 	 * checks if the given meld is greater than of equal 30*/
-	public boolean check30(ArrayList<Tile> meld) {
-		int sum=0;
-		for(int i=0;i<meld.size();i++) {
-			sum+=meld.get(i).getValue();
-		}
-		if (sum>=30) {
-			return true;
-		}
-		return false;
-		
-	}	
+	
 	public void customFillHand() {
 		hand.add(new Tile(Color.B,1 ));
 		hand.add(new Tile(Color.B,2 ));
@@ -94,69 +85,57 @@ public class Player {
 	 * checks for the run with the maximum sum ie O9,O10,O11,O12
 	 * TODO: Does checkrun remove the tiles from the hand
 	 **/
-	public ArrayList<Tile> checkRun(ArrayList<Tile> aHand) {
-		meld = new ArrayList<Tile>();
-	    int meldSize =0;
-	    
-		for(int i=aHand.size()-1; i>0;i--) {
-			meld.add(aHand.get(i));
-			meldSize++;
+	public ArrayList<Tile> createRun() {
+		ArrayList<Tile> temp = new ArrayList<Tile>();	    
+		for (int i=hand.size()-1; i>0;i--) {
+			temp.add(hand.get(i));
 			for(int j=i-1;j>=0;j--) {
-				if(checkColor(meld.get(meldSize-1), aHand.get(j))
-				&&checkDifference(meld.get(meldSize-1), aHand.get(j))) {
-					if (!meld.contains(aHand.get(j))) {
-						meld.add(aHand.get(j));
-						meldSize++;
+				if(MeldChecker.checkColor(temp.get(temp.size()-1), hand.get(j))
+				&&MeldChecker.checkDifference(temp.get(temp.size()-1), hand.get(j))) {
+					if (!temp.contains(hand.get(j))) {
+						temp.add(hand.get(j));
 					}
 				}
 			}
-			if(meld.size()>=3) {
-				return meld;
+			if(temp.size()>=3) {
+				return temp;
 			}
-			meld.clear();	
+			temp.clear();	
 		}
 		
 		System.out.println("");
 		return null;
 	}
-	
 	/**
 	 * checks if a player has a set ie O11,B11,R11,G11*/
-	public ArrayList<Tile> checkSet(ArrayList<Tile> aHand) {
-		meld = new ArrayList<Tile>();
-	    int meldSize=0;
-		for(int i=aHand.size()-1; i>0;i--) {
-			//System.out.println("im here");
-			meld.add(aHand.get(i));
-			meldSize++;
+	public ArrayList<Tile> createSet() {
+		ArrayList<Tile> temp= new ArrayList<Tile>();
+		for(int i=hand.size()-1; i>0;i--) {
+			temp.add(hand.get(i));
 			for(int j=i-1;j>=0;j--) {
-				//System.out.println("im here");
-			 //System.out.println("im here "+meld.get(meldSize).toString());
-				//System.out.println(meld.get(meldSize-1).toString());
-			if(meld.get(meldSize-1).getValue()==aHand.get(j).getValue()) {
-//					//System.out.print(","+aHand.get(j).toString());
-					meld.add(aHand.get(j));
-//					//System.out.println("im here");
-					meldSize++;
+			if(temp.get(temp.size()-1).getValue()==hand.get(j).getValue()) {
+					temp.add(hand.get(j));
 				}
 			}
-
+			if(temp.size()>=3) {
+				return temp;
+			}
+			temp.clear();
 		}
-		return null;
+		System.out.println("");
+		return temp;
 	}
 	
-	/**
-	 * compares the color of the 2 giver tiles and returns true if equal otherwise false*/
-	public boolean checkColor(Tile t1,Tile t2) {
-		return t1.colorToString().equals(t2.colorToString());
+	
+	
+	public void update(JRON data) {
+		this.tableData = data;
 	}
+
 	/**
-	 * compares the value of the 2 giver tiles and returns true if the difference=1 otherwise false*/
-	public boolean checkDifference(Tile t1, Tile t2) {
-		if ((t1.getValue()-t2.getValue())==1) {
-			return true;
-		}
-		return false;
+	 * Print the tiles in the current players hand*/
+	public void printTiles() {
+		System.out.println(this.name + "'s cards: " + this.hand.toString());
 	}
 	
 		

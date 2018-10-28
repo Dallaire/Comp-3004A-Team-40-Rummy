@@ -34,6 +34,14 @@ public class Table {
 		loadDeck();
 		
 	}
+
+	/**
+	 * Print initial tiles for each player*/
+	public void init() {
+		for (Player x: players) {
+			x.printTiles();
+		}
+	}
 	
 	/**
 	 * Hard coded instantiation of players to populate the list of players
@@ -42,14 +50,17 @@ public class Table {
 	 * @ThirdStrategy - */
 	public void loadPlayers() {
 		
+		PlayerStrategy p1 = new PlayerStrategy("dude");
 		FirstStrategy ai1 = new FirstStrategy("AI 1");
 		SecondStrategy ai2 = new SecondStrategy("AI 2");	
 		ThirdStrategy ai3 = new ThirdStrategy("AI 3");
 
 		players = new ArrayList<Player>();
+		players.add(p1);
 		players.add(ai1);
 		players.add(ai2);
 		players.add(ai3);
+		
 
 	}
 	/**
@@ -104,7 +115,7 @@ public class Table {
 	
 	/**
 	 *  Gets a meld by its index
-	 *  @param i - index of tile
+	 *  @i - index of tile
 	 */
 	public ArrayList<Tile> getMeld(int i){
 		return melds.get(i);
@@ -115,8 +126,8 @@ public class Table {
 //	}
 	
 	/**
-	 * @param meld - the meld to set
-	 * TODO: Maybe some error checking;
+	 * @meld - the meld to set
+	 * 
 	 */
 	public void addMeld(ArrayList<Tile> meld) {
 
@@ -125,11 +136,10 @@ public class Table {
 
 	/**
 	 * Method to get a random tile
-	 * @param stock - a collection of Tiles
+	 * @stock - a collection of Tiles
 	 * */
 	public Tile getTile() {
-		//TODO prompt user to select a color and value
-		//Tile tile = selectTile();
+
 		return stock.geTile(stock.getSize()-1);
 	}
 	
@@ -171,6 +181,7 @@ public class Table {
 
 	/**
 	 * Circular array cycling between 0 and 3
+	 * This method increments the index to the next player
 	 * */
 	public void nextMove() {
 		// TODO Auto-generated method stub
@@ -185,6 +196,23 @@ public class Table {
 	public int whosMove() {
 		return this.whosTurn;
 		
+	}
+	
+	/**
+	 * Initiate the next players move
+	 * @update() - updates players with current state of the table*/
+	public void playNext() {
+		players.get(whosMove()).printTiles();
+		
+		if(players.get(whosMove()) instanceof PlayerStrategy) {
+			((PlayerStrategy) players.get(whosMove())).playTurn();
+			
+		} else {
+			
+		}
+		players.get(whosMove()).printTiles();
+		nextMove();
+		update();
 	}
 	
 	public ArrayList<ArrayList<Tile>> getMelds() {
@@ -209,8 +237,14 @@ public class Table {
 	
 	/**
 	 * Update all subscribers on the state of the game
-	 * TODO: Cycle through all the players and send them update data packets*/
+	 * */
 	public void update() {
+		
+		JRON data = new JRON(this.getMelds(), this.getFirst(), this.getThreeLess());
+	       for (Player x:players) 
+	        { 
+	            x.update(data);
+	        } 
 		
 	}
 }
