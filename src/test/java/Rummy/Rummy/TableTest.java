@@ -139,10 +139,13 @@ public class TableTest extends TestCase
     	
     }
     
+    /**
+     *No assertions here, simply view console output*/
     public void testInit() {
     	Table rummy = new Table();
     	rummy.init();
     }
+    
     
     
      

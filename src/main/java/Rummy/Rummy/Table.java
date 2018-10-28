@@ -180,6 +180,7 @@ public class Table {
 
 	/**
 	 * Circular array cycling between 0 and 3
+	 * This method increments the index to the next player
 	 * */
 	public void nextMove() {
 		// TODO Auto-generated method stub
@@ -194,6 +195,13 @@ public class Table {
 	public int whosMove() {
 		return this.whosTurn;
 		
+	}
+	
+	/**
+	 * Initiate the next players move*/
+	public void playNext() {
+		players.get(whosMove()).printTiles();
+		nextMove();
 	}
 	
 	public ArrayList<ArrayList<Tile>> getMelds() {
