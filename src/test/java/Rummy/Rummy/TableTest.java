@@ -122,5 +122,19 @@ public class TableTest extends TestCase
     	table.addMeld(meld);
     	assertEquals(table.getMeld(0), meld);
     }
+    
+    public void testDealTiles() {
+    	Table rummy = new Table();
+    	Player one = rummy.getPlayer(0);
+    	Player two = rummy.getPlayer(1);
+    	Player three = rummy.getPlayer(2);
+    	Player four = rummy.getPlayer(3);
+    	
+    	assertEquals(13, one.getHand().size());
+    	assertEquals(13, two.getHand().size());
+    	assertEquals(13, three.getHand().size());
+    	assertEquals(13, four.getHand().size());
+    	
+    }
      
 }
