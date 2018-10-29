@@ -9,13 +9,12 @@ public class Player {
 	//Properties
 	private ArrayList<Tile> hand = new ArrayList<Tile>();
 	private String name;
-	//protected ArrayList<Tile> meld; //not used
+	protected ArrayList<Tile> meld = new ArrayList<Tile>();
 	private JRON tableData = null;
 	
 	//Constructor
 	public Player(String aName) {
 		this.name = aName;
-		//meld = new ArrayList<Tile>(); //not used
 	}
 	
 	
