@@ -45,11 +45,22 @@ public class TableTest2 extends TestCase {
     
     /**
      * Test if the JRON is working*/
-    public void testJRON() {
+    public void testJRON_1() {
     	Table rummy = new Table();
     	JRON data = new JRON(rummy.getMelds(), rummy.getFirst(), rummy.getThreeLess());
     	assertEquals(false, data.getThreeLess());
     	assertEquals(false, data.getFirstMeld());
     	assertEquals(true, data.getMelds() instanceof ArrayList);
     }
+    
+    /**
+     * Test if the JRON is working*/
+    public void testJRON_2() {
+    	Table rummy = new Table();
+    	JRON data = new JRON(rummy.getMelds(), rummy.getFirst(), rummy.getThreeLess());
+    	assertEquals(false, data.getThreeLess());
+    	assertEquals(false, data.getFirstMeld());
+    	assertEquals(true, data.getMelds() instanceof ArrayList);
+    }
+    
 }
