@@ -67,7 +67,6 @@ public class Table {
 	 * loads the deck*/
 	public void loadDeck() {
 		stock = new Deck();
-		stock.Shuffle();
 		shareCards();
 		melds = new ArrayList<ArrayList<Tile>>();
 	}
