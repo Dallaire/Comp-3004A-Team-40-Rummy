@@ -118,7 +118,7 @@ public class TableTest extends TestCase
     	run.add(new Tile(Color.B,1));
     	run.add(new Tile(Color.B,2));
     	run.add(new Tile(Color.B,3));
-    	assertEquals(true, check.handChecker(run));
+    	assertEquals(true, check.checkHand(run));
     }
     public void testMeldChecker() {
     	MeldChecker check = new MeldChecker();
@@ -126,7 +126,7 @@ public class TableTest extends TestCase
     	meld.add(new Tile(Color.O, 10)); 
     	meld.add(new Tile(Color.B, 10)); 
     	meld.add(new Tile(Color.G, 10));
-    	assertEquals(true, check.handChecker(meld));
+    	assertEquals(true, check.checkHand(meld));
     }
      
     public void testAddMeld() {
