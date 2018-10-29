@@ -112,6 +112,22 @@ public class TableTest extends TestCase
     	assertEquals("M", input.getPlayerInput());
     }
     
+    public void testRunChecker() {
+    	MeldChecker check = new MeldChecker();
+    	ArrayList<Tile> run = new ArrayList<Tile>();
+    	run.add(new Tile(Color.B,1));
+    	run.add(new Tile(Color.B,2));
+    	run.add(new Tile(Color.B,3));
+    	assertEquals(true, check.handChecker(run));
+    }
+    public void testMeldChecker() {
+    	MeldChecker check = new MeldChecker();
+    	ArrayList<Tile> meld = new ArrayList<Tile>();
+    	meld.add(new Tile(Color.O, 10)); 
+    	meld.add(new Tile(Color.B, 10)); 
+    	meld.add(new Tile(Color.G, 10));
+    	assertEquals(true, check.handChecker(meld));
+    }
      
     public void testAddMeld() {
     	Table table = new Table();
