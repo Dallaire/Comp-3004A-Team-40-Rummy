@@ -1,18 +1,21 @@
 package Rummy.Rummy;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 public class Player {
 	//Properties
 	private ArrayList<Tile> hand = new ArrayList<Tile>();
 	private String name;
-	private ArrayList<Tile> meld;
+	protected ArrayList<Tile> meld;
 	private JRON tableData = null;
 	
 	//Constructor
 	public Player(String aName) {
 		this.name = aName;
+		meld = new ArrayList<Tile>();
 	}
 	
 	
@@ -38,10 +41,24 @@ public class Player {
 		Collections.sort(hand,new valueComparator());
 	}
 	/**
-	 * Remove a tile
+	 * Remove tiles from the player hand
+	 * @indexes - the indexes of the tiles to be removed
 	 * */
-	public Tile removeTile(int i) {
-		return this.hand.remove(i);
+	public void removeTiles(int[] indexes) {
+		
+		//Convert to Integer object array
+		Integer[] result = new Integer[indexes.length];
+		for (int i = 0; i < indexes.length; i++) {
+			result[i] = Integer.valueOf(indexes[i]);
+		}
+		
+		List<Integer> reversedList = Arrays.asList(result);
+		//Convert the array to a list and reverse the order
+		Collections.sort(reversedList, Collections.reverseOrder());
+		
+		// Remove the items backwards
+		for (int i : reversedList)
+		    hand.remove(i);
 	}
 	
 	/**
@@ -129,6 +146,12 @@ public class Player {
 	
 	public void update(JRON data) {
 		this.tableData = data;
+	}
+
+	/**
+	 * Print the tiles in the current players hand*/
+	public void printTiles() {
+		System.out.println(this.name + "'s cards: " + this.hand.toString());
 	}
 	
 		

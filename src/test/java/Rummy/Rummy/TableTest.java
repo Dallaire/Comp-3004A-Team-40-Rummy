@@ -112,6 +112,22 @@ public class TableTest extends TestCase
     	assertEquals("M", input.getPlayerInput());
     }
     
+    public void testRunChecker() {
+    	MeldChecker check = new MeldChecker();
+    	ArrayList<Tile> run = new ArrayList<Tile>();
+    	run.add(new Tile(Color.B,1));
+    	run.add(new Tile(Color.B,2));
+    	run.add(new Tile(Color.B,3));
+    	assertEquals(true, check.checkHand(run));
+    }
+    public void testMeldChecker() {
+    	MeldChecker check = new MeldChecker();
+    	ArrayList<Tile> meld = new ArrayList<Tile>();
+    	meld.add(new Tile(Color.O, 10)); 
+    	meld.add(new Tile(Color.B, 10)); 
+    	meld.add(new Tile(Color.G, 10));
+    	assertEquals(true, check.checkHand(meld));
+    }
      
     public void testAddMeld() {
     	Table table = new Table();
@@ -122,5 +138,31 @@ public class TableTest extends TestCase
     	table.addMeld(meld);
     	assertEquals(table.getMeld(0), meld);
     }
+    
+    /**
+     * Test to assert that each player will receive 14 tiles*/
+    public void testDealTiles() {
+    	Table rummy = new Table();
+    	Player one = rummy.getPlayer(0);
+    	Player two = rummy.getPlayer(1);
+    	Player three = rummy.getPlayer(2);
+    	Player four = rummy.getPlayer(3);
+    	
+    	assertEquals(14, one.getHand().size());
+    	assertEquals(14, two.getHand().size());
+    	assertEquals(14, three.getHand().size());
+    	assertEquals(14, four.getHand().size());
+    	
+    }
+    
+    /**
+     *No assertions here, simply view console output*/
+    public void testInit() {
+    	Table rummy = new Table();
+    	rummy.init();
+    }
+    
+    
+    
      
 }
