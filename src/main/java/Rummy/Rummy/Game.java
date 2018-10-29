@@ -5,7 +5,10 @@ public class Game {
 	
 	private String gameInput;
 	private String playerInput;
-	private Player p1,p2,p3,p4;
+	private PlayerStrategy p1;
+	private FirstStrategy p2;
+	private SecondStrategy p3;
+	private ThirdStrategy p4;
 	private boolean won = false;
 	private int turns = 0;
 	Table table = new Table();

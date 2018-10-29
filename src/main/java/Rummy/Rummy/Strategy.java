@@ -15,7 +15,7 @@ public interface Strategy {
 	/***/
 	public ArrayList<Tile> playTurn();
 	
-
+	
 
 	
 }
