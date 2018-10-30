@@ -45,7 +45,7 @@ public class TableTest2 extends TestCase {
     
     /**
      * Test if the JRON is working*/
-    public void testJRON() {
+    public void testJRON_1() {
     	Table rummy = new Table();
     	JRON data = new JRON(rummy.getMelds(), rummy.getFirst(), rummy.getThreeLess());
     	assertEquals(false, data.getThreeLess());
@@ -54,6 +54,7 @@ public class TableTest2 extends TestCase {
     }
     
     /**
+
      * Test getting class types of Players*/
     public void testClass() {
 		PlayerStrategy p1 = new PlayerStrategy("dude");
@@ -69,4 +70,5 @@ public class TableTest2 extends TestCase {
 		assertEquals(false, p1.getClass().equals(ai2.getClass()));
 		assertEquals(false, p1.getClass().equals(ai1.getClass()));
     }
+>>>>>>> 32e5ba27d40572f93af942da52f9b6f7ea011e58
 }
