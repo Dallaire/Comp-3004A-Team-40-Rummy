@@ -83,7 +83,7 @@ public class GamePlayTest extends TestCase{
 		Table.playNext();
 		Table.playNext();
 		Table.playNext();
-		Table.playNext();
+		
 	}
 	
 
