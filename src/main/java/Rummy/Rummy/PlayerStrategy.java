@@ -9,6 +9,7 @@ public class PlayerStrategy extends Player implements Strategy {
 		super(aName);
 	}
 
+	//Logic is broken
 	@Override
 	public ArrayList<Tile> playTurn() {
 		
@@ -25,14 +26,21 @@ public class PlayerStrategy extends Player implements Strategy {
 		}
 		
 		// if the meld is legit remove it from the hand
-		if(MeldChecker.check30(meld)) {
-			System.out.println("Not enough points buddy.");
-			removeTiles(indexes);
-		} else {
-			
+		if (!playedFirst30) {
+			if(!MeldChecker.check30(meld)) {
+				System.out.println("Not enough points buddy.");
+				
+			} 
+			else {
+			 //TODO actually playing the meld onto the table
+				this.setFirst30(true);
+			}
+		}
+		else {
+			//TODO check if valid play and execute it
 		}
 
-		return meld;
+		return meld; //????
 	}
 	
 	/**
