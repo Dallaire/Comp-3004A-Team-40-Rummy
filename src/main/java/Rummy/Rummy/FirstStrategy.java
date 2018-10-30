@@ -37,7 +37,8 @@ public class FirstStrategy extends Player implements Strategy{
 			meldToPlay = null;
 			
 		}*/
-		
+		this.addTile(Table.getTile());
+		meldToPlay = null;
 		return meldToPlay;
 		
 	}

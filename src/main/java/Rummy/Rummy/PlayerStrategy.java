@@ -11,49 +11,53 @@ public class PlayerStrategy extends Player implements Strategy {
 
 	//Logic is broken
 	@Override
+	/**
+	 * @return - null if passing and or a meld*/
 	public ArrayList<Tile> playTurn() {
-		
-		// Allow the player to choose what they want to do
-		int choice = makeChoice();
-		
-		if (choice == 1) //play a meld from the hand
-		{
-			// let the player select the tiles they wish to play
-			int[] indexes = selectTile();
-			meld.clear();
-			
-			// create the meld using the indexes
-			for (int x: indexes) {
+		boolean flag = true;
+		// Put the player in a loop
+		while (flag == true) {
+			// Allow the player to choose what they want to do
+			int choice = makeChoice();
+			System.out.println(choice);
+			if (choice == 1) //play a meld from the hand
+			{
+				// let the player select the tiles they wish to play
+				int[] indexes = selectTile();
+				meld.clear();
 				
-				System.out.println(x);
-				System.out.println(this.getHand().size());
-				Tile temp = this.getHand().get(x);
-				meld.add(temp);
-			}
-			
-		} else //pick a tile from the stock and pass on turn
-		{
-			this.addTile(Table.getTile());
-		}
-		
-		
-		
-		// if the meld is legit remove it from the hand
-		if (!playedFirst30) {
-			if(!MeldChecker.check30(meld)) {
-				System.out.println("Not enough points buddy.");
+				// create the meld using the indexes
+				for (int x: indexes) {
+					
+					System.out.println(x);
+					System.out.println(this.getHand().size());
+					meld.add(this.getHand().get(x));
+				}
+				
+				// if the first thirty points aren't yet played check for that 
+				if (getFirst30() == false) {
+					if(MeldChecker.check30(meld) == false) {
+						System.out.println("On first play the total points must be >=30");
+						continue; 
+					} else if(MeldChecker.checkRun(meld) == false && MeldChecker.checkSet(meld) == false) {
+						System.out.println("Please play a valid run or set");
+						continue;
+					} else if(MeldChecker.checkRun(meld) == true || MeldChecker.checkSet(meld) == true) {
+						System.out.println("Player " + this.getName() + " played this meld: \n" + meld.toString());
+						
+					}
+				}
 				
 			} 
-			else {
-			 //TODO actually playing the meld onto the table
-				this.setFirst30(true);
+			else //pick a tile from the stock and pass on turn
+			{
+				this.addTile(Table.getTile());
+				meld = null;
+				flag = false;
 			}
 		}
-		else {
-			//TODO check if valid play and execute it
-		}
 
-		return meld; //????
+		return meld; //if the player passes, return null else return the meld
 	}
 	
 	/**
@@ -88,11 +92,15 @@ public class PlayerStrategy extends Player implements Strategy {
 		int choice = 0;
 		Scanner sc = new Scanner(System.in);
 		
-		while(choice != 1 | choice !=2) {
+		while(true) {
 			
 			System.out.println("What would you like to do? \n 1) play a meld or \n 2) pick from the stock");			
 			String input = sc.nextLine();
-			choice= Integer.parseInt(input);
+			choice = Integer.parseInt(input);
+			
+			if (choice == 1 || choice == 2) {
+				break;
+			}
 			
 		}
 		

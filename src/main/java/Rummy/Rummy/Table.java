@@ -204,16 +204,55 @@ public final class Table {
 	 * Initiate the next players move
 	 * @update() - updates players with current state of the table*/
 	static public void playNext() {
-		players.get(whosMove()).printTiles();
 		
-		if(players.get(whosMove()) instanceof PlayerStrategy) {
-			melds.add(((PlayerStrategy) players.get(whosMove())).playTurn());
+		Player player = players.get(whosMove());
+		player.printTiles();
+		ArrayList<Tile> meld = new ArrayList<Tile>();
+		
+		
+		if(player instanceof PlayerStrategy) {
 			
-		} else {
-			melds.add(((FirstStrategy) players.get(whosMove())).playTurn());
+			meld = ((PlayerStrategy) player).playTurn();
+			if (meld == null) {
+				System.out.println(player.getClass().getSimpleName() + " " +  player.getName() + " drew from stock");
+			}
+			else {
+				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld: " + meld.toString());
+				Table.addMeld(meld);
+			}
 			
+		} else if (player instanceof FirstStrategy){
+			meld = ((FirstStrategy) player).playTurn();
+			if (meld == null) {
+				System.out.println(player.getClass().getSimpleName() + " " +  player.getName() +" drew from stock");
+			}
+			else {
+				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld: " + meld.toString());
+				Table.addMeld(meld);
+			}
+		} else if (player instanceof SecondStrategy){
+			meld = ((SecondStrategy) player).playTurn();
+			if (meld == null) {
+				System.out.println(player.getClass().getSimpleName() + " " +  player.getName() +" drew from stock");
+			}
+			else {
+				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld: " + meld.toString());
+				Table.addMeld(meld);
+			}
 		}
-		players.get(whosMove()).printTiles();
+		else if (player instanceof ThirdStrategy){
+			meld = ((ThirdStrategy) player).playTurn();
+			if (meld == null) {
+				System.out.println(player.getClass().getSimpleName() + " " +  player.getName() +" drew from stock");
+			}
+			else {
+				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld: " + meld.toString());
+				Table.addMeld(meld);
+			}
+		}
+		
+		
+		player.printTiles();
 		nextMove();
 		update();
 	}
