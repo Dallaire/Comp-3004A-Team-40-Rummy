@@ -13,31 +13,33 @@ import java.util.ArrayList;
  * @firstMeld - boolean value of whether or not a valid 30 point melds is played to start the game
  * @players - An ArrayList of players in on the table
  * */
-public class Table {
+public final class Table {
 	
-	private ArrayList<Player> players;
-	private Deck stock;
+	static private ArrayList<Player> players;
+	static private Deck stock;
 
 	//private ArrayList<Tile> meld;
-	private ArrayList<ArrayList<Tile>> melds;
-	private boolean firstMeld = false;
-	private boolean threeLess = false;
+	static private ArrayList<ArrayList<Tile>> melds;
+	static private boolean firstMeld = false;
+	static private boolean threeLess = false;
 	
-	private int whosTurn = 0;
+	static private int whosTurn = 0;
 
 	/**
 	 * Table constructor
 	 * Initialize all table variables*/
-	public Table() {
+	private Table() {
 		
-		loadPlayers();
-		loadDeck();
+//		loadPlayers();
+//		loadDeck();
 		
 	}
 
 	/**
 	 * Print initial tiles for each player*/
-	public void init() {
+	static public void init() {
+		loadPlayers();
+		loadDeck();
 		for (Player x: players) {
 			x.printTiles();
 		}
@@ -48,7 +50,7 @@ public class Table {
 	 * @FirstStrategy - Plays 30 points as soon as it can
 	 * @SecondStrategy - 
 	 * @ThirdStrategy - */
-	public void loadPlayers() {
+	static public void loadPlayers() {
 		
 		PlayerStrategy p1 = new PlayerStrategy("dude");
 		FirstStrategy ai1 = new FirstStrategy("AI 1");
@@ -65,14 +67,14 @@ public class Table {
 	}
 	/**
 	 * loads the deck*/
-	public void loadDeck() {
-		stock = new Deck();
+	static public void loadDeck() {
+		setStock(new Deck());
 		shareCards();
 		melds = new ArrayList<ArrayList<Tile>>();
 	}
 	/**
 	 * distributes cards amongst players*/
-	public void shareCards() {
+	static public void shareCards() {
 		for(int i=0;i<players.size();i++) {
 			for(int j=0;j<14;j++) {
 				players.get(i).addTile(getTile());
@@ -84,7 +86,7 @@ public class Table {
 	 * Get a a player from the player collection
 	 * @param {Integer} i - the index of the player 
 	 * @return {Object} Player from index i*/
-	public Player getPlayer(int i) {
+	static public Player getPlayer(int i) {
 		return players.get(i);
 		
 	}
@@ -92,22 +94,22 @@ public class Table {
 	 * Returns the number of players in the game
 	 * player - ArrayList of players
 	 * @return Integer representation of the number of the */
-	public int getNumPlayers() {
+	static public int getNumPlayers() {
 		return players.size();
 	}
 	/**
 	 * Returns the number tiles left in the stock
 	 * stock.getSize() -  the size of the stock on the table
 	 * @return Integer representing the number of tiles in the stock*/
-	public int getNumTiles() {
-		return stock.getSize();
+	static public int getNumTiles() {
+		return getStock().getSize();
 	}
 	
 	/**
 	 * Returns all the melds added to the table by the players
 	 * melds -  The HashMap of Melds
 	 * @return Integer value of size of melds datastructure*/
-	public int getNumMelds() {
+	static public int getNumMelds() {
 		
 		return melds.size();
 	}
@@ -116,7 +118,7 @@ public class Table {
 	 *  Gets a meld by its index
 	 *  @i - index of tile
 	 */
-	public ArrayList<Tile> getMeld(int i){
+	static public ArrayList<Tile> getMeld(int i){
 		return melds.get(i);
 	}
 	
@@ -128,31 +130,31 @@ public class Table {
 	 * @meld - the meld to set
 	 * 
 	 */
-	public void addMeld(ArrayList<Tile> meld) {
+	static public void addMeld(ArrayList<Tile> meld) {
 
-		this.melds.add(meld);					// Adding a new meld refactored - Jacob
+		melds.add(meld);					// Adding a new meld refactored - Jacob
 	}
 
 	/**
 	 * Method to get a random tile
 	 * @stock - a collection of Tiles
 	 * */
-	public Tile getTile() {
+	static public Tile getTile() {
 
-		return stock.geTile(stock.getSize()-1);
+		return getStock().geTile(getStock().getSize()-1);
 	}
 	
-	public void displayStock() {
-		System.out.println(stock.toString());
+	static public void displayStock() {
+		System.out.println(getStock().toString());
 	}
 	
 	/**
 	 * Check if the stock contains the specified tile
 	 * For testing purposes*/
-	public boolean stockContains(Tile tile) {
+	static public boolean stockContains(Tile tile) {
 		// TODO Auto-generated method stub
 		
-		return stock.contains(tile);
+		return getStock().contains(tile);
 		//return false;
 	}
 	/**
@@ -161,7 +163,7 @@ public class Table {
 	 * @return Object of type Colour or null if input is invalid
 	 * */
 	@SuppressWarnings("unused")
-	private Color colorSelector(String c) {
+	static private Color colorSelector(String c) {
 		String color =  c.toUpperCase();
 		switch(color) {
 		case "R":
@@ -182,25 +184,26 @@ public class Table {
 	 * Circular array cycling between 0 and 3
 	 * This method increments the index to the next player
 	 * */
-	public void nextMove() {
+	static public void nextMove() {
 		// TODO Auto-generated method stub
-		this.whosTurn++;
-		this.whosTurn%=4;
+		whosTurn++;
+		whosTurn%=4;
 		
 	}
 	
 	/**
 	 * Returns the index of the next player to play
 	 * */
-	public int whosMove() {
-		return this.whosTurn;
+	static public int whosMove() {
+		System.out.println(getPlayer(whosTurn).getName() + " " + getPlayer(whosTurn).getClass().getSimpleName());
+		return whosTurn;
 		
 	}
 	
 	/**
 	 * Initiate the next players move
 	 * @update() - updates players with current state of the table*/
-	public void playNext() {
+	static public void playNext() {
 		players.get(whosMove()).printTiles();
 		
 		if(players.get(whosMove()) instanceof PlayerStrategy) {
@@ -215,36 +218,50 @@ public class Table {
 		update();
 	}
 	
-	public ArrayList<ArrayList<Tile>> getMelds() {
-		return this.melds;
+	static public ArrayList<ArrayList<Tile>> getMelds() {
+		return melds;
 	}
  
 	/**
 	 * Check if the first 30 point meld has been played
 	 * @return boolean - true if the first meld has been played*/
-	public boolean getFirst() {
+	static public boolean getFirst() {
 		
-		return this.firstMeld;
+		return firstMeld;
 	}
 	
 	/**
 	 * Check if any player has 3 less cards than Strategy3
 	 * @return boolean - true if there is a player who has 3 less than Strategy3*/
-	public boolean getThreeLess() {
+	static public boolean getThreeLess() {
 		
-		return this.threeLess;
+		return threeLess;
 	}
 	
 	/**
 	 * Update all subscribers on the state of the game
 	 * */
-	public void update() {
+	static public void update() {
 		
-		JRON data = new JRON(this.getMelds(), this.getFirst(), this.getThreeLess());
+		JRON data = new JRON(getMelds(), getFirst(), getThreeLess(),getStock());
 	       for (Player x:players) 
 	        { 
 	            x.update(data);
 	        } 
 		
+	}
+
+	/**
+	 * @return the stock
+	 */
+	public static Deck getStock() {
+		return stock;
+	}
+
+	/**
+	 * @param stock the stock to set
+	 */
+	public static void setStock(Deck stock) {
+		Table.stock = stock;
 	}
 }

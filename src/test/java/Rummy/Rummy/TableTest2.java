@@ -9,45 +9,39 @@ public class TableTest2 extends TestCase {
 	/**
 	 * Test that the table cycles through players to play their turns*/
     public void testPlayerMeld1_1() {
-    	Table rummy = new Table();
-    	assertEquals(0, rummy.whosMove());
+    	Table.init();
+    	assertEquals(0, Table.whosMove());
     }
     
     public void testPlayerMeld_2() {
-    	Table rummy = new Table();
-    	rummy.nextMove();
-    	assertEquals(1, rummy.whosMove());
+    	
+    	Table.nextMove();
+    	assertEquals(1, Table.whosMove());
     }
     
     public void testPlayerMeld_3() {
-    	Table rummy = new Table();
-    	rummy.nextMove();
-    	rummy.nextMove();
-    	assertEquals(2, rummy.whosMove());
+
+    	Table.nextMove();
+    	assertEquals(2, Table.whosMove());
     }
     
     public void testPlayerMeld_4() {
-    	Table rummy = new Table();
-    	rummy.nextMove();
-    	rummy.nextMove();
-    	rummy.nextMove();
-    	assertEquals(3, rummy.whosMove());
+
+    	Table.nextMove();
+    	assertEquals(3, Table.whosMove());
     }
 	
     public void testPlayerMeld_5() {
-    	Table rummy = new Table();
-    	rummy.nextMove();
-    	rummy.nextMove();
-    	rummy.nextMove();
-    	rummy.nextMove();
-    	assertEquals(0, rummy.whosMove());
+   
+    	Table.nextMove();
+    	assertEquals(0, Table.whosMove());
     }
     
     /**
      * Test if the JRON is working*/
     public void testJRON_1() {
-    	Table rummy = new Table();
-    	JRON data = new JRON(rummy.getMelds(), rummy.getFirst(), rummy.getThreeLess());
+
+    	JRON data = new JRON(Table.getMelds(), Table.getFirst(), Table.getThreeLess(), Table.getStock());
     	assertEquals(false, data.getThreeLess());
     	assertEquals(false, data.getFirstMeld());
     	assertEquals(true, data.getMelds() instanceof ArrayList);
@@ -57,6 +51,8 @@ public class TableTest2 extends TestCase {
 
      * Test getting class types of Players*/
     public void testClass() {
+    	
+    	Table.init();
 		PlayerStrategy p1 = new PlayerStrategy("dude");
 		PlayerStrategy p2 = new PlayerStrategy("another dude");
 		FirstStrategy ai1 = new FirstStrategy("AI 1");
@@ -72,10 +68,10 @@ public class TableTest2 extends TestCase {
     }
     
     public void testPlayersClass() {
-    	Table rummy = new Table();
+    	Table.init();
     	Player player;
     	for (int i = 0; i < 4; i++) {
-    		player = rummy.getPlayer(i);
+    		player = Table.getPlayer(i);
     		System.out.println(player.getClass().getSimpleName());  		
     		
     	}  	

@@ -45,7 +45,6 @@ public class Player {
 	}
 
 	
-	
 	/**
 	 * sorts the hand
 	 * */

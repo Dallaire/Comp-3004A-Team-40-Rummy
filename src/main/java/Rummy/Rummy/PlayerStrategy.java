@@ -13,17 +13,30 @@ public class PlayerStrategy extends Player implements Strategy {
 	@Override
 	public ArrayList<Tile> playTurn() {
 		
-		// let the player select the tiles they wish to play
-		int[] indexes = readInput();
-		meld.clear();
-		// create the meld using the indexes
-		for (int x: indexes) {
+		// Allow the player to choose what they want to do
+		int choice = makeChoice();
+		
+		if (choice == 1) //play a meld from the hand
+		{
+			// let the player select the tiles they wish to play
+			int[] indexes = selectTile();
+			meld.clear();
 			
-			System.out.println(x);
-			System.out.println(this.getHand().size());
-			Tile temp = this.getHand().get(x);
-			meld.add(temp);
+			// create the meld using the indexes
+			for (int x: indexes) {
+				
+				System.out.println(x);
+				System.out.println(this.getHand().size());
+				Tile temp = this.getHand().get(x);
+				meld.add(temp);
+			}
+			
+		} else //pick a tile from the stock and pass on turn
+		{
+			this.addTile(Table.getTile());
 		}
+		
+		
 		
 		// if the meld is legit remove it from the hand
 		if (!playedFirst30) {
@@ -44,9 +57,9 @@ public class PlayerStrategy extends Player implements Strategy {
 	}
 	
 	/**
-	 * Read the input from the console of the Player
+	 * Read the input from the console
 	 * @return - an integer array of indexes the player wishes to create a meld from*/
-	public int[] readInput() {
+	public int[] selectTile() {
 		
 		System.out.println("Create your meld, select the tiles by index in comma separated list: ");
 		Scanner sc = new Scanner(System.in);
@@ -65,6 +78,27 @@ public class PlayerStrategy extends Player implements Strategy {
 		sc.close();
 		
 		return indexes;
+	}
+	
+	/**
+	 * Read the input from the console to device on action to take
+	 * @return - an integer 1 for play a meld and 2 for */
+	public int makeChoice() {
+		
+		int choice = 0;
+		Scanner sc = new Scanner(System.in);
+		
+		while(choice != 1 | choice !=2) {
+			
+			System.out.println("What would you like to do? \n 1) play a meld or \n 2) pick from the stock");			
+			String input = sc.nextLine();
+			choice= Integer.parseInt(input);
+			
+		}
+		
+		sc.close();
+		
+		return choice;
 	}
 
 

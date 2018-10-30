@@ -23,11 +23,11 @@ public class GameTest extends TestCase {
 	 * game starts and cycles through the players to get the */
 	public void testGameLoop() {
 		Game rummyKub = new Game();
-		Table table = new Table();
+		Table.init();
 		rummyKub.play();
-		System.out.println(table.getNumPlayers());
+		System.out.println(Table.getNumPlayers());
 		System.out.println(rummyKub.getTurns());
-		assertEquals(table.getNumPlayers(), rummyKub.getTurns()); 
+		assertEquals(Table.getNumPlayers(), rummyKub.getTurns()); 
 
 	}
 	/***
