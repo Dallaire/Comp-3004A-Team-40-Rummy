@@ -1,37 +1,50 @@
 package Rummy.Rummy;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 public class Player {
 	//Properties
 	private ArrayList<Tile> hand = new ArrayList<Tile>();
 	private String name;
-	protected ArrayList<Tile> meld;
+	protected ArrayList<Tile> meld = new ArrayList<Tile>();
 	private JRON tableData = null;
+	protected Boolean playedFirst30 = false;
 	
 	//Constructor
 	public Player(String aName) {
 		this.name = aName;
-		meld = new ArrayList<Tile>();
 	}
 	
 	
+	//getters
 	public ArrayList<Tile> getHand(){
 			
 		return this.hand;
+	}
+	
+	public String getName() {
+		return this.name;
+	}
+	
+	public Boolean getFirst30() {
+		return playedFirst30;
+	}
+	
+	//Setters
+	public void setFirst30(Boolean first30) {
+		this.playedFirst30 = first30;
 	}
 	
 	public void getCards(Deck stock) {
 		for(int j=0;j<14;j++) {
 			addTile(stock.geTile(stock.getSize()-1));
 		}
-}
+	}
 
 	
-	public String getName() {
-		return this.name;
-	}
 	/**
 	 * sorts the hand
 	 * */
@@ -39,10 +52,24 @@ public class Player {
 		Collections.sort(hand,new valueComparator());
 	}
 	/**
-	 * Remove a tile
+	 * Remove tiles from the player hand
+	 * @indexes - the indexes of the tiles to be removed
 	 * */
-	public Tile removeTile(int i) {
-		return this.hand.remove(i);
+	public void removeTiles(int[] indexes) {
+		
+		//Convert to Integer object array
+		Integer[] result = new Integer[indexes.length];
+		for (int i = 0; i < indexes.length; i++) {
+			result[i] = Integer.valueOf(indexes[i]);
+		}
+		
+		List<Integer> reversedList = Arrays.asList(result);
+		//Convert the array to a list and reverse the order
+		Collections.sort(reversedList, Collections.reverseOrder());
+		
+		// Remove the items backwards
+		for (int i : reversedList)
+		    hand.remove(i);
 	}
 	
 	/**

@@ -16,6 +16,7 @@ public class Deck {
 				tiles.add(new Tile(color, i));
 			}
 		}
+		this.Shuffle();
 	}
 	
 	public Tile geTile(int i) {

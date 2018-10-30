@@ -12,6 +12,9 @@ public class SecondStrategy extends Player implements Strategy{
 	
 	@Override
 	public ArrayList<Tile> playTurn() {
+		
+		// Default draw from stock
+		this.addTile(Table.getTile());
 		return null;
 		// TODO  Override the playTurn method
 		
