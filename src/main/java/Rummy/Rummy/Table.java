@@ -208,6 +208,7 @@ public class Table {
 			melds.add(((PlayerStrategy) players.get(whosMove())).playTurn());
 			
 		} else {
+			melds.add(((FirstStrategy) players.get(whosMove())).playTurn());
 			
 		}
 		players.get(whosMove()).printTiles();

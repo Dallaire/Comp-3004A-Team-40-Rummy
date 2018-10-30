@@ -69,4 +69,19 @@ public class TableTest2 extends TestCase {
 		assertEquals(false, p1.getClass().equals(ai2.getClass()));
 		assertEquals(false, p1.getClass().equals(ai1.getClass()));
     }
+    
+    public void testPlayersClass() {
+    	Table rummy = new Table();
+    	Player player;
+    	for (int i = 0; i < 4; i++) {
+    		player = rummy.getPlayer(i);
+    		System.out.println(player.getClass().getSimpleName());
+    		
+    		
+    	}
+    	
+    	
+    	
+    }
+    
 }
