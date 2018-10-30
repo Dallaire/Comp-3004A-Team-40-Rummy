@@ -18,7 +18,7 @@ public class Table {
 	private ArrayList<Player> players;
 	private Deck stock;
 
-	private ArrayList<Tile> meld;
+	//private ArrayList<Tile> meld;
 	private ArrayList<ArrayList<Tile>> melds;
 	private boolean firstMeld = false;
 	private boolean threeLess = false;
@@ -67,7 +67,6 @@ public class Table {
 	 * loads the deck*/
 	public void loadDeck() {
 		stock = new Deck();
-		stock.Shuffle();
 		shareCards();
 		melds = new ArrayList<ArrayList<Tile>>();
 	}

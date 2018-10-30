@@ -45,7 +45,7 @@ public class TableTest2 extends TestCase {
     
     /**
      * Test if the JRON is working*/
-    public void testJRON() {
+    public void testJRON_1() {
     	Table rummy = new Table();
     	JRON data = new JRON(rummy.getMelds(), rummy.getFirst(), rummy.getThreeLess());
     	assertEquals(false, data.getThreeLess());
@@ -54,6 +54,7 @@ public class TableTest2 extends TestCase {
     }
     
     /**
+
      * Test getting class types of Players*/
     public void testClass() {
 		PlayerStrategy p1 = new PlayerStrategy("dude");
@@ -75,13 +76,9 @@ public class TableTest2 extends TestCase {
     	Player player;
     	for (int i = 0; i < 4; i++) {
     		player = rummy.getPlayer(i);
-    		System.out.println(player.getClass().getSimpleName());
+    		System.out.println(player.getClass().getSimpleName());  		
     		
-    		
-    	}
-    	
-    	
-    	
-    }
-    
+    	}  	
+    }   
+
 }

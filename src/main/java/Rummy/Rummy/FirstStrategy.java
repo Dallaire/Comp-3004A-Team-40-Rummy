@@ -11,12 +11,14 @@ public class FirstStrategy extends Player implements Strategy{
 
 	@Override
 	public ArrayList<Tile> playTurn() {
-		ArrayList<Tile> meldToPlay;
+		ArrayList<Tile> meldToPlay = new ArrayList<Tile>();
 		
-		if(checkRun(this.getHand()).size()>checkSet(this.getHand()).size()&&
-				this.check30(checkRun(this.getHand()))) {
+		// check if first 30 pts have been played
+		
+		/*
+		if(MeldChecker.checkRun(this.getHand()) && MeldChecker.checkSet(this.getHand())) {
 			
-			meldToPlay = checkRun(this.getHand());
+			//meldToPlay = checkRun(this.getHand());
 			//table.addMeld(checkRun(this.getHand()));
 			//removes the tiles from the players hand
 			this.getHand().remove(checkRun(this.getHand()));
@@ -34,7 +36,7 @@ public class FirstStrategy extends Player implements Strategy{
 			//this.addTile(table.getTile());
 			meldToPlay = null;
 			
-		}
+		}*/
 		
 		return meldToPlay;
 		

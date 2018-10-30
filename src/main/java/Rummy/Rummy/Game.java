@@ -5,7 +5,6 @@ public class Game {
 	
 	private String gameInput;
 	private String playerInput;
-	private Player p1,p2,p3,p4;
 	private boolean won = false;
 	private int turns = 0;
 	Table table = new Table();
@@ -33,7 +32,7 @@ public class Game {
 				if(won) {
 					break;
 				}else {
-					run(p1,p2,p3,p4,this.table);
+					run((PlayerStrategy)table.getPlayer(0),(FirstStrategy)table.getPlayer(1),(SecondStrategy)table.getPlayer(2),(ThirdStrategy)table.getPlayer(3),this.table);
 				}
 				
 			}

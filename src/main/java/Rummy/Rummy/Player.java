@@ -9,31 +9,43 @@ public class Player {
 	//Properties
 	private ArrayList<Tile> hand = new ArrayList<Tile>();
 	private String name;
-	protected ArrayList<Tile> meld;
+	protected ArrayList<Tile> meld = new ArrayList<Tile>();
 	private JRON tableData = null;
+	protected Boolean playedFirst30 = false;
 	
 	//Constructor
 	public Player(String aName) {
 		this.name = aName;
-		meld = new ArrayList<Tile>();
 	}
 	
 	
+	//getters
 	public ArrayList<Tile> getHand(){
 			
 		return this.hand;
+	}
+	
+	public String getName() {
+		return this.name;
+	}
+	
+	public Boolean getFirst30() {
+		return playedFirst30;
+	}
+	
+	//Setters
+	public void setFirst30(Boolean first30) {
+		this.playedFirst30 = first30;
 	}
 	
 	public void getCards(Deck stock) {
 		for(int j=0;j<14;j++) {
 			addTile(stock.geTile(stock.getSize()-1));
 		}
-}
+	}
 
 	
-	public String getName() {
-		return this.name;
-	}
+	
 	/**
 	 * sorts the hand
 	 * */

@@ -3,22 +3,32 @@ package Rummy.Rummy;
 import java.util.ArrayList;
 
 public class MeldChecker {
+	public boolean checkHand(ArrayList<Tile> hand) {
+		if(checkSet(hand)||checkRun(hand)) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 	public  static boolean checkSet(ArrayList<Tile> meld) {
 		for (int i = 0,j=1; j < meld.size(); i++,j++) {
 			if (meld.get(i).getValue()!=meld.get(j).getValue()) {
+				
 				return false;
 			}
 		}
 		return true;
 	}
 	public static boolean checkRun(ArrayList<Tile> meld) {
-		for (int i=0,j = 1;j < meld.size(); i++,j++) {
-			if (!checkDifference(meld.get(i), meld.get(i))) {
+		for (int i = 0, j=1; j < meld.size(); i++,j++) {
+			System.out.println("Tile 1: " + meld.get(i) + " Tile 2: " + meld.get(j));
+			if (!checkDifference(meld.get(i), meld.get(j))) {
 				return false;
 			}
-			if (!checkColor(meld.get(i), meld.get(j))) {
+			if (!checkColor(meld.get(i), meld.get(i+1))) {
 				return false;
 			}
+			
 		}
 		return true;
 		
@@ -42,7 +52,7 @@ public class MeldChecker {
 	/**
 	 * compares the value of the 2 giver tiles and returns true if the difference=1 otherwise false*/
 	public static boolean checkDifference(Tile t1, Tile t2) {
-		if ((t1.getValue()-t2.getValue())==1) {
+		if ((t2.getValue()-t1.getValue())==1) {
 			return true;
 		}
 		return false;
