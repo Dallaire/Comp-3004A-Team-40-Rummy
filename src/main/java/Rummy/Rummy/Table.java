@@ -63,7 +63,6 @@ public final class Table {
 	static public void loadDeck() {
 		setStock(new Deck());
 		shareCards();
-		melds = new ArrayList<ArrayList<Tile>>();
 	}
 	/**
 	 * distributes cards amongst players*/
@@ -228,15 +227,12 @@ public final class Table {
 					continue;
 				}
 			}
-<<<<<<< HEAD
+
 			//test to see if player has won after playing their hand.
 			//if they have break out of the game
 			if(player.winner()) {
 				System.out.println(player.getName() + " has won the game!");
 			}
-=======
-
->>>>>>> 1aab20e070417eccc3a34589a1a04a325625c37e
 			
 		} else if (player instanceof FirstStrategy){
 			meld = ((FirstStrategy) player).playTurn();

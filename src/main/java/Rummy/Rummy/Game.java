@@ -19,8 +19,7 @@ public class Game {
 			while(!Table.winner()) {
 				Table.playNext();
 			}
-		}
-		
+		}	
 	}
 	
 	
