@@ -21,7 +21,6 @@ public class MeldChecker {
 	}
 	public static boolean checkRun(ArrayList<Tile> meld) {
 		for (int i = 0, j=1; j < meld.size(); i++,j++) {
-			System.out.println("Tile 1: " + meld.get(i) + " Tile 2: " + meld.get(j));
 			if (!checkDifference(meld.get(i), meld.get(j))) {
 				return false;
 			}

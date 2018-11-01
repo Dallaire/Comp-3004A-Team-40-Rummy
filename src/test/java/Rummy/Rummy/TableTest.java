@@ -19,16 +19,15 @@ public class TableTest extends TestCase
     /**
      * Test that tiles are created*/
     public void testTiles() {
-    	assertEquals(104,Table.getNumTiles() );
+    	Deck tiles = new Deck();
+    	assertEquals(104,tiles.getSize());
 
     }
     /**
      * Check accessibility of melds data structure
      * Should be empty because no melds have been played*/
     public void testMelds() {
-
     	assertEquals(0, Table.getNumMelds());
-
     }
     
     /**
@@ -37,10 +36,9 @@ public class TableTest extends TestCase
     /**
      * Test if the tiles are removed from the deck*/
     public void testTileSelector2() {
-
-    	Tile selected = Table.getTile(); // select a tile from the stock
-    	//boolean value = rummy.stockContains(selected); // Check if the tile is in the stock
-    	assertEquals(true, Table.stockContains(selected)); // should be false
+    	Deck tiles = new Deck();
+    	Tile selected = tiles.geTile(0);
+    	assertEquals(false, tiles.contains(selected));
     }
     
     /**
@@ -79,25 +77,6 @@ public class TableTest extends TestCase
     public void testPlayerNotPlay() {
     	Game input = new Game();
     	assertEquals("N", input.getGameInput());
-    }
-    
-    /**
-     * test to check if player input equals R
-     * test to check if the player decides to play a run
-     */
-    public void testPlayerRun() {
-    	Game input = new Game();
-    	assertEquals("R", input.getPlayerInput());
-    }
-    
-    /**
-     * test to check if player input equals M
-     * test to check if the player decides to play a run
-     */
-    
-    public void testPlayerMeld() {
-    	Game input = new Game();
-    	assertEquals("M", input.getPlayerInput());
     }
     
     public void testRunChecker() {

@@ -33,6 +33,14 @@ public class Player {
 		return playedFirst30;
 	}
 	
+	public boolean winner() {
+		if(this.hand.size() == 0) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
 	//Setters
 	public void setFirst30(Boolean first30) {
 		this.playedFirst30 = first30;
