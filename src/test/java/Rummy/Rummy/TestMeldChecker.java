@@ -54,4 +54,11 @@ public class TestMeldChecker extends TestCase {
 		meld.add(new Tile(Color.B, 3));
 		assertFalse(MeldChecker.checkRun(meld));
 	}
+	public void testCheckSum() {
+		ArrayList<Tile> meld=new ArrayList<Tile>();
+		meld.add(new Tile(Color.O, 10));
+		meld.add(new Tile(Color.O, 10));
+		meld.add(new Tile(Color.O, 10));
+		assertEquals(30, MeldChecker.checkSum(meld));
+	}
 }

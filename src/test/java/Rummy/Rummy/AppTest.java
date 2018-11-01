@@ -28,15 +28,12 @@ public class AppTest extends TestCase
     }
     
     public void testPlayer() {
-    	Strategy first = new FirstStrategy();
-    	Player player = new Player("John", first);
+    	PlayerStrategy player = new PlayerStrategy("John");
     	assertEquals("John", player.getName());
-    	assertEquals(first, player.getStrategy());
     }
     
     public void testAddTile() {
-    	Strategy first = new FirstStrategy();
-    	Player player = new Player("John", first);
+    	PlayerStrategy player = new PlayerStrategy("John");
     	player.addTile(new Tile(Color.O, 10));
     	assertEquals(1,player.getHand().size());
     }

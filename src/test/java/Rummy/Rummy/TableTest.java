@@ -10,36 +10,24 @@ public class TableTest extends TestCase
 {
 	
     public void testPlayer() {
-    	Table rummy = new Table();
-    	assertEquals(2,rummy.getNumPlayers());
+    	Table.init();
+    	assertEquals(4,Table.getNumPlayers());
 
     }
-    /**
-     * Test that the table creates 4 players*/
-    public void testPlayer2() {
-    	Table rummy = new Table();
-    	assertEquals(3,rummy.getNumPlayers());
-    }
-    
-    public void testPlayer3() {
-    	Table rummy = new Table();
-    	assertEquals(4,rummy.getNumPlayers());
-    }
+
     
     /**
      * Test that tiles are created*/
     public void testTiles() {
-    	Table rummy = new Table();
-
-    	assertEquals(104,rummy.getNumTiles() );
+    	assertEquals(104,Table.getNumTiles() );
 
     }
     /**
      * Check accessibility of melds data structure
      * Should be empty because no melds have been played*/
     public void testMelds() {
-    	Table rummy = new Table();
-    	assertEquals(0, rummy.getNumMelds());
+
+    	assertEquals(0, Table.getNumMelds());
 
     }
     
@@ -49,10 +37,10 @@ public class TableTest extends TestCase
     /**
      * Test if the tiles are removed from the deck*/
     public void testTileSelector2() {
-    	Table rummy = new Table();
-    	Tile selected = rummy.getTile(); // select a tile from the stock
+
+    	Tile selected = Table.getTile(); // select a tile from the stock
     	//boolean value = rummy.stockContains(selected); // Check if the tile is in the stock
-    	assertEquals(true, rummy.stockContains(selected)); // should be false
+    	assertEquals(true, Table.stockContains(selected)); // should be false
     }
     
     /**
@@ -130,23 +118,23 @@ public class TableTest extends TestCase
     }
      
     public void testAddMeld() {
-    	Table table = new Table();
+ 
     	ArrayList<Tile> meld = new ArrayList<Tile>();
     	meld.add(new Tile(Color.O, 10)); 
     	meld.add(new Tile(Color.B, 10)); 
     	meld.add(new Tile(Color.G, 10));
-    	table.addMeld(meld);
-    	assertEquals(table.getMeld(0), meld);
+    	Table.addMeld(meld);
+    	assertEquals(Table.getMeld(0), meld);
     }
     
     /**
      * Test to assert that each player will receive 14 tiles*/
     public void testDealTiles() {
-    	Table rummy = new Table();
-    	Player one = rummy.getPlayer(0);
-    	Player two = rummy.getPlayer(1);
-    	Player three = rummy.getPlayer(2);
-    	Player four = rummy.getPlayer(3);
+
+    	Player one = Table.getPlayer(0);
+    	Player two = Table.getPlayer(1);
+    	Player three = Table.getPlayer(2);
+    	Player four = Table.getPlayer(3);
     	
     	assertEquals(14, one.getHand().size());
     	assertEquals(14, two.getHand().size());
@@ -158,8 +146,8 @@ public class TableTest extends TestCase
     /**
      *No assertions here, simply view console output*/
     public void testInit() {
-    	Table rummy = new Table();
-    	rummy.init();
+
+    	Table.init();
     }
     
     

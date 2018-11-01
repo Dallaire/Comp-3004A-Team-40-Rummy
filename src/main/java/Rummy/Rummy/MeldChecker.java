@@ -57,4 +57,12 @@ public class MeldChecker {
 		}
 		return false;
 	}
+	public static int checkSum(ArrayList<Tile> meld) {
+		int sum=0;
+		for (int i = 0; i < meld.size(); i++) {
+			sum+=meld.get(i).getValue();
+		}
+		return sum;
+		
+	}
 }

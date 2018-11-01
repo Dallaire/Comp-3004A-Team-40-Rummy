@@ -19,10 +19,9 @@ public class GamePlayTest extends TestCase{
 
 	@Test
 	public void testCycle() {
-		
-		Table rummy = new Table();
-		rummy.init();
-		rummy.playNext();
+
+		Table.init();
+		Table.playNext();
 	}
 	
 	/**
@@ -42,66 +41,57 @@ public class GamePlayTest extends TestCase{
 	}
 	
 	
-	public void testInteractiveLogic() {
-		Table rummy = new Table();
-		rummy.init();
-		rummy.playNext();
-		assertEquals(true, rummy.getPlayer(0) instanceof PlayerStrategy);
-		rummy.playNext();
-		rummy.playNext();
-		rummy.playNext();
-		
-	}
-	
 	public void testPlayerReadInput() {
 		PlayerStrategy p1 = new PlayerStrategy("dude");
-		int[] array = p1.readInput();
+		int[] array = p1.selectTile();
 		int[] array2 =  {1,2,3};
 		assertArrayEquals(array2, array);
 		
  	}
 	
 	public void testPlayerTurn() {
-		
-		Table rummy = new Table();
-		rummy.init();
-		rummy.playNext();
+
+		Table.init();
+		Table.playNext();
 		
 		//assertArrayEquals(array2, array);
 		
  	}
 	
-	/**
-	 * Handle invalid input*/
-	public void testPlayerTurn_Error_Handled() {
-		
-		Table rummy = new Table();
-		rummy.init();
-		rummy.playNext();
-		//assertArrayEquals(array2, array);
-		
- 	}
 	
 	/**
 	 * Check that the down casting works*/
 	public void testPlayerTypes() {
-		Table rummy = new Table();
-		rummy.init();
-		assertEquals(true, rummy.getPlayer(0) instanceof PlayerStrategy);
-		assertEquals(false, rummy.getPlayer(1) instanceof PlayerStrategy);
-		assertEquals(false, rummy.getPlayer(2) instanceof PlayerStrategy);
-		assertEquals(false, rummy.getPlayer(3) instanceof PlayerStrategy);
+		
+		assertEquals(true, Table.getPlayer(0) instanceof PlayerStrategy);
+		assertEquals(false, Table.getPlayer(1) instanceof PlayerStrategy);
+		assertEquals(false, Table.getPlayer(2) instanceof PlayerStrategy);
+		assertEquals(false, Table.getPlayer(3) instanceof PlayerStrategy);
 	}
 	
 	/***/
 	public void testRemoveTile() {
-		Table rummy = new Table();
-		rummy.init();
-		PlayerStrategy p1 = (PlayerStrategy) rummy.getPlayer(0);
+		
+	
+		PlayerStrategy p1 = (PlayerStrategy) Table.getPlayer(0);
 		p1.printTiles();
 		
 		
 	}
 	
+	public void testAllDrawFromStock() {
+		Table.init();
+		Table.playNext();
+		Table.playNext();
+		Table.playNext();
+		
+	}
+	
+	/**
+	 * To that the player can pass on a turn*/
+	public void testPlayerPass() {
+		Table.init();
+		Table.playNext();
+	}
 
 }

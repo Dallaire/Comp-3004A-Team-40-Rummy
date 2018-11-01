@@ -19,13 +19,11 @@ public class ThirdStrategy extends Player implements Strategy{
 	public ArrayList<Tile> playTurn() {
 		ArrayList<Tile> meldToPlay; 
 		
-		if(false) {
-			
-		}else {
-			meldToPlay = null;
-		}
-		
+		//Default draw from stock
+		this.addTile(Table.getTile());
+		meldToPlay = null;
 		return meldToPlay;
+
 		
 		
 	}

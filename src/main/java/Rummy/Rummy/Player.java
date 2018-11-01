@@ -9,31 +9,42 @@ public class Player {
 	//Properties
 	private ArrayList<Tile> hand = new ArrayList<Tile>();
 	private String name;
-	protected ArrayList<Tile> meld;
+	protected ArrayList<Tile> meld = new ArrayList<Tile>();
 	private JRON tableData = null;
+	protected Boolean playedFirst30 = false;
 	
 	//Constructor
 	public Player(String aName) {
 		this.name = aName;
-		meld = new ArrayList<Tile>();
 	}
 	
 	
+	//getters
 	public ArrayList<Tile> getHand(){
 			
 		return this.hand;
+	}
+	
+	public String getName() {
+		return this.name;
+	}
+	
+	public Boolean getFirst30() {
+		return playedFirst30;
+	}
+	
+	//Setters
+	public void setFirst30(Boolean first30) {
+		this.playedFirst30 = first30;
 	}
 	
 	public void getCards(Deck stock) {
 		for(int j=0;j<14;j++) {
 			addTile(stock.geTile(stock.getSize()-1));
 		}
-}
+	}
 
 	
-	public String getName() {
-		return this.name;
-	}
 	/**
 	 * sorts the hand
 	 * */
@@ -102,7 +113,9 @@ public class Player {
 	 * TODO: Does checkrun remove the tiles from the hand
 	 **/
 	public ArrayList<Tile> createRun() {
-		ArrayList<Tile> temp = new ArrayList<Tile>();	    
+		ArrayList<Tile> temp = new ArrayList<Tile>();
+		Collections.sort(getHand(),new valueComparator());
+
 		for (int i=hand.size()-1; i>0;i--) {
 			temp.add(hand.get(i));
 			for(int j=i-1;j>=0;j--) {
@@ -114,6 +127,7 @@ public class Player {
 				}
 			}
 			if(temp.size()>=3) {
+				hand.removeAll(temp);
 				return temp;
 			}
 			temp.clear();	
@@ -122,11 +136,15 @@ public class Player {
 		System.out.println("");
 		return null;
 	}
+	
 	/**
 	 * checks if a player has a set ie O11,B11,R11,G11*/
 	public ArrayList<Tile> createSet() {
+		
 		ArrayList<Tile> temp= new ArrayList<Tile>();
+		Collections.sort(getHand(),new valueComparator());
 		for(int i=hand.size()-1; i>0;i--) {
+
 			temp.add(hand.get(i));
 			for(int j=i-1;j>=0;j--) {
 			if(temp.get(temp.size()-1).getValue()==hand.get(j).getValue()) {
@@ -134,6 +152,7 @@ public class Player {
 				}
 			}
 			if(temp.size()>=3) {
+				hand.removeAll(temp);
 				return temp;
 			}
 			temp.clear();

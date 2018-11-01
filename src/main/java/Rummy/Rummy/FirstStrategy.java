@@ -6,17 +6,28 @@ public class FirstStrategy extends Player implements Strategy{
 
 	public FirstStrategy(String name) {
 		super(name);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public ArrayList<Tile> playTurn() {
-		ArrayList<Tile> meldToPlay;
+		ArrayList<ArrayList<Tile>> meldToPlay = new ArrayList<ArrayList<Tile>>();
 		
-		if(checkRun(this.getHand()).size()>checkSet(this.getHand()).size()&&
-				this.check30(checkRun(this.getHand()))) {
+		// see if we can create a set
+		
+		// see if we can create a run
+		
+		// check if first 30 pts have been played
+		if (playedFirst30) {
+			meldToPlay.add(createRun());
+			meldToPlay.add(createSet());
 			
-			meldToPlay = checkRun(this.getHand());
+		}else {
+			
+		}
+		/*
+		if(MeldChecker.checkRun(this.getHand()) && MeldChecker.checkSet(this.getHand())) {
+			
+			//meldToPlay = checkRun(this.getHand());
 			//table.addMeld(checkRun(this.getHand()));
 			//removes the tiles from the players hand
 			this.getHand().remove(checkRun(this.getHand()));
@@ -34,8 +45,9 @@ public class FirstStrategy extends Player implements Strategy{
 			//this.addTile(table.getTile());
 			meldToPlay = null;
 			
-		}
-		
+		}*/
+		this.addTile(Table.getTile());
+		//meldToPlay = null;
 		return meldToPlay;
 		
 	}
