@@ -1,6 +1,7 @@
 package Rummy.Rummy;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
 /**
@@ -216,15 +217,28 @@ public final class Table {
 		// if the meld is null it means the player chose to pick from the stock
 		// A non-null meld is a valid move placed on the Table
 		if(player instanceof PlayerStrategy) {
-			
-			meld = ((PlayerStrategy) player).playTurn();
-			if (meld == null) {
-				System.out.println(player.getClass().getSimpleName() + " " +  player.getName() + " drew from stock");
+			Scanner sc = new Scanner(System.in);
+			while(true) {
+				meld = ((PlayerStrategy) player).playTurn();
+				if (meld == null) {
+					System.out.println(player.getClass().getSimpleName() + " " +  player.getName() + " drew from stock");
+				}
+				else if (meld.size() > 0){
+					System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld: " + meld.toString());
+					Table.addMeld(meld);
+				} else {
+					System.out.println("The Player passed");
+					break;
+				}	
+				System.out.println("Would you like to keep playing? y/n");
+				String input = sc.nextLine(); 
+				if (input.toLowerCase().equals("n")) {
+					break;
+				} else {
+					continue;
+				}
 			}
-			else {
-				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld: " + meld.toString());
-				Table.addMeld(meld);
-			}
+
 			
 		} else if (player instanceof FirstStrategy){
 			meld = ((FirstStrategy) player).playTurn();

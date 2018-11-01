@@ -86,5 +86,12 @@ public class GamePlayTest extends TestCase{
 		Table.playNext();
 		
 	}
+	
+	/**
+	 * To that the player can pass on a turn*/
+	public void testPlayerPass() {
+		Table.init();
+		Table.playNext();
+	}
 
 }

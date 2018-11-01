@@ -17,16 +17,19 @@ public class PlayerStrategy extends Player implements Strategy {
 	/**
 	 * @return - null if passing and or a meld*/
 	public ArrayList<Tile> playTurn() {
+		int plays = 0;
 		boolean flag = true;
+		ArrayList<ArrayList<Tile>> melds = new ArrayList<ArrayList<Tile>>();
 		// Put the player in a loop
 		while (flag == true) {
+			meld.clear();
 			// Allow the player to choose what they want to do
 			int choice = makeChoice();
 			if (choice == 1) //play a meld from the hand
 			{
 				// let the player select the tiles they wish to play
 				int[] indexes = selectTile();
-				meld.clear();
+				
 				
 				// create the meld using the indexes
 				for (int x: indexes) {
@@ -46,19 +49,46 @@ public class PlayerStrategy extends Player implements Strategy {
 						continue;
 					} else if(MeldChecker.checkRun(meld) == true || MeldChecker.checkSet(meld) == true) {
 						System.out.println("Player " + this.getName() + " played this meld: \n" + meld.toString());
+						// change the first thirty flag
+						this.playedFirst30 = true;
 						
+						//Prompt user to play another meld
+						// break or make another meld
+						if(keepPlaying().equals("n")) {
+							flag = false;
+						}
+						else {
+							
+						}
 					}
-				} else if (getFirst30() == true) {
+				} 
+				// if the first 30 points have already been played for this player				
+				else if (getFirst30() == true) {
 					
+					//	Check if the meld is valid
+					 if(MeldChecker.checkRun(meld) == false && MeldChecker.checkSet(meld) == false) {
+						System.out.println("Please play a valid run or set");
+						continue;
+					 } else if(MeldChecker.checkRun(meld) == true || MeldChecker.checkSet(meld) == true) {
+							System.out.println("Player " + this.getName() + " played this meld: \n" + meld.toString());
+					}
 				}
 				
 			} 
-			else //pick a tile from the stock and pass on turn
+			//pick a tile from the stock and pass on turn
+			else if (choice == 2) 
 			{
 				this.addTile(Table.getTile());
 				meld = null;
 				flag = false;
+			} 
+			// Pass on the turn
+			else {
+				flag = false;
 			}
+			
+			// keep track of how many times the player has played
+			plays++;
 		}
 
 		return meld; //if the player passes, return null else return the meld
@@ -121,6 +151,25 @@ public class PlayerStrategy extends Player implements Strategy {
 		
 		return choice;
 	}
-
+	
+	/**
+	 * Prompt the user to keep playing or pass*/
+	public String keepPlaying() {
+		
+		System.out.println("Would you like to play another meld? y/n");
+		@SuppressWarnings("unused")
+		String input;
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		try {
+			input = in.readLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			input = "n";
+		}
+		
+		return input.toLowerCase();
+	}
+ 
 
 }
