@@ -51,6 +51,7 @@ public class GamePlayTest extends TestCase{
 	
 	public void testPlayerTurn() {
 
+		Table.init();
 		Table.playNext();
 		
 		//assertArrayEquals(array2, array);
@@ -86,5 +87,11 @@ public class GamePlayTest extends TestCase{
 		
 	}
 	
+	/**
+	 * To that the player can pass on a turn*/
+	public void testPlayerPass() {
+		Table.init();
+		Table.playNext();
+	}
 
 }

@@ -4,15 +4,17 @@ import java.util.ArrayList;
 
 public class FirstStrategy extends Player implements Strategy{
 
-	
-	public FirstStrategy(String aName) {
-		super(aName);
-		// TODO Auto-generated constructor stub
+	public FirstStrategy(String name) {
+		super(name);
 	}
 
 	@Override
 	public ArrayList<Tile> playTurn() {
 		ArrayList<ArrayList<Tile>> meldToPlay = new ArrayList<ArrayList<Tile>>();
+		
+		// see if we can create a set
+		
+		// see if we can create a run
 		
 		// check if first 30 pts have been played
 		if (playedFirst30) {
