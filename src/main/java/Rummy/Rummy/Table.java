@@ -25,15 +25,7 @@ public final class Table {
 	
 	static private int whosTurn = 0;
 
-	/**
-	 * Table constructor
-	 * Initialize all table variables*/
-	private Table() {
-		
-//		loadPlayers();
-//		loadDeck();
-		
-	}
+
 
 	/**
 	 * Print initial tiles for each player*/
@@ -110,7 +102,7 @@ public final class Table {
 	 * melds -  The HashMap of Melds
 	 * @return Integer value of size of melds datastructure*/
 	static public int getNumMelds() {
-		
+		System.out.print("#: " + melds.size());
 		return melds.size();
 	}
 	
@@ -219,6 +211,11 @@ public final class Table {
 			else {
 				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld: " + meld.toString());
 				Table.addMeld(meld);
+			}
+			//test to see if player has won after playing their hand.
+			//if they have break out of the game
+			if(player.winner()) {
+				System.out.println(player.getName() + " has won the game!");
 			}
 			
 		} else if (player instanceof FirstStrategy){

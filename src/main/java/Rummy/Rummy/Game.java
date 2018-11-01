@@ -5,9 +5,7 @@ public class Game {
 	
 	private String gameInput;
 	private String playerInput;
-	private boolean won = false;
-	private int turns = 0;
-	Table table = new Table();
+
 	
 
 	public Game() {
@@ -19,24 +17,15 @@ public class Game {
 	 */
 	public void play() {
 		Scanner sc = new Scanner(System.in);
-		while(true) {
-			System.out.println("Would you Like to play a new game?(Y/N)");
-			gameInput = sc.nextLine().toUpperCase();
-			if(gameInput.equals("N")) {
-				sc.close();
-				break;
-			}else {
-				/** 
-				 * if game is won break else run the game.
-				 */
-				if(won) {
-					break;
-				}else {
-					run((PlayerStrategy)table.getPlayer(0),(FirstStrategy)table.getPlayer(1),(SecondStrategy)table.getPlayer(2),(ThirdStrategy)table.getPlayer(3),this.table);
-				}
-				
+		System.out.println("Would you like to play the game Rummy(Y/N)");
+		playerInput = sc.nextLine().toUpperCase();
+		if(playerInput.equals("Y")) {
+			Table.init();
+			while(!Table.winner()) {
+				Table.playNext();
 			}
-			
+		}else {
+			sc.close();
 		}
 	}
 	
@@ -49,52 +38,14 @@ public class Game {
 	}
 
 
-	 public void run(PlayerStrategy human, FirstStrategy stratOne, SecondStrategy stratTwo, ThirdStrategy stratThree, Table board) {
-		int n = board.getNumPlayers();
-		while(true) {
-			if(this.turns==n) {
-				this.turns = 0;
-			}else {
-				if(this.turns == 0) {
-					human.playTurn();
-					if(human.getHand().size() == 0) {
-						this.won = true;
-						break;
-					}
-				}else if(this.turns == 1) {
-					stratOne.playTurn();
-					if(stratOne.getHand().size() == 0) {
-						this.won = true;
-						break;
-					}
-				}else if(this.turns == 2) {
-					stratTwo.playTurn();
-					if(stratTwo.getHand().size() == 0) {
-						this.won = true;
-						break;
-					}
-				}else {
-					stratThree.playTurn();
-					if(stratThree.getHand().size() == 0) {
-						this.won = true;
-						break;
-					}
-				}
-				this.turns++;
-			}
-
-		}
-		
-			
-		
+	 public void run() {
+		 Table.playNext();	 
 	}
 
 	/**
 	 * @return the turns
 	 */
-	public int getTurns() {
-		return this.turns;
-	}
+
 
 	
 }

@@ -26,7 +26,6 @@ public class TableTest extends TestCase
      * Check accessibility of melds data structure
      * Should be empty because no melds have been played*/
     public void testMelds() {
-
     	assertEquals(0, Table.getNumMelds());
 
     }
