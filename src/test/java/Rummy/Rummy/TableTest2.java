@@ -70,5 +70,5 @@ public class TableTest2 extends TestCase {
 		assertEquals(false, p1.getClass().equals(ai2.getClass()));
 		assertEquals(false, p1.getClass().equals(ai1.getClass()));
     }
->>>>>>> 32e5ba27d40572f93af942da52f9b6f7ea011e58
+
 }
