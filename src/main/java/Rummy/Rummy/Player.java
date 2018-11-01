@@ -113,8 +113,9 @@ public class Player {
 	 * TODO: Does checkrun remove the tiles from the hand
 	 **/
 	public ArrayList<Tile> createRun() {
-		ArrayList<Tile> temp = new ArrayList<Tile>();	
-		
+		ArrayList<Tile> temp = new ArrayList<Tile>();
+		Collections.sort(getHand(),new valueComparator());
+
 		for (int i=hand.size()-1; i>0;i--) {
 			temp.add(hand.get(i));
 			for(int j=i-1;j>=0;j--) {
@@ -140,9 +141,9 @@ public class Player {
 	public ArrayList<Tile> createSet() {
 		
 		ArrayList<Tile> temp= new ArrayList<Tile>();
-		
-		for(int i = hand.size()-1; i>0;i--) {
-			
+		Collections.sort(getHand(),new valueComparator());
+		for(int i=hand.size()-1; i>0;i--) {
+
 			temp.add(hand.get(i));
 			for(int j=i-1;j>=0;j--) {
 			if(temp.get(temp.size()-1).getValue()==hand.get(j).getValue()) {
