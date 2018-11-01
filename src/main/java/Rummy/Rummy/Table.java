@@ -20,7 +20,7 @@ public final class Table {
 	static private Deck stock;
 
 	//private ArrayList<Tile> meld;
-	static private ArrayList<ArrayList<Tile>> melds;
+	static private ArrayList<ArrayList<Tile>> melds = new ArrayList<ArrayList<Tile>>();
 	static private boolean firstMeld = false;
 	static private boolean threeLess = false;
 	
@@ -31,7 +31,6 @@ public final class Table {
 	/**
 	 * Print initial tiles for each player*/
 	static public void init() {
-		melds = new ArrayList<ArrayList<Tile>>();
 		loadPlayers();
 		loadDeck();
 		for (Player x: players) {
@@ -96,7 +95,7 @@ public final class Table {
 	 * stock.getSize() -  the size of the stock on the table
 	 * @return Integer representing the number of tiles in the stock*/
 	static public int getNumTiles() {
-		return getStock().getSize();
+		return stock.getSize();
 	}
 	
 	/**
@@ -104,7 +103,6 @@ public final class Table {
 	 * @melds -  The ArraList of Melds
 	 * @return Integer value of size of melds data structure*/
 	static public int getNumMelds() {
-		System.out.print("#: " + melds.size());
 		return melds.size();
 	}
 	
