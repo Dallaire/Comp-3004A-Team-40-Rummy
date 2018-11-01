@@ -126,6 +126,7 @@ public class Player {
 				}
 			}
 			if(temp.size()>=3) {
+				hand.removeAll(temp);
 				return temp;
 			}
 			temp.clear();	
@@ -147,6 +148,7 @@ public class Player {
 				}
 			}
 			if(temp.size()>=3) {
+				hand.removeAll(temp);
 				return temp;
 			}
 			temp.clear();
