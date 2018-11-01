@@ -1,5 +1,8 @@
 package Rummy.Rummy;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -19,7 +22,6 @@ public class PlayerStrategy extends Player implements Strategy {
 		while (flag == true) {
 			// Allow the player to choose what they want to do
 			int choice = makeChoice();
-			System.out.println(choice);
 			if (choice == 1) //play a meld from the hand
 			{
 				// let the player select the tiles they wish to play
@@ -46,6 +48,8 @@ public class PlayerStrategy extends Player implements Strategy {
 						System.out.println("Player " + this.getName() + " played this meld: \n" + meld.toString());
 						
 					}
+				} else if (getFirst30() == true) {
+					
 				}
 				
 			} 
@@ -66,20 +70,28 @@ public class PlayerStrategy extends Player implements Strategy {
 	public int[] selectTile() {
 		
 		System.out.println("Create your meld, select the tiles by index in comma separated list: ");
-		Scanner sc = new Scanner(System.in);
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		String input;
 		
-		String[] input = sc.nextLine().split(",");
-		int[] indexes = new int[input.length];
+		try {
+			input = in.readLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			input = "";
+		}
+		System.out.println("input is: " + input);
+		String[] array = input.split(",");
+		int[] indexes = new int[array.length];
 		
-		for(int i = 0;i < input.length;i++)
+		for(int i = 0;i < array.length;i++)
 		{
 		   // Note that this is assuming valid input
 		   // If you want to check then add a try/catch 
 		   // and another index for the numbers if to continue adding the others (see below)
-		   indexes[i] = Integer.parseInt(input[i]);
-		}
+		   indexes[i] = Integer.parseInt(array[i]);
+		}	
 		
-		sc.close();
 		
 		return indexes;
 	}
@@ -90,21 +102,22 @@ public class PlayerStrategy extends Player implements Strategy {
 	public int makeChoice() {
 		
 		int choice = 0;
-		Scanner sc = new Scanner(System.in);
+		Scanner scanner = new Scanner(System.in);
 		
 		while(true) {
 			
-			System.out.println("What would you like to do? \n 1) play a meld or \n 2) pick from the stock");			
-			String input = sc.nextLine();
+			System.out.println("What would you like to do? \n 1) play a meld or \n 2) pick from the stock \n 3) pass without playing");			
+			String input = scanner.nextLine();
 			choice = Integer.parseInt(input);
 			
-			if (choice == 1 || choice == 2) {
+			if (choice == 1 || choice == 2 || choice == 3) {
+				scanner.close();
 				break;
 			}
 			
 		}
 		
-		sc.close();
+		
 		
 		return choice;
 	}

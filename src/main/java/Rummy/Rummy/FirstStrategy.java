@@ -6,12 +6,15 @@ public class FirstStrategy extends Player implements Strategy{
 
 	public FirstStrategy(String name) {
 		super(name);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public ArrayList<Tile> playTurn() {
 		ArrayList<Tile> meldToPlay = new ArrayList<Tile>();
+		
+		// see if we can create a set
+		
+		// see if we can create a run
 		
 		// check if first 30 pts have been played
 		

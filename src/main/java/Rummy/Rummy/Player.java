@@ -113,7 +113,8 @@ public class Player {
 	 * TODO: Does checkrun remove the tiles from the hand
 	 **/
 	public ArrayList<Tile> createRun() {
-		ArrayList<Tile> temp = new ArrayList<Tile>();	    
+		ArrayList<Tile> temp = new ArrayList<Tile>();	
+		
 		for (int i=hand.size()-1; i>0;i--) {
 			temp.add(hand.get(i));
 			for(int j=i-1;j>=0;j--) {
@@ -133,11 +134,15 @@ public class Player {
 		System.out.println("");
 		return null;
 	}
+	
 	/**
 	 * checks if a player has a set ie O11,B11,R11,G11*/
 	public ArrayList<Tile> createSet() {
+		
 		ArrayList<Tile> temp= new ArrayList<Tile>();
-		for(int i=hand.size()-1; i>0;i--) {
+		
+		for(int i = hand.size()-1; i>0;i--) {
+			
 			temp.add(hand.get(i));
 			for(int j=i-1;j>=0;j--) {
 			if(temp.get(temp.size()-1).getValue()==hand.get(j).getValue()) {

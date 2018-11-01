@@ -38,6 +38,7 @@ public final class Table {
 	/**
 	 * Print initial tiles for each player*/
 	static public void init() {
+		melds = new ArrayList<ArrayList<Tile>>();
 		loadPlayers();
 		loadDeck();
 		for (Player x: players) {
@@ -107,8 +108,8 @@ public final class Table {
 	
 	/**
 	 * Returns all the melds added to the table by the players
-	 * melds -  The HashMap of Melds
-	 * @return Integer value of size of melds datastructure*/
+	 * @melds -  The ArraList of Melds
+	 * @return Integer value of size of melds data structure*/
 	static public int getNumMelds() {
 		
 		return melds.size();
@@ -202,6 +203,8 @@ public final class Table {
 	
 	/**
 	 * Initiate the next players move
+	 * @whosMove is a circular array which increase everytime this method is called
+	 * cycling through the players in @players
 	 * @update() - updates players with current state of the table*/
 	static public void playNext() {
 		
@@ -209,7 +212,9 @@ public final class Table {
 		player.printTiles();
 		ArrayList<Tile> meld = new ArrayList<Tile>();
 		
-		
+		// Each player is cast to their proper class to invoke the playTurn() method
+		// if the meld is null it means the player chose to pick from the stock
+		// A non-null meld is a valid move placed on the Table
 		if(player instanceof PlayerStrategy) {
 			
 			meld = ((PlayerStrategy) player).playTurn();
