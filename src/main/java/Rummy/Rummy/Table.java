@@ -1,6 +1,7 @@
 package Rummy.Rummy;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
 /**
@@ -30,6 +31,7 @@ public final class Table {
 	/**
 	 * Print initial tiles for each player*/
 	static public void init() {
+		melds = new ArrayList<ArrayList<Tile>>();
 		loadPlayers();
 		loadDeck();
 		for (Player x: players) {
@@ -99,8 +101,8 @@ public final class Table {
 	
 	/**
 	 * Returns all the melds added to the table by the players
-	 * melds -  The HashMap of Melds
-	 * @return Integer value of size of melds datastructure*/
+	 * @melds -  The ArraList of Melds
+	 * @return Integer value of size of melds data structure*/
 	static public int getNumMelds() {
 		System.out.print("#: " + melds.size());
 		return melds.size();
@@ -194,6 +196,8 @@ public final class Table {
 	
 	/**
 	 * Initiate the next players move
+	 * @whosMove is a circular array which increase everytime this method is called
+	 * cycling through the players in @players
 	 * @update() - updates players with current state of the table*/
 	static public void playNext() {
 		
@@ -201,22 +205,40 @@ public final class Table {
 		player.printTiles();
 		ArrayList<Tile> meld = new ArrayList<Tile>();
 		
-		
+		// Each player is cast to their proper class to invoke the playTurn() method
+		// if the meld is null it means the player chose to pick from the stock
+		// A non-null meld is a valid move placed on the Table
 		if(player instanceof PlayerStrategy) {
-			
-			meld = ((PlayerStrategy) player).playTurn();
-			if (meld == null) {
-				System.out.println(player.getClass().getSimpleName() + " " +  player.getName() + " drew from stock");
+			Scanner sc = new Scanner(System.in);
+			while(true) {
+				meld = ((PlayerStrategy) player).playTurn();
+				if (meld == null) {
+					System.out.println(player.getClass().getSimpleName() + " " +  player.getName() + " drew from stock");
+				}
+				else if (meld.size() > 0){
+					System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld: " + meld.toString());
+					Table.addMeld(meld);
+				} else {
+					System.out.println("The Player passed");
+					break;
+				}	
+				System.out.println("Would you like to keep playing? y/n");
+				String input = sc.nextLine(); 
+				if (input.toLowerCase().equals("n")) {
+					break;
+				} else {
+					continue;
+				}
 			}
-			else {
-				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld: " + meld.toString());
-				Table.addMeld(meld);
-			}
+<<<<<<< HEAD
 			//test to see if player has won after playing their hand.
 			//if they have break out of the game
 			if(player.winner()) {
 				System.out.println(player.getName() + " has won the game!");
 			}
+=======
+
+>>>>>>> 1aab20e070417eccc3a34589a1a04a325625c37e
 			
 		} else if (player instanceof FirstStrategy){
 			meld = ((FirstStrategy) player).playTurn();

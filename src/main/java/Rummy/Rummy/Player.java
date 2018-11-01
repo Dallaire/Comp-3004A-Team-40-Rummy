@@ -123,6 +123,7 @@ public class Player {
 	public ArrayList<Tile> createRun() {
 		ArrayList<Tile> temp = new ArrayList<Tile>();
 		Collections.sort(getHand(),new valueComparator());
+
 		for (int i=hand.size()-1; i>0;i--) {
 			temp.add(hand.get(i));
 			for(int j=i-1;j>=0;j--) {
@@ -134,6 +135,7 @@ public class Player {
 				}
 			}
 			if(temp.size()>=3) {
+				hand.removeAll(temp);
 				return temp;
 			}
 			temp.clear();	
@@ -142,12 +144,15 @@ public class Player {
 		System.out.println("");
 		return null;
 	}
+	
 	/**
 	 * checks if a player has a set ie O11,B11,R11,G11*/
 	public ArrayList<Tile> createSet() {
+		
 		ArrayList<Tile> temp= new ArrayList<Tile>();
 		Collections.sort(getHand(),new valueComparator());
 		for(int i=hand.size()-1; i>0;i--) {
+
 			temp.add(hand.get(i));
 			for(int j=i-1;j>=0;j--) {
 			if(temp.get(temp.size()-1).getValue()==hand.get(j).getValue()) {
@@ -155,6 +160,7 @@ public class Player {
 				}
 			}
 			if(temp.size()>=3) {
+				hand.removeAll(temp);
 				return temp;
 			}
 			temp.clear();
