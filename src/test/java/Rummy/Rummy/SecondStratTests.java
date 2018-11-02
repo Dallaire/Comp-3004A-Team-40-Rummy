@@ -10,7 +10,7 @@ public class SecondStratTests extends TestCase {
 		Table.init();
 		Table.getMelds().clear();
 		SecondStrategy player = (SecondStrategy)Table.getPlayer(2);
-		JRON jron = new JRON(Table.getMelds(),false,Table.getThreeLess(), Table.getStock());
+		JRON jron = new JRON(Table.getMelds(),false,Table.getThreeLess());
 		player.update(jron);
 		int handsize1 = player.getHand().size();
 		player.playTurn2(Table.getMelds());
@@ -24,7 +24,7 @@ public class SecondStratTests extends TestCase {
 		Table.getMelds().clear();
 		Table.setFirst30(true);
 		SecondStrategy player = (SecondStrategy)Table.getPlayer(2);
-		JRON jron = new JRON(Table.getMelds(),Table.getFirst(),Table.getThreeLess(), Table.getStock());
+		JRON jron = new JRON(Table.getMelds(),Table.getFirst(),Table.getThreeLess());
 		player.update(jron);
 		int handsize1 = player.getHand().size();
 		player.playTurn2(Table.getMelds());
@@ -56,7 +56,7 @@ public class SecondStratTests extends TestCase {
 		player.addTile(new Tile(Color.O, 4));
 		player.addTile(new Tile(Color.O, 8));
 		player.addTile(new Tile(Color.R, 8));
-		player.update(new JRON(new ArrayList<ArrayList<Tile>>(),true,false, new Deck()));
+		player.update(new JRON(new ArrayList<ArrayList<Tile>>(),true,false));
 		player.setFirst30(true);
 		player.playTurn2(Table.getMelds());
 		
@@ -87,7 +87,7 @@ public class SecondStratTests extends TestCase {
 		meld.add(new Tile(Color.R, 3));
 		meld.add(new Tile(Color.R, 4));
 		Table.addMeld(meld);
-		player.update(new JRON(new ArrayList<ArrayList<Tile>>(),true,false, new Deck()));
+		player.update(new JRON(new ArrayList<ArrayList<Tile>>(),true,false));
 		player.setFirst30(true);
 		player.playTurn2(Table.getMelds());
 		

@@ -9,19 +9,13 @@ public class JRON {
 	private ArrayList<ArrayList<Tile>> melds;
 	private boolean firstMeld = false;
 	private boolean threeLess = false;
-	private Deck stock;
+
 	
-	public JRON(ArrayList<ArrayList<Tile>> melds,boolean firstMeld,boolean threeLess, Deck stock ) {
+	public JRON(ArrayList<ArrayList<Tile>> melds,boolean firstMeld,boolean threeLess ) {
 		this.setMelds(melds);
 		this.setFirstMeld(firstMeld);
 		this.setThreeLess(threeLess);
-		this.setStock(stock);
 		
-	}
-	
-	private void setStock(Deck stock2) {
-		// TODO Auto-generated method stub
-		this.stock = stock2;
 	}
 
 	// Getter and Setter for the data fields

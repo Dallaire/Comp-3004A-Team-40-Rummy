@@ -23,6 +23,7 @@ public final class Table {
 	static private ArrayList<ArrayList<Tile>> melds = new ArrayList<ArrayList<Tile>>();
 	static private boolean firstMeld = false;
 	static private boolean threeLess = false;
+	static private JRON jron = new JRON(null, false, false);
 	
 	static private int whosTurn = 0;
 
@@ -219,6 +220,9 @@ public final class Table {
 				}
 				else if (meld.size() > 0){
 					System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld: " + meld.toString());
+					if (!getFirst()) {
+						setFirst30(true);
+					}
 					Table.addMeld(meld);
 				} else {
 					System.out.println("The Player passed");
@@ -247,6 +251,9 @@ public final class Table {
 			else {
 				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld: " + meld.toString());
 				Table.addMeld(meld);
+				if (!getFirst()) {
+					setFirst30(true);
+				}
 			}
 		} else if (player instanceof SecondStrategy){
 			((SecondStrategy) player).playTurn2(Table.getMelds());
@@ -255,7 +262,9 @@ public final class Table {
 			}
 			else {
 				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld");
-				
+				if (!getFirst()) {
+					setFirst30(true);
+				}
 			}
 		}
 		else if (player instanceof ThirdStrategy){
@@ -266,6 +275,9 @@ public final class Table {
 			else {
 				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld: " + meld.toString());
 				Table.addMeld(meld);
+				if (!getFirst()) {
+					setFirst30(true);
+				}
 			}
 		}
 		
@@ -292,7 +304,7 @@ public final class Table {
 	 * @return boolean - true if there is a player who has 3 less than Strategy3*/
 	static public boolean getThreeLess() {
 		
-		return threeLess;
+	       return threeLess;
 	}
 	
 	/**
@@ -300,10 +312,20 @@ public final class Table {
 	 * */
 	static public void update() {
 		
-		JRON data = new JRON(getMelds(), getFirst(), getThreeLess(),getStock());
+		// update the jron data
+		jron.setFirstMeld(getFirst());
+		jron.setMelds(getMelds());
+		
 	       for (Player x:players) 
 	        { 
-	            x.update(data);
+	    	   	// update threeLess for the ThirdStrategy
+	            if(players.get(3).getHand().size() - x.getHand().size() == 3)
+	            {
+	            	
+	            	threeLess = true;
+	            	jron.setThreeLess(threeLess);
+	            }
+	            x.update(jron);
 	        } 
 		
 	}
