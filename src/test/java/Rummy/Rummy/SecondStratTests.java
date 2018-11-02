@@ -1,7 +1,5 @@
 package Rummy.Rummy;
 
-import java.util.ArrayList;
-
 import junit.framework.TestCase;
 
 public class SecondStratTests extends TestCase {

@@ -2,8 +2,6 @@ package Rummy.Rummy;
 
 import java.util.ArrayList;
 
-import javax.swing.border.TitledBorder;
-
 import org.junit.Test;
 
 import junit.framework.TestCase;

@@ -3,7 +3,7 @@ package Rummy.Rummy;
 import java.util.ArrayList;
 
 public class MeldChecker {
-	public boolean checkHand(ArrayList<Tile> hand) {
+	public static boolean checkHand(ArrayList<Tile> hand) {
 		if(checkSet(hand)||checkRun(hand)) {
 			return true;
 		}else {
