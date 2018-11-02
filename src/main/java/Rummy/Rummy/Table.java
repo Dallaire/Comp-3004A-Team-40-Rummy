@@ -117,6 +117,11 @@ public final class Table {
 //		this.melds = melds;
 //	}
 	
+	//allow control of parameter
+	static public void setFirst30(Boolean value) {
+		firstMeld = value;
+	}
+	
 	/**
 	 * @meld - the meld to set
 	 * 
