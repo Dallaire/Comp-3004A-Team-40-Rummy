@@ -10,7 +10,7 @@ public class SecondStratTests extends TestCase {
 		Table.init();
 		Table.getMelds().clear();
 		SecondStrategy player = (SecondStrategy)Table.getPlayer(2);
-		JRON jron = new JRON(Table.getMelds(),Table.getFirst(),Table.getThreeLess(), Table.getStock());
+		JRON jron = new JRON(Table.getMelds(),false,Table.getThreeLess(), Table.getStock());
 		player.update(jron);
 		int handsize1 = player.getHand().size();
 		player.playTurn2(Table.getMelds());

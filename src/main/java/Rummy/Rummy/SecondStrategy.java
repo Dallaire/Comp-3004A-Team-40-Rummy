@@ -15,8 +15,8 @@ public class SecondStrategy extends Player implements Strategy{
 	
 	public void playTurn2(ArrayList<ArrayList<Tile>> tableMelds) { //don't want to return anything, can just interact with table in the function
 		this.setHasPlayed(false);
-		if (playedFirst30) {
-			if (tableData.getFirstMeld()) { //First 30 already played
+		if (tableData.getFirstMeld()) {
+			if (this.playedFirst30) { //First 30 already played
 				ArrayList<ArrayList<Tile>> temp = new ArrayList<ArrayList<Tile>>();
 				ArrayList<Tile> meld = this.createRun();
 				if (meld == null) {
@@ -62,10 +62,12 @@ public class SecondStrategy extends Player implements Strategy{
 			else {
 				ArrayList<Tile> meld = this.createRun();
 				if(meld == null || !MeldChecker.check30(meld)) {
+					if (meld != null) {
 					this.getHand().addAll(meld);
 					meld.clear();
+					}
 					meld = this.createSet();
-					if(MeldChecker.check30(meld)) {
+					if(meld != null && MeldChecker.check30(meld)) {
 						Table.addMeld(meld); // plays set as first 30
 						this.setHasPlayed(true);
 						
@@ -83,7 +85,7 @@ public class SecondStrategy extends Player implements Strategy{
 				}
 			}
 		}
-		else {
+		else { //wait to play
 		// Default draw from stock
 			this.addTile(Table.getTile());
 			
