@@ -204,7 +204,7 @@ public final class Table {
 	
 	/**
 	 * Initiate the next players move
-	 * @whosMove is a circular array which increase everytime this method is called
+	 * @whosMove is a circular array which increase every time this method is called
 	 * cycling through the players in @players
 	 * @update() - updates players with current state of the table*/
 	static public void playNext() {
