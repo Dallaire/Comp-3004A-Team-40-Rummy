@@ -38,6 +38,10 @@ public class Player {
 		return hasPlayed;
 	}
 	
+	public JRON getJRON() {
+		return tableData;
+	}
+	
 	public boolean winner() {
 		if(this.hand.size() == 0) {
 			return true;
