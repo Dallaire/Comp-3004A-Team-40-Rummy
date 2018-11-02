@@ -38,11 +38,11 @@ public class TestMeldChecker extends TestCase {
 	}
 	public void testCheckSet() {
 		ArrayList<Tile> meld=new ArrayList<Tile>();
-		meld.add(new Tile(Color.O, 11));
-		meld.add(new Tile(Color.O, 11));
+		meld.add(new Tile(Color.B, 11));
+		meld.add(new Tile(Color.G, 11));
 		meld.add(new Tile(Color.O, 11));
 		assertTrue(MeldChecker.checkSet(meld));
-		meld.add(new Tile(Color.O, 9));
+		meld.add(new Tile(Color.O, 11));
 		assertFalse(MeldChecker.checkSet(meld));
 	}
 	public void testCheckRun() {
