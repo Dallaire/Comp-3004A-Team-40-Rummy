@@ -65,8 +65,10 @@ public class ThirdStrategy extends Player implements Strategy{
 			}
 			else {
 				if (this.getJRON().getThreeLess()) { //play all possible melds
-					Table.getMelds().addAll(temp);
-					this.setHasPlayed(true);
+					if (temp != null) {
+						Table.getMelds().addAll(temp);
+						this.setHasPlayed(true);
+					}
 				}
 				else{//return functional melds to hand
 					if (temp != null) {
