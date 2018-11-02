@@ -72,4 +72,11 @@ public class MeldChecker {
 		return sum;
 		
 	}
+	/**
+	 * */
+	public static int countPoints(ArrayList<Tile> meld) {
+		// TODO Auto-generated method stub
+		
+		return null;
+	}
 }

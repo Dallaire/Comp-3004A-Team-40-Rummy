@@ -58,6 +58,21 @@ public class GamePlayTest extends TestCase{
 		
  	}
 	
+	public void testPointChecker_1() {
+
+		ArrayList<Tile> meld = new ArrayList<Tile>();
+		meld.add(new Tile(Color.R, 1));
+		meld.add(new Tile(Color.R, 1));
+		meld.add(new Tile(Color.R, 1));
+		meld.add(new Tile(Color.R, 1));
+		meld.add(new Tile(Color.R, 1));
+		meld.add(new Tile(Color.R, 1));
+		meld.add(new Tile(Color.R, 1));
+		
+		assertEquals(7, MeldChecker.countPoints());
+		
+ 	}
+	
 	
 	/**
 	 * Check that the down casting works*/

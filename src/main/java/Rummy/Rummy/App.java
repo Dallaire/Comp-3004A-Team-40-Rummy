@@ -8,23 +8,27 @@ import java.util.Scanner;
  */
 public class App 
 {
-	private static Table table;
+	//private static Table table;
     public static void main( String[] args )
     {
-    	gameSetup();
-    	table.shareCards();
+    	Table.init();
+    	Table.playNext();
+    	Table.playNext();
+    	Table.playNext();
+    	Table.playNext();
+    	Table.playNext();
     	
     }
     
-    public static void gameSetup() {
-    	@SuppressWarnings("resource")
-		Scanner scanner=new Scanner(System.in);
-    	
-    	System.out.println("how many players are playing?");
-        int input=scanner.nextInt();
-         System.out.println(input);
-    	// table= new Table(input);
-    	        
-	}
+//    public static void gameSetup() {
+//    	@SuppressWarnings("resource")
+//		Scanner scanner=new Scanner(System.in);
+//    	
+//    	System.out.println("how many players are playing?");
+//        int input=scanner.nextInt();
+//         System.out.println(input);
+//    	// table= new Table(input);
+//    	        
+//	}
    
 }
