@@ -30,19 +30,22 @@ public class SecondStrategy extends Player implements Strategy{
 						meld = this.createSet();
 					}
 				}
+				ArrayList<Tile> played = new ArrayList<Tile>();
 				for (Tile tile : this.getHand()) { //play all tiles needing stuff on the board
 					for (ArrayList<Tile> tableMeld: Table.getMelds()) {
 						tableMeld.add(tile);
 						if (!MeldChecker.checkHand(tableMeld)) {//invalid play
-							tableMeld.remove(tile);
+							tableMeld.remove(tile); //don't actually play it
 						}
 						else { //valid keep move
-							this.getHand().remove(tile);
+							played.add(tile); //play tile
 							this.setHasPlayed(true);
 							break;
 						}
 					}
 				}
+				this.getHand().removeAll(played); //remove all played tiles
+				
 				if(this.getHand().isEmpty()) { //Win condition
 					Table.getMelds().addAll(temp);
 					this.setHasPlayed(true);
