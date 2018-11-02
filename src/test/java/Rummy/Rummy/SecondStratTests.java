@@ -1,11 +1,14 @@
 package Rummy.Rummy;
 
+import java.util.ArrayList;
+
 import junit.framework.TestCase;
 
 public class SecondStratTests extends TestCase {
 
 	public void testWait30() {
 		Table.init();
+		Table.getMelds().clear();
 		SecondStrategy player = (SecondStrategy)Table.getPlayer(2);
 		JRON jron = new JRON(Table.getMelds(),Table.getFirst(),Table.getThreeLess(), Table.getStock());
 		player.update(jron);
@@ -18,6 +21,7 @@ public class SecondStratTests extends TestCase {
 	
 	public void testPlay30isTrue() {
 		Table.init();
+		Table.getMelds().clear();
 		Table.setFirst30(true);
 		SecondStrategy player = (SecondStrategy)Table.getPlayer(2);
 		JRON jron = new JRON(Table.getMelds(),Table.getFirst(),Table.getThreeLess(), Table.getStock());
@@ -32,5 +36,28 @@ public class SecondStratTests extends TestCase {
 		else {
 			assertFalse(Table.getMelds().isEmpty());
 		}
+	}
+	
+	public void testPlayAllTilesNoTable() {
+		Table.loadPlayers();
+		Table.getMelds().clear();
+		SecondStrategy player = (SecondStrategy)Table.getPlayer(2);
+		player.addTile(new Tile(Color.B, 1));
+		player.addTile(new Tile(Color.B, 2));
+		player.addTile(new Tile(Color.B, 3));
+		player.addTile(new Tile(Color.B, 4));
+		player.addTile(new Tile(Color.B, 5));
+		player.addTile(new Tile(Color.B, 8));
+		player.addTile(new Tile(Color.O, 1));
+		player.addTile(new Tile(Color.O, 2));
+		player.addTile(new Tile(Color.O, 3));
+		player.addTile(new Tile(Color.O, 4));
+		player.addTile(new Tile(Color.O, 8));
+		player.addTile(new Tile(Color.R, 8));
+		player.update(new JRON(new ArrayList<ArrayList<Tile>>(),true,false, new Deck()));
+		player.setFirst30(true);
+		player.playTurn2(Table.getMelds());
+		
+		assertTrue(player.getHand().isEmpty());
 	}
 }

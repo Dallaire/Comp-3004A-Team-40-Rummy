@@ -137,18 +137,21 @@ public class Player {
 		ArrayList<Tile> temp = new ArrayList<Tile>();
 		Collections.sort(getHand(),new valueComparator());
 
-		for (int i=hand.size()-1; i>0;i--) {
+		for (int i=0; i<hand.size()-1;i++) {
 			temp.add(hand.get(i));
-			for(int j=i-1;j>=0;j--) {
+			for(int j=i+1;j<hand.size();j++) {
 				if(MeldChecker.checkColor(temp.get(temp.size()-1), hand.get(j))
 				&&MeldChecker.checkDifference(temp.get(temp.size()-1), hand.get(j))) {
 					if (!temp.contains(hand.get(j))) {
 						temp.add(hand.get(j));
 					}
 				}
+				else if(temp.get(temp.size()-1).equals(hand.get(j))) {
+					continue;
+				}
 			}
 			if(temp.size()>=3) {
-				//hand.removeAll(temp);
+				hand.removeAll(temp);
 				return temp;
 			}
 			temp.clear();	
@@ -173,7 +176,7 @@ public class Player {
 				}
 			}
 			if(temp.size()>=3) {
-				//hand.removeAll(temp);
+				hand.removeAll(temp);
 				return temp;
 			}
 			temp.clear();

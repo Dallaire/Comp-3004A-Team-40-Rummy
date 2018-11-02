@@ -254,8 +254,8 @@ public final class Table {
 				System.out.println(player.getClass().getSimpleName() + " " +  player.getName() +" drew from stock");
 			}
 			else {
-				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld: " + meld.toString());
-				Table.addMeld(meld);
+				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld");
+				
 			}
 		}
 		else if (player instanceof ThirdStrategy){

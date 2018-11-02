@@ -24,6 +24,7 @@ public class SecondStrategy extends Player implements Strategy{
 				}
 				while (meld != null) {
 					temp.add(meld); //add in the meld
+					meld = null;
 					meld = this.createRun(); //create a new one
 					if (meld == null) {
 						meld = this.createSet();
