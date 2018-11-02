@@ -6,7 +6,6 @@ public class ThirdStrategy extends Player implements Strategy{
 
 	public ThirdStrategy(String aName) {
 		super(aName);
-		// TODO Auto-generated constructor stub
 	}
 
 	@SuppressWarnings("unused")
@@ -55,11 +54,14 @@ public class ThirdStrategy extends Player implements Strategy{
 					}
 				}
 			}
-			this.getHand().removeAll(played); //remove all played tiles
-			
+			if(played != null) {
+				this.getHand().removeAll(played); //remove all played tiles
+			}
 			if(this.getHand().isEmpty()) { //Win condition
-				Table.getMelds().addAll(temp);
-				this.setHasPlayed(true);
+				if (temp != null) {
+					Table.getMelds().addAll(temp);
+					this.setHasPlayed(true);
+				}
 			}
 			else {
 				if (this.getJRON().getThreeLess()) { //play all possible melds
@@ -67,10 +69,12 @@ public class ThirdStrategy extends Player implements Strategy{
 					this.setHasPlayed(true);
 				}
 				else{//return functional melds to hand
-					for (ArrayList<Tile> tempMeld : temp) {
-					this.getHand().addAll(tempMeld);
-					}
+					if (temp != null) {
+						for (ArrayList<Tile> tempMeld : temp) {
+							this.getHand().addAll(tempMeld);
+						}
 					this.getHand().sort(new valueComparator());
+					}
 				}
 			}
 		}
@@ -88,8 +92,10 @@ public class ThirdStrategy extends Player implements Strategy{
 					
 				}
 				else { //cant play 30 pts
-					this.getHand().addAll(meld);
-					meld.clear();
+					if (meld != null) {
+						this.getHand().addAll(meld);
+						meld.clear();
+					}
 					// Default draw from stock
 					this.addTile(Table.getTile());
 				}

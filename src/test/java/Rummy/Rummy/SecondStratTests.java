@@ -42,6 +42,7 @@ public class SecondStratTests extends TestCase {
 		Table.loadPlayers();
 		Table.getMelds().clear();
 		SecondStrategy player = (SecondStrategy)Table.getPlayer(2);
+		player.getHand().clear();
 		player.addTile(new Tile(Color.B, 1));
 		player.addTile(new Tile(Color.B, 2));
 		player.addTile(new Tile(Color.B, 3));
@@ -65,6 +66,7 @@ public class SecondStratTests extends TestCase {
 		Table.loadPlayers();
 		Table.getMelds().clear();
 		SecondStrategy player = (SecondStrategy)Table.getPlayer(2);
+		player.getHand().clear();
 		player.addTile(new Tile(Color.B, 1));
 		player.addTile(new Tile(Color.B, 2));
 		player.addTile(new Tile(Color.B, 3));

@@ -73,8 +73,10 @@ public class SecondStrategy extends Player implements Strategy{
 						
 					}
 					else {
-						this.getHand().addAll(meld);
-						meld.clear();
+						if(meld != null) {
+							this.getHand().addAll(meld);
+							meld.clear();
+						}
 						// Default draw from stock
 						this.addTile(Table.getTile());
 					}
