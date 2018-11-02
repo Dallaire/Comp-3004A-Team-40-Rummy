@@ -24,6 +24,8 @@ public final class Table {
 	static private boolean firstMeld = false;
 	static private boolean threeLess = false;
 	static private JRON jron = new JRON(null, false, false);
+	static private boolean winner = false;
+
 	
 	static private int whosTurn = 0;
 
@@ -307,6 +309,7 @@ public final class Table {
 	       return threeLess;
 	}
 	
+	
 	/**
 	 * Update all subscribers on the state of the game
 	 * */
@@ -328,6 +331,12 @@ public final class Table {
 	            x.update(jron);
 	        } 
 		
+	}
+	static public void setWinner(boolean win) {
+		winner = win;
+	}
+	static public boolean getWinner() {
+		return winner;
 	}
 
 	/**
