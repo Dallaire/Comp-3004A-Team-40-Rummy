@@ -64,8 +64,11 @@ public class MeldChecker {
 	public static int checkSum(ArrayList<Tile> meld) {
 		int sum=0;
 		for (int i = 0; i < meld.size(); i++) {
+			//System.out.println("sum"+sum);
 			sum+=meld.get(i).getValue();
 		}
+		//System.out.println("sum"+sum);
+
 		return sum;
 		
 	}

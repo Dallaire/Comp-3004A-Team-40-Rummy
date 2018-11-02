@@ -144,7 +144,7 @@ public class Player {
 				}
 			}
 			if(temp.size()>=3) {
-				hand.removeAll(temp);
+				//hand.removeAll(temp);
 				return temp;
 			}
 			temp.clear();	
@@ -169,13 +169,13 @@ public class Player {
 				}
 			}
 			if(temp.size()>=3) {
-				hand.removeAll(temp);
+				//hand.removeAll(temp);
 				return temp;
 			}
 			temp.clear();
 		}
 		System.out.println("");
-		return temp;
+		return null;
 	}
 	
 	
@@ -187,6 +187,9 @@ public class Player {
 	/**
 	 * Print the tiles in the current players hand*/
 	public void printTiles() {
+		Collections.sort(hand,new valueComparator());
+		Collections.sort(hand,new colourCompataror());
+
 		System.out.println(this.name + "'s cards: " + this.hand.toString());
 	}
 	
