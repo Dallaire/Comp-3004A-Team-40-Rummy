@@ -39,6 +39,7 @@ public class SecondStratTests extends TestCase {
 	}
 	
 	public void testPlayAllTilesNoTable() {
+		Table.init();
 		Table.loadPlayers();
 		Table.getMelds().clear();
 		SecondStrategy player = (SecondStrategy)Table.getPlayer(2);
@@ -63,6 +64,7 @@ public class SecondStratTests extends TestCase {
 	}
 	
 	public void testPlayAllTilesWithTable() {
+		Table.init();
 		Table.loadPlayers();
 		Table.getMelds().clear();
 		SecondStrategy player = (SecondStrategy)Table.getPlayer(2);
