@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public interface Strategy {
 	
 	/***/
-	public ArrayList<Tile> playTurn();
+	public ArrayList<ArrayList<Tile>> playTurn();
 	
 	
 

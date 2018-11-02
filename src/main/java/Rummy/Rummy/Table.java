@@ -208,7 +208,7 @@ public final class Table {
 		
 		Player player = players.get(whosMove());
 		player.printTiles();
-		ArrayList<Tile> meld = new ArrayList<Tile>();
+		ArrayList<ArrayList<Tile>> meldz = new ArrayList<ArrayList<Tile>>();
 		
 		// Each player is cast to their proper class to invoke the playTurn() method
 		// if the meld is null it means the player chose to pick from the stock
@@ -216,16 +216,17 @@ public final class Table {
 		if(player instanceof PlayerStrategy) {
 			Scanner sc = new Scanner(System.in);
 			while(true) {
-				meld = ((PlayerStrategy) player).playTurn();
-				if (meld == null) {
+				meldz = ((PlayerStrategy) player).playTurn();
+				if (meldz == null) {
 					System.out.println(player.getClass().getSimpleName() + " " +  player.getName() + " drew from stock");
 				}
-				else if (meld.size() > 0){
-					System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld: " + meld.toString());
+				else if (meldz.size() > 0){
+					System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld: " + meldz.toString());
 					if (!getFirst()) {
 						setFirst30(true);
 					}
-					Table.addMeld(meld);
+					addMeldz(meldz);
+					
 				} else {
 					System.out.println("The Player passed");
 					break;
@@ -246,13 +247,13 @@ public final class Table {
 			}
 			
 		} else if (player instanceof FirstStrategy){
-			meld = ((FirstStrategy) player).playTurn();
-			if (meld == null) {
+			meldz = ((FirstStrategy) player).playTurn();
+			if (meldz == null) {
 				System.out.println(player.getClass().getSimpleName() + " " +  player.getName() +" drew from stock");
 			}
 			else {
-				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld: " + meld.toString());
-				Table.addMeld(meld);
+				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld: " + meldz.toString());
+				addMeldz(meldz);
 				if (!getFirst()) {
 					setFirst30(true);
 				}
@@ -270,13 +271,13 @@ public final class Table {
 			}
 		}
 		else if (player instanceof ThirdStrategy){
-			meld = ((ThirdStrategy) player).playTurn();
-			if (meld == null) {
+			meldz = ((PlayerStrategy) player).playTurn();
+			if (meldz == null) {
 				System.out.println(player.getClass().getSimpleName() + " " +  player.getName() +" drew from stock");
 			}
 			else {
-				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld: " + meld.toString());
-				Table.addMeld(meld);
+				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld: " + meldz.toString());
+				addMeldz(meldz);
 				if (!getFirst()) {
 					setFirst30(true);
 				}
@@ -287,6 +288,13 @@ public final class Table {
 		player.printTiles();
 		nextMove();
 		update();
+	}
+	
+	static public void addMeldz (ArrayList<ArrayList<Tile>> meldz) {
+		
+		for (ArrayList<Tile> x: meldz) {
+			Table.addMeld(x);
+		}
 	}
 	
 	static public ArrayList<ArrayList<Tile>> getMelds() {
@@ -312,6 +320,7 @@ public final class Table {
 	
 	/**
 	 * Update all subscribers on the state of the game
+	 * Uplates
 	 * */
 	static public void update() {
 		
@@ -324,7 +333,8 @@ public final class Table {
 	    	   	// update threeLess for the ThirdStrategy
 	            if(players.get(3).getHand().size() - x.getHand().size() == 3)
 	            {
-	            	
+	            	if(x.getHand().size() == 0)
+	            			setWinner(true);
 	            	threeLess = true;
 	            	jron.setThreeLess(threeLess);
 	            }

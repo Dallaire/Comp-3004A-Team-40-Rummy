@@ -16,7 +16,8 @@ public class PlayerStrategy extends Player implements Strategy {
 	@Override
 	/**
 	 * @return - null if passing and or a meld*/
-	public ArrayList<Tile> playTurn() {
+	public ArrayList<ArrayList<Tile>> playTurn() {
+		
 		int plays = 0;
 		boolean flag = true;
 		ArrayList<ArrayList<Tile>> melds = new ArrayList<ArrayList<Tile>>();
@@ -74,6 +75,8 @@ public class PlayerStrategy extends Player implements Strategy {
 					}
 				}
 				
+				melds.add(meld);
+				
 			} 
 			//pick a tile from the stock and pass on turn
 			else if (choice == 2) 
@@ -91,7 +94,7 @@ public class PlayerStrategy extends Player implements Strategy {
 			plays++;
 		}
 
-		return meld; //if the player passes, return null else return the meld
+		return melds; //if the player passes, return null else return the meld
 	}
 	
 	/**

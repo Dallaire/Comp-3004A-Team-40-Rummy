@@ -9,7 +9,7 @@ public class FirstStrategy extends Player implements Strategy{
 	}
 
 	@Override
-	public ArrayList<Tile> playTurn() {
+	public ArrayList<ArrayList<Tile>> playTurn() {
 		int sumRun=0;
 		int sumSet=0;
 		// see if we can create a set
