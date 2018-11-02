@@ -11,6 +11,7 @@ public class MeldChecker {
 		}
 	}
 	public  static boolean checkSet(ArrayList<Tile> meld) {
+		meld.sort(new valueComparator());
 		for (int i = 0,j=1; j < meld.size(); i++,j++) {
 			if (meld.get(i).getValue()!=meld.get(j).getValue()) {
 				return false;
@@ -22,6 +23,7 @@ public class MeldChecker {
 		return true;
 	}
 	public static boolean checkRun(ArrayList<Tile> meld) {
+		meld.sort(new valueComparator());
 		for (int i = 0, j=1; j < meld.size(); i++,j++) {
 			if (!checkDifference(meld.get(i), meld.get(j))) {
 				return false;
@@ -35,6 +37,7 @@ public class MeldChecker {
 		
 	}
 	public static boolean check30(ArrayList<Tile> meld) {
+		meld.sort(new valueComparator());
 		int sum=0;
 		for(int i=0;i<meld.size();i++) {
 			sum+=meld.get(i).getValue();
