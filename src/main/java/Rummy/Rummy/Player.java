@@ -55,6 +55,10 @@ public class Player {
 		this.playedFirst30 = first30;
 	}
 	
+	public void setHasPlayed(Boolean played) {
+		this.hasPlayed = played;
+	}
+	
 	public void getCards(Deck stock) {
 		for(int j=0;j<14;j++) {
 			addTile(stock.geTile(stock.getSize()-1));
