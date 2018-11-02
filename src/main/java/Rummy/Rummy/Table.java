@@ -244,8 +244,8 @@ public final class Table {
 				Table.addMeld(meld);
 			}
 		} else if (player instanceof SecondStrategy){
-			meld = ((SecondStrategy) player).playTurn();
-			if (meld == null) {
+			((SecondStrategy) player).playTurn2(Table.getMelds());
+			if (!player.getHasPlayed()) {
 				System.out.println(player.getClass().getSimpleName() + " " +  player.getName() +" drew from stock");
 			}
 			else {
