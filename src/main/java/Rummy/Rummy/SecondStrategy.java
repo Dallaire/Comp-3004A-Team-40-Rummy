@@ -28,7 +28,6 @@ public class SecondStrategy extends Player implements Strategy{
 		// Default draw from stock
 			this.addTile(Table.getTile());
 			
-		// TODO  Override the playTurn method
 		}
 	}
 }
