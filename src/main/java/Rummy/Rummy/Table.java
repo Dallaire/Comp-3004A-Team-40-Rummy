@@ -20,26 +20,17 @@ public final class Table {
 	static private Deck stock;
 
 	//private ArrayList<Tile> meld;
-	static private ArrayList<ArrayList<Tile>> melds;
+	static private ArrayList<ArrayList<Tile>> melds = new ArrayList<ArrayList<Tile>>();
 	static private boolean firstMeld = false;
 	static private boolean threeLess = false;
 	
 	static private int whosTurn = 0;
 
-	/**
-	 * Table constructor
-	 * Initialize all table variables*/
-	private Table() {
-		
-//		loadPlayers();
-//		loadDeck();
-		
-	}
+
 
 	/**
 	 * Print initial tiles for each player*/
 	static public void init() {
-		melds = new ArrayList<ArrayList<Tile>>();
 		loadPlayers();
 		loadDeck();
 		for (Player x: players) {
@@ -72,7 +63,6 @@ public final class Table {
 	static public void loadDeck() {
 		setStock(new Deck());
 		shareCards();
-		melds = new ArrayList<ArrayList<Tile>>();
 	}
 	/**
 	 * distributes cards amongst players*/
@@ -104,7 +94,7 @@ public final class Table {
 	 * stock.getSize() -  the size of the stock on the table
 	 * @return Integer representing the number of tiles in the stock*/
 	static public int getNumTiles() {
-		return getStock().getSize();
+		return stock.getSize();
 	}
 	
 	/**
@@ -112,7 +102,6 @@ public final class Table {
 	 * @melds -  The ArraList of Melds
 	 * @return Integer value of size of melds data structure*/
 	static public int getNumMelds() {
-		
 		return melds.size();
 	}
 	
@@ -127,6 +116,11 @@ public final class Table {
 //	private void setMelds(Set<Set<Tile>> melds) {
 //		this.melds = melds;
 //	}
+	
+	//allow control of parameter
+	static public void setFirst30(Boolean value) {
+		firstMeld = value;
+	}
 	
 	/**
 	 * @meld - the meld to set
@@ -239,6 +233,11 @@ public final class Table {
 				}
 			}
 
+			//test to see if player has won after playing their hand.
+			//if they have break out of the game
+			if(player.winner()) {
+				System.out.println(player.getName() + " has won the game!");
+			}
 			
 		} else if (player instanceof FirstStrategy){
 			meld = ((FirstStrategy) player).playTurn();
@@ -250,13 +249,13 @@ public final class Table {
 				Table.addMeld(meld);
 			}
 		} else if (player instanceof SecondStrategy){
-			meld = ((SecondStrategy) player).playTurn();
-			if (meld == null) {
+			((SecondStrategy) player).playTurn2(Table.getMelds());
+			if (!player.getHasPlayed()) {
 				System.out.println(player.getClass().getSimpleName() + " " +  player.getName() +" drew from stock");
 			}
 			else {
-				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld: " + meld.toString());
-				Table.addMeld(meld);
+				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld");
+				
 			}
 		}
 		else if (player instanceof ThirdStrategy){

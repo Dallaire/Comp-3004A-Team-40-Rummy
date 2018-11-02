@@ -5,7 +5,7 @@ import java.util.Collections;
 
 
 public class Deck {
-	ArrayList<Tile> tiles;
+	private ArrayList<Tile> tiles;
 	
 	public Deck() {
 		this.tiles = new ArrayList<Tile>();
@@ -25,12 +25,15 @@ public class Deck {
 	/**
 	 * Check if a specific tile is in the Deck
 	 * for testing purposes atm*/
-	public Boolean contains(Tile tile) {
+	public boolean contains(Tile tile) {
 		// TODO Auto-generated method stub
-		if(tiles.indexOf(tile)==-1) 
-			return false;
-		else
-			return true;
+		for(int i = 0; i<this.tiles.size(); i++) {
+			System.out.println("Tile: " + tiles.get(i));
+			if(this.tiles.get(i) == tile) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public int getSize() {
@@ -43,16 +46,13 @@ public class Deck {
 	
 
 	/**
-	 * Select a specific tile from the Deck*/
+	 * Select a specific tile from the Deck
 	public Tile getTile(Tile tile) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	*/
 	
-	@Override
-	public String toString() {
-		return null;
-		
-	}
+	
 
 }

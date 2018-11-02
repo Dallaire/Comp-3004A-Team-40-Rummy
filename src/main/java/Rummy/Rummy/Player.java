@@ -10,8 +10,9 @@ public class Player {
 	private ArrayList<Tile> hand = new ArrayList<Tile>();
 	private String name;
 	protected ArrayList<Tile> meld = new ArrayList<Tile>();
-	private JRON tableData = null;
+	protected JRON tableData = null;
 	protected Boolean playedFirst30 = false;
+	protected Boolean hasPlayed = false;
 	
 	//Constructor
 	public Player(String aName) {
@@ -33,9 +34,29 @@ public class Player {
 		return playedFirst30;
 	}
 	
+	public Boolean getHasPlayed() {
+		return hasPlayed;
+	}
+	
+	public JRON getJRON() {
+		return tableData;
+	}
+	
+	public boolean winner() {
+		if(this.hand.size() == 0) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
 	//Setters
 	public void setFirst30(Boolean first30) {
 		this.playedFirst30 = first30;
+	}
+	
+	public void setHasPlayed(Boolean played) {
+		this.hasPlayed = played;
 	}
 	
 	public void getCards(Deck stock) {
@@ -116,14 +137,17 @@ public class Player {
 		ArrayList<Tile> temp = new ArrayList<Tile>();
 		Collections.sort(getHand(),new valueComparator());
 
-		for (int i=hand.size()-1; i>0;i--) {
+		for (int i=0; i<hand.size()-1;i++) {
 			temp.add(hand.get(i));
-			for(int j=i-1;j>=0;j--) {
+			for(int j=i+1;j<hand.size();j++) {
 				if(MeldChecker.checkColor(temp.get(temp.size()-1), hand.get(j))
 				&&MeldChecker.checkDifference(temp.get(temp.size()-1), hand.get(j))) {
 					if (!temp.contains(hand.get(j))) {
 						temp.add(hand.get(j));
 					}
+				}
+				else if(temp.get(temp.size()-1).equals(hand.get(j))) {
+					continue;
 				}
 			}
 			if(temp.size()>=3) {
@@ -158,7 +182,7 @@ public class Player {
 			temp.clear();
 		}
 		System.out.println("");
-		return temp;
+		return null;
 	}
 	
 	
@@ -170,6 +194,9 @@ public class Player {
 	/**
 	 * Print the tiles in the current players hand*/
 	public void printTiles() {
+		Collections.sort(hand,new valueComparator());
+		Collections.sort(hand,new colourCompataror());
+
 		System.out.println(this.name + "'s cards: " + this.hand.toString());
 	}
 	
