@@ -10,8 +10,9 @@ public class Player {
 	private ArrayList<Tile> hand = new ArrayList<Tile>();
 	private String name;
 	protected ArrayList<Tile> meld = new ArrayList<Tile>();
-	private JRON tableData = null;
+	protected JRON tableData = null;
 	protected Boolean playedFirst30 = false;
+	protected Boolean hasPlayed = false;
 	
 	//Constructor
 	public Player(String aName) {
@@ -31,6 +32,10 @@ public class Player {
 	
 	public Boolean getFirst30() {
 		return playedFirst30;
+	}
+	
+	public Boolean getHasPlayed() {
+		return hasPlayed;
 	}
 	
 	public boolean winner() {
