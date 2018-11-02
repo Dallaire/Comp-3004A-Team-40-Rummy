@@ -64,11 +64,11 @@ public class SecondStrategy extends Player implements Strategy{
 						meld.clear();
 					}
 					else {
-						Table.addMeld(meld);
+						Table.addMeld(meld); // plays set as first 30
 					}
 				}
 				else if(MeldChecker.check30(meld)) {
-					Table.addMeld(meld);
+					Table.addMeld(meld); //plays run as first 30
 				}
 				else {
 				// Default draw from stock
