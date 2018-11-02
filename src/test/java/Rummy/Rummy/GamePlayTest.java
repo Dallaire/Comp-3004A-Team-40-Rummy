@@ -69,7 +69,29 @@ public class GamePlayTest extends TestCase{
 		meld.add(new Tile(Color.R, 1));
 		meld.add(new Tile(Color.R, 1));
 		
-		assertEquals(7, MeldChecker.countPoints());
+		assertEquals(7, MeldChecker.countPoints(meld));
+		
+ 	}
+	
+	public void testPointChecker_2() {
+
+		ArrayList<Tile> meld = new ArrayList<Tile>();
+		meld.add(new Tile(Color.B, 4));
+		meld.add(new Tile(Color.R, 7));
+		meld.add(new Tile(Color.O, 11));
+		meld.add(new Tile(Color.R, 3));
+		meld.add(new Tile(Color.R, 6));
+		meld.add(new Tile(Color.R, 6));
+		meld.add(new Tile(Color.R, 9));
+		
+		assertEquals(46, MeldChecker.countPoints(meld));
+		
+ 	}
+	
+	public void testPointChecker_3() {
+
+		ArrayList<Tile> meld = new ArrayList<Tile>();
+		assertEquals(0, MeldChecker.countPoints(meld));
 		
  	}
 	

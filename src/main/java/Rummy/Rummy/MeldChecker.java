@@ -73,10 +73,15 @@ public class MeldChecker {
 		
 	}
 	/**
-	 * */
+	 * Count Points in a meld
+	 * @param meld - the Arraylist of melds containing Tiles
+	 * @return - The integer value of the number of points in the meld*/
 	public static int countPoints(ArrayList<Tile> meld) {
-		// TODO Auto-generated method stub
-		
-		return null;
+		int mpoints = 0;
+		for(Tile t: meld)
+		{
+			mpoints += t.getValue();
+		}
+		return mpoints;
 	}
 }
