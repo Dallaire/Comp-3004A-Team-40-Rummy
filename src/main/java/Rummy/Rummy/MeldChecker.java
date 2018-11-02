@@ -13,9 +13,11 @@ public class MeldChecker {
 	public  static boolean checkSet(ArrayList<Tile> meld) {
 		for (int i = 0,j=1; j < meld.size(); i++,j++) {
 			if (meld.get(i).getValue()!=meld.get(j).getValue()) {
-				
 				return false;
 			}
+			if (checkColor(meld.get(i),meld.get(j))){
+				return false;
+				}
 		}
 		return true;
 	}
