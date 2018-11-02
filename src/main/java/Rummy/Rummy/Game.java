@@ -13,13 +13,16 @@ public class Game {
 	public static void play() {
 		System.out.println("Would you like to play Rummy(Y/N)");
 		Scanner sc = new Scanner(System.in);
-		gameInput = sc.nextLine();
+		gameInput = sc.nextLine().toUpperCase();
 		if(gameInput.equals("Y")) {
 			Table.init();
-			while(true) {
+			while(!Table.getWinner()) {
 				Table.playNext();
 			}
-		}	
+		}else {
+			sc.close();
+			System.exit(0);
+		}
 	}
 	
 	
@@ -29,10 +32,6 @@ public class Game {
 	}
 
 
-
-	/**
-	 * @return the turns
-	 */
 
 
 	
