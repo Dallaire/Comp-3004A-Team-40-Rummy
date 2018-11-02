@@ -63,8 +63,8 @@ public class SecondStrategy extends Player implements Strategy{
 				ArrayList<Tile> meld = this.createRun();
 				if(meld == null || !MeldChecker.check30(meld)) {
 					if (meld != null) {
-					this.getHand().addAll(meld);
-					meld.clear();
+						this.getHand().addAll(meld);
+						meld.clear();
 					}
 					meld = this.createSet();
 					if(meld != null && MeldChecker.check30(meld)) {
