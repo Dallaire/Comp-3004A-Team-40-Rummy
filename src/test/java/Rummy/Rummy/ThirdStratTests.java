@@ -28,7 +28,7 @@ public class ThirdStratTests extends TestCase {
 		
 		assertTrue(!Table.getMelds().isEmpty());
 	}
-	
+
 	public void testPlayFirst30Later() {
 		Table.init();
 		Table.getMelds().clear();

@@ -152,6 +152,7 @@ public class Player {
 			}
 			if(temp.size()>=3) {
 				hand.removeAll(temp);
+				System.out.println("Melds Hand: " + getHand());
 				return temp;
 			}
 			temp.clear();	

@@ -74,10 +74,7 @@ public class FirstStratTests extends TestCase {
 		player.setFirst30(true);
 		
 		player.playTurn(Table.getMelds());
-		System.out.println("QWER							" + Table.getMelds());
-		System.out.println("Printing Player Hand: " + player.getHand());
-		//player.getHand().remove(0);
-
+		System.out.println("Test Hand: " + player.getHand());
 		//should only have 8 cards in hand after playing a run
 		assertEquals(8,player.getHand().size());
 	}
