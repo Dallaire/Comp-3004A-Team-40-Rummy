@@ -51,9 +51,47 @@ public class GamePlayTest extends TestCase{
 	
 	public void testPlayerTurn() {
 
+		Table.init();
 		Table.playNext();
 		
 		//assertArrayEquals(array2, array);
+		
+ 	}
+	
+	public void testPointChecker_1() {
+
+		ArrayList<Tile> meld = new ArrayList<Tile>();
+		meld.add(new Tile(Color.R, 1));
+		meld.add(new Tile(Color.R, 1));
+		meld.add(new Tile(Color.R, 1));
+		meld.add(new Tile(Color.R, 1));
+		meld.add(new Tile(Color.R, 1));
+		meld.add(new Tile(Color.R, 1));
+		meld.add(new Tile(Color.R, 1));
+		
+		assertEquals(7, MeldChecker.countPoints(meld));
+		
+ 	}
+	
+	public void testPointChecker_2() {
+
+		ArrayList<Tile> meld = new ArrayList<Tile>();
+		meld.add(new Tile(Color.B, 4));
+		meld.add(new Tile(Color.R, 7));
+		meld.add(new Tile(Color.O, 11));
+		meld.add(new Tile(Color.R, 3));
+		meld.add(new Tile(Color.R, 6));
+		meld.add(new Tile(Color.R, 6));
+		meld.add(new Tile(Color.R, 9));
+		
+		assertEquals(46, MeldChecker.countPoints(meld));
+		
+ 	}
+	
+	public void testPointChecker_3() {
+
+		ArrayList<Tile> meld = new ArrayList<Tile>();
+		assertEquals(0, MeldChecker.countPoints(meld));
 		
  	}
 	
@@ -86,5 +124,19 @@ public class GamePlayTest extends TestCase{
 		
 	}
 	
-
+	/**
+	 * To that the player can pass on a turn*/
+	public void testPlayerPass() {
+		Table.init();
+		Table.playNext();
+	}
+	
+	/**
+	 * Test file input mode*/
+	public void testPlayerFileMode() {
+		Table.init8();
+		PlayerStrategy player = (PlayerStrategy) Table.getPlayer(0);
+		String mode = player.getMode();
+		assertEquals("file", mode);
+	}
 }

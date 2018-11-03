@@ -3,7 +3,7 @@ package Rummy.Rummy;
 import java.util.ArrayList;
 
 public class MeldChecker {
-	public boolean checkHand(ArrayList<Tile> hand) {
+	public static boolean checkHand(ArrayList<Tile> hand) {
 		if(checkSet(hand)||checkRun(hand)) {
 			return true;
 		}else {
@@ -11,17 +11,20 @@ public class MeldChecker {
 		}
 	}
 	public  static boolean checkSet(ArrayList<Tile> meld) {
+		meld.sort(new valueComparator());
 		for (int i = 0,j=1; j < meld.size(); i++,j++) {
 			if (meld.get(i).getValue()!=meld.get(j).getValue()) {
-				
 				return false;
 			}
+			if (checkColor(meld.get(i),meld.get(j))){
+				return false;
+				}
 		}
 		return true;
 	}
 	public static boolean checkRun(ArrayList<Tile> meld) {
+		meld.sort(new valueComparator());
 		for (int i = 0, j=1; j < meld.size(); i++,j++) {
-			System.out.println("Tile 1: " + meld.get(i) + " Tile 2: " + meld.get(j));
 			if (!checkDifference(meld.get(i), meld.get(j))) {
 				return false;
 			}
@@ -34,6 +37,7 @@ public class MeldChecker {
 		
 	}
 	public static boolean check30(ArrayList<Tile> meld) {
+		meld.sort(new valueComparator());
 		int sum=0;
 		for(int i=0;i<meld.size();i++) {
 			sum+=meld.get(i).getValue();
@@ -56,5 +60,28 @@ public class MeldChecker {
 			return true;
 		}
 		return false;
+	}
+	public static int checkSum(ArrayList<Tile> meld) {
+		int sum=0;
+		for (int i = 0; i < meld.size(); i++) {
+			//System.out.println("sum"+sum);
+			sum+=meld.get(i).getValue();
+		}
+		//System.out.println("sum"+sum);
+
+		return sum;
+		
+	}
+	/**
+	 * Count Points in a meld
+	 * @param meld - the Arraylist of melds containing Tiles
+	 * @return - The integer value of the number of points in the meld*/
+	public static int countPoints(ArrayList<Tile> meld) {
+		int mpoints = 0;
+		for(Tile t: meld)
+		{
+			mpoints += t.getValue();
+		}
+		return mpoints;
 	}
 }

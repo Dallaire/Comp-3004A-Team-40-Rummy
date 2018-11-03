@@ -1,6 +1,7 @@
 package Rummy.Rummy;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
 /**
@@ -19,30 +20,60 @@ public final class Table {
 	static private Deck stock;
 
 	//private ArrayList<Tile> meld;
-	static private ArrayList<ArrayList<Tile>> melds;
+	static private ArrayList<ArrayList<Tile>> melds = new ArrayList<ArrayList<Tile>>();
 	static private boolean firstMeld = false;
 	static private boolean threeLess = false;
+	static private JRON jron = new JRON(null, false, false);
+	static private boolean winner = false;
+
 	
 	static private int whosTurn = 0;
 
-	/**
-	 * Table constructor
-	 * Initialize all table variables*/
-	private Table() {
-		
-//		loadPlayers();
-//		loadDeck();
-		
-	}
+
 
 	/**
 	 * Print initial tiles for each player*/
 	static public void init() {
 		loadPlayers();
 		loadDeck();
+		shareCards();
 		for (Player x: players) {
 			x.printTiles();
 		}
+		
+	}
+	
+	/**
+	 * Init for requirement number 8 on the grid
+	 * a - The player can play a single run
+	 * b - The player can play a single set
+	 * c - The player can play multiple runs
+	 * d - The player can play multiple sets
+	 * e - The player can play a run and a set*/
+	static public void init8() {
+		//players.clear();	
+		loadPlayers();
+		loadDeck();
+		
+		int i = 11;
+		for (Player x: players) {
+			x.addTile(new Tile(Color.R, i));
+			x.addTile(new Tile(Color.B, i));
+			x.addTile(new Tile(Color.O, i));
+			x.addTile(new Tile(Color.G, i));
+			x.addTile(new Tile(Color.R, i-1));
+			x.addTile(new Tile(Color.B, i-1));
+			x.addTile(new Tile(Color.R, i-1));
+			x.addTile(new Tile(Color.B, i-1));
+			x.addTile(new Tile(Color.R, i-2));
+			x.addTile(new Tile(Color.B, i-2));
+			x.addTile(new Tile(Color.R, i-2));
+			x.addTile(new Tile(Color.B, i-2));
+			x.printTiles();
+			i--;
+		}
+		
+		((PlayerStrategy) players.get(0)).setMode("file");
 	}
 	
 	/**
@@ -62,15 +93,13 @@ public final class Table {
 		players.add(ai1);
 		players.add(ai2);
 		players.add(ai3);
-		
+
 
 	}
 	/**
 	 * loads the deck*/
 	static public void loadDeck() {
 		setStock(new Deck());
-		shareCards();
-		melds = new ArrayList<ArrayList<Tile>>();
 	}
 	/**
 	 * distributes cards amongst players*/
@@ -102,15 +131,14 @@ public final class Table {
 	 * stock.getSize() -  the size of the stock on the table
 	 * @return Integer representing the number of tiles in the stock*/
 	static public int getNumTiles() {
-		return getStock().getSize();
+		return stock.getSize();
 	}
 	
 	/**
 	 * Returns all the melds added to the table by the players
-	 * melds -  The HashMap of Melds
-	 * @return Integer value of size of melds datastructure*/
+	 * @melds -  The ArraList of Melds
+	 * @return Integer value of size of melds data structure*/
 	static public int getNumMelds() {
-		
 		return melds.size();
 	}
 	
@@ -125,6 +153,11 @@ public final class Table {
 //	private void setMelds(Set<Set<Tile>> melds) {
 //		this.melds = melds;
 //	}
+	
+	//allow control of parameter
+	static public void setFirst30(Boolean value) {
+		firstMeld = value;
+	}
 	
 	/**
 	 * @meld - the meld to set
@@ -202,52 +235,79 @@ public final class Table {
 	
 	/**
 	 * Initiate the next players move
+	 * @whosMove is a circular array which increase every time this method is called
+	 * cycling through the players in @players
 	 * @update() - updates players with current state of the table*/
 	static public void playNext() {
 		
 		Player player = players.get(whosMove());
 		player.printTiles();
-		ArrayList<Tile> meld = new ArrayList<Tile>();
+		ArrayList<ArrayList<Tile>> meldz = new ArrayList<ArrayList<Tile>>();
 		
-		
+		// Each player is cast to their proper class to invoke the playTurn() method
+		// if the meld is null it means the player chose to pick from the stock
+		// A non-null meld is a valid move placed on the Table
 		if(player instanceof PlayerStrategy) {
-			
-			meld = ((PlayerStrategy) player).playTurn();
-			if (meld == null) {
-				System.out.println(player.getClass().getSimpleName() + " " +  player.getName() + " drew from stock");
+			Scanner sc = new Scanner(System.in);
+			while(true) {
+				meldz = ((PlayerStrategy) player).playTurn();
+				if (meldz == null) {
+					System.out.println(player.getClass().getSimpleName() + " " +  player.getName() + " drew from stock");
+				}
+				else if (meldz.size() > 0){
+					System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld: " + meldz.toString());
+					if (!getFirst()) {
+						setFirst30(true);
+					}
+					addMeldz(meldz);
+					
+				} else {
+					System.out.println("The Player passed");
+					break;
+				}	
+				System.out.println("Would you like to keep playing? y/n");
+				String input = sc.nextLine(); 
+				if (input.toLowerCase().equals("n")) {
+					break;
+				} else {
+					continue;
+				}
 			}
-			else {
-				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld: " + meld.toString());
-				Table.addMeld(meld);
+
+			//test to see if player has won after playing their hand.
+			//if they have break out of the game
+			if(player.winner()) {
+				System.out.println(player.getName() + " has won the game!");
 			}
 			
 		} else if (player instanceof FirstStrategy){
-			meld = ((FirstStrategy) player).playTurn();
-			if (meld == null) {
+			meldz = ((FirstStrategy) player).playTurn();
+			if (meldz == null) {
 				System.out.println(player.getClass().getSimpleName() + " " +  player.getName() +" drew from stock");
 			}
 			else {
-				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld: " + meld.toString());
-				Table.addMeld(meld);
+				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld: " + meldz.toString());
+				addMeldz(meldz);
+				if (!getFirst()) {
+					setFirst30(true);
+				}
 			}
 		} else if (player instanceof SecondStrategy){
-			meld = ((SecondStrategy) player).playTurn();
-			if (meld == null) {
+			((SecondStrategy) player).playTurn2(Table.getMelds());
+			if (!player.getHasPlayed()) {
 				System.out.println(player.getClass().getSimpleName() + " " +  player.getName() +" drew from stock");
 			}
 			else {
-				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld: " + meld.toString());
-				Table.addMeld(meld);
+				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld");
 			}
 		}
 		else if (player instanceof ThirdStrategy){
-			meld = ((ThirdStrategy) player).playTurn();
-			if (meld == null) {
+			((ThirdStrategy) player).playTurn2(Table.getMelds());
+			if (!player.getHasPlayed()) {
 				System.out.println(player.getClass().getSimpleName() + " " +  player.getName() +" drew from stock");
 			}
 			else {
-				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld: " + meld.toString());
-				Table.addMeld(meld);
+				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld");
 			}
 		}
 		
@@ -255,6 +315,13 @@ public final class Table {
 		player.printTiles();
 		nextMove();
 		update();
+	}
+	
+	static public void addMeldz (ArrayList<ArrayList<Tile>> meldz) {
+		
+		for (ArrayList<Tile> x: meldz) {
+			Table.addMeld(x);
+		}
 	}
 	
 	static public ArrayList<ArrayList<Tile>> getMelds() {
@@ -274,20 +341,39 @@ public final class Table {
 	 * @return boolean - true if there is a player who has 3 less than Strategy3*/
 	static public boolean getThreeLess() {
 		
-		return threeLess;
+	       return threeLess;
 	}
+	
 	
 	/**
 	 * Update all subscribers on the state of the game
+	 * Uplates
 	 * */
 	static public void update() {
 		
-		JRON data = new JRON(getMelds(), getFirst(), getThreeLess(),getStock());
+		// update the jron data
+		jron.setFirstMeld(getFirst());
+		jron.setMelds(getMelds());
+		
 	       for (Player x:players) 
 	        { 
-	            x.update(data);
+	    	   	// update threeLess for the ThirdStrategy
+	            if(players.get(3).getHand().size() - x.getHand().size() == 3)
+	            {
+	            	if(x.getHand().size() == 0)
+	            			setWinner(true);
+	            	threeLess = true;
+	            	jron.setThreeLess(threeLess);
+	            }
+	            x.update(jron);
 	        } 
 		
+	}
+	static public void setWinner(boolean win) {
+		winner = win;
+	}
+	static public boolean getWinner() {
+		return winner;
 	}
 
 	/**
