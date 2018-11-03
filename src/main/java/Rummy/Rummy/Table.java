@@ -25,11 +25,7 @@ public final class Table {
 	static private boolean threeLess = false;
 	static private JRON jron = new JRON(null, false, false);
 	static private boolean winner = false;
-
-	
 	static private int whosTurn = 0;
-
-
 
 	/**
 	 * Print initial tiles for each player*/
@@ -63,12 +59,12 @@ public final class Table {
 			x.addTile(new Tile(Color.G, i));
 			x.addTile(new Tile(Color.R, i-1));
 			x.addTile(new Tile(Color.B, i-1));
-			x.addTile(new Tile(Color.R, i-1));
-			x.addTile(new Tile(Color.B, i-1));
+			x.addTile(new Tile(Color.O, i-1));
+			x.addTile(new Tile(Color.G, i-1));
 			x.addTile(new Tile(Color.R, i-2));
 			x.addTile(new Tile(Color.B, i-2));
-			x.addTile(new Tile(Color.R, i-2));
-			x.addTile(new Tile(Color.B, i-2));
+			x.addTile(new Tile(Color.O, i-2));
+			x.addTile(new Tile(Color.G, i-2));
 			x.printTiles();
 			i--;
 		}
@@ -248,31 +244,22 @@ public final class Table {
 		// if the meld is null it means the player chose to pick from the stock
 		// A non-null meld is a valid move placed on the Table
 		if(player instanceof PlayerStrategy) {
-			Scanner sc = new Scanner(System.in);
-			while(true) {
-				meldz = ((PlayerStrategy) player).playTurn();
-				if (meldz == null) {
-					System.out.println(player.getClass().getSimpleName() + " " +  player.getName() + " drew from stock");
-				}
-				else if (meldz.size() > 0){
-					System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld: " + meldz.toString());
-					if (!getFirst()) {
-						setFirst30(true);
-					}
-					addMeldz(meldz);
-					
-				} else {
-					System.out.println("The Player passed");
-					break;
-				}	
-				System.out.println("Would you like to keep playing? y/n");
-				String input = sc.nextLine(); 
-				if (input.toLowerCase().equals("n")) {
-					break;
-				} else {
-					continue;
-				}
+			//Scanner sc = new Scanner(System.in);
+
+			meldz = ((PlayerStrategy) player).playTurn();
+			if (meldz == null) {
+				System.out.println(player.getClass().getSimpleName() + " " +  player.getName() + " drew from stock");
 			}
+			else if (meldz.size() > 0){
+				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld: " + meldz.toString());
+				if (!getFirst()) {
+					setFirst30(true);
+				}
+				addMeldz(meldz);
+				
+			} else {
+				System.out.println("The Player passed");
+			}	
 
 			//test to see if player has won after playing their hand.
 			//if they have break out of the game
