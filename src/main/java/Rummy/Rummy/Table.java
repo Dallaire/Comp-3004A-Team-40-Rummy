@@ -36,6 +36,20 @@ public final class Table {
 	static public void init() {
 		loadPlayers();
 		loadDeck();
+		shareCards();
+		for (Player x: players) {
+			x.printTiles();
+		}
+		
+	}
+	
+	/**
+	 * Init for*/
+	static public void init2() {
+		loadPlayers();
+		loadDeck();
+		
+		
 		for (Player x: players) {
 			x.printTiles();
 		}
@@ -58,14 +72,13 @@ public final class Table {
 		players.add(ai1);
 		players.add(ai2);
 		players.add(ai3);
-		
+
 
 	}
 	/**
 	 * loads the deck*/
 	static public void loadDeck() {
 		setStock(new Deck());
-		shareCards();
 	}
 	/**
 	 * distributes cards amongst players*/

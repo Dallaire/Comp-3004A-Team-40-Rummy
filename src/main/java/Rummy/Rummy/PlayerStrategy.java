@@ -18,9 +18,11 @@ public class PlayerStrategy extends Player implements Strategy {
 	 * @return - null if passing and or a meld*/
 	public ArrayList<ArrayList<Tile>> playTurn() {
 		
-		int plays = 0;
-		boolean flag = true;
+		// local variables
+		int points = 0;
+		boolean flag = true;		
 		ArrayList<ArrayList<Tile>> melds = new ArrayList<ArrayList<Tile>>();
+		
 		// Put the player in a loop
 		while (flag == true) {
 			meld.clear();
@@ -40,10 +42,14 @@ public class PlayerStrategy extends Player implements Strategy {
 					meld.add(this.getHand().get(x));
 				}
 				
+				points += MeldChecker.countPoints(meld);
+				
 				// if the first thirty points aren't yet played check for that 
-				if (getFirst30() == false) {
+				if (getFirst30() == false && points < 30) {
 					if(MeldChecker.check30(meld) == false) {
 						System.out.println("On first play the total points must be >=30");
+						System.out.println("You currently have " + points + " points.");
+						melds.add(meld);
 						continue; 
 					} else if(MeldChecker.checkRun(meld) == false && MeldChecker.checkSet(meld) == false) {
 						System.out.println("Please play a valid run or set");
@@ -52,7 +58,7 @@ public class PlayerStrategy extends Player implements Strategy {
 						System.out.println("Player " + this.getName() + " played this meld: \n" + meld.toString());
 						// change the first thirty flag
 						this.playedFirst30 = true;
-						
+						melds.add(meld);
 						//Prompt user to play another meld
 						// break or make another meld
 						if(keepPlaying().equals("n")) {
@@ -72,10 +78,11 @@ public class PlayerStrategy extends Player implements Strategy {
 						continue;
 					 } else if(MeldChecker.checkRun(meld) == true || MeldChecker.checkSet(meld) == true) {
 							System.out.println("Player " + this.getName() + " played this meld: \n" + meld.toString());
+							melds.add(meld);
 					}
 				}
 				
-				melds.add(meld);
+				
 				
 			} 
 			//pick a tile from the stock and pass on turn
@@ -90,8 +97,6 @@ public class PlayerStrategy extends Player implements Strategy {
 				flag = false;
 			}
 			
-			// keep track of how many times the player has played
-			plays++;
 		}
 
 		return melds; //if the player passes, return null else return the meld
