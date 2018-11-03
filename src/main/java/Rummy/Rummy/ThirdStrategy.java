@@ -15,13 +15,8 @@ public class ThirdStrategy extends Player implements Strategy{
 	 * Play all tiles if possible
 	 * If no player has 3 fewer tiles, then play only tiles that require table input
 	 * */
-	public ArrayList<Tile> playTurn() { //legacy method
-		ArrayList<Tile> meldToPlay; 
-		
-		//Default draw from stock
-		this.addTile(Table.getTile());
-		meldToPlay = null;
-		return meldToPlay;	
+	public ArrayList<ArrayList<Tile>> playTurn() { //legacy method
+		return null;	
 	}
 	
 	public void playTurn2(ArrayList<ArrayList<Tile>> tableMelds) {

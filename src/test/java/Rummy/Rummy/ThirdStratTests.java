@@ -23,7 +23,7 @@ public class ThirdStratTests extends TestCase {
 		player.addTile(new Tile(Color.O, 4));
 		player.addTile(new Tile(Color.O, 9));
 		player.addTile(new Tile(Color.R, 8));
-		player.update(new JRON(new ArrayList<ArrayList<Tile>>(),true,false, new Deck()));
+		player.update(new JRON(new ArrayList<ArrayList<Tile>>(),true,false));
 		player.playTurn2(Table.getMelds());
 		
 		assertTrue(!Table.getMelds().isEmpty());
@@ -45,7 +45,7 @@ public class ThirdStratTests extends TestCase {
 		player.addTile(new Tile(Color.O, 4));
 		player.addTile(new Tile(Color.O, 9));
 		player.addTile(new Tile(Color.R, 8));
-		player.update(new JRON(new ArrayList<ArrayList<Tile>>(),true,false, new Deck()));
+		player.update(new JRON(new ArrayList<ArrayList<Tile>>(),true,false));
 		player.playTurn2(Table.getMelds());
 		
 		assertTrue(Table.getMelds().isEmpty());

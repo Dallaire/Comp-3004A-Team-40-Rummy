@@ -41,7 +41,7 @@ public class TableTest2 extends TestCase {
      * Test if the JRON is working*/
     public void testJRON_1() {
 
-    	JRON data = new JRON(Table.getMelds(), Table.getFirst(), Table.getThreeLess(), Table.getStock());
+    	JRON data = new JRON(Table.getMelds(), Table.getFirst(), Table.getThreeLess());
     	assertEquals(false, data.getThreeLess());
     	assertEquals(false, data.getFirstMeld());
     	assertEquals(true, data.getMelds() instanceof ArrayList);
