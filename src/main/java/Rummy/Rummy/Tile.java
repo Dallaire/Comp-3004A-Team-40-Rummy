@@ -30,4 +30,13 @@ public class Tile {
 	public String colorToString() {
 		return color.toString();
 	}
+	
+	public boolean equals(Object o) {
+		if (o instanceof Tile) {
+			Tile t = (Tile) o;
+			return (this.getColor() == t.getColor() && this.getValue() == t.getValue());
+		}
+		return false;
+	}
+	
 }

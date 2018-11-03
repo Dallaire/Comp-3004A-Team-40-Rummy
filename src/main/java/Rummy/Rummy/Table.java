@@ -278,22 +278,15 @@ public final class Table {
 			}
 			else {
 				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld");
-				if (!getFirst()) {
-					setFirst30(true);
-				}
 			}
 		}
 		else if (player instanceof ThirdStrategy){
-			meldz = ((PlayerStrategy) player).playTurn();
-			if (meldz == null) {
+			((ThirdStrategy) player).playTurn2(Table.getMelds());
+			if (!player.getHasPlayed()) {
 				System.out.println(player.getClass().getSimpleName() + " " +  player.getName() +" drew from stock");
 			}
 			else {
-				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld: " + meldz.toString());
-				addMeldz(meldz);
-				if (!getFirst()) {
-					setFirst30(true);
-				}
+				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld");
 			}
 		}
 		
