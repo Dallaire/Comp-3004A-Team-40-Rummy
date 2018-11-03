@@ -130,5 +130,13 @@ public class GamePlayTest extends TestCase{
 		Table.init();
 		Table.playNext();
 	}
-
+	
+	/**
+	 * Test file input mode*/
+	public void testPlayerFileMode() {
+		Table.init8();
+		PlayerStrategy player = (PlayerStrategy) Table.getPlayer(0);
+		String mode = player.getMode();
+		assertEquals("file", mode);
+	}
 }

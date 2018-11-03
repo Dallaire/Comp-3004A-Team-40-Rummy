@@ -1,15 +1,27 @@
 package Rummy.Rummy;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PlayerStrategy extends Player implements Strategy {
+	
+	//Instance variables
+	private ArrayList<Integer> fileInput = new ArrayList<Integer>();
+	private int index = 0;
+	private String mode = "user";
 
 	public PlayerStrategy(String aName) {
 		super(aName);
+		try {
+			readInputFromFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	//Logic is broken
@@ -107,6 +119,11 @@ public class PlayerStrategy extends Player implements Strategy {
 	 * @return - an integer array of indexes the player wishes to create a meld from*/
 	public int[] selectTile() {
 		
+		// if using file input because eclipse is being sexy
+		if (getMode().equals("file")) {
+			
+		}
+		
 		System.out.println("Create your meld, select the tiles by index in comma separated list: ");
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		String input;
@@ -153,9 +170,7 @@ public class PlayerStrategy extends Player implements Strategy {
 				break;
 			}
 			
-		}
-		
-		
+		}		
 		
 		return choice;
 	}
@@ -177,6 +192,41 @@ public class PlayerStrategy extends Player implements Strategy {
 		}
 		
 		return input.toLowerCase();
+	}
+	
+	/**
+	 * Read a text file containing all the moves the Player will make for the test
+	 * @throws -IOException*/
+	private void readInputFromFile() throws IOException {
+		// Open the file
+		String root =  System.getProperty("user.dir");
+		String filePath = "/src/main/input8.txt";
+		FileInputStream fstream = new FileInputStream(root + filePath);
+		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+
+		String strLine;
+		int intBuff = 0;
+		//Read File Line By Line
+		while ((strLine = br.readLine()) != null)   {
+		  // Print the content on the console
+		  System.out.println (strLine);
+		 
+		  intBuff = Integer.parseInt(strLine);
+		  fileInput.add(intBuff);
+		  
+		}
+
+		//Close the input stream
+		br.close();
+	}
+
+	public String getMode() {
+		// TODO Auto-generated method stub
+		return mode;
+	}
+	
+	public void setMode(String mode) {
+		this.mode = mode;
 	}
  
 

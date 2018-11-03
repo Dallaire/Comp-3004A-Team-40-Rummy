@@ -44,15 +44,36 @@ public final class Table {
 	}
 	
 	/**
-	 * Init for*/
-	static public void init2() {
+	 * Init for requirement number 8 on the grid
+	 * a - The player can play a single run
+	 * b - The player can play a single set
+	 * c - The player can play multiple runs
+	 * d - The player can play multiple sets
+	 * e - The player can play a run and a set*/
+	static public void init8() {
+		//players.clear();	
 		loadPlayers();
 		loadDeck();
 		
-		
+		int i = 11;
 		for (Player x: players) {
+			x.addTile(new Tile(Color.R, i));
+			x.addTile(new Tile(Color.B, i));
+			x.addTile(new Tile(Color.O, i));
+			x.addTile(new Tile(Color.G, i));
+			x.addTile(new Tile(Color.R, i-1));
+			x.addTile(new Tile(Color.B, i-1));
+			x.addTile(new Tile(Color.R, i-1));
+			x.addTile(new Tile(Color.B, i-1));
+			x.addTile(new Tile(Color.R, i-2));
+			x.addTile(new Tile(Color.B, i-2));
+			x.addTile(new Tile(Color.R, i-2));
+			x.addTile(new Tile(Color.B, i-2));
 			x.printTiles();
+			i--;
 		}
+		
+		((PlayerStrategy) players.get(0)).setMode("file");
 	}
 	
 	/**
