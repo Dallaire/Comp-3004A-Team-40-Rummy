@@ -48,6 +48,7 @@ public class FirstStrategy extends Player implements Strategy {
 				meld = this.createSet();
 				if (meld != null && MeldChecker.check30(meld)) {
 					Table.addMeld(meld); // plays set as first 30
+					this.setFirst30(true);
 					this.setHasPlayed(true);
 
 				} else {
@@ -60,6 +61,7 @@ public class FirstStrategy extends Player implements Strategy {
 				}
 			} else {
 				Table.addMeld(meld); // plays run as first 30
+				this.setFirst30(true);
 				this.setHasPlayed(true);
 			}
 		}
