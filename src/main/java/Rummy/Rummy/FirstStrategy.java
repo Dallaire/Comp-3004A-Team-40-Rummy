@@ -2,56 +2,69 @@ package Rummy.Rummy;
 
 import java.util.ArrayList;
 
-public class FirstStrategy extends Player implements Strategy{
+public class FirstStrategy extends Player implements Strategy {
 
 	public FirstStrategy(String name) {
 		super(name);
 	}
 
-	@Override
 	public ArrayList<ArrayList<Tile>> playTurn() {
-		int sumRun=0;
-		int sumSet=0;
-		// see if we can create a set
-		
-		// see if we can create a run
-		if(createSet()!=null) {
-		 sumSet=MeldChecker.checkSum(createSet());
-		}
-		if (createRun()!=null) {
-			sumRun=MeldChecker.checkSum(createRun());
-
-		}
-		/** check if first 30 pts have been played
-		 * if yes returns a set or a run every time this function is called*/
-		 if (playedFirst30) {
-			return playMeld();
-		}else if (sumRun+sumSet<30) {
-			/** check if you have 30 to play
-			 * if yes returns the melds that will*/
-			this.addTile(Table.getTile());
-			return null;
-		}	
-		else {
-		return playMeld();
-		}
-		}		
-	
-	public ArrayList<Tile> playMeld() {
-		ArrayList<Tile> meldToPlay = new ArrayList<Tile>();
-
-		meldToPlay =createRun();
-		if(meldToPlay!=null) {
-			getHand().removeAll(meldToPlay);
-			return meldToPlay;
-		}
-		meldToPlay=createSet();
-		if (meldToPlay!=null) {
-			getHand().removeAll(meldToPlay);
-			return meldToPlay;
-		}
 		return null;
 	}
-	
-	
+
+	public void playTurn(ArrayList<ArrayList<Tile>> tableMelds) { // don't want to return anything, can just interact
+																	// with table in the function
+		this.setHasPlayed(false);
+		if (this.playedFirst30) { // First 30 already played
+			ArrayList<ArrayList<Tile>> temp = new ArrayList<ArrayList<Tile>>();
+			ArrayList<Tile> meld = this.createRun();
+			if (meld == null) {
+				meld = this.createSet();
+			}
+			while (meld != null) {
+				temp.add(meld); // add in the meld
+				meld = null;
+				meld = this.createRun(); // create a new one
+				if (meld == null) {
+					meld = this.createSet();
+				}
+			}
+			
+			Table.addMeldz(temp);
+			
+			
+
+			if (this.getHand().isEmpty()) { // Win condition
+				Table.getMelds().addAll(temp);
+				this.setHasPlayed(true);
+			}
+		} else {
+			ArrayList<Tile> meld = this.createRun();
+			if (meld == null || !MeldChecker.check30(meld)) {
+				if (meld != null) {
+					this.getHand().addAll(meld);
+					meld.clear();
+				}
+				meld = this.createSet();
+				if (meld != null && MeldChecker.check30(meld)) {
+					Table.addMeld(meld); // plays set as first 30
+					this.setFirst30(true);
+					this.setHasPlayed(true);
+
+				} else {
+					if (meld != null) {
+						this.getHand().addAll(meld);
+						meld.clear();
+					}
+					// Default draw from stock
+					this.addTile(Table.getTile());
+				}
+			} else {
+				Table.addMeld(meld); // plays run as first 30
+				this.setFirst30(true);
+				this.setHasPlayed(true);
+			}
+		}
+
+	}
 }

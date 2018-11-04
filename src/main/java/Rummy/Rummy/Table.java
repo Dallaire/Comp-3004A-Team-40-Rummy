@@ -281,7 +281,7 @@ public final class Table {
 				}
 			}
 		} else if (player instanceof SecondStrategy){
-			((SecondStrategy) player).playTurn2(Table.getMelds());
+			((SecondStrategy) player).playTurn(Table.getMelds());
 			if (!player.getHasPlayed()) {
 				System.out.println(player.getClass().getSimpleName() + " " +  player.getName() +" drew from stock");
 			}

@@ -13,7 +13,7 @@ public class SecondStrategy extends Player implements Strategy{
 	@Override
 	public ArrayList<ArrayList<Tile>> playTurn(){return null;} //leave blank
 	
-	public void playTurn2(ArrayList<ArrayList<Tile>> tableMelds) { //don't want to return anything, can just interact with table in the function
+	public void playTurn(ArrayList<ArrayList<Tile>> tableMelds) { //don't want to return anything, can just interact with table in the function
 		this.setHasPlayed(false);
 		if (tableData.getFirstMeld()) {
 			if (this.playedFirst30) { //First 30 already played
