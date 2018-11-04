@@ -46,7 +46,7 @@ public final class Table {
 	 * c - The player can play multiple runs
 	 * d - The player can play multiple sets
 	 * e - The player can play a run and a set*/
-	static public void init8() {
+	static public void init8(String f) {
 		//players.clear();	
 		loadPlayers();
 		loadDeck();
@@ -70,6 +70,7 @@ public final class Table {
 		}
 		
 		((PlayerStrategy) players.get(0)).setMode("file");
+		((PlayerStrategy) players.get(0)).setFile(f);
 	}
 	
 	/**
@@ -248,17 +249,17 @@ public final class Table {
 
 			meldz = ((PlayerStrategy) player).playTurn();
 			if (meldz == null) {
-				System.out.println(player.getClass().getSimpleName() + " " +  player.getName() + " drew from stock");
+				System.out.println("Table: " + player.getClass().getSimpleName() + " " +  player.getName() + " drew from stock");
 			}
 			else if (meldz.size() > 0){
-				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld: " + meldz.toString());
+				System.out.println("Table: " + player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld(s): " + meldz.toString());
 				if (!getFirst()) {
 					setFirst30(true);
 				}
 				addMeldz(meldz);
 				
 			} else {
-				System.out.println("The Player passed");
+				System.out.println("Table: The Player passed");
 			}	
 
 			//test to see if player has won after playing their hand.

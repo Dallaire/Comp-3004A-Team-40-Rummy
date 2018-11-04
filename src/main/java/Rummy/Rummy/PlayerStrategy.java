@@ -12,6 +12,8 @@ public class PlayerStrategy extends Player implements Strategy {
 	//Instance variables
 	private ArrayList<String> fileInput = new ArrayList<String>();
 	private String mode = "user";
+	private String fileName = "";
+	private int x = 1;
 
 	public PlayerStrategy(String aName) {
 		super(aName);
@@ -30,44 +32,29 @@ public class PlayerStrategy extends Player implements Strategy {
 		
 		// Put the player in a loop
 		while (flag == true) {
-			meld.clear();
+			meld = new ArrayList<Tile>();
+
 			// Allow the player to choose what they want to do
 			int choice = makeChoice();
 			if (choice == 1) //play a meld from the hand
 			{
 				// let the player select the tiles they wish to play
 				int[] indexes = selectTile();
-				
-				
+		
 				// create the meld using the indexes
 				for (int x: indexes) {
 					
-					System.out.println(x);
-					System.out.println(this.getHand().size());
+					//System.out.println(x);
+					//System.out.println(this.getHand().size());
 					meld.add(this.getHand().get(x));
 				}
-				
+				// remove tiles from the hand
+				this.removeTiles(indexes);
 				points += MeldChecker.countPoints(meld);
 				
-				// if the first thirty points aren't yet played check for that 
-				if (getFirst30() == false) {
-					if(MeldChecker.check30(meld) == false) {
-						System.out.println("On first play the total points must be >=30");
-						System.out.println("You currently have " + points + " points.");
-						melds.add(meld);
-					} else if(MeldChecker.checkRun(meld) == false && MeldChecker.checkSet(meld) == false) {
-						System.out.println("Please play a valid run or set");
-					} else if(MeldChecker.checkRun(meld) == true || MeldChecker.checkSet(meld) == true) {
-						System.out.println("Player " + this.getName() + " played this meld: \n" + meld.toString());
-						// change the first thirty flag
-						this.playedFirst30 = true;
-						melds.add(meld);
-
-					}
-				} 
 				// if the first 30 points have already been played for this player				
-				else if (getFirst30() == true) {
-					
+				if (getFirst30() == true) {
+
 					//	Check if the meld is valid
 					 if(MeldChecker.checkRun(meld) == false && MeldChecker.checkSet(meld) == false) {
 						System.out.println("Please play a valid run or set");
@@ -77,6 +64,25 @@ public class PlayerStrategy extends Player implements Strategy {
 							melds.add(meld);
 					}
 				}
+				// if the first thirty points aren't yet played check for that 
+				else if (getFirst30() == false) {
+
+					if(MeldChecker.check30(meld) == false) {
+						System.out.println("On first play the total points must be >=30");
+						System.out.println("You currently have " + points + " points.");
+						melds.add(meld);
+					} else if(MeldChecker.checkRun(meld) == false && MeldChecker.checkSet(meld) == false) {
+						System.out.println("Please play a valid run or set");
+						
+						
+					} else if(MeldChecker.checkRun(meld) == true || MeldChecker.checkSet(meld) == true) {
+						System.out.println("Player " + this.getName() + " played this meld: \n" + meld.toString());
+						// change the first thirty flag
+						this.playedFirst30 = true;
+						melds.add(meld);
+
+					}
+				} 
 				
 				//Prompt user to play another meld
 				// break or make another meld
@@ -86,6 +92,7 @@ public class PlayerStrategy extends Player implements Strategy {
 				else {
 					continue;
 				}
+			// End of choice == 1
 			} 
 			//pick a tile from the stock and pass on turn
 			else if (choice == 2) 
@@ -113,7 +120,7 @@ public class PlayerStrategy extends Player implements Strategy {
 		// if using file input because eclipse is being sexy
 		if (getMode().equals("file")) {
 			try {
-				readInputFromFile("input2.txt");
+				readInputFromFile("input" + Integer.toString(x++) +".txt");
 			} catch (IOException e) {
 				
 				e.printStackTrace();
@@ -162,7 +169,7 @@ public class PlayerStrategy extends Player implements Strategy {
 		// Either from a pre-made file or 
 		if (getMode().equals("file")) {
 			try {
-				readInputFromFile("input1.txt");
+				readInputFromFile("input" + Integer.toString(x++) +".txt");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -199,7 +206,7 @@ public class PlayerStrategy extends Player implements Strategy {
 		// Either read from a pre-made file or Scan from user input
 		if (getMode().equals("file")) {
 			try {
-				readInputFromFile("input3.txt");
+				readInputFromFile("input" + Integer.toString(x++) +".txt");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -224,35 +231,39 @@ public class PlayerStrategy extends Player implements Strategy {
 	private void readInputFromFile(String file) throws IOException {
 		// Open the file
 		String root =  System.getProperty("user.dir");
-		String filePath = "/src/main/8a/" + file;
+		String filePath = "/src/main/"+ fileName + "/" + file;
 		FileInputStream fstream = new FileInputStream(root + filePath);
 		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
 		fileInput.clear();
 		String strLine;
-		@SuppressWarnings("unused")
-		int intBuff = 0;
+		
 		//Read File Line By Line
 		while ((strLine = br.readLine()) != null)   {
-		  // Print the content on the console
-		  System.out.println (strLine);
-		 
-		  //intBuff = Integer.parseInt(strLine);
-		  fileInput.add(strLine);
-		  
+		  fileInput.add(strLine);		  
 		}
 
 		//Close the input stream
 		br.close();
 	}
 
+	/**
+	 * A string representation of how the PlayerStrategy will be executed
+	 * @return - The mode that the player is in: Either "file" or "user" mode*/
 	public String getMode() {
 		return mode;
 	}
 	
+	/**
+	 * The the mode the player will be in
+	 * */
 	public void setMode(String mode) {
 		this.mode = mode;
 	}
- 
-
+	
+	/**
+	 * Sets the file name of the input file for testing*/
+	public void setFile(String file) {
+		this.fileName  = file;
+	}
 }
