@@ -130,6 +130,40 @@ public class Player {
 		hand.add(new Tile(Color.R,11 ));
 		//hand.add(new Tile(Color.R,1 ));		
 	}
+	
+	/**
+	 * Function creates melds
+	 * @return Collection of melds*/
+	protected ArrayList<ArrayList<Tile>> createMelds() {
+		
+		ArrayList<ArrayList<Tile>> temp = new ArrayList<ArrayList<Tile>>();
+		
+		// create all the sets possible
+		while (true) {
+			ArrayList<Tile> meld = createSet(null);
+			
+			// If there are no sets or run to create just give up
+			if (meld == null) {
+				break;
+			} else {
+				temp.add(meld);
+			}
+		}
+		
+		// create all the runs possible
+		while (true) {
+			ArrayList<Tile> meld = createRun(null);
+			
+			// If there are no sets or run to create just give up
+			if (meld == null) {
+				break;
+			} else {
+				temp.add(meld);
+			}
+		}
+		
+		return temp;
+	}
 
 	/**
 	 * Create a Run

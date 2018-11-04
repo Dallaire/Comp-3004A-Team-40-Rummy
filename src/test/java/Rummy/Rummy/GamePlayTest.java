@@ -118,7 +118,7 @@ public class GamePlayTest extends TestCase{
 	
 	
 	public void testAllDrawFromStock() {
-		Table.init();
+		Table.initPass("pass");
 		Table.playNext();
 		Table.playNext();
 		Table.playNext();
