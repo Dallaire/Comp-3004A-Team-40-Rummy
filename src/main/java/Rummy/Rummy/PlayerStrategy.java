@@ -53,13 +53,6 @@ public class PlayerStrategy extends Player implements Strategy {
 				// remove tiles from the hand
 				this.removeTiles(indexes);
 				
-				// Count the points
-				for (ArrayList<Tile> tiles: melds) {
-					points += MeldChecker.countPoints(tiles);
-				}
-				
-				System.out.println("You have " + points +  " points");
-				
 				// if the first 30 points have already been played for this player				
 				if (getFirst30() == true) {
 
@@ -94,12 +87,24 @@ public class PlayerStrategy extends Player implements Strategy {
 				
 				//Prompt user to play another meld
 				// break or make another meld
+				
+				// Count the points
+				points = 0;
+				for (ArrayList<Tile> tiles: melds) {
+					points += MeldChecker.countPoints(tiles);
+				}
+				
+				System.out.println("You have " + points +  " points");
+				
 				if(keepPlaying().equals("n")) {
 					flag = false;
 					
-					if (points < 30 && getFirst30()) {
+
+					if (points < 30 && getFirst30() == false) {
+						System.out.println("Player ones melds do not have enough points to play to the Table");
 						addMelds(melds);
-						meld =  null;
+						this.addTile(Table.getTile());
+						melds =  null;
 					}
 				}
 				else {
