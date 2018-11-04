@@ -18,7 +18,7 @@ public class SecondStrategy extends Player implements Strategy{
 	 * @return Collection of melds*/
 	public ArrayList<ArrayList<Tile>> playTurn(){
 		
-		
+		// pass if no one else has played
 		if (tableData.getFirstMeld() == false) {
 			return null;
 		}
@@ -36,16 +36,16 @@ public class SecondStrategy extends Player implements Strategy{
 		if (tableData.getFirstMeld()) {
 			if (this.playedFirst30) { //First 30 already played
 				ArrayList<ArrayList<Tile>> temp = new ArrayList<ArrayList<Tile>>();
-				ArrayList<Tile> meld = this.createRun();
+				ArrayList<Tile> meld = this.createRun(null);
 				if (meld == null) {
-					meld = this.createSet();
+					meld = this.createSet(null);
 				}
 				while (meld != null) {
 					temp.add(meld); //add in the meld
 					meld = null;
-					meld = this.createRun(); //create a new one
+					meld = this.createRun(null); //create a new one
 					if (meld == null) {
-						meld = this.createSet();
+						meld = this.createSet(null);
 					}
 				}
 				ArrayList<Tile> played = new ArrayList<Tile>();
@@ -78,13 +78,13 @@ public class SecondStrategy extends Player implements Strategy{
 			
 			//Can play first 30 but hasn't yet
 			else {
-				ArrayList<Tile> meld = this.createRun();
+				ArrayList<Tile> meld = this.createRun(null);
 				if(meld == null || !MeldChecker.check30(meld)) {
 					if (meld != null) {
 						this.getHand().addAll(meld);
 						meld.clear();
 					}
-					meld = this.createSet();
+					meld = this.createSet(null);
 					if(meld != null && MeldChecker.check30(meld)) {
 						Table.addMeld(meld); // plays set as first 30
 						this.setHasPlayed(true);
