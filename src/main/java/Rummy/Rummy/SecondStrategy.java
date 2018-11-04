@@ -11,10 +11,28 @@ public class SecondStrategy extends Player implements Strategy{
 	}
 	
 	@Override
-	public ArrayList<ArrayList<Tile>> playTurn(){return null;} //leave blank
+	/**
+	 * SecondStrategy
+	 * -Plays initial 30 only if another player has played their initial 30
+	 * -If it can play all it's Tiles it does
+	 * @return Collection of melds*/
+	public ArrayList<ArrayList<Tile>> playTurn(){
+		
+		
+		if (tableData.getFirstMeld() == false) {
+			return null;
+		}
+		
+		// get all the Table Melds that greater than 3 in size
+		
+		return null;
+		
+	} //leave blank
 	
 	public void playTurn(ArrayList<ArrayList<Tile>> tableMelds) { //don't want to return anything, can just interact with table in the function
 		this.setHasPlayed(false);
+		
+		
 		if (tableData.getFirstMeld()) {
 			if (this.playedFirst30) { //First 30 already played
 				ArrayList<ArrayList<Tile>> temp = new ArrayList<ArrayList<Tile>>();

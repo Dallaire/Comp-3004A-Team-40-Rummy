@@ -8,6 +8,7 @@ public class FirstStrategy extends Player implements Strategy {
 		super(name);
 	}
 	public ArrayList<ArrayList<Tile>> playTurn(){return null;}
+	
 
 	public void playTurn(ArrayList<ArrayList<Tile>> tableMelds) { // don't want to return anything, can just interact
 																	// with table in the function
@@ -17,11 +18,11 @@ public class FirstStrategy extends Player implements Strategy {
 			ArrayList<ArrayList<Tile>> temp = new ArrayList<ArrayList<Tile>>();
 			
 			// create a run
-			ArrayList<Tile> meld = this.createRun();
+			ArrayList<Tile> meld = this.createRun(null);
 			
 			// if a run can't be created create set
 			if (meld == null) {
-				meld = this.createSet();
+				meld = this.createSet(null);
 			}
 			
 			// A none null meld goes in here
@@ -29,9 +30,9 @@ public class FirstStrategy extends Player implements Strategy {
 			while (meld != null) {
 				temp.add(meld); // add in the meld
 				meld = null;
-				meld = this.createRun(); // create a new one
+				meld = this.createRun(null); // create a new one
 				if (meld == null) {
-					meld = this.createSet();
+					meld = this.createSet(null);
 				}
 			}
 			
@@ -46,7 +47,7 @@ public class FirstStrategy extends Player implements Strategy {
 			
 		} else {
 			// create a run 
-			ArrayList<Tile> meld = this.createRun();
+			ArrayList<Tile> meld = this.createRun(null);
 			// if the run can't be created or is less than 30 points
 			if (meld == null || !MeldChecker.check30(meld)) {
 				
@@ -57,7 +58,7 @@ public class FirstStrategy extends Player implements Strategy {
 				}
 				
 				// try create a set
-				meld = this.createSet();
+				meld = this.createSet(null);
 				
 				// if the set is not null and point are more than thirty
 				if (meld != null && MeldChecker.check30(meld)) {
@@ -82,4 +83,6 @@ public class FirstStrategy extends Player implements Strategy {
 		}
 
 	}
+	
+	
 }
