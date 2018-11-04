@@ -319,7 +319,7 @@ public final class Table {
 				numMeldsLastPlayed = 0;
 			}
 			else if (meldz.size() > 0){
-				System.out.println("Table: " + player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld(s): " + meldzToString(meldz));
+				System.out.println("Table: " + player.getClass().getSimpleName() + " " +  player.getName()+ " played meld(s): " + meldzToString(meldz));
 				if (!getFirst()) {
 					setFirst30(true);
 				}
@@ -335,13 +335,15 @@ public final class Table {
 			//meldsToString = "{ " +  meldsToString.substring(1, meldsToString.length()) + " }";
 			if (meldz == null) {
 				System.out.println(player.getClass().getSimpleName() + " " +  player.getName() +" drew from stock");
+				numMeldsLastPlayed = 0;
 			}
 			else {
-				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld: ");
+				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played meld(s): " + meldzToString(meldz));
 				addMeldz(meldz);
 				if (!getFirst()) {
 					setFirst30(true);
 				}
+				numMeldsLastPlayed = meldz.size();
 			}
 		} else if (player instanceof SecondStrategy){
 			((SecondStrategy) player).playTurn(Table.getMelds());
