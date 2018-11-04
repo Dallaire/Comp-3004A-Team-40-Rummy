@@ -109,7 +109,7 @@ public class GamePlayTest extends TestCase{
 	/***/
 	public void testRemoveTile() {
 		
-	
+		Table.init();
 		PlayerStrategy p1 = (PlayerStrategy) Table.getPlayer(0);
 		p1.printTiles();
 		

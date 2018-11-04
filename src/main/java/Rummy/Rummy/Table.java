@@ -15,16 +15,16 @@ import java.util.ArrayList;
  * */
 public final class Table {
 	
+	//Table variables
 	static private ArrayList<Player> players;
 	static private Deck stock;
-
-	//private ArrayList<Tile> meld;
 	static private ArrayList<ArrayList<Tile>> melds = new ArrayList<ArrayList<Tile>>();
 	static private boolean firstMeld = false;
 	static private boolean threeLess = false;
 	static private JRON jron = new JRON(null, false, false);
 	static private boolean winner = false;
 	static private int whosTurn = 0;
+	static private int numMeldsLastPlayed = 0;
 
 	/**
 	 * Print initial tiles for each player*/
@@ -316,31 +316,34 @@ public final class Table {
 			meldsToString = "{ " +  meldsToString.substring(1, meldsToString.length()) + " }";
 			if (meldz == null) {
 				System.out.println("Table: " + player.getClass().getSimpleName() + " " +  player.getName() + " drew from stock");
+				numMeldsLastPlayed = 0;
 			}
 			else if (meldz.size() > 0){
-				System.out.println("Table: " + player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld(s): " + meldsToString);
+				System.out.println("Table: " + player.getClass().getSimpleName() + " " +  player.getName()+ " played meld(s): " + meldzToString(meldz));
 				if (!getFirst()) {
 					setFirst30(true);
 				}
 				addMeldz(meldz);
-				
+				numMeldsLastPlayed = meldz.size();
 			} else {
 				System.out.println("Table: The Player passed");
 			}	
 			
 		} else if (player instanceof FirstStrategy){
 			meldz = ((FirstStrategy) player).playTurn();
-			meldsToString = meldz.toString();
-			meldsToString = "{ " +  meldsToString.substring(1, meldsToString.length()) + " }";
+			//meldsToString = meldz.toString();
+			//meldsToString = "{ " +  meldsToString.substring(1, meldsToString.length()) + " }";
 			if (meldz == null) {
 				System.out.println(player.getClass().getSimpleName() + " " +  player.getName() +" drew from stock");
+				numMeldsLastPlayed = 0;
 			}
 			else {
-				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld: " + meldsToString);
+				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played meld(s): " + meldzToString(meldz));
 				addMeldz(meldz);
 				if (!getFirst()) {
 					setFirst30(true);
 				}
+				numMeldsLastPlayed = meldz.size();
 			}
 		} else if (player instanceof SecondStrategy){
 			((SecondStrategy) player).playTurn(Table.getMelds());
@@ -370,6 +373,7 @@ public final class Table {
 			setWinner(true);
 		}
 		
+		printMelds();
 		nextMove();
 		update();
 	}
@@ -445,5 +449,60 @@ public final class Table {
 	 */
 	public static void setStock(Deck stock) {
 		Table.stock = stock;
+	}
+	
+	/**
+	 * Print all the melds on the Table
+	 * @return void*/
+	public static void printMelds() {
+		String str = "";
+		int i = 0;
+		
+//		ArrayList<Tile> meld1 = new ArrayList<Tile>();
+//		
+//		meld1.add(new Tile(Color.R, 4));
+//		meld1.add(new Tile(Color.B, 4));
+//		meld1.add(new Tile(Color.G, 4));
+//		meld1.add(new Tile(Color.O, 4));
+//		
+//		melds.add(meld1);
+//		
+//		ArrayList<Tile> meld2 = new ArrayList<Tile>();
+//		
+//		meld2.add(new Tile(Color.R, 4));
+//		meld2.add(new Tile(Color.B, 4));
+//		meld2.add(new Tile(Color.G, 4));
+//		meld2.add(new Tile(Color.O, 4));
+//		
+//		melds.add(meld2);
+		for (ArrayList<Tile> m: melds){
+			if (melds.size() - numMeldsLastPlayed <= i ) {
+				str += m.toString().replace("[", "*{").replaceAll("]", "} ");;
+			} else {
+				str += m.toString().replace("[", "{").replaceAll("]", "} ");;
+			}
+			
+			i++;
+		}
+		
+		System.out.println("------------------------------------" );
+		System.out.println("The melds on the Table are:" );
+		System.out.println("{ " + str + "}");
+		System.out.println("------------------------------------\n\n" );
+	}
+	
+	/**
+	 * String format the melds to comfort to Requirement 7
+	 * @return String formated variable*/
+	public static String meldzToString(ArrayList<ArrayList<Tile>> meldz) {
+		String str = "";
+
+		for (ArrayList<Tile> m: meldz){
+
+				str += m.toString().replace("[", "{").replaceAll("]", "} ");;
+
+		}
+		
+		return "{ " + str + " }";
 	}
 }
