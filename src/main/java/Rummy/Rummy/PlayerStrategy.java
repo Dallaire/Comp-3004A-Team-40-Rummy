@@ -19,10 +19,12 @@ public class PlayerStrategy extends Player implements Strategy {
 		super(aName);
 	}
 
-	//Logic is broken
+
 	@Override
 	/**
-	 * @return - null if passing and or a meld*/
+	 * Prompts the user to play a meld
+	 * -Two modes: can read from file or prompt user through the console
+	 * @return - ArrayList<ArrayList<Tile>> if valid  or null if passing and or a meld*/
 	public ArrayList<ArrayList<Tile>> playTurn() {
 		
 		// local variables
@@ -36,7 +38,7 @@ public class PlayerStrategy extends Player implements Strategy {
 
 			// Allow the player to choose what they want to do
 			int choice = makeChoice();
-			if (choice == 1) //play a meld from the hand
+			if (choice == 1) //create a meld from the hand
 			{
 				// let the player select the tiles they wish to play
 				int[] indexes = selectTile();
@@ -50,7 +52,6 @@ public class PlayerStrategy extends Player implements Strategy {
 				}
 				// remove tiles from the hand
 				this.removeTiles(indexes);
-				points += MeldChecker.countPoints(meld);
 				
 				// if the first 30 points have already been played for this player				
 				if (getFirst30() == true) {
@@ -86,13 +87,31 @@ public class PlayerStrategy extends Player implements Strategy {
 				
 				//Prompt user to play another meld
 				// break or make another meld
+				
+				// Count the points
+				points = 0;
+				for (ArrayList<Tile> tiles: melds) {
+					points += MeldChecker.countPoints(tiles);
+				}
+				
+				System.out.println("You have " + points +  " points");
+				
 				if(keepPlaying().equals("n")) {
 					flag = false;
+					
+
+					if (points < 30 && getFirst30() == false) {
+						System.out.println("Player ones melds do not have enough points to play to the Table");
+						addMelds(melds);
+						this.addTile(Table.getTile());
+						melds =  null;
+					}
 				}
 				else {
 					continue;
 				}
 			// End of choice == 1
+				
 			} 
 			//pick a tile from the stock and pass on turn
 			else if (choice == 2) 
@@ -104,13 +123,15 @@ public class PlayerStrategy extends Player implements Strategy {
 			// Pass on the turn
 			else {
 				flag = false;
-			}
+			} 
+			this.printTiles();
 		// end while loop	
 		}
-
+		
+		
 		return melds; //if the player passes, return null else return the meld
 	}
-	
+
 	/**
 	 * Read the input from the console
 	 * @return - an integer array of indexes the player wishes to create a meld from*/
@@ -190,9 +211,7 @@ public class PlayerStrategy extends Player implements Strategy {
 				
 			}
 		}
-		
-		
-		
+
 		return choice;
 	}
 	public void selectBoardTile() {

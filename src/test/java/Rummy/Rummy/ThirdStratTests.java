@@ -109,4 +109,19 @@ public class ThirdStratTests extends TestCase {
 		player.playTurn2(Table.getMelds());
 		assertTrue(player.getHand().isEmpty());
 	}
+	
+	/**
+	 * Test that the JRON return false for threeLess if all players pass*/
+	public void testThreeLess_1() {
+		Table.init();
+		Table.playNext();
+		Table.playNext();
+		Table.playNext();
+		Table.playNext();
+		ThirdStrategy p3 = (ThirdStrategy) Table.getPlayer(3);
+		JRON data = p3.getJRON();
+		boolean threeLess = data.getThreeLess();
+		assertEquals(false, threeLess);
+		
+	}
 }

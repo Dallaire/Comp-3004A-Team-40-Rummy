@@ -100,5 +100,27 @@ public class testPlayer8 extends TestCase {
 		assertEquals(true, Table.getMeld(1).toString().equals(meld.toString()));
 	}
 	
+	/**
+	 * Test for 8e
+	 * The PlayerStrategy plays multiple melds of different type
+	 * -shows player can add a meld to the Table*/
+	public void testPlayerPlaysMeldMultipleMelds() {
+		Table.init8("8e");
+		Table.playNext();
+		ArrayList<Tile> meld = new ArrayList<Tile>();
+		
+		meld.add(new Tile(Color.R, 9));
+		meld.add(new Tile(Color.B, 9));
+		meld.add(new Tile(Color.G, 9));
+		assertEquals(Table.getNumMelds(), 2);
+		assertEquals(true, Table.getMeld(0).toString().equals(meld.toString()));
+		meld.clear();
+		
+		meld.add(new Tile(Color.O, 9));
+		meld.add(new Tile(Color.O, 10));
+		meld.add(new Tile(Color.O, 11));
+		assertEquals(Table.getNumMelds(), 2);
+		assertEquals(true, Table.getMeld(1).toString().equals(meld.toString()));
+	}
 	
 }
