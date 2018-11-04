@@ -124,7 +124,7 @@ public class PlayerStrategy extends Player implements Strategy {
 			else {
 				flag = false;
 			} 
-			this.printTiles();
+			
 		// end while loop	
 		}
 		
