@@ -1,7 +1,6 @@
 package Rummy.Rummy;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 
 /**
@@ -52,6 +51,40 @@ public final class Table {
 		loadDeck();
 		
 		int i = 11;
+		for (Player x: players) {
+			x.addTile(new Tile(Color.R, i));
+			x.addTile(new Tile(Color.B, i));
+			x.addTile(new Tile(Color.O, i));
+			x.addTile(new Tile(Color.G, i));
+			x.addTile(new Tile(Color.R, i-1));
+			x.addTile(new Tile(Color.B, i-1));
+			x.addTile(new Tile(Color.O, i-1));
+			x.addTile(new Tile(Color.G, i-1));
+			x.addTile(new Tile(Color.R, i-2));
+			x.addTile(new Tile(Color.B, i-2));
+			x.addTile(new Tile(Color.O, i-2));
+			x.addTile(new Tile(Color.G, i-2));
+			x.printTiles();
+			i--;
+		}
+		
+		((PlayerStrategy) players.get(0)).setMode("file");
+		((PlayerStrategy) players.get(0)).setFile(f);
+	}
+	
+	/**
+	 * Init for requirement number 8 on the grid
+	 * a - The player can play a single run
+	 * b - The player can play a single set
+	 * c - The player can play multiple runs
+	 * d - The player can play multiple sets
+	 * e - The player can play a run and a set*/
+	static public void init4(String f) {
+		//players.clear();	
+		loadPlayers();
+		loadDeck();
+		
+		int i = 6;
 		for (Player x: players) {
 			x.addTile(new Tile(Color.R, i));
 			x.addTile(new Tile(Color.B, i));

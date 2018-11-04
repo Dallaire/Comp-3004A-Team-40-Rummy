@@ -185,7 +185,19 @@ public class Player {
 		return null;
 	}
 	
-	
+	/**
+	 * Add melds to the hand
+	 * @param - melds: the collection of melds to add to the hand
+	 * @return - void */
+	protected void addMelds(ArrayList<ArrayList<Tile>> melds) {
+		// TODO Auto-generated method stub
+		for(ArrayList<Tile> meld: melds) {
+			for (Tile tile: meld) {
+				this.addTile(tile);
+			}
+		}
+		
+	}
 	
 	public void update(JRON data) {
 		this.tableData = data;
