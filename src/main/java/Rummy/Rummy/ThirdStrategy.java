@@ -17,14 +17,13 @@ public class ThirdStrategy extends Player implements Strategy{
 	 * */
 	public ArrayList<ArrayList<Tile>> playTurn() { //legacy method
 		ArrayList<Tile> meldToPlay; 
-		
 		//Default draw from stock
 		this.addTile(Table.getTile());
 		meldToPlay = null;
 		return null;	
 	}
 	
-	public void playTurn2(ArrayList<ArrayList<Tile>> tableMelds) {
+	public void playTurn(ArrayList<ArrayList<Tile>> tableMelds) {
 		this.setHasPlayed(false);
 		if (playedFirst30) { //already played once
 			ArrayList<ArrayList<Tile>> temp = new ArrayList<ArrayList<Tile>>();

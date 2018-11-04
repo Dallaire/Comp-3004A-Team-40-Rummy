@@ -352,7 +352,7 @@ public final class Table {
 			}
 		}
 		else if (player instanceof ThirdStrategy){
-			((ThirdStrategy) player).playTurn2(Table.getMelds());
+			((ThirdStrategy) player).playTurn(Table.getMelds());
 			if (!player.getHasPlayed()) {
 				System.out.println(player.getClass().getSimpleName() + " " +  player.getName() +" drew from stock");
 			}

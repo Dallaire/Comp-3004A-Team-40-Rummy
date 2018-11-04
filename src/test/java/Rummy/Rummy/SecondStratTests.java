@@ -13,7 +13,7 @@ public class SecondStratTests extends TestCase {
 		JRON jron = new JRON(Table.getMelds(),false,Table.getThreeLess());
 		player.update(jron);
 		int handsize1 = player.getHand().size();
-		player.playTurn2(Table.getMelds());
+		player.playTurn(Table.getMelds());
 		int handsize2 = player.getHand().size();
 		assertTrue(Table.getMelds().isEmpty());
 		assertEquals(1, handsize2-handsize1);
@@ -27,7 +27,7 @@ public class SecondStratTests extends TestCase {
 		JRON jron = new JRON(Table.getMelds(),Table.getFirst(),Table.getThreeLess());
 		player.update(jron);
 		int handsize1 = player.getHand().size();
-		player.playTurn2(Table.getMelds());
+		player.playTurn(Table.getMelds());
 		int handsize2 = player.getHand().size();
 		if(!player.getHasPlayed()) {
 			assertTrue(Table.getMelds().isEmpty());
@@ -58,7 +58,7 @@ public class SecondStratTests extends TestCase {
 		player.addTile(new Tile(Color.R, 8));
 		player.update(new JRON(new ArrayList<ArrayList<Tile>>(),true,false));
 		player.setFirst30(true);
-		player.playTurn2(Table.getMelds());
+		player.playTurn(Table.getMelds());
 		
 		assertTrue(player.getHand().isEmpty());
 	}
@@ -89,7 +89,7 @@ public class SecondStratTests extends TestCase {
 		Table.addMeld(meld);
 		player.update(new JRON(new ArrayList<ArrayList<Tile>>(),true,false));
 		player.setFirst30(true);
-		player.playTurn2(Table.getMelds());
+		player.playTurn(Table.getMelds());
 		
 		assertTrue(player.getHand().isEmpty());
 	}
