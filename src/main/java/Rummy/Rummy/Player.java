@@ -162,6 +162,9 @@ public class Player {
 			}
 		}
 		
+		if (temp.size()==0)
+			return null;
+		
 		return temp;
 	}
 
