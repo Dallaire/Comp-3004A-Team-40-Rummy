@@ -329,15 +329,15 @@ public final class Table {
 			}	
 			
 		} else if (player instanceof FirstStrategy){
-			meldz = ((FirstStrategy) player).playTurn();
-			meldsToString = meldz.toString();
-			meldsToString = "{ " +  meldsToString.substring(1, meldsToString.length()) + " }";
-			if (meldz == null) {
+			((FirstStrategy) player).playTurn2(Table.getMelds());
+			//meldsToString = meldz.toString();
+			//meldsToString = "{ " +  meldsToString.substring(1, meldsToString.length()) + " }";
+			if (!player.getHasPlayed()) {
 				System.out.println(player.getClass().getSimpleName() + " " +  player.getName() +" drew from stock");
 			}
 			else {
-				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld: " + meldsToString);
-				addMeldz(meldz);
+				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld: ");
+				//addMeldz(meldz);
 				if (!getFirst()) {
 					setFirst30(true);
 				}
