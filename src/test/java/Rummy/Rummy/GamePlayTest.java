@@ -109,18 +109,21 @@ public class GamePlayTest extends TestCase{
 	/***/
 	public void testRemoveTile() {
 		
-	
+		Table.init();
 		PlayerStrategy p1 = (PlayerStrategy) Table.getPlayer(0);
 		p1.printTiles();
 		
 		
 	}
 	
+	
 	public void testAllDrawFromStock() {
 		Table.init();
 		Table.playNext();
 		Table.playNext();
 		Table.playNext();
+		Table.playNext();
+
 		
 	}
 	
@@ -134,7 +137,7 @@ public class GamePlayTest extends TestCase{
 	/**
 	 * Test file input mode*/
 	public void testPlayerFileMode() {
-		Table.init8();
+		Table.init8("8a");
 		PlayerStrategy player = (PlayerStrategy) Table.getPlayer(0);
 		String mode = player.getMode();
 		assertEquals("file", mode);

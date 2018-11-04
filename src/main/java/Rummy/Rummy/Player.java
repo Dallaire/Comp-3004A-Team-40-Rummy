@@ -38,6 +38,8 @@ public class Player {
 		return hasPlayed;
 	}
 	
+	/**
+	 * @return - The table Data as a JRON*/
 	public JRON getJRON() {
 		return tableData;
 	}
@@ -208,8 +210,9 @@ public class Player {
 	public void printTiles() {
 		Collections.sort(hand,new valueComparator());
 		Collections.sort(hand,new colourCompataror());
-
-		System.out.println(this.name + "'s cards: " + this.hand.toString());
+		String meldsToString = hand.toString();
+		meldsToString = "{ " +  meldsToString.substring(1, meldsToString.length() -1) + " }";
+		System.out.println(this.name + "'s cards: " + meldsToString);
 	}
 	
 		
