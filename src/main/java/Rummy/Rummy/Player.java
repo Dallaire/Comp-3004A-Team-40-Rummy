@@ -11,8 +11,8 @@ public class Player {
 	private String name;
 	protected ArrayList<Tile> meld = new ArrayList<Tile>();
 	protected JRON tableData = null;
-	protected Boolean playedFirst30 = false;
-	protected Boolean hasPlayed = false;
+	protected boolean playedFirst30 = false;
+	protected boolean hasPlayed = false;
 	
 	//Constructor
 	public Player(String aName) {
@@ -30,11 +30,11 @@ public class Player {
 		return this.name;
 	}
 	
-	public Boolean getFirst30() {
+	public boolean getFirst30() {
 		return playedFirst30;
 	}
 	
-	public Boolean getHasPlayed() {
+	public boolean getHasPlayed() {
 		return hasPlayed;
 	}
 	
@@ -51,11 +51,11 @@ public class Player {
 	}
 	
 	//Setters
-	public void setFirst30(Boolean first30) {
+	public void setFirst30(boolean first30) {
 		this.playedFirst30 = first30;
 	}
 	
-	public void setHasPlayed(Boolean played) {
+	public void setHasPlayed(boolean played) {
 		this.hasPlayed = played;
 	}
 	
@@ -185,7 +185,19 @@ public class Player {
 		return null;
 	}
 	
-	
+	/**
+	 * Add melds to the hand
+	 * @param - melds: the collection of melds to add to the hand
+	 * @return - void */
+	protected void addMelds(ArrayList<ArrayList<Tile>> melds) {
+		// TODO Auto-generated method stub
+		for(ArrayList<Tile> meld: melds) {
+			for (Tile tile: meld) {
+				this.addTile(tile);
+			}
+		}
+		
+	}
 	
 	public void update(JRON data) {
 		this.tableData = data;

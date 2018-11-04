@@ -1,7 +1,6 @@
 package Rummy.Rummy;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 
 /**
@@ -25,11 +24,7 @@ public final class Table {
 	static private boolean threeLess = false;
 	static private JRON jron = new JRON(null, false, false);
 	static private boolean winner = false;
-
-	
 	static private int whosTurn = 0;
-
-
 
 	/**
 	 * Print initial tiles for each player*/
@@ -50,7 +45,7 @@ public final class Table {
 	 * c - The player can play multiple runs
 	 * d - The player can play multiple sets
 	 * e - The player can play a run and a set*/
-	static public void init8() {
+	static public void init8(String f) {
 		//players.clear();	
 		loadPlayers();
 		loadDeck();
@@ -63,18 +58,81 @@ public final class Table {
 			x.addTile(new Tile(Color.G, i));
 			x.addTile(new Tile(Color.R, i-1));
 			x.addTile(new Tile(Color.B, i-1));
-			x.addTile(new Tile(Color.R, i-1));
-			x.addTile(new Tile(Color.B, i-1));
+			x.addTile(new Tile(Color.O, i-1));
+			x.addTile(new Tile(Color.G, i-1));
 			x.addTile(new Tile(Color.R, i-2));
 			x.addTile(new Tile(Color.B, i-2));
-			x.addTile(new Tile(Color.R, i-2));
-			x.addTile(new Tile(Color.B, i-2));
+			x.addTile(new Tile(Color.O, i-2));
+			x.addTile(new Tile(Color.G, i-2));
 			x.printTiles();
 			i--;
 		}
 		
 		((PlayerStrategy) players.get(0)).setMode("file");
+		((PlayerStrategy) players.get(0)).setFile(f);
 	}
+	
+	/**
+	 * Init for requirement number 4 on the grid
+	 * */
+	static public void init4a(String f) {
+		//players.clear();	
+		loadPlayers();
+		loadDeck();
+		
+		int i = 6;
+		for (Player x: players) {
+			x.addTile(new Tile(Color.R, i));
+			x.addTile(new Tile(Color.B, i));
+			x.addTile(new Tile(Color.O, i));
+			x.addTile(new Tile(Color.G, i));
+			x.addTile(new Tile(Color.R, i-1));
+			x.addTile(new Tile(Color.B, i-1));
+			x.addTile(new Tile(Color.O, i-1));
+			x.addTile(new Tile(Color.G, i-1));
+			x.addTile(new Tile(Color.R, i-2));
+			x.addTile(new Tile(Color.B, i-2));
+			x.addTile(new Tile(Color.O, i-2));
+			x.addTile(new Tile(Color.G, i-2));
+			x.printTiles();
+			i--;
+		}
+		
+		((PlayerStrategy) players.get(0)).setMode("file");
+		((PlayerStrategy) players.get(0)).setFile(f);
+	}
+	
+	/**
+	 * Init for requirement number 4 on the grid
+	 * */
+	static public void init4b(String f) {
+		//players.clear();	
+		loadPlayers();
+		loadDeck();
+		
+		int i = 3;
+		for (Player x: players) {
+			x.addTile(new Tile(Color.R, i));
+			x.addTile(new Tile(Color.B, i));
+			x.addTile(new Tile(Color.O, i));
+			x.addTile(new Tile(Color.G, i));
+			x.addTile(new Tile(Color.R, i-1));
+			x.addTile(new Tile(Color.B, i-1));
+			x.addTile(new Tile(Color.O, i-1));
+			x.addTile(new Tile(Color.G, i-1));
+			x.addTile(new Tile(Color.R, i-2));
+			x.addTile(new Tile(Color.B, i-2));
+			x.addTile(new Tile(Color.O, i-2));
+			x.addTile(new Tile(Color.G, i-2));
+			x.printTiles();
+			i++;
+		}
+		
+		((PlayerStrategy) players.get(0)).setMode("file");
+		((PlayerStrategy) players.get(0)).setFile(f);
+	}
+	
+	
 	
 	/**
 	 * Hard coded instantiation of players to populate the list of players
@@ -248,31 +306,22 @@ public final class Table {
 		// if the meld is null it means the player chose to pick from the stock
 		// A non-null meld is a valid move placed on the Table
 		if(player instanceof PlayerStrategy) {
-			Scanner sc = new Scanner(System.in);
-			while(true) {
-				meldz = ((PlayerStrategy) player).playTurn();
-				if (meldz == null) {
-					System.out.println(player.getClass().getSimpleName() + " " +  player.getName() + " drew from stock");
-				}
-				else if (meldz.size() > 0){
-					System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld: " + meldz.toString());
-					if (!getFirst()) {
-						setFirst30(true);
-					}
-					addMeldz(meldz);
-					
-				} else {
-					System.out.println("The Player passed");
-					break;
-				}	
-				System.out.println("Would you like to keep playing? y/n");
-				String input = sc.nextLine(); 
-				if (input.toLowerCase().equals("n")) {
-					break;
-				} else {
-					continue;
-				}
+			//Scanner sc = new Scanner(System.in);
+
+			meldz = ((PlayerStrategy) player).playTurn();
+			if (meldz == null) {
+				System.out.println("Table: " + player.getClass().getSimpleName() + " " +  player.getName() + " drew from stock");
 			}
+			else if (meldz.size() > 0){
+				System.out.println("Table: " + player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld(s): " + meldz.toString());
+				if (!getFirst()) {
+					setFirst30(true);
+				}
+				addMeldz(meldz);
+				
+			} else {
+				System.out.println("Table: The Player passed");
+			}	
 
 			//test to see if player has won after playing their hand.
 			//if they have break out of the game
