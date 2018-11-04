@@ -168,6 +168,9 @@ public final class Table {
 			}
 		}
 	}
+	static public void remove(int meld) {
+		melds.remove(meld);
+	}
 	
 	/**
 	 * Get a a player from the player collection
