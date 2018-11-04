@@ -195,6 +195,27 @@ public class PlayerStrategy extends Player implements Strategy {
 		
 		return choice;
 	}
+	public void selectBoardTile() {
+		System.out.println("Please enter the number of melds you want to modify from the Table: ");
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		for(int i =0; i<n; i++) {
+			System.out.println("Table: " + Table.getMelds());
+			System.out.println("Please enter which meld you would like to add to your Hand: ");
+			int meld = sc.nextInt();
+			/*
+			 * Have to add entire meld to players hand so that the player can make new melds
+			 * and play those to the board instead of trying to add back to the meld that the player
+			 * just took a tile from
+			 */
+			for(Tile tile : Table.getMeld(meld)) {
+				this.getHand().add(tile);
+			}
+			Table.remove(meld);
+		}
+		
+		sc.close();
+	}
 	
 	/**
 	 * Prompt the user to keep playing or pass*/
