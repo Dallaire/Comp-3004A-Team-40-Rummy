@@ -31,7 +31,7 @@ public class FirstStrategy extends Player implements Strategy {
 			}
 			
 			Table.addMeldz(temp);
-			
+
 			
 
 			if (this.getHand().isEmpty()) { // Win condition
@@ -47,6 +47,7 @@ public class FirstStrategy extends Player implements Strategy {
 				}
 				meld = this.createSet();
 				if (meld != null && MeldChecker.check30(meld)) {
+
 					Table.addMeld(meld); // plays set as first 30
 					this.setFirst30(true);
 					this.setHasPlayed(true);

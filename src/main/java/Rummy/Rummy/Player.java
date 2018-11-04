@@ -38,6 +38,8 @@ public class Player {
 		return hasPlayed;
 	}
 	
+	/**
+	 * @return - The table Data as a JRON*/
 	public JRON getJRON() {
 		return tableData;
 	}
