@@ -29,7 +29,9 @@ public class SecondStrategy extends Player implements Strategy{
 		
 	} //leave blank
 	
+
 	public ArrayList<ArrayList<Tile>> playTurn2() { //don't want to return anything, can just interact with table in the function
+
 		this.setHasPlayed(false);
 		ArrayList<ArrayList<Tile>> temp = new ArrayList<ArrayList<Tile>>();
 		

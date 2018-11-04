@@ -17,7 +17,6 @@ public class ThirdStrategy extends Player implements Strategy{
 	 * */
 	public ArrayList<ArrayList<Tile>> playTurn() { //legacy method
 		ArrayList<Tile> meldToPlay; 
-		
 		//Default draw from stock
 		this.addTile(Table.getTile());
 		meldToPlay = null;
@@ -25,6 +24,7 @@ public class ThirdStrategy extends Player implements Strategy{
 	}
 	
 	public ArrayList<ArrayList<Tile>> playTurn2() {
+
 		this.setHasPlayed(false);
 		
 		ArrayList<ArrayList<Tile>> temp = new ArrayList<ArrayList<Tile>>();
