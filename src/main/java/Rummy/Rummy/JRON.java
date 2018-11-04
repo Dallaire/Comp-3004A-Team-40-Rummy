@@ -37,7 +37,7 @@ public class JRON {
 	}
 
 	public boolean getThreeLess() {
-		return threeLess;
+		return this.threeLess;
 	}
 
 	public void setThreeLess(boolean threeLess) {

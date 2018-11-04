@@ -24,7 +24,7 @@ public class ThirdStratTests extends TestCase {
 		player.addTile(new Tile(Color.O, 9));
 		player.addTile(new Tile(Color.R, 8));
 		player.update(new JRON(new ArrayList<ArrayList<Tile>>(),true,false));
-		player.playTurn2(Table.getMelds());
+		player.playTurn2();
 		
 		assertTrue(!Table.getMelds().isEmpty());
 	}
@@ -46,12 +46,12 @@ public class ThirdStratTests extends TestCase {
 		player.addTile(new Tile(Color.O, 9));
 		player.addTile(new Tile(Color.R, 8));
 		player.update(new JRON(new ArrayList<ArrayList<Tile>>(),true,false));
-		player.playTurn2(Table.getMelds());
+		player.playTurn2();
 		
 		assertTrue(Table.getMelds().isEmpty());
 		
 		player.addTile(new Tile(Color.B, 12));
-		player.playTurn2(Table.getMelds());
+		player.playTurn2();
 		
 		assertTrue(!Table.getMelds().isEmpty());
 	}
@@ -74,9 +74,9 @@ public class ThirdStratTests extends TestCase {
 		player.addTile(new Tile(Color.R, 8));
 		player.update(new JRON(new ArrayList<ArrayList<Tile>>(),true,false));
 		player.setFirst30(true);
-		player.playTurn2(Table.getMelds());
+		player.playTurn2();
 
-		player.playTurn2(Table.getMelds());
+		player.playTurn2();
 		assertTrue(player.getHand().isEmpty());
 	}
 	
@@ -104,16 +104,16 @@ public class ThirdStratTests extends TestCase {
 		meld.add(new Tile(Color.G, 1));
 		meld.add(new Tile(Color.G, 2));
 		meld.add(new Tile(Color.G, 3));
-		player.playTurn2(Table.getMelds());
+		player.playTurn2();
 		Table.addMeld(meld);
-		player.playTurn2(Table.getMelds());
+		player.playTurn2();
 		assertTrue(player.getHand().isEmpty());
 	}
 	
 	/**
 	 * Test that the JRON return false for threeLess if all players pass*/
 	public void testThreeLess_1() {
-		Table.init();
+		Table.initPass("pass");
 		Table.playNext();
 		Table.playNext();
 		Table.playNext();

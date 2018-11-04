@@ -160,7 +160,7 @@ public final class Table {
 	 * @ThirdStrategy - */
 	static public void loadPlayers() {
 		
-		PlayerStrategy p1 = new PlayerStrategy("dude");
+		PlayerStrategy p1 = new PlayerStrategy("Human");
 		FirstStrategy ai1 = new FirstStrategy("AI 1");
 		SecondStrategy ai2 = new SecondStrategy("AI 2");	
 		ThirdStrategy ai3 = new ThirdStrategy("AI 3");
@@ -365,21 +365,34 @@ public final class Table {
 				numMeldsLastPlayed = meldz.size();
 			}
 		} else if (player instanceof SecondStrategy){
-			((SecondStrategy) player).playTurn(Table.getMelds());
-			if (!player.getHasPlayed()) {
+			meldz = ((SecondStrategy) player).playTurn2();
+			if (meldz == null) {
 				System.out.println(player.getClass().getSimpleName() + " " +  player.getName() +" drew from stock");
+				numMeldsLastPlayed = 0;
 			}
 			else {
-				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld");
+				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played meld(s)" + meldzToString(meldz));
+				addMeldz(meldz);
+				if (!getFirst()) {
+					setFirst30(true);
+				}
+				numMeldsLastPlayed = meldz.size();
 			}
 		}
 		else if (player instanceof ThirdStrategy){
-			((ThirdStrategy) player).playTurn2(Table.getMelds());
-			if (!player.getHasPlayed()) {
+			meldz = ((ThirdStrategy) player).playTurn2();
+			if (meldz == null) {
 				System.out.println(player.getClass().getSimpleName() + " " +  player.getName() +" drew from stock");
+				numMeldsLastPlayed = 0;
 			}
 			else {
 				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld");
+				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played meld(s)" + meldzToString(meldz));
+				addMeldz(meldz);
+				if (!getFirst()) {
+					setFirst30(true);
+				}
+				numMeldsLastPlayed = meldz.size();
 			}
 		}
 		
@@ -477,23 +490,6 @@ public final class Table {
 		String str = "";
 		int i = 0;
 		
-//		ArrayList<Tile> meld1 = new ArrayList<Tile>();
-//		
-//		meld1.add(new Tile(Color.R, 4));
-//		meld1.add(new Tile(Color.B, 4));
-//		meld1.add(new Tile(Color.G, 4));
-//		meld1.add(new Tile(Color.O, 4));
-//		
-//		melds.add(meld1);
-//		
-//		ArrayList<Tile> meld2 = new ArrayList<Tile>();
-//		
-//		meld2.add(new Tile(Color.R, 4));
-//		meld2.add(new Tile(Color.B, 4));
-//		meld2.add(new Tile(Color.G, 4));
-//		meld2.add(new Tile(Color.O, 4));
-//		
-//		melds.add(meld2);
 		for (ArrayList<Tile> m: melds){
 			if (melds.size() - numMeldsLastPlayed <= i ) {
 				str += m.toString().replace("[", "*{").replaceAll("]", "} ");;

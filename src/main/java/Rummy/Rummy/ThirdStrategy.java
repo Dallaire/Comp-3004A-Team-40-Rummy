@@ -24,10 +24,13 @@ public class ThirdStrategy extends Player implements Strategy{
 		return null;	
 	}
 	
-	public void playTurn2(ArrayList<ArrayList<Tile>> tableMelds) {
+	public ArrayList<ArrayList<Tile>> playTurn2() {
 		this.setHasPlayed(false);
+		
+		ArrayList<ArrayList<Tile>> temp = new ArrayList<ArrayList<Tile>>();
+		
 		if (playedFirst30) { //already played once
-			ArrayList<ArrayList<Tile>> temp = new ArrayList<ArrayList<Tile>>();
+
 			ArrayList<Tile> meld = this.createRun(null);
 			if (meld == null) {
 				meld = this.createSet(null);
@@ -40,9 +43,10 @@ public class ThirdStrategy extends Player implements Strategy{
 					meld = this.createSet(null);
 				}
 			}
+			
 			ArrayList<Tile> played = new ArrayList<Tile>();
 			for (Tile tile : this.getHand()) { //play all tiles needing stuff on the board
-				for (ArrayList<Tile> tableMeld: Table.getMelds()) {
+				for (ArrayList<Tile> tableMeld: tableData.getMelds()) {
 					tableMeld.add(tile);
 					if (!MeldChecker.checkHand(tableMeld)) {//invalid play
 						tableMeld.remove(tile); //don't actually play it
@@ -89,7 +93,8 @@ public class ThirdStrategy extends Player implements Strategy{
 				}
 				meld = this.createSet(null);
 				if(meld != null && MeldChecker.check30(meld)) {
-					Table.addMeld(meld); // plays set as first 30
+					//Table.addMeld(meld); // plays set as first 30
+					temp.add(meld);
 					this.setHasPlayed(true);
 					
 				}
@@ -100,12 +105,16 @@ public class ThirdStrategy extends Player implements Strategy{
 					}
 					// Default draw from stock
 					this.addTile(Table.getTile());
+					return null;
 				}
 			}
 			else {
 				Table.addMeld(meld); //plays run as first 30
+				temp.add(meld);
 				this.setHasPlayed(true);
 			}
 		}
+		
+		return temp;
 	}
 }
