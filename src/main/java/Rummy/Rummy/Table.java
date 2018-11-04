@@ -319,7 +319,7 @@ public final class Table {
 				numMeldsLastPlayed = 0;
 			}
 			else if (meldz.size() > 0){
-				System.out.println("Table: " + player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld(s): " + meldsToString);
+				System.out.println("Table: " + player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld(s): " + meldzToString(meldz));
 				if (!getFirst()) {
 					setFirst30(true);
 				}
@@ -483,6 +483,24 @@ public final class Table {
 			i++;
 		}
 		
-		System.out.print("{ " + str + "}");
+		System.out.println("------------------------------------" );
+		System.out.println("The melds on the Table are:" );
+		System.out.println("{ " + str + "}");
+		System.out.println("------------------------------------\n\n" );
+	}
+	
+	/**
+	 * String format the melds to comfort to Requirement 7
+	 * @return String formated variable*/
+	public static String meldzToString(ArrayList<ArrayList<Tile>> meldz) {
+		String str = "";
+
+		for (ArrayList<Tile> m: meldz){
+
+				str += m.toString().replace("[", "{").replaceAll("]", "} ");;
+
+		}
+		
+		return "{ " + str + " }";
 	}
 }
