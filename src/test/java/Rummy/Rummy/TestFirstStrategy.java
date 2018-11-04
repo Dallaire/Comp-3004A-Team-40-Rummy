@@ -13,8 +13,12 @@ public class TestFirstStrategy extends TestCase {
 		Table.init();
 		FirstStrategy ai1= new FirstStrategy("AI1");
 		ai1.customFillHand();
-		ArrayList<Tile> meld = ai1.playTurn();
-		assertEquals(true, MeldChecker.checkSet(meld) || MeldChecker.checkRun(meld));
+		ArrayList<ArrayList<Tile>> meld = ai1.playTurn();
+		
+		for (ArrayList<Tile> m: meld) {
+			assertEquals(true, MeldChecker.checkSet(m) || MeldChecker.checkRun(m));
+		}
+		
 		
 	}
 

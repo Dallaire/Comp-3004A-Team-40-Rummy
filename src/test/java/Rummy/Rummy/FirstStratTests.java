@@ -177,4 +177,11 @@ public class FirstStratTests extends TestCase {
 		
 		
 	}
+	
+	public void testP1_pass() {
+		
+		Table.init();
+		Table.playNext();
+		Table.playNext();
+	}
 }
