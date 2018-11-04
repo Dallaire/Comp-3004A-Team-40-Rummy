@@ -27,7 +27,7 @@ public final class Table {
 	static private int numMeldsLastPlayed = 0;
 
 	/**
-	 * Print initial tiles for each player*/
+	 *Start the came with Random Cards*/
 	static public void init() {
 		loadPlayers();
 		loadDeck();
@@ -39,12 +39,29 @@ public final class Table {
 	}
 	
 	/**
+	 * Start the Game and let the user pass
+	 * @param f - The name of the input file*/
+	static public void initPass(String f) {
+		loadPlayers();
+		loadDeck();
+		shareCards();
+		for (Player x: players) {
+			x.printTiles();
+		}
+		
+		((PlayerStrategy) players.get(0)).setMode("file");
+		((PlayerStrategy) players.get(0)).setFile(f);
+		
+	}
+	
+	/**
 	 * Init for requirement number 8 on the grid
 	 * a - The player can play a single run
 	 * b - The player can play a single set
 	 * c - The player can play multiple runs
 	 * d - The player can play multiple sets
-	 * e - The player can play a run and a set*/
+	 * e - The player can play a run and a set
+	 * @param f - The name of the input file*/
 	static public void init8(String f) {
 		//players.clear();	
 		loadPlayers();
@@ -74,6 +91,7 @@ public final class Table {
 	
 	/**
 	 * Init for requirement number 4 on the grid
+	 * @param f - The name of the input file
 	 * */
 	static public void init4a(String f) {
 		//players.clear();	
@@ -104,6 +122,7 @@ public final class Table {
 	
 	/**
 	 * Init for requirement number 4 on the grid
+	 * @param f - The name of the input file
 	 * */
 	static public void init4b(String f) {
 		//players.clear();	

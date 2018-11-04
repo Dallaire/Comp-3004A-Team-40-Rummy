@@ -14,29 +14,7 @@ public class FirstStrategy extends Player implements Strategy {
 	public ArrayList<ArrayList<Tile>> playTurn() {
 		ArrayList<ArrayList<Tile>> temp = new ArrayList<ArrayList<Tile>>();
 		
-		// create all the sets possible
-		while (true) {
-			ArrayList<Tile> meld = createSet();
-			
-			// If there are no sets or run to create just give up
-			if (meld == null) {
-				break;
-			} else {
-				temp.add(meld);
-			}
-		}
-		
-		// create all the runs possible
-		while (true) {
-			ArrayList<Tile> meld = createRun();
-			
-			// If there are no sets or run to create just give up
-			if (meld == null) {
-				break;
-			} else {
-				temp.add(meld);
-			}
-		}
+		temp = createMelds();
 		
 		int points = 0;
 		// if no sets or runs where made grab one from the table and return null
@@ -58,6 +36,40 @@ public class FirstStrategy extends Player implements Strategy {
 				addMelds(temp);
 				this.addTile(Table.getTile());
 				temp =  null;
+			}
+		}
+		
+		return temp;
+	}
+	
+	/**
+	 * Function creates melds
+	 * @return Collection of melds*/
+	protected ArrayList<ArrayList<Tile>> createMelds() {
+		
+		ArrayList<ArrayList<Tile>> temp = new ArrayList<ArrayList<Tile>>();
+		
+		// create all the sets possible
+		while (true) {
+			ArrayList<Tile> meld = createSet(null);
+			
+			// If there are no sets or run to create just give up
+			if (meld == null) {
+				break;
+			} else {
+				temp.add(meld);
+			}
+		}
+		
+		// create all the runs possible
+		while (true) {
+			ArrayList<Tile> meld = createRun(null);
+			
+			// If there are no sets or run to create just give up
+			if (meld == null) {
+				break;
+			} else {
+				temp.add(meld);
 			}
 		}
 		
@@ -137,4 +149,6 @@ public class FirstStrategy extends Player implements Strategy {
 //		}
 //
 //	}
+	
+	
 }
