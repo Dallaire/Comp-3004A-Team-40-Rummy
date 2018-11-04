@@ -111,6 +111,7 @@ public class PlayerStrategy extends Player implements Strategy {
 					continue;
 				}
 			// End of choice == 1
+				
 			} 
 			//pick a tile from the stock and pass on turn
 			else if (choice == 2) 
@@ -123,6 +124,7 @@ public class PlayerStrategy extends Player implements Strategy {
 			else {
 				flag = false;
 			} 
+			this.printTiles();
 		// end while loop	
 		}
 		
