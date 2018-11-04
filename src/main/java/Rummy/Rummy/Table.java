@@ -27,7 +27,7 @@ public final class Table {
 	static private int numMeldsLastPlayed = 0;
 
 	/**
-	 * Print initial tiles for each player*/
+	 *Start the came with Random Cards*/
 	static public void init() {
 		loadPlayers();
 		loadDeck();
@@ -39,12 +39,29 @@ public final class Table {
 	}
 	
 	/**
+	 * Start the Game and let the user pass
+	 * @param f - The name of the input file*/
+	static public void initPass(String f) {
+		loadPlayers();
+		loadDeck();
+		shareCards();
+		for (Player x: players) {
+			x.printTiles();
+		}
+		
+		((PlayerStrategy) players.get(0)).setMode("file");
+		((PlayerStrategy) players.get(0)).setFile(f);
+		
+	}
+	
+	/**
 	 * Init for requirement number 8 on the grid
 	 * a - The player can play a single run
 	 * b - The player can play a single set
 	 * c - The player can play multiple runs
 	 * d - The player can play multiple sets
-	 * e - The player can play a run and a set*/
+	 * e - The player can play a run and a set
+	 * @param f - The name of the input file*/
 	static public void init8(String f) {
 		//players.clear();	
 		loadPlayers();
@@ -74,6 +91,7 @@ public final class Table {
 	
 	/**
 	 * Init for requirement number 4 on the grid
+	 * @param f - The name of the input file
 	 * */
 	static public void init4a(String f) {
 		//players.clear();	
@@ -104,6 +122,7 @@ public final class Table {
 	
 	/**
 	 * Init for requirement number 4 on the grid
+	 * @param f - The name of the input file
 	 * */
 	static public void init4b(String f) {
 		//players.clear();	
@@ -141,7 +160,7 @@ public final class Table {
 	 * @ThirdStrategy - */
 	static public void loadPlayers() {
 		
-		PlayerStrategy p1 = new PlayerStrategy("dude");
+		PlayerStrategy p1 = new PlayerStrategy("Human");
 		FirstStrategy ai1 = new FirstStrategy("AI 1");
 		SecondStrategy ai2 = new SecondStrategy("AI 2");	
 		ThirdStrategy ai3 = new ThirdStrategy("AI 3");
@@ -346,21 +365,34 @@ public final class Table {
 				numMeldsLastPlayed = meldz.size();
 			}
 		} else if (player instanceof SecondStrategy){
-			((SecondStrategy) player).playTurn(Table.getMelds());
-			if (!player.getHasPlayed()) {
+			meldz = ((SecondStrategy) player).playTurn2();
+			if (meldz == null) {
 				System.out.println(player.getClass().getSimpleName() + " " +  player.getName() +" drew from stock");
+				numMeldsLastPlayed = 0;
 			}
 			else {
-				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld");
+				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played meld(s)" + meldzToString(meldz));
+				addMeldz(meldz);
+				if (!getFirst()) {
+					setFirst30(true);
+				}
+				numMeldsLastPlayed = meldz.size();
 			}
 		}
 		else if (player instanceof ThirdStrategy){
-			((ThirdStrategy) player).playTurn2(Table.getMelds());
-			if (!player.getHasPlayed()) {
+			meldz = ((ThirdStrategy) player).playTurn2();
+			if (meldz == null) {
 				System.out.println(player.getClass().getSimpleName() + " " +  player.getName() +" drew from stock");
+				numMeldsLastPlayed = 0;
 			}
 			else {
 				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld");
+				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played meld(s)" + meldzToString(meldz));
+				addMeldz(meldz);
+				if (!getFirst()) {
+					setFirst30(true);
+				}
+				numMeldsLastPlayed = meldz.size();
 			}
 		}
 		
@@ -458,23 +490,6 @@ public final class Table {
 		String str = "";
 		int i = 0;
 		
-//		ArrayList<Tile> meld1 = new ArrayList<Tile>();
-//		
-//		meld1.add(new Tile(Color.R, 4));
-//		meld1.add(new Tile(Color.B, 4));
-//		meld1.add(new Tile(Color.G, 4));
-//		meld1.add(new Tile(Color.O, 4));
-//		
-//		melds.add(meld1);
-//		
-//		ArrayList<Tile> meld2 = new ArrayList<Tile>();
-//		
-//		meld2.add(new Tile(Color.R, 4));
-//		meld2.add(new Tile(Color.B, 4));
-//		meld2.add(new Tile(Color.G, 4));
-//		meld2.add(new Tile(Color.O, 4));
-//		
-//		melds.add(meld2);
 		for (ArrayList<Tile> m: melds){
 			if (melds.size() - numMeldsLastPlayed <= i ) {
 				str += m.toString().replace("[", "*{").replaceAll("]", "} ");;

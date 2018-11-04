@@ -118,7 +118,7 @@ public class GamePlayTest extends TestCase{
 	
 	
 	public void testAllDrawFromStock() {
-		Table.init();
+		Table.initPass("pass");
 		Table.playNext();
 		Table.playNext();
 		Table.playNext();
@@ -128,7 +128,7 @@ public class GamePlayTest extends TestCase{
 	}
 	
 	/**
-	 * To that the player can pass on a turn*/
+	 * Test that the player can pass on a turn*/
 	public void testPlayerPass() {
 		Table.init();
 		Table.playNext();

@@ -22,7 +22,7 @@ public class FirstStratTests extends TestCase {
 		player.addTile(new Tile(Color.O, 8));
 		player.addTile(new Tile(Color.R, 8));
 		player.setFirst30(false);
-		player.playTurn(Table.getMelds());
+		player.playTurn();
 			
 		assertEquals(13,player.getHand().size());
 		
@@ -46,7 +46,7 @@ public class FirstStratTests extends TestCase {
 		player.addTile(new Tile(Color.O, 8));
 		player.addTile(new Tile(Color.R, 8));
 		player.setFirst30(false);
-		player.playTurn(Table.getMelds());
+		player.playTurn();
 			
 		//should only have 8 cards in hand after playing first 30
 		assertEquals(8,player.getHand().size());
@@ -70,7 +70,7 @@ public class FirstStratTests extends TestCase {
 		player.addTile(new Tile(Color.O, 8));
 		player.addTile(new Tile(Color.R, 8));
 		player.setFirst30(false);
-		player.playTurn(Table.getMelds());
+		player.playTurn();
 		System.out.println(player.getHand().size());
 		System.out.println("Printing Player Hand: " + player.getHand());
 		//should only have 8 cards in hand after playing first 30
@@ -97,7 +97,7 @@ public class FirstStratTests extends TestCase {
 		player.addTile(new Tile(Color.R, 8));
 		player.setFirst30(true);
 		
-		player.playTurn(Table.getMelds());
+		player.playTurn();
 		System.out.println("Test Hand: " + player.getHand());
 		//should only have 8 cards in hand after playing a run
 		assertEquals(8,player.getHand().size());
@@ -121,7 +121,7 @@ public class FirstStratTests extends TestCase {
 		player.addTile(new Tile(Color.B, 9));
 		player.addTile(new Tile(Color.R, 8));
 		player.setFirst30(true);
-		player.playTurn(Table.getMelds());
+		player.playTurn();
 		System.out.println(player.getHand().size());
 		System.out.println("Printing Player Hand: " + player.getHand());
 		//should only have 8 cards in hand after playing first 30
@@ -147,7 +147,7 @@ public class FirstStratTests extends TestCase {
 		player.addTile(new Tile(Color.B, 9));
 		player.addTile(new Tile(Color.R, 8));
 		player.setFirst30(true);
-		player.playTurn(Table.getMelds());
+		player.playTurn();
 		System.out.println("Printing Player Hand: " + player.getHand());
 		//should only have 8 cards in hand after playing first 30
 		assertEquals(4,player.getHand().size());
@@ -170,9 +170,9 @@ public class FirstStratTests extends TestCase {
 		player.addTile(new Tile(Color.B, 10));
 		player.addTile(new Tile(Color.B, 8));
 		
-		player.playTurn(Table.getMelds());
+		player.playTurn();
 		assertTrue(player.getFirst30());
-		player.playTurn(Table.getMelds());
+		player.playTurn();
 		assertEquals(0,player.getHand().size());
 		
 		
@@ -180,7 +180,7 @@ public class FirstStratTests extends TestCase {
 	
 	public void testP1_pass() {
 		
-		Table.init();
+		Table.initPass("pass");
 		Table.playNext();
 		Table.playNext();
 	}
