@@ -329,7 +329,7 @@ public final class Table {
 			}	
 			
 		} else if (player instanceof FirstStrategy){
-			((FirstStrategy) player).playTurn2(Table.getMelds());
+			((FirstStrategy) player).playTurn(Table.getMelds());
 			//meldsToString = meldz.toString();
 			//meldsToString = "{ " +  meldsToString.substring(1, meldsToString.length()) + " }";
 			if (!player.getHasPlayed()) {
