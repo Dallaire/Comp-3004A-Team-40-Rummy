@@ -10,8 +10,9 @@ public class Player {
 	private ArrayList<Tile> hand = new ArrayList<Tile>();
 	private String name;
 	protected ArrayList<Tile> meld = new ArrayList<Tile>();
-	private JRON tableData = null;
-	protected Boolean playedFirst30 = false;
+	protected JRON tableData = null;
+	protected boolean playedFirst30 = false;
+	protected boolean hasPlayed = false;
 	
 	//Constructor
 	public Player(String aName) {
@@ -29,13 +30,35 @@ public class Player {
 		return this.name;
 	}
 	
-	public Boolean getFirst30() {
+	public boolean getFirst30() {
 		return playedFirst30;
 	}
 	
+	public boolean getHasPlayed() {
+		return hasPlayed;
+	}
+	
+	/**
+	 * @return - The table Data as a JRON*/
+	public JRON getJRON() {
+		return tableData;
+	}
+	
+	public boolean winner() {
+		if(this.hand.size() == 0) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
 	//Setters
-	public void setFirst30(Boolean first30) {
+	public void setFirst30(boolean first30) {
 		this.playedFirst30 = first30;
+	}
+	
+	public void setHasPlayed(boolean played) {
+		this.hasPlayed = played;
 	}
 	
 	public void getCards(Deck stock) {
@@ -107,27 +130,88 @@ public class Player {
 		hand.add(new Tile(Color.R,11 ));
 		//hand.add(new Tile(Color.R,1 ));		
 	}
+	
+	/**
+	 * Function creates melds
+	 * @return Collection of melds*/
+	protected ArrayList<ArrayList<Tile>> createMelds() {
+		
+		ArrayList<ArrayList<Tile>> temp = new ArrayList<ArrayList<Tile>>();
+		
+		// create all the sets possible
+		while (true) {
+			ArrayList<Tile> meld = createSet(null);
+			
+			// If there are no sets or run to create just give up
+			if (meld == null) {
+				break;
+			} else {
+				temp.add(meld);
+			}
+		}
+		
+		// create all the runs possible
+		while (true) {
+			ArrayList<Tile> meld = createRun(null);
+			
+			// If there are no sets or run to create just give up
+			if (meld == null) {
+				break;
+			} else {
+				temp.add(meld);
+			}
+		}
+		
+		if (temp.size()==0)
+			return null;
+		
+		return temp;
+	}
 
 	/**
+	 * Create a Run
 	 * checks for the run with the maximum sum ie O9,O10,O11,O12
-	 * TODO: Does checkrun remove the tiles from the hand
+	 * @param - Additional tile from the Table that could be used to make a meld
+	 * @return A collection of Melds
 	 **/
-	public ArrayList<Tile> createRun() {
+	public ArrayList<Tile> createRun(ArrayList<Tile> additionalTiles) {
 		ArrayList<Tile> temp = new ArrayList<Tile>();
-		Collections.sort(getHand(),new valueComparator());
+		
+		// Create a temporary hand
+		ArrayList<Tile> tempHand = new ArrayList<Tile>();
+		
+		// check if any additional Tiles where added
+		if(additionalTiles == null){
+			tempHand = this.getHand();
+		} else {
+			tempHand = this.getHand();
+			tempHand.addAll(additionalTiles);
+		}
+		
+		Collections.sort(tempHand,new valueComparator());
 
-		for (int i=hand.size()-1; i>0;i--) {
-			temp.add(hand.get(i));
-			for(int j=i-1;j>=0;j--) {
-				if(MeldChecker.checkColor(temp.get(temp.size()-1), hand.get(j))
-				&&MeldChecker.checkDifference(temp.get(temp.size()-1), hand.get(j))) {
-					if (!temp.contains(hand.get(j))) {
-						temp.add(hand.get(j));
+		for (int i=0; i<hand.size()-1;i++) {
+			temp.add(tempHand.get(i));
+			for(int j=i+1;j<hand.size();j++) {
+				if(MeldChecker.checkColor(temp.get(temp.size()-1), tempHand.get(j))
+				&&MeldChecker.checkDifference(temp.get(temp.size()-1), tempHand.get(j))) {
+					if (!temp.contains(tempHand.get(j))) {
+						temp.add(tempHand.get(j));
 					}
+				}
+				else if(temp.get(temp.size()-1).equals(tempHand.get(j))) {
+					continue;
 				}
 			}
 			if(temp.size()>=3) {
-				hand.removeAll(temp);
+				if (hand.containsAll(tempHand)) {
+					hand.removeAll(temp);
+				} else {
+					ArrayList<Tile> temp2= new ArrayList<Tile>();
+					temp2.addAll(temp);
+					temp2.removeAll(additionalTiles);
+					hand.removeAll(temp2);
+				}
 				return temp;
 			}
 			temp.clear();	
@@ -138,30 +222,68 @@ public class Player {
 	}
 	
 	/**
-	 * checks if a player has a set ie O11,B11,R11,G11*/
-	public ArrayList<Tile> createSet() {
+	 * Creates a set from from the players hand and additional tiles
+	 * @param - Additional tile from the Table that could be used to make a meld
+	 * checks if a player has a set ie O11,B11,R11,G11
+	 * @return A collection of Melds*/
+	public ArrayList<Tile> createSet(ArrayList<Tile> additionalTiles) {
 		
+		// Create a temporary hand
+		ArrayList<Tile> tempHand = new ArrayList<Tile>();
+		
+		// check if any additional Tiles where added
+		if(additionalTiles == null){
+			tempHand = this.getHand();
+		} else {
+			tempHand = this.getHand();
+			tempHand.addAll(additionalTiles);
+		}
+		
+		// create a temporary array of melds
 		ArrayList<Tile> temp= new ArrayList<Tile>();
-		Collections.sort(getHand(),new valueComparator());
-		for(int i=hand.size()-1; i>0;i--) {
+		
+		Collections.sort(tempHand,new valueComparator());
+		for(int i=tempHand.size()-1; i>0;i--) {
 
-			temp.add(hand.get(i));
+			temp.add(tempHand.get(i));
+			
 			for(int j=i-1;j>=0;j--) {
-			if(temp.get(temp.size()-1).getValue()==hand.get(j).getValue()) {
-					temp.add(hand.get(j));
-				}
+				if(temp.get(temp.size()-1).getValue()==tempHand.get(j).getValue()) {
+						temp.add(tempHand.get(j));
+					}
 			}
+			
 			if(temp.size()>=3) {
-				hand.removeAll(temp);
+				if (hand.containsAll(tempHand)) {
+					hand.removeAll(temp);
+				} else {
+					ArrayList<Tile> temp2= new ArrayList<Tile>();
+					temp2.addAll(temp);
+					temp2.removeAll(additionalTiles);
+					hand.removeAll(temp2);
+				}
 				return temp;
 			}
 			temp.clear();
 		}
+		
 		System.out.println("");
-		return temp;
+		return null;
 	}
 	
-	
+	/**
+	 * Add melds to the hand
+	 * @param - melds: the collection of melds to add to the hand
+	 * @return - void */
+	protected void addMelds(ArrayList<ArrayList<Tile>> melds) {
+		// TODO Auto-generated method stub
+		for(ArrayList<Tile> meld: melds) {
+			for (Tile tile: meld) {
+				this.addTile(tile);
+			}
+		}
+		
+	}
 	
 	public void update(JRON data) {
 		this.tableData = data;
@@ -170,7 +292,11 @@ public class Player {
 	/**
 	 * Print the tiles in the current players hand*/
 	public void printTiles() {
-		System.out.println(this.name + "'s cards: " + this.hand.toString());
+		Collections.sort(hand,new valueComparator());
+		Collections.sort(hand,new colourCompataror());
+		String meldsToString = hand.toString();
+		meldsToString = "{ " +  meldsToString.substring(1, meldsToString.length() -1) + " }";
+		System.out.println(this.name + "'s cards: " + meldsToString);
 	}
 	
 		

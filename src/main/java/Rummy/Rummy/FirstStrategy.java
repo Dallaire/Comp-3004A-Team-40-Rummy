@@ -2,55 +2,56 @@ package Rummy.Rummy;
 
 import java.util.ArrayList;
 
-public class FirstStrategy extends Player implements Strategy{
+public class FirstStrategy extends Player implements Strategy {
 
 	public FirstStrategy(String name) {
 		super(name);
 	}
 
-	@Override
-	public ArrayList<Tile> playTurn() {
-		ArrayList<ArrayList<Tile>> meldToPlay = new ArrayList<ArrayList<Tile>>();
+	public ArrayList<ArrayList<Tile>> playTurn() { // don't want to return anything, can just interact
 		
-		// see if we can create a set
+		// create as many melds as possible
+		ArrayList<ArrayList<Tile>> temp = createMelds();
 		
-		// see if we can create a run
-		
-		// check if first 30 pts have been played
-		if (playedFirst30) {
-			meldToPlay.add(createRun());
-			meldToPlay.add(createSet());
-			
-		}else {
-			
+		// Draw from Tile if no melds could be created
+		if (temp == null) {
+			this.addTile(Table.getTile());
+			return temp;
 		}
-		/*
-		if(MeldChecker.checkRun(this.getHand()) && MeldChecker.checkSet(this.getHand())) {
-			
-			//meldToPlay = checkRun(this.getHand());
-			//table.addMeld(checkRun(this.getHand()));
-			//removes the tiles from the players hand
-			this.getHand().remove(checkRun(this.getHand()));
-			
-			
-		}else if (this.check30(checkSet(this.getHand()))) {
-			
-			//table.addMeld(checkSet(this.getHand()));
-			meldToPlay = checkSet(this.getHand());
-			this.getHand().remove(checkSet(this.getHand()));
-			
-			
-		}else {
-			//otherwise player draws a new card from stock
-			//this.addTile(table.getTile());
-			meldToPlay = null;
-			
-		}*/
-		this.addTile(Table.getTile());
-		//meldToPlay = null;
-		return meldToPlay;
+				
 		
+		// Check how many points we have
+		int points = 0;
+		for (ArrayList<Tile> tiles: temp) {
+			points += MeldChecker.countPoints(tiles);
+		}
+		
+		System.out.println("You have " + points +  " points");
+		
+		
+		this.setHasPlayed(false);
+		if (this.playedFirst30) { // First 30 already played
+			// create a temporary array
+			return temp;
+
+		} else {
+
+
+			// if the run can't be created or is less than 30 points
+			if (points < 30) {
+
+				// return cards to the players hand
+				this.addMelds(temp);
+				this.addTile(Table.getTile());
+				return null;
+				
+			// the melds are enough and played
+			} else {
+				this.setFirst30(true);
+				this.setHasPlayed(true);
+				return temp; // plays run as first 30
+			}
+		}
 	}
-	
-	
+
 }

@@ -2,8 +2,6 @@ package Rummy.Rummy;
 
 import java.util.ArrayList;
 
-import javax.swing.border.TitledBorder;
-
 import org.junit.Test;
 
 import junit.framework.TestCase;
@@ -13,8 +11,8 @@ public class TestMeldChecker extends TestCase {
 	public void testCheckDifference() {
 		Tile t1= new Tile(Color.O, 10);
 		Tile t2= new Tile(Color.O, 9);
-		assertTrue(MeldChecker.checkDifference(t1,t2));
-		assertFalse(MeldChecker.checkDifference(t1, t1));
+		assertEquals(true,MeldChecker.checkDifference(t2,t1));
+		assertEquals(false,MeldChecker.checkDifference(t1, t1));
 	}
 	public void testCheckColor() {
 		Tile t1= new Tile(Color.O, 10);
@@ -38,21 +36,21 @@ public class TestMeldChecker extends TestCase {
 	}
 	public void testCheckSet() {
 		ArrayList<Tile> meld=new ArrayList<Tile>();
-		meld.add(new Tile(Color.O, 11));
-		meld.add(new Tile(Color.O, 11));
+		meld.add(new Tile(Color.B, 11));
+		meld.add(new Tile(Color.G, 11));
 		meld.add(new Tile(Color.O, 11));
 		assertTrue(MeldChecker.checkSet(meld));
-		meld.add(new Tile(Color.O, 9));
+		meld.add(new Tile(Color.O, 11));
 		assertFalse(MeldChecker.checkSet(meld));
 	}
 	public void testCheckRun() {
-		ArrayList<Tile> meld=new ArrayList<Tile>();
-		meld.add(new Tile(Color.O, 11));
-		meld.add(new Tile(Color.O, 10));
+		ArrayList<Tile> meld = new ArrayList<Tile>();
 		meld.add(new Tile(Color.O, 9));
-		assertTrue(MeldChecker.checkRun(meld));
+		meld.add(new Tile(Color.O, 10));
+		meld.add(new Tile(Color.O, 11));
+		assertEquals(true,MeldChecker.checkRun(meld));
 		meld.add(new Tile(Color.B, 3));
-		assertFalse(MeldChecker.checkRun(meld));
+		assertEquals(false,MeldChecker.checkRun(meld));
 	}
 	public void testCheckSum() {
 		ArrayList<Tile> meld=new ArrayList<Tile>();

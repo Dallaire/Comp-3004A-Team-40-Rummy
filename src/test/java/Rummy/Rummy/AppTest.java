@@ -61,7 +61,7 @@ public class AppTest extends TestCase
 		ai1.addTile(new Tile(Color.B, 9));
 		ai1.addTile(new Tile(Color.B, 10));
 		Collections.sort(ai1.getHand(),new valueComparator());
-    	ArrayList<Tile> temp=ai1.createRun();
+    	ArrayList<Tile> temp=ai1.createRun(null);
     	ArrayList<Tile> meld=new ArrayList<Tile>();
     	meld.add(new Tile(Color.B, 11));
     	meld.add(new Tile(Color.B, 10));
@@ -93,7 +93,7 @@ public class AppTest extends TestCase
 		ai1.addTile(new Tile(Color.B, 9));
 		ai1.addTile(new Tile(Color.B, 10));
 		Collections.sort(ai1.getHand(),new valueComparator());
-    	ArrayList<Tile> temp=ai1.createSet();
+    	ArrayList<Tile> temp=ai1.createSet(null);
     	ArrayList<Tile> meld=new ArrayList<Tile>();
     	meld.add(new Tile(Color.G, 13));
     	meld.add(new Tile(Color.R, 13));
