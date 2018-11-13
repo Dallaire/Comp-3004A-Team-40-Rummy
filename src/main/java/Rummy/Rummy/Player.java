@@ -298,6 +298,12 @@ public class Player {
 		meldsToString = "{ " +  meldsToString.substring(1, meldsToString.length() -1) + " }";
 		System.out.println(this.name + "'s cards: " + meldsToString);
 	}
+
+
+	public ArrayList<ArrayList<Tile>> playTurn() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 		
 }
