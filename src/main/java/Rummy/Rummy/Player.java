@@ -313,22 +313,22 @@ public class Player {
 	}
 	
 	
-    public static void main(String[] args) throws IOException {
+    public void playSocket() throws IOException {
         
-        if (args.length != 2) {
-            System.err.println(
-                "Usage: java EchoClient <host name> <port number>");
-            System.exit(1);
-        }
+//        if (args.length != 2) {
+//            System.err.println(
+//                "Usage: java EchoClient <host name> <port number>");
+//            System.exit(1);
+//        }
 
         String hostName = "localhost";
         int portNumber = 4444;
 
         try (
-            Socket kkSocket = new Socket(hostName, portNumber);
-            PrintWriter out = new PrintWriter(kkSocket.getOutputStream(), true);
+            Socket rummySocket = new Socket(hostName, portNumber);
+            PrintWriter out = new PrintWriter(rummySocket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(
-                new Reader(kkSocket.getInputStream()));
+                new InputStreamReader(rummySocket.getInputStream()));
         ) {
             BufferedReader stdIn =
                 new BufferedReader(new InputStreamReader(System.in));

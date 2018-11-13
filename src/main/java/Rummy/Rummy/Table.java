@@ -37,9 +37,6 @@ public final class Table {
 		for (Player x: players) {
 			x.printTiles();
 		}
-		
-		
-		
 	}
 	
 	/**
@@ -526,47 +523,54 @@ public final class Table {
 		return "{ " + str + " }";
 	}
 	
-	 public static void main(String[] args) throws IOException {
+	 public static void connectSocket() throws IOException {
+
+	        int portNumber = 4444;
 	        
-	        if (args.length != 2) {
-	            System.err.println(
-	                "Usage: java EchoClient <host name> <port number>");
-	            System.exit(1);
-	        }
-
-	        String hostName = args[0];
-	        int portNumber = Integer.parseInt(args[1]);
-
-	        try (
-	            Socket kkSocket = new Socket(hostName, portNumber);
-	            PrintWriter out = new PrintWriter(kkSocket.getOutputStream(), true);
+	        try ( 
+	        	//server side of a client/server socket connection
+	            ServerSocket serverSocket = new ServerSocket(portNumber);
+	        		
+	        	//The accept method waits until a client starts up and 
+	        	//requests a connection on the host and port of this server.
+	            Socket clientSocket = serverSocket.accept();
+	            PrintWriter out =
+	                new PrintWriter(clientSocket.getOutputStream(), true);
 	            BufferedReader in = new BufferedReader(
-	                new InputStreamReader(kkSocket.getInputStream()));
+	                new InputStreamReader(clientSocket.getInputStream()));
 	        ) {
-	            BufferedReader stdIn =
-	                new BufferedReader(new InputStreamReader(System.in));
-	            String fromServer;
-	            String fromUser;
-
-	            while ((fromServer = in.readLine()) != null) {
-	                System.out.println("Server: " + fromServer);
-	                if (fromServer.equals("Bye."))
+	         
+	            String inputLine, outputLine;
+	             
+	            // Initiate conversation with client
+	            RummyProtocol kkp = new RummyProtocol();
+	            outputLine = kkp.processInput(null);
+	            out.println(outputLine);
+	            System.out.println(outputLine);
+	 
+	            while ((inputLine = in.readLine()) != null) {
+	                outputLine = kkp.processInput(inputLine);
+	                out.println(outputLine);
+	                if (outputLine.equals("Bye."))
 	                    break;
-	                
-	                fromUser = stdIn.readLine();
-	                if (fromUser != null) {
-	                    System.out.println("Client: " + fromUser);
-	                    out.println(fromUser);
-	                }
 	            }
-	        } catch (UnknownHostException e) {
-	            System.err.println("Don't know about host " + hostName);
-	            System.exit(1);
 	        } catch (IOException e) {
-	            System.err.println("Couldn't get I/O for the connection to " +
-	                hostName);
-	            System.exit(1);
+	            System.out.println("Exception caught when trying to listen on port "
+	                + portNumber + " or listening for a connection");
+	            System.out.println(e.getMessage());
 	        }
 	    }
+	 
+	 public void closeSocket() {
+		 try {
+			ServerSocket serverSocket = new ServerSocket(4444);
+			serverSocket.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			
+			e.printStackTrace();
+		}
+	 }
+	 
 	
 }
