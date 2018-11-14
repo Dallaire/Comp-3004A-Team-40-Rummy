@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class ThirdStrategy extends Player implements Strategy{
 
-	public ThirdStrategy(String aName) {
-		super(aName);
+	public ThirdStrategy(String aName, boolean isLocal) {
+		super(aName, isLocal);
 	}
 
 	@SuppressWarnings("unused")

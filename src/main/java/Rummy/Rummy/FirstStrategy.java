@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class FirstStrategy extends Player implements Strategy {
 
-	public FirstStrategy(String name) {
-		super(name);
+	public FirstStrategy(String name, boolean isLocal) {
+		super(name, isLocal);
 	}
 
 	public ArrayList<ArrayList<Tile>> playTurn() { // don't want to return anything, can just interact
@@ -26,8 +26,7 @@ public class FirstStrategy extends Player implements Strategy {
 			points += MeldChecker.countPoints(tiles);
 		}
 		
-		System.out.println("You have " + points +  " points");
-		
+		System.out.println("You have " + points +  " points");		
 		
 		this.setHasPlayed(false);
 		if (this.playedFirst30) { // First 30 already played

@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class SecondStrategy extends Player implements Strategy{
 	
 	//Invoke super class constructor
-	public SecondStrategy(String name) {
-		super(name);
+	public SecondStrategy(String name, boolean isLocal) {
+		super(name, isLocal);
 		
 	}
 	

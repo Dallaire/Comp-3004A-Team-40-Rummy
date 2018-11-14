@@ -20,10 +20,12 @@ public class Player {
 	protected JRON tableData = null;
 	protected boolean playedFirst30 = false;
 	protected boolean hasPlayed = false;
+	private boolean isLocal;
 	
 	//Constructor
-	public Player(String aName) {
+	public Player(String aName, boolean isLocal) {
 		this.name = aName;
+		this.isLocal = isLocal;
 	}
 	
 	
@@ -337,10 +339,16 @@ public class Player {
 
             while ((fromServer = in.readLine()) != null) {
                 System.out.println("Server: " + fromServer);
-                if (fromServer.equals("Bye."))
-                    break;
                 
-                fromUser = stdIn.readLine();
+                if (fromServer.equals("playTurn()"))
+                	System.out.println("playTurn()");
+                    break;
+                else if (fromServer.equals("update()")) {
+                	System.out.println("update()");
+                	break;
+                }
+                
+                fromUser = "OK.";
                 if (fromUser != null) {
                     System.out.println("Client: " + fromUser);
                     out.println(fromUser);
@@ -355,5 +363,11 @@ public class Player {
             System.exit(1);
         }
     }
+
+
+	public boolean isLocal() {
+		// TODO Auto-generated method stub
+		return this.isLocal;
+	}
 		
 }

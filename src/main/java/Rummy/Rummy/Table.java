@@ -23,7 +23,7 @@ public final class Table {
 	static private ArrayList<ArrayList<Tile>> melds = new ArrayList<ArrayList<Tile>>();
 	static private boolean firstMeld = false;
 	static private boolean threeLess = false;
-	static private JRON jron = new JRON(null, false, false);
+	static private JRON jron = new JRON(null, false, false, null);
 	static private boolean winner = false;
 	static private int whosTurn = 0;
 	static private int numMeldsLastPlayed = 0;
@@ -161,10 +161,10 @@ public final class Table {
 	 * @ThirdStrategy - */
 	static public void loadPlayers() {
 		
-		PlayerStrategy p1 = new PlayerStrategy("Human");
-		FirstStrategy ai1 = new FirstStrategy("AI 1");
-		SecondStrategy ai2 = new SecondStrategy("AI 2");	
-		ThirdStrategy ai3 = new ThirdStrategy("AI 3");
+		PlayerStrategy p1 = new PlayerStrategy("Human", true);
+		FirstStrategy ai1 = new FirstStrategy("AI 1", true);
+		SecondStrategy ai2 = new SecondStrategy("AI 2", true);	
+		ThirdStrategy ai3 = new ThirdStrategy("AI 3", true);
 
 		players = new ArrayList<Player>();
 		players.add(p1);
@@ -439,12 +439,11 @@ public final class Table {
 	       return threeLess;
 	}
 	
-	
 	/**
 	 * Update all subscribers of the state of the game
 	 * Updates
 	 * */
-	static public void update() {
+	static public void updateJRON() {
 		
 		// update the jron data
 		jron.setFirstMeld(getFirst());
@@ -460,7 +459,33 @@ public final class Table {
 	            	threeLess = true;
 	            	jron.setThreeLess(threeLess);
 	            }
-	            x.update(jron);
+	        } 
+		
+	}
+	/**
+	 * Update all subscribers of the state of the game
+	 * Updates
+	 * */
+	static public void update() {
+		
+		// update the jron data
+		updateJRON();
+		jron.setContext("update");
+	       for (Player x:players) 
+	        { 
+	    	   	if(x.isLocal()) 
+	    	   	{
+	    	   		x.update(jron);
+	    	   	}
+	    	   	else 
+	    	   	{
+	    	   		try {
+						connectSocket(jron);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+	    	   	}
 	        } 
 		
 	}
@@ -523,7 +548,7 @@ public final class Table {
 		return "{ " + str + " }";
 	}
 	
-	 public static void connectSocket() throws IOException {
+	 static void connectSocket(JRON jron) throws IOException {
 
 	        int portNumber = 4444;
 	        
@@ -539,25 +564,29 @@ public final class Table {
 	            BufferedReader in = new BufferedReader(
 	                new InputStreamReader(clientSocket.getInputStream()));
 	        ) {
-	         
-	            String inputLine, outputLine;
-	             
-	            // Initiate conversation with client
-	            RummyProtocol kkp = new RummyProtocol();
-	            outputLine = kkp.processInput(null);
-	            out.println(outputLine);
-	            System.out.println(outputLine);
-	 
-	            while ((inputLine = in.readLine()) != null) {
-	                outputLine = kkp.processInput(inputLine);
-	                out.println(outputLine);
-	                if (outputLine.equals("Bye."))
-	                    break;
-	            }
+	        	System.out.println("Connected to scoket");
+	        	RummyProtocol kkp = new RummyProtocol();
+	        	out.println("playTurn()");
+//	            String inputLine, outputLine;
+//	             
+//	            // Initiate conversation with client
+//	            RummyProtocol kkp = new RummyProtocol();
+//	            outputLine = kkp.processInput(null);
+//	            out.println(outputLine);
+//	            System.out.println(outputLine);
+//	 
+//	            while ((inputLine = in.readLine()) != null) {
+//	                outputLine = kkp.processInput(inputLine);
+//	                out.println(outputLine);
+//	                if (outputLine.equals("Bye."))
+//	                    break;
+//	            }
+	        	
 	        } catch (IOException e) {
 	            System.out.println("Exception caught when trying to listen on port "
 	                + portNumber + " or listening for a connection");
 	            System.out.println(e.getMessage());
+	            
 	        }
 	    }
 	 

@@ -15,8 +15,8 @@ public class PlayerStrategy extends Player implements Strategy {
 	private String fileName = "";
 	private int x = 1;
 
-	public PlayerStrategy(String aName) {
-		super(aName);
+	public PlayerStrategy(String aName, boolean isLocal) {
+		super(aName, isLocal);
 	}
 
 
