@@ -27,11 +27,11 @@ public class GamePlayTest extends TestCase{
 	/**
 	 * Test on how to differentiate between ai and human player*/
 	public void testDiff() {
-		PlayerStrategy p1 = new PlayerStrategy("dude");
-		PlayerStrategy p2 = new PlayerStrategy("another dude");
-		FirstStrategy ai1 = new FirstStrategy("AI 1");
-		SecondStrategy ai2 = new SecondStrategy("AI 2");	
-		ThirdStrategy ai3 = new ThirdStrategy("AI 3");
+		PlayerStrategy p1 = new PlayerStrategy("dude", true);
+		PlayerStrategy p2 = new PlayerStrategy("another dude", true);
+		FirstStrategy ai1 = new FirstStrategy("AI 1", true);
+		SecondStrategy ai2 = new SecondStrategy("AI 2", true);	
+		ThirdStrategy ai3 = new ThirdStrategy("AI 3", true);
 		
 		assertEquals(p1 instanceof PlayerStrategy, p2 instanceof PlayerStrategy); 
 		assertEquals(p1 instanceof PlayerStrategy, ai1 instanceof Player); 
@@ -42,7 +42,7 @@ public class GamePlayTest extends TestCase{
 	
 	
 	public void testPlayerReadInput() {
-		PlayerStrategy p1 = new PlayerStrategy("dude");
+		PlayerStrategy p1 = new PlayerStrategy("dude", true);
 		int[] array = p1.selectTile();
 		int[] array2 =  {1,2,3};
 		assertArrayEquals(array2, array);
