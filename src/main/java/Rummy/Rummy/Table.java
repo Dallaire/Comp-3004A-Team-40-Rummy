@@ -1,6 +1,7 @@
 package Rummy.Rummy;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.net.*;
 import java.io.*;
 
@@ -27,6 +28,7 @@ public final class Table {
 	static private boolean winner = false;
 	static private int whosTurn = 0;
 	static private int numMeldsLastPlayed = 0;
+	static private Random rn = new Random();
 
 	/**
 	 *Start the came with Random Cards*/
@@ -155,25 +157,54 @@ public final class Table {
 	
 	
 	/**
-	 * Hard coded instantiation of players to populate the list of players
+	 * Instantiation of players to populate the list of players
 	 * @FirstStrategy - Plays 30 points as soon as it can
 	 * @SecondStrategy - 
 	 * @ThirdStrategy - */
 	static public void loadPlayers() {
 		
-		PlayerStrategy p1 = new PlayerStrategy("Human", true);
-		FirstStrategy ai1 = new FirstStrategy("AI 1", true);
-		SecondStrategy ai2 = new SecondStrategy("AI 2", true);	
-		ThirdStrategy ai3 = new ThirdStrategy("AI 3", true);
-
+		// Prompt the user to enter the number of players that will be human
+		System.out.println("How many human players will be playing?");
+		BufferedReader input = new BufferedReader (new InputStreamReader (System.in));
+		String inputString = "";
+		try {
+			inputString = input.readLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Failed at reading user input @loadPlayers");
+			e.printStackTrace();
+		}
+		int num = Integer.parseInt ( inputString );
+		
+		// Initialize the ArrayList of player
 		players = new ArrayList<Player>();
-		players.add(p1);
-		players.add(ai1);
-		players.add(ai2);
-		players.add(ai3);
-
+		
+		// add the specified number of player to the list
+		for (int i = 0; i < num; i++) {
+			players.add(new PlayerStrategy("Human" + (i+1) , true));		
+		}
+		
+		// generate AI based on modulo 3 random number
+		int spaces_available = 4 - players.size();
+		int measure = 0;
+		for (int i = 0; i < spaces_available; i++) {
+			measure = rn.nextInt(10000)%4;
+			if( measure == 0) { //create a StratOne
+				players.add(new FirstStrategy("AI1", true));	
+			}
+			else if (measure == 1) { //create a StratTwo
+				players.add(new SecondStrategy("AI2", true));	
+			}
+			else if  (measure == 2){ //create a StratThree
+				players.add(new ThirdStrategy("AI3", true));	
+			} 
+			else {//create a StratFour
+				players.add(new SecondStrategy("AI4", true));	
+			}
+		}
 
 	}
+	
 	/**
 	 * loads the deck*/
 	static public void loadDeck() {
@@ -484,6 +515,9 @@ public final class Table {
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
+					} catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
 	    	   	}
 	        } 
@@ -548,57 +582,37 @@ public final class Table {
 		return "{ " + str + " }";
 	}
 	
-	 static void connectSocket(JRON jron) throws IOException {
+	 static void connectSocket(JRON jron) throws IOException, ClassNotFoundException {
+		 //PlayerStrategy player = (PlayerStrategy)Table.getPlayer(0);
+		 
+		 int port = 4444;
+	  //create the socket server object
+        ServerSocket server = new ServerSocket(port);
+        //keep listens indefinitely until receives 'exit' call or program terminates
+        while(true){
+            System.out.println("Waiting for client request");
+            //creating socket and waiting for client connection
+            Socket socket = server.accept();
+            //read from socket to ObjectInputStream object
+            ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+            //convert ObjectInputStream object to String
+            String message = (String) ois.readObject();
+            System.out.println("Message Received: " + message);
+            //create ObjectOutputStream object
+            ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+            //write object to Socket
+            oos.writeObject("Hi Client "+message);
+            //close resources
+            ois.close();
+            oos.close();
+            socket.close();
+            //terminate the server if client sends exit request
+            if(message.equalsIgnoreCase("exit")) break;
+        }
+        System.out.println("Shutting down Socket server!!");
+        //close the ServerSocket object
+        server.close();
 
-	        int portNumber = 4444;
-	        
-	        try ( 
-	        	//server side of a client/server socket connection
-	            ServerSocket serverSocket = new ServerSocket(portNumber);
-	        		
-	        	//The accept method waits until a client starts up and 
-	        	//requests a connection on the host and port of this server.
-	            Socket clientSocket = serverSocket.accept();
-	            PrintWriter out =
-	                new PrintWriter(clientSocket.getOutputStream(), true);
-	            BufferedReader in = new BufferedReader(
-	                new InputStreamReader(clientSocket.getInputStream()));
-	        ) {
-	        	System.out.println("Connected to scoket");
-	        	RummyProtocol kkp = new RummyProtocol();
-	        	out.println("playTurn()");
-//	            String inputLine, outputLine;
-//	             
-//	            // Initiate conversation with client
-//	            RummyProtocol kkp = new RummyProtocol();
-//	            outputLine = kkp.processInput(null);
-//	            out.println(outputLine);
-//	            System.out.println(outputLine);
-//	 
-//	            while ((inputLine = in.readLine()) != null) {
-//	                outputLine = kkp.processInput(inputLine);
-//	                out.println(outputLine);
-//	                if (outputLine.equals("Bye."))
-//	                    break;
-//	            }
-	        	
-	        } catch (IOException e) {
-	            System.out.println("Exception caught when trying to listen on port "
-	                + portNumber + " or listening for a connection");
-	            System.out.println(e.getMessage());
-	            
-	        }
-	    }
-	 
-	 public void closeSocket() {
-		 try {
-			ServerSocket serverSocket = new ServerSocket(4444);
-			serverSocket.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			
-			e.printStackTrace();
-		}
 	 }
 	 
 	

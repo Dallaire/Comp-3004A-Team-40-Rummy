@@ -124,9 +124,18 @@ public class TableTest extends TestCase
     
     /**
      *No assertions here, simply view console output*/
-    public void testInit() {
+    @SuppressWarnings("null")
+	public void testLoadPlayer() {
 
     	Table.init();
+    	ArrayList<Player> players = new ArrayList<Player>();
+    	System.out.println(Table.getNumPlayers());
+    	for (int i = 0; i < 4; i++) {
+    		//System.out.println(players.toString());
+    		players.add(Table.getPlayer(i));
+    	}
+    	System.out.println(players.toString());
+    	System.out.println(players.size());
     }
     
     
