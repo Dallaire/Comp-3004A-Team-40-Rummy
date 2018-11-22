@@ -28,12 +28,12 @@ public class AppTest extends TestCase
     }
     
     public void testPlayer() {
-    	PlayerStrategy player = new PlayerStrategy("John");
+    	PlayerStrategy player = new PlayerStrategy("John", true);
     	assertEquals("John", player.getName());
     }
     
     public void testAddTile() {
-    	PlayerStrategy player = new PlayerStrategy("John");
+    	PlayerStrategy player = new PlayerStrategy("John", true);
     	player.addTile(new Tile(Color.O, 10));
     	assertEquals(1,player.getHand().size());
     }
@@ -46,7 +46,7 @@ public class AppTest extends TestCase
 
     	Deck stock = new Deck();
 		stock.Shuffle();
-		Player ai1 = new Player("POE");
+		Player ai1 = new Player("POE", true);
 		ai1.addTile(new Tile(Color.O, 6));
 		ai1.addTile(new Tile(Color.B, 3));
 		ai1.addTile(new Tile(Color.R, 12));
@@ -78,7 +78,7 @@ public class AppTest extends TestCase
 
     	Deck stock = new Deck();
 		stock.Shuffle();
-		Player ai1 = new Player("POE");
+		Player ai1 = new Player("POE", true);
 		ai1.addTile(new Tile(Color.O, 6));
 		ai1.addTile(new Tile(Color.B, 3));
 		ai1.addTile(new Tile(Color.R, 12));

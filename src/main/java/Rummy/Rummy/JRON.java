@@ -5,17 +5,17 @@ import java.util.ArrayList;
  * Java Rummy Object Notation
  * Data object pushed to players as part of the Observer Pattern*/
 public class JRON {
-	
-	private ArrayList<ArrayList<Tile>> melds;
+		
 	private boolean firstMeld = false;
 	private boolean threeLess = false;
-
+	private ArrayList<ArrayList<Tile>> melds = new ArrayList<ArrayList<Tile>>();
+	private String context = null;
 	
-	public JRON(ArrayList<ArrayList<Tile>> melds,boolean firstMeld,boolean threeLess ) {
+	public JRON(ArrayList<ArrayList<Tile>> melds,boolean firstMeld,boolean threeLess, String context ) {
 		this.setMelds(melds);
 		this.setFirstMeld(firstMeld);
 		this.setThreeLess(threeLess);
-		
+		this.setContext(context);
 	}
 
 	// Getter and Setter for the data fields
@@ -42,6 +42,14 @@ public class JRON {
 
 	public void setThreeLess(boolean threeLess) {
 		this.threeLess = threeLess;
+	}
+
+	public String getContext() {
+		return context;
+	}
+
+	public void setContext(String context) {
+		this.context = context;
 	}
 	
 }

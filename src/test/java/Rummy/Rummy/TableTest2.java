@@ -41,7 +41,7 @@ public class TableTest2 extends TestCase {
      * Test if the JRON is working*/
     public void testJRON_1() {
 
-    	JRON data = new JRON(Table.getMelds(), Table.getFirst(), Table.getThreeLess());
+    	JRON data = new JRON(Table.getMelds(), Table.getFirst(), Table.getThreeLess(), null);
     	assertEquals(false, data.getThreeLess());
     	assertEquals(false, data.getFirstMeld());
     	assertEquals(true, data.getMelds() instanceof ArrayList);
@@ -53,11 +53,11 @@ public class TableTest2 extends TestCase {
     public void testClass() {
     	
     	Table.init();
-		PlayerStrategy p1 = new PlayerStrategy("dude");
-		PlayerStrategy p2 = new PlayerStrategy("another dude");
-		FirstStrategy ai1 = new FirstStrategy("AI 1");
-		SecondStrategy ai2 = new SecondStrategy("AI 2");	
-		ThirdStrategy ai3 = new ThirdStrategy("AI 3");
+		PlayerStrategy p1 = new PlayerStrategy("dude",true);
+		PlayerStrategy p2 = new PlayerStrategy("another dude",true);
+		FirstStrategy ai1 = new FirstStrategy("AI 1", true);
+		SecondStrategy ai2 = new SecondStrategy("AI 2", true);	
+		ThirdStrategy ai3 = new ThirdStrategy("AI 3", true);
 		
 		System.out.println(p1.getClass());
 		assertEquals(p1.getClass(),p2.getClass());
@@ -66,7 +66,7 @@ public class TableTest2 extends TestCase {
 		assertEquals(false, p1.getClass().equals(ai2.getClass()));
 		assertEquals(false, p1.getClass().equals(ai1.getClass()));
     }
-    
+
     public void testPlayersClass() {
     	Table.init();
     	Player player;

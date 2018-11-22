@@ -1,5 +1,12 @@
 package Rummy.Rummy;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.io.Reader;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -13,10 +20,12 @@ public class Player {
 	protected JRON tableData = null;
 	protected boolean playedFirst30 = false;
 	protected boolean hasPlayed = false;
+	private boolean isLocal;
 	
 	//Constructor
-	public Player(String aName) {
+	public Player(String aName, boolean isLocal) {
 		this.name = aName;
+		this.isLocal = isLocal;
 	}
 	
 	
@@ -162,6 +171,9 @@ public class Player {
 			}
 		}
 		
+		if (temp.size()==0)
+			return null;
+		
 		return temp;
 	}
 
@@ -295,6 +307,67 @@ public class Player {
 		meldsToString = "{ " +  meldsToString.substring(1, meldsToString.length() -1) + " }";
 		System.out.println(this.name + "'s cards: " + meldsToString);
 	}
+
+
+	public ArrayList<ArrayList<Tile>> playTurn() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
+	
+    public void playSocket() throws IOException {
+        
+//        if (args.length != 2) {
+//            System.err.println(
+//                "Usage: java EchoClient <host name> <port number>");
+//            System.exit(1);
+//        }
+
+        String hostName = "localhost";
+        int portNumber = 4444;
+
+        try (
+            Socket rummySocket = new Socket(hostName, portNumber);
+            PrintWriter out = new PrintWriter(rummySocket.getOutputStream(), true);
+            BufferedReader in = new BufferedReader(
+                new InputStreamReader(rummySocket.getInputStream()));
+        ) {
+            BufferedReader stdIn =
+                new BufferedReader(new InputStreamReader(System.in));
+            String fromServer;
+            String fromUser;
+
+            while ((fromServer = in.readLine()) != null) {
+                System.out.println("Server: " + fromServer);
+                
+                if (fromServer.equals("playTurn()"))
+                	System.out.println("playTurn()");
+                    break;
+                else if (fromServer.equals("update()")) {
+                	System.out.println("update()");
+                	break;
+                }
+                
+                fromUser = "OK.";
+                if (fromUser != null) {
+                    System.out.println("Client: " + fromUser);
+                    out.println(fromUser);
+                }
+            }
+        } catch (UnknownHostException e) {
+            System.err.println("Don't know about host " + hostName);
+            System.exit(1);
+        } catch (IOException e) {
+            System.err.println("Couldn't get I/O for the connection to " +
+                hostName);
+            System.exit(1);
+        }
+    }
+
+
+	public boolean isLocal() {
+		// TODO Auto-generated method stub
+		return this.isLocal;
+	}
 		
 }

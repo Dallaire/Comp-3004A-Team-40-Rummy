@@ -4,81 +4,51 @@ import java.util.ArrayList;
 
 public class FirstStrategy extends Player implements Strategy {
 
-	public FirstStrategy(String name) {
-		super(name);
+	public FirstStrategy(String name, boolean isLocal) {
+		super(name, isLocal);
 	}
 
-	public ArrayList<ArrayList<Tile>> playTurn() {
-		return null;
-	}
-
-	public void playTurn(ArrayList<ArrayList<Tile>> tableMelds) { // don't want to return anything, can just interact
-																	// with table in the function
+	public ArrayList<ArrayList<Tile>> playTurn() { // don't want to return anything, can just interact
+		
+		// create as many melds as possible
+		ArrayList<ArrayList<Tile>> temp = createMelds();
+		
+		// Draw from Tile if no melds could be created
+		if (temp == null) {
+			this.addTile(Table.getTile());
+			return temp;
+		}
+				
+		
+		// Check how many points we have
+		int points = 0;
+		for (ArrayList<Tile> tiles: temp) {
+			points += MeldChecker.countPoints(tiles);
+		}
+		
+		System.out.println("You have " + points +  " points");		
+		
 		this.setHasPlayed(false);
 		if (this.playedFirst30) { // First 30 already played
 			// create a temporary array
-			ArrayList<ArrayList<Tile>> temp = new ArrayList<ArrayList<Tile>>();
-
-			// create a run
-			ArrayList<Tile> meld = this.createRun(null);
-
-			// if a run can't be created create set
-			if (meld == null) {
-				meld = this.createSet(null);
-			}
-
-			// A none null meld goes in here
-			// Keep creating runs and sets as much as possible
-			while (meld != null) {
-				temp.add(meld); // add in the meld
-				meld = null;
-				meld = this.createRun(null); // create a new one
-				if (meld == null) {
-					meld = this.createSet(null);
-				}
-			}
-
-			Table.addMeldz(temp);
-
-			if (this.getHand().isEmpty()) { // Win condition
-				Table.getMelds().addAll(temp);
-				this.setHasPlayed(true);
-			}
+			return temp;
 
 		} else {
-			// create a run
-			ArrayList<Tile> meld = this.createRun(null);
+
+
 			// if the run can't be created or is less than 30 points
-			if (meld == null || !MeldChecker.check30(meld)) {
+			if (points < 30) {
 
-				// the run is too small
-				if (meld != null) {
-					this.getHand().addAll(meld);
-					meld.clear();
-				}
-
-				// try create a set
-				meld = this.createSet(null);
-
-				// if the set is not null and point are more than thirty
-				if (meld != null && MeldChecker.check30(meld)) {
-
-					Table.addMeld(meld); // plays set as first 30
-					this.setFirst30(true);
-					this.setHasPlayed(true);
-
-				} else {
-					if (meld != null) {
-						this.getHand().addAll(meld);
-						meld.clear();
-					}
-					// Default draw from stock
-					this.addTile(Table.getTile());
-				}
+				// return cards to the players hand
+				this.addMelds(temp);
+				this.addTile(Table.getTile());
+				return null;
+				
+			// the melds are enough and played
 			} else {
-				Table.addMeld(meld); // plays run as first 30
 				this.setFirst30(true);
 				this.setHasPlayed(true);
+				return temp; // plays run as first 30
 			}
 		}
 	}
