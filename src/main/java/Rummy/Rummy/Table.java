@@ -53,7 +53,7 @@ public final class Table {
 		for (Player player: players) {
 			tileMap.put(player, stock.getRandomTile());
 		}
-		
+		 
 		
 	}
 
