@@ -2,10 +2,12 @@ package Rummy.Rummy;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 
 public class Deck {
 	private ArrayList<Tile> tiles;
+	private Random rn = new Random();
 	
 	public Deck() {
 		this.tiles = new ArrayList<Tile>();
@@ -45,13 +47,17 @@ public class Deck {
 	}
 	
 
-	/**
-	 * Select a specific tile from the Deck
-	public Tile getTile(Tile tile) {
+
+	 /** 
+	  * Select a random tile from the Deck
+	  * @return - Tile
+	  */
+	public Tile getRandomTile() {
 		// TODO Auto-generated method stub
-		return null;
+		
+		return tiles.remove(rn.nextInt(14));
 	}
-	*/
+
 	
 	
 

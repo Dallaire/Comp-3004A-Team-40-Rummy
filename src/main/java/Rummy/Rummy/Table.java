@@ -1,6 +1,7 @@
 package Rummy.Rummy;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 import java.net.*;
 import java.io.*;
@@ -35,12 +36,27 @@ public final class Table {
 	static public void init() {
 		loadPlayers();
 		loadDeck();
+		//tileDraw();
 		shareCards();
 		for (Player x: players) {
 			x.printTiles();
 		}
 	}
-	
+	/**
+	 * Determine the order in which the players will play
+	 * Each player draws a tile the highest goes first
+	 * Completely Automated atm*/
+	public static void tileDraw() {
+		// each player draws a tile
+		HashMap<Player, Tile> tileMap = new HashMap<Player, Tile>();
+		//sort the tiles according to rank
+		for (Player player: players) {
+			tileMap.put(player, stock.getRandomTile());
+		}
+		
+		
+	}
+
 	/**
 	 * Start the Game and let the user pass
 	 * @param f - The name of the input file*/
