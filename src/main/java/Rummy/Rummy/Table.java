@@ -45,16 +45,15 @@ public final class Table {
 	/**
 	 * Determine the order in which the players will play
 	 * Each player draws a tile the highest goes first
-	 * Completely Automated atm*/
+	 * Completely Automated at his moment*/
 	public static void tileDraw() {
 		// each player draws a tile
-		HashMap<Player, Tile> tileMap = new HashMap<Player, Tile>();
+		HashMap<String, Tile> tileMap = new HashMap<String, Tile>();
 		//sort the tiles according to rank
 		for (Player player: players) {
-			tileMap.put(player, stock.getRandomTile());
+			tileMap.put(player.getName(), stock.getRandomTile());
 		}
-		 
-		
+	
 	}
 
 	/**
@@ -206,16 +205,16 @@ public final class Table {
 		for (int i = 0; i < spaces_available; i++) {
 			measure = rn.nextInt(10000)%4;
 			if( measure == 0) { //create a StratOne
-				players.add(new FirstStrategy("AI1", true));	
+				players.add(new FirstStrategy("AI1-"+i, true));	
 			}
 			else if (measure == 1) { //create a StratTwo
-				players.add(new SecondStrategy("AI2", true));	
+				players.add(new SecondStrategy("AI2-"+i, true));	
 			}
 			else if  (measure == 2){ //create a StratThree
-				players.add(new ThirdStrategy("AI3", true));	
+				players.add(new ThirdStrategy("AI3-"+i, true));	
 			} 
 			else {//create a StratFour
-				players.add(new SecondStrategy("AI4", true));	
+				players.add(new SecondStrategy("AI4-"+i, true));	
 			}
 		}
 

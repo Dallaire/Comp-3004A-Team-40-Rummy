@@ -1,7 +1,7 @@
 package Rummy.Rummy;
 
 
-public class Tile {
+public class Tile implements Comparable<Tile>{
 	private Color color;
 	//Ace =1, j-K = 11-13
 	private int value;
@@ -38,5 +38,25 @@ public class Tile {
 		}
 		return false;
 	}
-	
+	/**
+	 * @param otherTile - the tile to be compared
+	 * @return A negative, zero, or a positive integer depending on the difference in values*/
+	@Override
+	public int compareTo(Tile otherTile) {
+		
+		//Compare the Tile colors if they are equal compare the colors
+	 	Color c1 = this.getColor();
+	 	Color c2 = otherTile.getColor();
+	 	int comp = c1.compareTo(c2);
+	 	
+	 	if (comp != 0) {return comp;}
+	 	
+	 	//Compare the Tiles by value
+	 	Integer i1 = this.getValue();
+	 	Integer i2 = otherTile.getValue();
+	 	
+        return i1.compareTo(i2);	
+		
+	}
+
 }

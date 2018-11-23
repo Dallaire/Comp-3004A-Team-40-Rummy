@@ -1,6 +1,13 @@
 package Rummy.Rummy;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.stream.Stream;
+
 import junit.framework.TestCase;
 
 /**
@@ -138,7 +145,39 @@ public class TableTest extends TestCase
     	System.out.println(players.size());
     }
     
-    
-    
+    /**
+     *No assertions here, simply view console output*/
+    @SuppressWarnings("null")
+	public void testTileDraw() {
+
+    	// get the players 
+    	Table.init();
+    	ArrayList<Player> players = new ArrayList<Player>();
+    		
+    	for (int i = 0; i < 4; i++) {
+    		players.add(Table.getPlayer(i));
+    	}
+    	// get all the cards
+    	Deck stock = Table.getStock();
+		HashMap<String, Tile> tileMap = new HashMap<String, Tile>();
+		
+		//sort the tiles according to rank
+		for (Player player: players) {
+			tileMap.put(player.getName(), stock.getRandomTile());
+		}
+		
+		Set<Entry<String, Tile>> entries = tileMap.entrySet();
+	    // let's sort this map by values first
+	    Map<String, Integer> sorted = tileMap
+	        .entrySet()
+	        .stream()
+	        .sorted(comparingByValue())
+	        .collect(
+	            toMap(e -> e.getKey(), e -> e.getValue(), (e1, e2) -> e2,
+	                LinkedHashMap::new));
+
+		System.out.println(entries.toString());
+
+    }
      
 }
