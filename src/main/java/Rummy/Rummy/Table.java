@@ -1,7 +1,7 @@
 package Rummy.Rummy;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.Random;
 import java.net.*;
 import java.io.*;
@@ -36,24 +36,11 @@ public final class Table {
 	static public void init() {
 		loadPlayers();
 		loadDeck();
-		//tileDraw();
+		tileDraw();
 		shareCards();
 		for (Player x: players) {
 			x.printTiles();
 		}
-	}
-	/**
-	 * Determine the order in which the players will play
-	 * Each player draws a tile the highest goes first
-	 * Completely Automated at his moment*/
-	public static void tileDraw() {
-		// each player draws a tile
-		HashMap<String, Tile> tileMap = new HashMap<String, Tile>();
-		//sort the tiles according to rank
-		for (Player player: players) {
-			tileMap.put(player.getName(), stock.getRandomTile());
-		}
-	
 	}
 
 	/**
@@ -62,6 +49,7 @@ public final class Table {
 	static public void initPass(String f) {
 		loadPlayers();
 		loadDeck();
+		tileDraw();
 		shareCards();
 		for (Player x: players) {
 			x.printTiles();
@@ -84,6 +72,8 @@ public final class Table {
 		//players.clear();	
 		loadPlayers();
 		loadDeck();
+		tileDraw();
+
 		
 		int i = 11;
 		for (Player x: players) {
@@ -115,6 +105,8 @@ public final class Table {
 		//players.clear();	
 		loadPlayers();
 		loadDeck();
+		tileDraw();
+
 		
 		int i = 6;
 		for (Player x: players) {
@@ -146,6 +138,8 @@ public final class Table {
 		//players.clear();	
 		loadPlayers();
 		loadDeck();
+		tileDraw();
+
 		
 		int i = 3;
 		for (Player x: players) {
@@ -218,6 +212,45 @@ public final class Table {
 			}
 		}
 
+	}
+	/**
+	 * Determine the order in which the players will play
+	 * Each player draws a tile the highest goes first
+	 * Completely Automated at his moment*/
+	public static void tileDraw() {
+
+
+		ArrayList<Tile> tileMap = new ArrayList<Tile>();
+		ArrayList<Tile> dirtyTileMap = new ArrayList<Tile>();
+		
+    	for (int i = 0; i < 4; i++) {
+    		tileMap.add(stock.getRandomTile());
+    		dirtyTileMap.add(tileMap.get(i));
+    	}
+    	
+    	System.out.println(players);    
+
+		// run an insertion sort on the 
+    	System.out.println(tileMap);
+		Collections.sort(tileMap);
+
+		
+		// let's do some dirty arrangements
+		ArrayList<Player> dirtyTemp =  new ArrayList<Player>();
+		// add all the players from one list to the other
+    	for (int i = 0; i < 4; i++) {
+    		dirtyTemp.add(players.get(i));
+    	}
+    	
+    	// get the old index and set new one according to the draw results
+    	for (int i = 0; i < 4; i++) {
+    		
+    		players.set( tileMap.indexOf(dirtyTileMap.get(i)), dirtyTemp.get(i));
+    	}
+    	
+		System.out.println(tileMap);
+		System.out.println(players);
+	
 	}
 	
 	/**

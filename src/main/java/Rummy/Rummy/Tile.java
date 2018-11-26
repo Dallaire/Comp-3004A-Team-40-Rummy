@@ -52,10 +52,12 @@ public class Tile implements Comparable<Tile>{
 	 	if (comp != 0) {return comp;}
 	 	
 	 	//Compare the Tiles by value
-	 	Integer i1 = this.getValue();
-	 	Integer i2 = otherTile.getValue();
-	 	
-        return i1.compareTo(i2);	
+	 	if (this.getValue() > otherTile.getValue()) {
+	 		return -1;
+	 	}
+	 	else {
+	 		return 1;
+	 	}	
 		
 	}
 

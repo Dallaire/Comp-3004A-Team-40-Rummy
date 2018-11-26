@@ -2,12 +2,6 @@ package Rummy.Rummy;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.stream.Stream;
 
 import junit.framework.TestCase;
 
@@ -88,20 +82,18 @@ public class TableTest extends TestCase
     }
     
     public void testRunChecker() {
-    	MeldChecker check = new MeldChecker();
     	ArrayList<Tile> run = new ArrayList<Tile>();
     	run.add(new Tile(Color.B,1));
     	run.add(new Tile(Color.B,2));
     	run.add(new Tile(Color.B,3));
-    	assertEquals(true, check.checkHand(run));
+    	assertEquals(true, MeldChecker.checkHand(run));
     }
     public void testMeldChecker() {
-    	MeldChecker check = new MeldChecker();
     	ArrayList<Tile> meld = new ArrayList<Tile>();
     	meld.add(new Tile(Color.O, 10)); 
     	meld.add(new Tile(Color.B, 10)); 
     	meld.add(new Tile(Color.G, 10));
-    	assertEquals(true, check.checkHand(meld));
+    	assertEquals(true, MeldChecker.checkHand(meld));
     }
      
     public void testAddMeld() {
@@ -145,40 +137,48 @@ public class TableTest extends TestCase
     	System.out.println(players.toString());
     	System.out.println(players.size());
     }
-    
-    /**
-     *No assertions here, simply view console output*/
-    @SuppressWarnings("null")
-	public void testTileDraw() {
+
+	public void testTile() {
 
     	// get the players 
     	Table.init();
     	ArrayList<Player> players = new ArrayList<Player>();
-    		
-    	for (int i = 0; i < 4; i++) {
-    		players.add(Table.getPlayer(i));
-    	}
     	// get all the cards
     	Deck stock = Table.getStock();
-		HashMap<String, Tile> tileMap = new HashMap<String, Tile>();
+		ArrayList<Tile> tileMap = new ArrayList<Tile>();
+		ArrayList<Tile> dirtyTileMap = new ArrayList<Tile>();
 		
-		//sort the tiles according to rank
-		for (Player player: players) {
-			tileMap.put(player.getName(), stock.getRandomTile());
-		}
-		
-		Set<Entry<String, Tile>> entries = tileMap.entrySet();
-	    // let's sort this map by values first
-	    Map<String, Integer> sorted = tileMap
-	        .entrySet()
-	        .stream()
-	        .sorted(comparingByValue())
-	        .collect(
-	            toMap(e -> e.getKey(), e -> e.getValue(), (e1, e2) -> e2,
-	                LinkedHashMap::new));
+    	for (int i = 0; i < 4; i++) {
+    		players.add(Table.getPlayer(i));
+    		tileMap.add(stock.getRandomTile());
+    		dirtyTileMap.add(tileMap.get(i));
+    	}
+    	
+    	System.out.println(players);    
 
-		System.out.println(entries.toString());
+		// run an insertion sort on the 
+    	System.out.println(tileMap);
+		Collections.sort(tileMap);
+
+		
+		// let's do some dirty arrangements
+		ArrayList<Player> dirtyTemp =  new ArrayList<Player>();
+		// add all the players from one list to the other
+    	for (int i = 0; i < 4; i++) {
+    		dirtyTemp.add(players.get(i));
+    	}
+    	
+    	// get the old index and 
+    	for (int i = 0; i < 4; i++) {
+    		
+    		players.set( tileMap.indexOf(dirtyTileMap.get(i)), dirtyTemp.get(i));
+    	}
+    	
+		System.out.println(tileMap);
+		System.out.println(players);
+		assertEquals(14, 14);
 
     }
-     
+	
+    
 }
