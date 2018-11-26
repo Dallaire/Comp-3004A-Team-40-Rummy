@@ -17,7 +17,6 @@ public class TableTest extends TestCase
 
     }
 
-    
     /**
      * Test that tiles are created*/
     public void testTiles() {

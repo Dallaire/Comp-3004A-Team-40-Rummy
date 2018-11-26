@@ -36,9 +36,7 @@ public class SecondStrategy extends Player implements Strategy{
 		ArrayList<ArrayList<Tile>> temp = new ArrayList<ArrayList<Tile>>();
 		
 		if (tableData.getFirstMeld()) {
-			if (this.playedFirst30) { //First 30 already played
-				
-				
+			if (this.playedFirst30) { //First 30 already played				
 				
 				ArrayList<Tile> meld = this.createRun(null);
 				// create a run or a set

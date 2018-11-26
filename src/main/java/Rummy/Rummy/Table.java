@@ -38,6 +38,7 @@ public final class Table {
 		loadDeck();
 		tileDraw();
 		shareCards();
+		update();
 		for (Player x: players) {
 			x.printTiles();
 		}
@@ -51,6 +52,8 @@ public final class Table {
 		loadDeck();
 		tileDraw();
 		shareCards();
+		update();
+		int index = 0;
 		for (Player x: players) {
 			x.printTiles();
 		}
@@ -73,7 +76,7 @@ public final class Table {
 		loadPlayers();
 		loadDeck();
 		tileDraw();
-
+		update();
 		
 		int i = 11;
 		for (Player x: players) {
@@ -106,7 +109,7 @@ public final class Table {
 		loadPlayers();
 		loadDeck();
 		tileDraw();
-
+		update();
 		
 		int i = 6;
 		for (Player x: players) {
@@ -139,7 +142,7 @@ public final class Table {
 		loadPlayers();
 		loadDeck();
 		tileDraw();
-
+		update();
 		
 		int i = 3;
 		for (Player x: players) {
@@ -434,8 +437,8 @@ public final class Table {
 		if(player instanceof PlayerStrategy) {
 
 			meldz = ((PlayerStrategy) player).playTurn();
-			meldsToString = meldz.toString();
-			meldsToString = "{ " +  meldsToString.substring(1, meldsToString.length()) + " }";
+//			meldsToString = meldz.toString();
+//			meldsToString = "{ " +  meldsToString.substring(1, meldsToString.length()) + " }";
 			if (meldz == null) {
 				System.out.println("Table: " + player.getClass().getSimpleName() + " " +  player.getName() + " drew from stock");
 				numMeldsLastPlayed = 0;
@@ -452,17 +455,14 @@ public final class Table {
 			}	
 			
 		} else if (player instanceof FirstStrategy){
-			((FirstStrategy) player).playTurn();
-			//meldsToString = meldz.toString();
-			//meldsToString = "{ " +  meldsToString.substring(1, meldsToString.length()) + " }";
-			if (!player.getHasPlayed()) {
-
+			meldz = ((FirstStrategy) player).playTurn();
+			if (meldz == null) {
 				System.out.println(player.getClass().getSimpleName() + " " +  player.getName() +" drew from stock");
 				numMeldsLastPlayed = 0;
 			}
 			else {
 				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld: ");
-				//addMeldz(meldz);
+				addMeldz(meldz);
 				if (!getFirst()) {
 					setFirst30(true);
 				}
@@ -490,6 +490,8 @@ public final class Table {
 				numMeldsLastPlayed = 0;
 			}
 			else {
+				// meldsToString = meldz.toString();
+				// meldsToString = "{ " +  meldsToString.substring(1, meldsToString.length()) + " }";
 				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld");
 				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played meld(s)" + meldzToString(meldz));
 				addMeldz(meldz);

@@ -109,7 +109,7 @@ public class ThirdStrategy extends Player implements Strategy{
 				}
 			}
 			else {
-				Table.addMeld(meld); //plays run as first 30
+				//Table.addMeld(meld); //plays run as first 30
 				temp.add(meld);
 				this.setHasPlayed(true);
 			}
