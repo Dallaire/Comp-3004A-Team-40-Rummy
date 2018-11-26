@@ -3,8 +3,11 @@ package Rummy.Rummy;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.io.Reader;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -315,53 +318,32 @@ public class Player {
 	}
 	
 	
-    public void playSocket() throws IOException {
-        
-//        if (args.length != 2) {
-//            System.err.println(
-//                "Usage: java EchoClient <host name> <port number>");
-//            System.exit(1);
-//        }
-
-        String hostName = "localhost";
-        int portNumber = 4444;
-
-        try (
-            Socket rummySocket = new Socket(hostName, portNumber);
-            PrintWriter out = new PrintWriter(rummySocket.getOutputStream(), true);
-            BufferedReader in = new BufferedReader(
-                new InputStreamReader(rummySocket.getInputStream()));
-        ) {
-            BufferedReader stdIn =
-                new BufferedReader(new InputStreamReader(System.in));
-            String fromServer;
-            String fromUser;
-
-            while ((fromServer = in.readLine()) != null) {
-                System.out.println("Server: " + fromServer);
-                
-                if (fromServer.equals("playTurn()"))
-                	System.out.println("playTurn()");
-                    break;
-                else if (fromServer.equals("update()")) {
-                	System.out.println("update()");
-                	break;
-                }
-                
-                fromUser = "OK.";
-                if (fromUser != null) {
-                    System.out.println("Client: " + fromUser);
-                    out.println(fromUser);
-                }
-            }
-        } catch (UnknownHostException e) {
-            System.err.println("Don't know about host " + hostName);
-            System.exit(1);
-        } catch (IOException e) {
-            System.err.println("Couldn't get I/O for the connection to " +
-                hostName);
-            System.exit(1);
-        }
+    public void playSocket() throws UnknownHostException, IOException, ClassNotFoundException, InterruptedException {
+    	
+		InetAddress host = InetAddress.getLocalHost();
+	    Socket socket = null;
+	    ObjectOutputStream oos = null;
+	    ObjectInputStream ois = null;
+	    
+	    for(int i=0; i<5;i++){
+	        //establish socket connection to server
+	        socket = new Socket(host.getHostName(), 9876);
+	        //write to socket using ObjectOutputStream
+	        oos = new ObjectOutputStream(socket.getOutputStream());
+	        System.out.println("Sending request to Socket Server");
+	        if(i==4)oos.writeObject("exit");
+	        else oos.writeObject(""+i);
+	        //read the server response message
+	        ois = new ObjectInputStream(socket.getInputStream());
+	        String message = (String) ois.readObject();
+	        System.out.println("Message: " + message);
+	        //close resources
+	        ois.close();
+	        oos.close();
+	        Thread.sleep(100);
+	    
+	    }    	
+    	
     }
 
 

@@ -26,7 +26,7 @@ public class FirstStrategy extends Player implements Strategy {
 			points += MeldChecker.countPoints(tiles);
 		}
 		
-		System.out.println("You have " + points +  " points");		
+		System.out.println(this.getName() + " You have " + points +  " points");		
 		
 		this.setHasPlayed(false);
 		if (this.playedFirst30) { // First 30 already played
