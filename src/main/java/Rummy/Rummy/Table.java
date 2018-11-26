@@ -193,8 +193,30 @@ public final class Table {
 			players.add(new PlayerStrategy("Human" + (i+1) , true));		
 		}
 		
+		// Prompt the user to determine the number of AI's
+		System.out.println("How many AI players will be playing?");
+		inputString = "";
+		try {
+//			input.reset();
+			inputString = input.readLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		num = Integer.parseInt ( inputString );
+				
 		// generate AI based on modulo 3 random number
 		int spaces_available = 4 - players.size();
+		
+		//easiest way to deal with wrong input
+		if(num + players.size() == 4) {
+			spaces_available = 4 - players.size();
+		} else if (num + players.size() < 4 && num > 0) {
+			spaces_available = num;
+		} else if ((num + players.size() > 4) ) {
+			spaces_available = 4 - players.size();
+		}
+		
 		int measure = 0;
 		for (int i = 0; i < spaces_available; i++) {
 			measure = rn.nextInt(10000)%4;
@@ -216,14 +238,15 @@ public final class Table {
 	/**
 	 * Determine the order in which the players will play
 	 * Each player draws a tile the highest goes first
-	 * Completely Automated at his moment*/
+	 * Completely Automated at his moment - no input from players required*/
 	public static void tileDraw() {
 
 
 		ArrayList<Tile> tileMap = new ArrayList<Tile>();
 		ArrayList<Tile> dirtyTileMap = new ArrayList<Tile>();
 		
-    	for (int i = 0; i < 4; i++) {
+		// Draw the random tiles
+    	for (int i = 0; i < players.size(); i++) {
     		tileMap.add(stock.getRandomTile());
     		dirtyTileMap.add(tileMap.get(i));
     	}
@@ -238,12 +261,12 @@ public final class Table {
 		// let's do some dirty arrangements
 		ArrayList<Player> dirtyTemp =  new ArrayList<Player>();
 		// add all the players from one list to the other
-    	for (int i = 0; i < 4; i++) {
+    	for (int i = 0; i < players.size(); i++) {
     		dirtyTemp.add(players.get(i));
     	}
     	
     	// get the old index and set new one according to the draw results
-    	for (int i = 0; i < 4; i++) {
+    	for (int i = 0; i < players.size(); i++) {
     		
     		players.set( tileMap.indexOf(dirtyTileMap.get(i)), dirtyTemp.get(i));
     	}

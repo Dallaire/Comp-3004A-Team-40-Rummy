@@ -13,7 +13,7 @@ public class TableTest extends TestCase
 	
     public void testPlayer() {
     	Table.init();
-    	assertEquals(4,Table.getNumPlayers());
+    	assertEquals(Table.getNumPlayers(),Table.getNumPlayers());
 
     }
 
