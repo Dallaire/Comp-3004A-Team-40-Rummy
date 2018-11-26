@@ -9,10 +9,9 @@ import java.io.*;
 
 /**
  * The Table class contains all the data structures used to represent game elements
- * The class is responsible for passing data between 
+ * The class is responsible for passing data between the players
  * @players {Object} - A list of players in the game
  * @stock - The initial set of 104 tiles used at the start of the game 
- * @meld - a single meld submitted by a player, which is refreshed after each turn - Removed -Jacob
  * @melds - a collection of melds submitted
  * @firstMeld - boolean value of whether or not a valid 30 point melds is played to start the game
  * @players - An ArrayList of players in on the table
@@ -243,8 +242,8 @@ public final class Table {
 	 * Each player draws a tile the highest goes first
 	 * Completely Automated at his moment - no input from players required*/
 	public static void tileDraw() {
-
-
+		System.out.println("\n------------------------------------");
+		System.out.println("Begin tile draw to determine who starts");
 		ArrayList<Tile> tileMap = new ArrayList<Tile>();
 		ArrayList<Tile> dirtyTileMap = new ArrayList<Tile>();
 		
@@ -254,9 +253,13 @@ public final class Table {
     		dirtyTileMap.add(tileMap.get(i));
     	}
     	
-    	System.out.println(players);    
+    	System.out.println("Old order"); 
 
-		// run an insertion sort on the 
+    	for (int i = 0; i < players.size(); i++) {
+    		System.out.println(i +": "+ players.get(i).getName());
+    	}
+
+		// run a sort on the tileMap
     	System.out.println(tileMap);
 		Collections.sort(tileMap);
 
@@ -275,8 +278,14 @@ public final class Table {
     	}
     	
 		System.out.println(tileMap);
-		System.out.println(players);
-	
+    	System.out.println("New order"); 
+
+    	for (int i = 0; i < players.size(); i++) {
+    		System.out.println(i +": "+ players.get(i).getName());
+    	}
+    	
+    	System.out.println("End of tile draw");
+    	System.out.println("------------------------------------ \n");
 	}
 	
 	/**
