@@ -52,7 +52,7 @@ public class Tile implements Comparable<Tile>{
 	 	if (comp != 0) {return comp;}
 	 	
 	 	//Compare the Tiles by value
-	 	if (this.getValue() > otherTile.getValue()) {
+	 	if (this.getValue() > otherTile.getValue() || this.getValue() == 0) {
 	 		return -1;
 	 	}
 	 	else {
