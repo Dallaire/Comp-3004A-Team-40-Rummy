@@ -260,11 +260,20 @@ public class Player {
 			temp.add(tempHand.get(i));
 			
 			for(int j=i-1;j>=0;j--) {
-				if(temp.get(temp.size()-1).getValue()==tempHand.get(j).getValue()) {
+				if (temp.get(temp.size()-1).getValue()==0) {
+					if (((Joker)temp.get(temp.size()-1)).getMask()==tempHand.get(j).getValue())
+						temp.add(tempHand.get(j));
+				}
+				else if (tempHand.get(j).getValue()==0) {
+					if (temp.get(temp.size()-1).getValue()==((Joker)tempHand.get(j)).getMask())
+						temp.add(tempHand.get(j));
+				}	
+				else if(temp.get(temp.size()-1).getValue()==tempHand.get(j).getValue()) {
 						temp.add(tempHand.get(j));
 					}
 			}
-			
+			if (temp.size() > 4)
+				temp = (ArrayList<Tile>)temp.subList(0, 4);
 			if(temp.size()>=3) {
 				if (hand.containsAll(tempHand)) {
 					hand.removeAll(temp);
