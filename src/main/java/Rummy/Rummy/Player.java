@@ -261,12 +261,12 @@ public class Player {
 			
 			for(int j=i-1;j>=0;j--) {
 				if (temp.get(temp.size()-1).getValue()==0) {
-					if (((Joker)temp.get(temp.size()-1)).getMask()==tempHand.get(j).getValue())
-						temp.add(tempHand.get(j));
+					(temp.get(temp.size()-1)).setMask(tempHand.get(j).getValue());
+					temp.add(tempHand.get(j));
 				}
 				else if (tempHand.get(j).getValue()==0) {
-					if (temp.get(temp.size()-1).getValue()==((Joker)tempHand.get(j)).getMask())
-						temp.add(tempHand.get(j));
+					(temp.get(j)).setMask(tempHand.get(temp.size()-1).getValue());
+					temp.add(tempHand.get(j));
 				}	
 				else if(temp.get(temp.size()-1).getValue()==tempHand.get(j).getValue()) {
 						temp.add(tempHand.get(j));

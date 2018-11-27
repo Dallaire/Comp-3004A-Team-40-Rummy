@@ -41,7 +41,7 @@ public class MeldChecker {
 		int sum=0;
 		for(int i=0;i<meld.size();i++) {
 			if (meld.get(i).getValue() == 0) {
-				sum+= ((Joker)meld.get(i)).getMask();}
+				sum+= meld.get(i).getMask();}
 			sum+=meld.get(i).getValue();
 		}
 		if (sum>=30) {
@@ -59,8 +59,8 @@ public class MeldChecker {
 	/**
 	 * compares the value of the 2 giver tiles and returns true if the difference=1 otherwise false*/
 	public static boolean checkDifference(Tile t1, Tile t2) {
-		if (t1.getValue() == 0) {return ((t2.getValue() - ((Joker)t1).getMask()) == 1);}
-		else if (t2.getValue() == 0) {return ((((Joker)t2).getMask() - t1.getValue()) == 1);}
+		if (t1.getValue() == 0) {return ((t2.getValue() - t1.getMask()) == 1);}
+		else if (t2.getValue() == 0) {return ((t2.getMask() - t1.getValue()) == 1);}
 		if ((t2.getValue()-t1.getValue())==1) {
 			return true;
 		}
@@ -71,7 +71,7 @@ public class MeldChecker {
 		for (int i = 0; i < meld.size(); i++) {
 			//System.out.println("sum"+sum);
 			if (meld.get(i).getValue() == 0) {
-				sum+= ((Joker)meld.get(i)).getMask();
+				sum+= meld.get(i).getMask();
 			}
 			else sum+=meld.get(i).getValue();
 		}
@@ -89,7 +89,7 @@ public class MeldChecker {
 		for(Tile t: meld)
 		{
 			if (t.getValue() == 0)
-				mpoints += ((Joker)t).getMask();
+				mpoints += t.getMask();
 			else mpoints += t.getValue();
 		}
 		return mpoints;
