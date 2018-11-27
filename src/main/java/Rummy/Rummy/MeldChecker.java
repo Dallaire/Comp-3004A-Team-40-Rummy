@@ -59,8 +59,10 @@ public class MeldChecker {
 	/**
 	 * compares the value of the 2 giver tiles and returns true if the difference=1 otherwise false*/
 	public static boolean checkDifference(Tile t1, Tile t2) {
-		if (t1.getValue() == 0) {return ((t2.getValue() - t1.getMask()) == 1);}
-		else if (t2.getValue() == 0) {return ((t2.getMask() - t1.getValue()) == 1);}
+		if (t1.getValue() == 0 && t2.getValue() != 1) { t1.setMask(t2.getValue() - 1); 
+			return true;}
+		else if (t2.getValue() == 0 && t1.getValue() != 13) {t2.setMask(t1.getValue() + 1);
+			return true;}
 		if ((t2.getValue()-t1.getValue())==1) {
 			return true;
 		}
