@@ -15,7 +15,9 @@ public class valueComparator implements Comparator<Tile> {
 		 	if (comp != 0) {return comp;}
 		 	
 		 	Integer i1 = o1.getValue();
+		 	if (i1 == 0) i1 = ((Joker)o1).getMask();
 		 	Integer i2 = o2.getValue();
+		 	if (i2 == 0) i2 = ((Joker)o2).getMask();
 	        return i1.compareTo(i2);
 	    }
 		
