@@ -41,7 +41,7 @@ public class MeldChecker {
 		int sum=0;
 		for(int i=0;i<meld.size();i++) {
 			if (meld.get(i).getValue() == 0) {
-				sum+= ((Joker)meld.get(i)).getMask();
+				sum+= ((Joker)meld.get(i)).getMask();}
 			sum+=meld.get(i).getValue();
 		}
 		if (sum>=30) {
