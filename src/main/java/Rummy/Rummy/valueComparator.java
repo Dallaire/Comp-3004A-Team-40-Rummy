@@ -10,7 +10,12 @@ public class valueComparator implements Comparator<Tile> {
 	    public int compare(Tile o1, Tile o2) {
 		 	Color c1 = o1.getColor();
 		 	Color c2 = o2.getColor();
-		 	int comp = c1.compareTo(c2);
+		 	int comp;
+		 	if (c1 == null) 
+		 		comp = -1;
+		 	else if (c2 == null)
+		 		comp = 1;
+		 	else comp = c1.compareTo(c2);
 		 	
 		 	if (comp != 0) {return comp;}
 		 	
