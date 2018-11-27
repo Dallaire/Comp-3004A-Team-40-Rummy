@@ -51,11 +51,14 @@ public class MeldChecker {
 	/**
 	 * compares the color of the 2 giver tiles and returns true if equal otherwise false*/
 	public static boolean checkColor(Tile t1,Tile t2) {
+		if (t1.getColor() == null || t2.getColor() == null) return true;
 		return t1.colorToString().equals(t2.colorToString());
 	}
 	/**
 	 * compares the value of the 2 giver tiles and returns true if the difference=1 otherwise false*/
 	public static boolean checkDifference(Tile t1, Tile t2) {
+		if (t1.getValue() == 0) {return ((t2.getValue() - ((Joker)t1).getMask()) == 1);}
+		else if (t2.getValue() == 0) {return ((((Joker)t2).getMask() - t1.getValue()) == 1);}
 		if ((t2.getValue()-t1.getValue())==1) {
 			return true;
 		}
