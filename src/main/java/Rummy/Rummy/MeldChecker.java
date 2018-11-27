@@ -68,7 +68,10 @@ public class MeldChecker {
 		int sum=0;
 		for (int i = 0; i < meld.size(); i++) {
 			//System.out.println("sum"+sum);
-			sum+=meld.get(i).getValue();
+			if (meld.get(i).getValue() == 0) {
+				sum+= ((Joker)meld.get(i)).getMask();
+			}
+			else sum+=meld.get(i).getValue();
 		}
 		//System.out.println("sum"+sum);
 
@@ -83,7 +86,9 @@ public class MeldChecker {
 		int mpoints = 0;
 		for(Tile t: meld)
 		{
-			mpoints += t.getValue();
+			if (t.getValue() == 0)
+				mpoints += ((Joker)t).getMask();
+			else mpoints += t.getValue();
 		}
 		return mpoints;
 	}
