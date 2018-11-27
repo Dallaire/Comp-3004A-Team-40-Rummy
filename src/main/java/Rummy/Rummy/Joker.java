@@ -2,6 +2,7 @@ package Rummy.Rummy;
 
 public class Joker extends Tile{
 	int maskValue = 0;
+	
 	public Joker(Color aColor, int aValue) {
 		super(null, 0);
 	}
