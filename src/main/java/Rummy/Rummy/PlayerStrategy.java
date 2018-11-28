@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Timer;
+
 
 public class PlayerStrategy extends Player implements Strategy {
 	
@@ -27,8 +27,10 @@ public class PlayerStrategy extends Player implements Strategy {
 	 * -Two modes: can read from file or prompt user through the console
 	 * @return - ArrayList<ArrayList<Tile>> if valid  or null if passing and or a meld*/
 	public ArrayList<ArrayList<Tile>> playTurn() {
+
 		
 		// local variables
+
 		int points = 0;
 		boolean flag = true;		
 		ArrayList<ArrayList<Tile>> melds = new ArrayList<ArrayList<Tile>>();
