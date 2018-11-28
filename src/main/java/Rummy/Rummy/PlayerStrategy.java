@@ -30,10 +30,12 @@ public class PlayerStrategy extends Player implements Strategy {
 
 		
 		// local variables
-
+		long endTime = System.currentTimeMillis() + 120000;
 		int points = 0;
 		boolean flag = true;		
 		ArrayList<ArrayList<Tile>> melds = new ArrayList<ArrayList<Tile>>();
+		
+		while(System.currentTimeMillis()<endTime) {
 		
 		// Put the player in a loop
 		while (flag == true) {
@@ -126,12 +128,13 @@ public class PlayerStrategy extends Player implements Strategy {
 			// Pass on the turn
 			else {
 				flag = false;
+				break;
 			} 
 			
 		// end while loop	
 		}
 		
-		
+		}
 		return melds; //if the player passes, return null else return the meld
 	}
 
