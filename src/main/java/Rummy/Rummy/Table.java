@@ -444,8 +444,8 @@ public final class Table {
 		// if the meld is null it means the player chose to pick from the stock
 		// A non-null meld is a valid move placed on the Table
 		if(player instanceof PlayerStrategy) {
-
 			meldz = ((PlayerStrategy) player).playTurn();
+			
 //			meldsToString = meldz.toString();
 //			meldsToString = "{ " +  meldsToString.substring(1, meldsToString.length()) + " }";
 			if (meldz == null) {

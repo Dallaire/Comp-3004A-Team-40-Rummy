@@ -18,6 +18,8 @@ public class Deck {
 				tiles.add(new Tile(color, i));
 			}
 		}
+		tiles.add(new Tile(null, 0));
+		tiles.add(new Tile(null, 0));
 		this.Shuffle();
 	}
 	

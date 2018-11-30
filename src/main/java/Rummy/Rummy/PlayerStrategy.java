@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class PlayerStrategy extends Player implements Strategy {
 	
 	//Instance variables
@@ -26,11 +27,15 @@ public class PlayerStrategy extends Player implements Strategy {
 	 * -Two modes: can read from file or prompt user through the console
 	 * @return - ArrayList<ArrayList<Tile>> if valid  or null if passing and or a meld*/
 	public ArrayList<ArrayList<Tile>> playTurn() {
+
 		
 		// local variables
+		long endTime = System.currentTimeMillis() + 120000;
 		int points = 0;
 		boolean flag = true;		
 		ArrayList<ArrayList<Tile>> melds = new ArrayList<ArrayList<Tile>>();
+		
+		while(System.currentTimeMillis()<endTime) {
 		
 		// Put the player in a loop
 		while (flag == true) {
@@ -123,12 +128,13 @@ public class PlayerStrategy extends Player implements Strategy {
 			// Pass on the turn
 			else {
 				flag = false;
+				break;
 			} 
 			
 		// end while loop	
 		}
 		
-		
+		}
 		return melds; //if the player passes, return null else return the meld
 	}
 
