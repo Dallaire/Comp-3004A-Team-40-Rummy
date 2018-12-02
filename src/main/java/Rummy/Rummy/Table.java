@@ -1,14 +1,17 @@
 package Rummy.Rummy;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
+import java.net.*;
+import java.io.*;
 
 
 /**
  * The Table class contains all the data structures used to represent game elements
- * The class is responsible for passing data between 
+ * The class is responsible for passing data between the players
  * @players {Object} - A list of players in the game
  * @stock - The initial set of 104 tiles used at the start of the game 
- * @meld - a single meld submitted by a player, which is refreshed after each turn - Removed -Jacob
  * @melds - a collection of melds submitted
  * @firstMeld - boolean value of whether or not a valid 30 point melds is played to start the game
  * @players - An ArrayList of players in on the table
@@ -21,30 +24,35 @@ public final class Table {
 	static private ArrayList<ArrayList<Tile>> melds = new ArrayList<ArrayList<Tile>>();
 	static private boolean firstMeld = false;
 	static private boolean threeLess = false;
-	static private JRON jron = new JRON(null, false, false);
+	static private JRON jron = new JRON(null, false, false, null,null);
 	static private boolean winner = false;
 	static private int whosTurn = 0;
 	static private int numMeldsLastPlayed = 0;
+	static private Random rn = new Random();
 
 	/**
 	 *Start the came with Random Cards*/
 	static public void init() {
 		loadPlayers();
 		loadDeck();
+		tileDraw();
 		shareCards();
+		update();
 		for (Player x: players) {
 			x.printTiles();
 		}
-		
 	}
-	
+
 	/**
 	 * Start the Game and let the user pass
 	 * @param f - The name of the input file*/
 	static public void initPass(String f) {
 		loadPlayers();
 		loadDeck();
+		tileDraw();
 		shareCards();
+		update();
+		int index = 0;
 		for (Player x: players) {
 			x.printTiles();
 		}
@@ -66,6 +74,8 @@ public final class Table {
 		//players.clear();	
 		loadPlayers();
 		loadDeck();
+		tileDraw();
+		update();
 		
 		int i = 11;
 		for (Player x: players) {
@@ -97,6 +107,8 @@ public final class Table {
 		//players.clear();	
 		loadPlayers();
 		loadDeck();
+		tileDraw();
+		update();
 		
 		int i = 6;
 		for (Player x: players) {
@@ -128,6 +140,8 @@ public final class Table {
 		//players.clear();	
 		loadPlayers();
 		loadDeck();
+		tileDraw();
+		update();
 		
 		int i = 3;
 		for (Player x: players) {
@@ -154,25 +168,126 @@ public final class Table {
 	
 	
 	/**
-	 * Hard coded instantiation of players to populate the list of players
+	 * Instantiation of players to populate the list of players
 	 * @FirstStrategy - Plays 30 points as soon as it can
 	 * @SecondStrategy - 
 	 * @ThirdStrategy - */
 	static public void loadPlayers() {
 		
-		PlayerStrategy p1 = new PlayerStrategy("Human");
-		FirstStrategy ai1 = new FirstStrategy("AI 1");
-		SecondStrategy ai2 = new SecondStrategy("AI 2");	
-		ThirdStrategy ai3 = new ThirdStrategy("AI 3");
-
+		// Prompt the user to enter the number of players that will be human
+		System.out.println("How many human players will be playing?");
+		BufferedReader input = new BufferedReader (new InputStreamReader (System.in));
+		String inputString = "";
+		try {
+			inputString = input.readLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Failed at reading user input @loadPlayers");
+			e.printStackTrace();
+		}
+		int num = Integer.parseInt ( inputString );
+		
+		// Initialize the ArrayList of player
 		players = new ArrayList<Player>();
-		players.add(p1);
-		players.add(ai1);
-		players.add(ai2);
-		players.add(ai3);
-
+		
+		// add the specified number of player to the list
+		for (int i = 0; i < num; i++) {
+			players.add(new PlayerStrategy("Human" + (i+1) , true));		
+		}
+		
+		// Prompt the user to determine the number of AI's
+		System.out.println("How many AI players will be playing?");
+		inputString = "";
+		try {
+//			input.reset();
+			inputString = input.readLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		num = Integer.parseInt ( inputString );
+				
+		// generate AI based on modulo 3 random number
+		int spaces_available = 4 - players.size();
+		
+		//easiest way to deal with wrong input
+		if(num + players.size() == 4) {
+			spaces_available = 4 - players.size();
+		} else if (num + players.size() < 4 && num > 0) {
+			spaces_available = num;
+		} else if ((num + players.size() > 4) ) {
+			spaces_available = 4 - players.size();
+		}
+		
+		int measure = 0;
+		for (int i = 0; i < spaces_available; i++) {
+			measure = rn.nextInt(10000)%4;
+			if( measure == 0) { //create a StratOne
+				players.add(new FirstStrategy("AI1-"+i, true));	
+			}
+			else if (measure == 1) { //create a StratTwo
+				players.add(new SecondStrategy("AI2-"+i, true));	
+			}
+			else if  (measure == 2){ //create a StratThree
+				players.add(new ThirdStrategy("AI3-"+i, true));	
+			} 
+			else {//create a StratFour
+				players.add(new SecondStrategy("AI4-"+i, true));	
+			}
+		}
 
 	}
+	/**
+	 * Determine the order in which the players will play
+	 * Each player draws a tile the highest goes first
+	 * Completely Automated at his moment - no input from players required*/
+	public static void tileDraw() {
+		System.out.println("\n------------------------------------");
+		System.out.println("Begin tile draw to determine who starts");
+		ArrayList<Tile> tileMap = new ArrayList<Tile>();
+		ArrayList<Tile> dirtyTileMap = new ArrayList<Tile>();
+		
+		// Draw the random tiles
+    	for (int i = 0; i < players.size(); i++) {
+    		tileMap.add(stock.getRandomTile());
+    		dirtyTileMap.add(tileMap.get(i));
+    	}
+    	
+    	System.out.println("Old order"); 
+
+    	for (int i = 0; i < players.size(); i++) {
+    		System.out.println(i +": "+ players.get(i).getName());
+    	}
+
+		// run a sort on the tileMap
+    	System.out.println(tileMap);
+		Collections.sort(tileMap);
+
+		
+		// let's do some dirty arrangements
+		ArrayList<Player> dirtyTemp =  new ArrayList<Player>();
+		// add all the players from one list to the other
+    	for (int i = 0; i < players.size(); i++) {
+    		dirtyTemp.add(players.get(i));
+    	}
+    	
+    	// get the old index and set new one according to the draw results
+    	for (int i = 0; i < players.size(); i++) {
+    		
+    		players.set( tileMap.indexOf(dirtyTileMap.get(i)), dirtyTemp.get(i));
+    	}
+    	
+		System.out.println(tileMap);
+    	System.out.println("New order"); 
+
+    	for (int i = 0; i < players.size(); i++) {
+    		System.out.println(i +": "+ players.get(i).getName());
+    	}
+    	
+    	System.out.println("End of tile draw");
+    	System.out.println("------------------------------------ \n");
+	}
+	
 	/**
 	 * loads the deck*/
 	static public void loadDeck() {
@@ -329,10 +444,10 @@ public final class Table {
 		// if the meld is null it means the player chose to pick from the stock
 		// A non-null meld is a valid move placed on the Table
 		if(player instanceof PlayerStrategy) {
-
 			meldz = ((PlayerStrategy) player).playTurn();
-			meldsToString = meldz.toString();
-			meldsToString = "{ " +  meldsToString.substring(1, meldsToString.length()) + " }";
+			
+//			meldsToString = meldz.toString();
+//			meldsToString = "{ " +  meldsToString.substring(1, meldsToString.length()) + " }";
 			if (meldz == null) {
 				System.out.println("Table: " + player.getClass().getSimpleName() + " " +  player.getName() + " drew from stock");
 				numMeldsLastPlayed = 0;
@@ -350,14 +465,12 @@ public final class Table {
 			
 		} else if (player instanceof FirstStrategy){
 			meldz = ((FirstStrategy) player).playTurn();
-			//meldsToString = meldz.toString();
-			//meldsToString = "{ " +  meldsToString.substring(1, meldsToString.length()) + " }";
 			if (meldz == null) {
 				System.out.println(player.getClass().getSimpleName() + " " +  player.getName() +" drew from stock");
 				numMeldsLastPlayed = 0;
 			}
 			else {
-				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played meld(s): " + meldzToString(meldz));
+				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld: ");
 				addMeldz(meldz);
 				if (!getFirst()) {
 					setFirst30(true);
@@ -386,6 +499,8 @@ public final class Table {
 				numMeldsLastPlayed = 0;
 			}
 			else {
+				// meldsToString = meldz.toString();
+				// meldsToString = "{ " +  meldsToString.substring(1, meldsToString.length()) + " }";
 				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played a meld");
 				System.out.println(player.getClass().getSimpleName() + " " +  player.getName()+ " played meld(s)" + meldzToString(meldz));
 				addMeldz(meldz);
@@ -404,6 +519,26 @@ public final class Table {
 			System.out.println(player.getName() + " has won the game!");
 			setWinner(true);
 		}
+		
+		//Memento, check if the table melds are in a good state
+		//Mememeto = Table.jron.melds
+		//Originator = player
+		//Caretaker = Table.jron
+		for (ArrayList<Tile> hand: melds) {
+			
+			if(MeldChecker.checkHand(hand) == false) {
+				
+				player.addMelds(meldz); // return the melds to the player
+				melds = jron.getMelds(); // go back to the old state 
+				
+				for (int i = 0; i <3 ; i++) { // pick three random tiles
+					player.addTile(stock.getRandomTile()); //
+				}
+				break;
+			}
+		}
+		
+
 		
 		printMelds();
 		nextMove();
@@ -437,16 +572,16 @@ public final class Table {
 	       return threeLess;
 	}
 	
-	
 	/**
 	 * Update all subscribers of the state of the game
 	 * Updates
 	 * */
-	static public void update() {
+	static public void updateJRON() {
 		
 		// update the jron data
 		jron.setFirstMeld(getFirst());
 		jron.setMelds(getMelds());
+		jron.setStock(getStock());
 		
 	       for (Player x:players) 
 	        { 
@@ -458,7 +593,36 @@ public final class Table {
 	            	threeLess = true;
 	            	jron.setThreeLess(threeLess);
 	            }
-	            x.update(jron);
+	        } 
+		
+	}
+	/**
+	 * Update all subscribers of the state of the game
+	 * Updates
+	 * */
+	static public void update() {
+		
+		// update the jron data
+		updateJRON();
+		jron.setContext("update");
+	       for (Player x:players) 
+	        { 
+	    	   	if(x.isLocal()) 
+	    	   	{
+	    	   		x.update(jron);
+	    	   	}
+	    	   	else 
+	    	   	{
+	    	   		try {
+						connectSocket(jron);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+	    	   	}
 	        } 
 		
 	}
@@ -520,4 +684,39 @@ public final class Table {
 		
 		return "{ " + str + " }";
 	}
+	
+	 static void connectSocket(JRON jron) throws IOException, ClassNotFoundException {
+		 //PlayerStrategy player = (PlayerStrategy)Table.getPlayer(0);
+		 
+		 int port = 4444;
+	  //create the socket server object
+        ServerSocket server = new ServerSocket(port);
+        //keep listens indefinitely until receives 'exit' call or program terminates
+        while(true){
+            System.out.println("Waiting for client request");
+            //creating socket and waiting for client connection
+            Socket socket = server.accept();
+            //read from socket to ObjectInputStream object
+            ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+            //convert ObjectInputStream object to String
+            String message = (String) ois.readObject();
+            System.out.println("Message Received: " + message);
+            //create ObjectOutputStream object
+            ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+            //write object to Socket
+            oos.writeObject("Hi Client "+message);
+            //close resources
+            ois.close();
+            oos.close();
+            socket.close();
+            //terminate the server if client sends exit request
+            if(message.equalsIgnoreCase("exit")) break;
+        }
+        System.out.println("Shutting down Socket server!!");
+        //close the ServerSocket object
+        server.close();
+
+	 }
+	 
+	
 }

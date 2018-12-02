@@ -1,5 +1,15 @@
 package Rummy.Rummy;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
+import java.io.Reader;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -13,10 +23,12 @@ public class Player {
 	protected JRON tableData = null;
 	protected boolean playedFirst30 = false;
 	protected boolean hasPlayed = false;
+	private boolean isLocal;
 	
 	//Constructor
-	public Player(String aName) {
+	public Player(String aName, boolean isLocal) {
 		this.name = aName;
+		this.isLocal = isLocal;
 	}
 	
 	
@@ -162,6 +174,9 @@ public class Player {
 			}
 		}
 		
+		if (temp.size()==0)
+			return null;
+		
 		return temp;
 	}
 
@@ -245,11 +260,20 @@ public class Player {
 			temp.add(tempHand.get(i));
 			
 			for(int j=i-1;j>=0;j--) {
-				if(temp.get(temp.size()-1).getValue()==tempHand.get(j).getValue()) {
+				if (temp.get(temp.size()-1).getValue()==0) {
+					(temp.get(temp.size()-1)).setMask(tempHand.get(j).getValue());
+					temp.add(tempHand.get(j));
+				}
+				else if (tempHand.get(j).getValue()==0) {
+					(temp.get(j)).setMask(tempHand.get(temp.size()-1).getValue());
+					temp.add(tempHand.get(j));
+				}	
+				else if(temp.get(temp.size()-1).getValue()==tempHand.get(j).getValue()) {
 						temp.add(tempHand.get(j));
 					}
 			}
-			
+			if (temp.size() > 4)
+				temp = (ArrayList<Tile>)temp.subList(0, 4);
 			if(temp.size()>=3) {
 				if (hand.containsAll(tempHand)) {
 					hand.removeAll(temp);
@@ -295,6 +319,46 @@ public class Player {
 		meldsToString = "{ " +  meldsToString.substring(1, meldsToString.length() -1) + " }";
 		System.out.println(this.name + "'s cards: " + meldsToString);
 	}
+
+
+	public ArrayList<ArrayList<Tile>> playTurn() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
+	
+    public void playSocket() throws UnknownHostException, IOException, ClassNotFoundException, InterruptedException {
+    	
+		InetAddress host = InetAddress.getLocalHost();
+	    Socket socket = null;
+	    ObjectOutputStream oos = null;
+	    ObjectInputStream ois = null;
+	    
+	    for(int i=0; i<5;i++){
+	        //establish socket connection to server
+	        socket = new Socket(host.getHostName(), 9876);
+	        //write to socket using ObjectOutputStream
+	        oos = new ObjectOutputStream(socket.getOutputStream());
+	        System.out.println("Sending request to Socket Server");
+	        if(i==4)oos.writeObject("exit");
+	        else oos.writeObject(""+i);
+	        //read the server response message
+	        ois = new ObjectInputStream(socket.getInputStream());
+	        String message = (String) ois.readObject();
+	        System.out.println("Message: " + message);
+	        //close resources
+	        ois.close();
+	        oos.close();
+	        Thread.sleep(100);
+	    
+	    }    	
+    	
+    }
+
+
+	public boolean isLocal() {
+		// TODO Auto-generated method stub
+		return this.isLocal;
+	}
 		
 }

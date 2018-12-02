@@ -10,14 +10,10 @@ public class SecondStratTests extends TestCase {
 		Table.init();
 		Table.getMelds().clear();
 		SecondStrategy player = (SecondStrategy)Table.getPlayer(2);
-		JRON jron = new JRON(Table.getMelds(),false,Table.getThreeLess());
+		JRON jron = new JRON(Table.getMelds(),false,Table.getThreeLess(), "update", Table.getStock());
 		player.update(jron);
 		int handsize1 = player.getHand().size();
-<<<<<<< HEAD
 		player.playTurn2();
-=======
-		player.playTurn(Table.getMelds());
->>>>>>> branch 'Working' of https://github.com/Dallaire/Comp-3004A-Team-40-Rummy.git
 		int handsize2 = player.getHand().size();
 		assertTrue(Table.getMelds().isEmpty());
 		assertEquals(1, handsize2-handsize1);
@@ -28,14 +24,10 @@ public class SecondStratTests extends TestCase {
 		Table.getMelds().clear();
 		Table.setFirst30(true);
 		SecondStrategy player = (SecondStrategy)Table.getPlayer(2);
-		JRON jron = new JRON(Table.getMelds(),Table.getFirst(),Table.getThreeLess());
+		JRON jron = new JRON(Table.getMelds(),Table.getFirst(),Table.getThreeLess(), "update",Table.getStock());
 		player.update(jron);
 		int handsize1 = player.getHand().size();
-<<<<<<< HEAD
 		player.playTurn2();
-=======
-		player.playTurn(Table.getMelds());
->>>>>>> branch 'Working' of https://github.com/Dallaire/Comp-3004A-Team-40-Rummy.git
 		int handsize2 = player.getHand().size();
 		if(!player.getHasPlayed()) {
 			assertTrue(Table.getMelds().isEmpty());
@@ -64,13 +56,9 @@ public class SecondStratTests extends TestCase {
 		player.addTile(new Tile(Color.O, 4));
 		player.addTile(new Tile(Color.O, 8));
 		player.addTile(new Tile(Color.R, 8));
-		player.update(new JRON(new ArrayList<ArrayList<Tile>>(),true,false));
+		player.update(new JRON(new ArrayList<ArrayList<Tile>>(),true,false, "update", Table.getStock()));
 		player.setFirst30(true);
-<<<<<<< HEAD
 		player.playTurn2();
-=======
-		player.playTurn(Table.getMelds());
->>>>>>> branch 'Working' of https://github.com/Dallaire/Comp-3004A-Team-40-Rummy.git
 		
 		assertTrue(player.getHand().isEmpty());
 	}
@@ -99,14 +87,9 @@ public class SecondStratTests extends TestCase {
 		meld.add(new Tile(Color.R, 3));
 		meld.add(new Tile(Color.R, 4));
 		Table.addMeld(meld);
-		player.update(new JRON(new ArrayList<ArrayList<Tile>>(),true,false));
+		player.update(new JRON(new ArrayList<ArrayList<Tile>>(),true,false, "update", Table.getStock()));
 		player.setFirst30(true);
-<<<<<<< HEAD
 		player.playTurn2();
-=======
-		player.playTurn(Table.getMelds());
->>>>>>> branch 'Working' of https://github.com/Dallaire/Comp-3004A-Team-40-Rummy.git
-		
 		assertTrue(player.getHand().isEmpty());
 	}
 }

@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class PlayerStrategy extends Player implements Strategy {
 	
 	//Instance variables
@@ -15,8 +16,8 @@ public class PlayerStrategy extends Player implements Strategy {
 	private String fileName = "";
 	private int x = 1;
 
-	public PlayerStrategy(String aName) {
-		super(aName);
+	public PlayerStrategy(String aName, boolean isLocal) {
+		super(aName, isLocal);
 	}
 
 
@@ -26,11 +27,15 @@ public class PlayerStrategy extends Player implements Strategy {
 	 * -Two modes: can read from file or prompt user through the console
 	 * @return - ArrayList<ArrayList<Tile>> if valid  or null if passing and or a meld*/
 	public ArrayList<ArrayList<Tile>> playTurn() {
+
 		
 		// local variables
+		long endTime = System.currentTimeMillis() + 120000;
 		int points = 0;
 		boolean flag = true;		
 		ArrayList<ArrayList<Tile>> melds = new ArrayList<ArrayList<Tile>>();
+		
+		//while(System.currentTimeMillis()<endTime) {
 		
 		// Put the player in a loop
 		while (flag == true) {
@@ -123,12 +128,13 @@ public class PlayerStrategy extends Player implements Strategy {
 			// Pass on the turn
 			else {
 				flag = false;
+				break;
 			} 
 			
 		// end while loop	
 		}
 		
-		
+		//}
 		return melds; //if the player passes, return null else return the meld
 	}
 
@@ -197,19 +203,11 @@ public class PlayerStrategy extends Player implements Strategy {
 			scanner.close();
 			return Integer.parseInt(fileInput.remove(0));
 		} else {
-			
-			while(true) {
-				
-				System.out.println("What would you like to do? \n 1) play a meld or \n 2) pick from the stock \n 3) pass without playing");			
-				String input = scanner.nextLine();
-				choice = Integer.parseInt(input);
-				
-				if (choice == 1 || choice == 2 || choice == 3) {
-					scanner.close();
-					break;
-				}
-				
-			}
+			System.out.println("Table: " + Table.getMelds());
+			System.out.println("What would you like to do? \n 1) play a meld or \n 2) pick from the stock \n 3) pass without playing");
+			String input = scanner.nextLine();
+			choice = Integer.parseInt(input);
+			scanner.reset();
 		}
 
 		return choice;
@@ -252,13 +250,9 @@ public class PlayerStrategy extends Player implements Strategy {
 			}
 			input = fileInput.get(0);
 		} else {
-			BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-			try {
-				input = in.readLine();
-			} catch (IOException e) {
-				e.printStackTrace();
-				input = "n";
-			}
+			Scanner scanner = new Scanner(System.in);
+			input = scanner.nextLine();
+			scanner.reset();
 		}
 
 		
