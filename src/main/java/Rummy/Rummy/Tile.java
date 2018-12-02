@@ -5,7 +5,7 @@ public class Tile implements Comparable<Tile>{
 	private Color color;
 	//Ace =1, j-K = 11-13
 	private int value;
-	private int maskValue;
+	private int maskValue = 0;
 
 	public Tile(Color aColor, int aValue) {
 		this.color = aColor;
