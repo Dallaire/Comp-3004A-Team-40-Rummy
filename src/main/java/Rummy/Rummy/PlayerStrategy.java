@@ -35,7 +35,7 @@ public class PlayerStrategy extends Player implements Strategy {
 		boolean flag = true;		
 		ArrayList<ArrayList<Tile>> melds = new ArrayList<ArrayList<Tile>>();
 		
-		while(System.currentTimeMillis()<endTime) {
+		//while(System.currentTimeMillis()<endTime) {
 		
 		// Put the player in a loop
 		while (flag == true) {
@@ -134,7 +134,7 @@ public class PlayerStrategy extends Player implements Strategy {
 		// end while loop	
 		}
 		
-		}
+		//}
 		return melds; //if the player passes, return null else return the meld
 	}
 

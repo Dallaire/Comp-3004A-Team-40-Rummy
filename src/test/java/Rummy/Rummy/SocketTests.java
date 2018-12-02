@@ -12,7 +12,7 @@ public class SocketTests extends TestCase {
 	public void testTableConnect() throws IOException {
 		
 		Table.init();
-		JRON jron = new JRON(null, false, false, "update");
+		JRON jron = new JRON(null, false, false, "update", Table.getStock());
 		try {
 			Table.connectSocket(jron);
 		} catch (ClassNotFoundException e) {
