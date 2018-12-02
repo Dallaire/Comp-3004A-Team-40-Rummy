@@ -33,7 +33,18 @@ public class JokerTest extends TestCase {
 		assertTrue(player.getHand().isEmpty());
 	}
 	
-	public void testJokerPrint() {
-		System.out.println(new Tile(null,0));
+	public void testJokerRun2() {
+		Table.getMelds().clear();
+		FirstStrategy player = new FirstStrategy("p1", true);
+		player.getHand().clear();
+		player.addTile(new Tile(Color.B, 8));
+		player.addTile(new Tile(Color.B, 10));
+		player.addTile(new Tile(Color.B, 7));
+		player.addTile(new Tile(null,0));
+		player.setFirst30(true);
+		player.playTurn();
+		System.out.println(player.getHand().size());
+		assertTrue(player.getHand().isEmpty());
 	}
+	
 }

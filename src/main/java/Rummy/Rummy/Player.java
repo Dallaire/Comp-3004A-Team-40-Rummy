@@ -205,17 +205,27 @@ public class Player {
 		for (int i=0; i<hand.size()-1;i++) {
 			temp.add(tempHand.get(i));
 			for(int j=i+1;j<hand.size();j++) {
-				if(MeldChecker.checkColor(temp.get(temp.size()-1), tempHand.get(j))
+				if (temp.get(temp.size()-1).getValue() - tempHand.get(j).getValue() == -2 
+						&& temp.get(temp.size()-1).getColor() == tempHand.get(j).getColor()
+						&& tempHand.get(tempHand.size()-1).getValue() == 0) {
+					temp.add(tempHand.get(j));
+					tempHand.get(tempHand.size()-1).setMask(temp.get(temp.size()-1).getValue() + 1);
+					temp.add(tempHand.get(tempHand.size()-1));
+				}
+				
+				else if(temp.get(temp.size()-1).equals(tempHand.get(j))) {
+					continue;
+				}
+				else if(MeldChecker.checkColor(temp.get(temp.size()-1), tempHand.get(j))
 				&&MeldChecker.checkDifference(temp.get(temp.size()-1), tempHand.get(j))) {
 					if (!temp.contains(tempHand.get(j))) {
 						temp.add(tempHand.get(j));
 					}
 				}
-				else if(temp.get(temp.size()-1).equals(tempHand.get(j))) {
-					continue;
-				}
 			}
 			if(temp.size()>=3) {
+				Collections.sort(temp, new valueComparator());
+				System.out.println(temp);
 				if (hand.containsAll(tempHand)) {
 					hand.removeAll(temp);
 				} else {
