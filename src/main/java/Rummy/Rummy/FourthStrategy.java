@@ -3,6 +3,9 @@ package Rummy.Rummy;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -13,6 +16,7 @@ public class FourthStrategy extends Player implements Strategy{
 	private ArrayList<ArrayList<Tile>> onTable = new ArrayList<ArrayList<Tile>>();
 	// Set compute 
 	Set<Integer> possibleSets = new TreeSet<Integer>(); 
+	Set<Color> possibleRuns = new TreeSet<Color>();
 	
 	private HashMap<String,Integer> tileMap = new HashMap<String,Integer>();
 	
@@ -21,6 +25,8 @@ public class FourthStrategy extends Player implements Strategy{
 		// TODO Auto-generated constructor stub
 	}
 	
+	/**
+	 * Analyze the Tiles on the board and determine the number still out there*/
 	public void compute() {
 		
 		dataInit();
@@ -63,7 +69,14 @@ public class FourthStrategy extends Player implements Strategy{
 		System.out.println(onTable.toString());
 		System.out.println(tileMap.toString());
 		
+		setCompute();
+		runCompute();
+		printMap();
+		
+		// Iterate through the tileMap and find Tiles that are possibly still in the stock
+		
 	}
+	
 	
 	/**
 	 * Get the cards that the other players have, including your own
@@ -102,6 +115,7 @@ public class FourthStrategy extends Player implements Strategy{
 	 * Find possible sets in the current hand*/
 	public void setCompute() {
 		
+		System.out.println("\n************Computing Sets************");
 		ArrayList<Tile> tempHand = new ArrayList<Tile>(hand);
 		Collections.sort(tempHand, new valueComparator());
 		System.out.println(tempHand.toString());
@@ -119,6 +133,37 @@ public class FourthStrategy extends Player implements Strategy{
 		System.out.println(possibleSets.toString());
 		
 	}
-	
+	/**
+	 * Find possible runs in the current hand*/
+	public void runCompute() {
+		System.out.println("\n************Computing Runs************");
+		ArrayList<Tile> tempHand = new ArrayList<Tile>(hand);
+		Collections.sort(tempHand, new valueComparator());
+		System.out.println(tempHand.toString());
+		Tile temp;
+		for (int i = 0; i < tempHand.size(); i++) {
+			temp = tempHand.remove(i);
+			for (Tile t: hand) {
+				if(temp.getColor() == t.getColor() && Math.abs(temp.getValue() - t.getValue())==1) {
+					possibleRuns.add(temp.getColor());
+					tempHand.remove(t);
+				}
+			}
+		}
 
+		System.out.println(possibleRuns.toString());
+	}
+	
+	public void printMap() {
+	    Iterator<Entry<String, Integer>> it = tileMap.entrySet().iterator();
+	    while (it.hasNext()) {
+	        Map.Entry pair = (Map.Entry)it.next();
+	        System.out.println(pair.getKey() + " = " + pair.getValue());
+	        it.remove(); // avoids a ConcurrentModificationException
+	        
+//	        if(pair.getValue() == 0) {
+//	        	
+//	        }
+	    }
+	}
 }

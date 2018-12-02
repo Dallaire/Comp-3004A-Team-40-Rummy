@@ -12,7 +12,6 @@ public class FourthStrategyTest extends TestCase {
 		Table.initStrat4();
 		FourthStrategy player = (FourthStrategy) Table.getPlayer(0);
 		player.compute();
-		player.setCompute();
 	}
 	
 	/**
