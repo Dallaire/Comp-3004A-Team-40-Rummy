@@ -28,6 +28,7 @@ public class Tile implements Comparable<Tile>{
 	}
 	
 	public String toString() {
+		if (value == 0) return "J";
 		return color.toString() + String.valueOf(value);
 	}
 	
