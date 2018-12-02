@@ -60,6 +60,13 @@ public class Deck {
 		return tiles.remove(rn.nextInt(14));
 	}
 
+	public void addTiles(ArrayList<Tile> tileMap) {
+		// TODO Auto-generated method stub
+		for (Tile tile: tileMap)
+			tiles.add(tile);
+		
+	}
+
 	
 	
 
