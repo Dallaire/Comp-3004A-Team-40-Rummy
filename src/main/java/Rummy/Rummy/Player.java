@@ -17,13 +17,13 @@ import java.util.List;
 
 public class Player implements Comparable<Player>{
 	//Properties
-	private ArrayList<Tile> hand = new ArrayList<Tile>();
-	private String name;
+	protected ArrayList<Tile> hand = new ArrayList<Tile>();
+	protected String name;
 	protected ArrayList<Tile> meld = new ArrayList<Tile>();
 	protected JRON tableData = null;
 	protected boolean playedFirst30 = false;
 	protected boolean hasPlayed = false;
-	private boolean isLocal;
+	protected boolean isLocal;
 	
 	//Constructor
 	public Player(String aName, boolean isLocal) {

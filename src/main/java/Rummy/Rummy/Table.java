@@ -62,6 +62,22 @@ public final class Table {
 		
 	}
 	
+	static public void initStrat4() {
+		//loadPlayers();
+		players = new ArrayList<Player>();
+		players.add(new FourthStrategy("AI4-1", true));
+		players.add(new FourthStrategy("AI4-2", true));
+		players.add(new ThirdStrategy("AI3-1", true));
+		players.add(new ThirdStrategy("AI3-2", true));
+		loadDeck();
+		//tileDraw();
+		shareCards();
+		update();
+		for (Player x: players) {
+			x.printTiles();
+		}
+	}
+	
 	/**
 	 * Init for requirement number 8 on the grid
 	 * a - The player can play a single run
@@ -232,7 +248,7 @@ public final class Table {
 				players.add(new ThirdStrategy("AI3-"+i, true));	
 			} 
 			else {//create a StratFour
-				players.add(new SecondStrategy("AI4-"+i, true));	
+				players.add(new FourthStrategy("AI4-"+i, true));	
 			}
 		}
 
