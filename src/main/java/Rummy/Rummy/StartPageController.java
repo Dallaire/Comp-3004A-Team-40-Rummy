@@ -62,8 +62,7 @@ public class StartPageController {
 	}
 	
 	public void onClickstartPageOKbutton() throws IOException {
-//		Stage stage =(Stage)startPageOKbutton.getScene().getWindow();
-//		stage.close();
+		//TODO Populate Table.players
 		main.showMainPage();
 	}
 //	private void startPage() throws IOException {

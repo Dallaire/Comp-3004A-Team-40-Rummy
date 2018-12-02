@@ -32,4 +32,8 @@ public class JokerTest extends TestCase {
 		System.out.println(player.getHand().size());
 		assertTrue(player.getHand().isEmpty());
 	}
+	
+	public void testJokerPrint() {
+		System.out.println(new Tile(null,0));
+	}
 }
