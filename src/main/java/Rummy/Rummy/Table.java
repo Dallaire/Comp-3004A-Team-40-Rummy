@@ -286,6 +286,7 @@ public final class Table {
     	
     	System.out.println("End of tile draw");
     	System.out.println("------------------------------------ \n");
+    	stock.addTiles(tileMap);
 	}
 	
 	/**

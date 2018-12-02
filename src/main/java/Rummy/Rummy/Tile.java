@@ -57,14 +57,16 @@ public class Tile implements Comparable<Tile>{
 	 	Color c2 = otherTile.getColor();
 	 	int comp = c1.compareTo(c2);
 	 	
+	 	// Compare by color if the ranks differ
 	 	if (comp != 0) {return comp;}
 	 	
-	 	//Compare the Tiles by value
+	 	//Compare the Tiles by value if the color is the same
 	 	if (this.getValue() > otherTile.getValue() || this.getValue() == 0) {
 	 		return -1;
 	 	}
+	 	// The colors are the same and the value is the same
 	 	else {
-	 		return 1;
+	 		return 0;
 	 	}	
 		
 	}

@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class Player {
+public class Player implements Comparable<Player>{
 	//Properties
 	private ArrayList<Tile> hand = new ArrayList<Tile>();
 	private String name;
@@ -313,8 +313,8 @@ public class Player {
 	/**
 	 * Print the tiles in the current players hand*/
 	public void printTiles() {
-		Collections.sort(hand,new valueComparator());
-		Collections.sort(hand,new colourCompataror());
+		//Collections.sort(hand,new valueComparator());
+		//Collections.sort(hand,new colourCompataror());
 		String meldsToString = hand.toString();
 		meldsToString = "{ " +  meldsToString.substring(1, meldsToString.length() -1) + " }";
 		System.out.println(this.name + "'s cards: " + meldsToString);
@@ -360,5 +360,18 @@ public class Player {
 		// TODO Auto-generated method stub
 		return this.isLocal;
 	}
+
+
+	@Override
+	/**
+	 * Compares the player names to determine if a player is itself*/
+	public int compareTo(Player o) {
+		// TODO Auto-generated method stub
+		if(this.getName().equals(o.getName()))
+			return 0;
+		return -1;
+	}
+	
+	
 		
 }
