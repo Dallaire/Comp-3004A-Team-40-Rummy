@@ -24,7 +24,7 @@ public final class Table {
 	static private ArrayList<ArrayList<Tile>> melds = new ArrayList<ArrayList<Tile>>();
 	static private boolean firstMeld = false;
 	static private boolean threeLess = false;
-	static private JRON jron = new JRON(null, false, false, null);
+	static private JRON jron = new JRON(null, false, false, null,null);
 	static private boolean winner = false;
 	static private int whosTurn = 0;
 	static private int numMeldsLastPlayed = 0;
@@ -444,8 +444,8 @@ public final class Table {
 		// if the meld is null it means the player chose to pick from the stock
 		// A non-null meld is a valid move placed on the Table
 		if(player instanceof PlayerStrategy) {
-
 			meldz = ((PlayerStrategy) player).playTurn();
+			
 //			meldsToString = meldz.toString();
 //			meldsToString = "{ " +  meldsToString.substring(1, meldsToString.length()) + " }";
 			if (meldz == null) {
@@ -520,6 +520,26 @@ public final class Table {
 			setWinner(true);
 		}
 		
+		//Memento, check if the table melds are in a good state
+		//Mememeto = Table.jron.melds
+		//Originator = player
+		//Caretaker = Table.jron
+		for (ArrayList<Tile> hand: melds) {
+			
+			if(MeldChecker.checkHand(hand) == false) {
+				
+				player.addMelds(meldz); // return the melds to the player
+				melds = jron.getMelds(); // go back to the old state 
+				
+				for (int i = 0; i <3 ; i++) { // pick three random tiles
+					player.addTile(stock.getRandomTile()); //
+				}
+				break;
+			}
+		}
+		
+
+		
 		printMelds();
 		nextMove();
 		update();
@@ -561,6 +581,7 @@ public final class Table {
 		// update the jron data
 		jron.setFirstMeld(getFirst());
 		jron.setMelds(getMelds());
+		jron.setStock(getStock());
 		
 	       for (Player x:players) 
 	        { 

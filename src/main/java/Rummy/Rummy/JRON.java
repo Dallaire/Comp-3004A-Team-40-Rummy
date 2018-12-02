@@ -10,12 +10,14 @@ public class JRON {
 	private boolean threeLess = false;
 	private ArrayList<ArrayList<Tile>> melds = new ArrayList<ArrayList<Tile>>();
 	private String context = null;
+	private Deck stock = null;
 	
-	public JRON(ArrayList<ArrayList<Tile>> melds,boolean firstMeld,boolean threeLess, String context ) {
+	public JRON(ArrayList<ArrayList<Tile>> melds,boolean firstMeld,boolean threeLess, String context, Deck stock) {
 		this.setMelds(melds);
 		this.setFirstMeld(firstMeld);
 		this.setThreeLess(threeLess);
 		this.setContext(context);
+		this.setStock(stock);
 	}
 
 	// Getter and Setter for the data fields
@@ -50,6 +52,14 @@ public class JRON {
 
 	public void setContext(String context) {
 		this.context = context;
+	}
+
+	public Deck getStock() {
+		return stock;
+	}
+
+	public void setStock(Deck deck) {
+		this.stock = deck;
 	}
 	
 }

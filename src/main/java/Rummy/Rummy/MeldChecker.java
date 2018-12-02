@@ -40,6 +40,8 @@ public class MeldChecker {
 		meld.sort(new valueComparator());
 		int sum=0;
 		for(int i=0;i<meld.size();i++) {
+			if (meld.get(i).getValue() == 0) {
+				sum+= meld.get(i).getMask();}
 			sum+=meld.get(i).getValue();
 		}
 		if (sum>=30) {
@@ -51,11 +53,16 @@ public class MeldChecker {
 	/**
 	 * compares the color of the 2 giver tiles and returns true if equal otherwise false*/
 	public static boolean checkColor(Tile t1,Tile t2) {
+		if (t1.getColor() == null || t2.getColor() == null) return true;
 		return t1.colorToString().equals(t2.colorToString());
 	}
 	/**
 	 * compares the value of the 2 giver tiles and returns true if the difference=1 otherwise false*/
 	public static boolean checkDifference(Tile t1, Tile t2) {
+		if (t1.getValue() == 0 && t2.getValue() != 1) { t1.setMask(t2.getValue() - 1); 
+			return true;}
+		else if (t2.getValue() == 0 && t1.getValue() != 13) {t2.setMask(t1.getValue() + 1);
+			return true;}
 		if ((t2.getValue()-t1.getValue())==1) {
 			return true;
 		}
@@ -65,7 +72,10 @@ public class MeldChecker {
 		int sum=0;
 		for (int i = 0; i < meld.size(); i++) {
 			//System.out.println("sum"+sum);
-			sum+=meld.get(i).getValue();
+			if (meld.get(i).getValue() == 0) {
+				sum+= meld.get(i).getMask();
+			}
+			else sum+=meld.get(i).getValue();
 		}
 		//System.out.println("sum"+sum);
 
@@ -80,7 +90,9 @@ public class MeldChecker {
 		int mpoints = 0;
 		for(Tile t: meld)
 		{
-			mpoints += t.getValue();
+			if (t.getValue() == 0)
+				mpoints += t.getMask();
+			else mpoints += t.getValue();
 		}
 		return mpoints;
 	}

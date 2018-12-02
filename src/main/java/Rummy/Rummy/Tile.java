@@ -5,12 +5,20 @@ public class Tile implements Comparable<Tile>{
 	private Color color;
 	//Ace =1, j-K = 11-13
 	private int value;
+	private int maskValue;
 
 	public Tile(Color aColor, int aValue) {
 		this.color = aColor;
 		this.value = aValue;
 	}
-
+	public int getMask() {
+		return this.maskValue;
+	}
+	
+	public void setMask(int i) {
+		maskValue = i;
+	}
+	
 	public Color getColor() {
 		return this.color;
 	}
@@ -52,7 +60,7 @@ public class Tile implements Comparable<Tile>{
 	 	if (comp != 0) {return comp;}
 	 	
 	 	//Compare the Tiles by value
-	 	if (this.getValue() > otherTile.getValue()) {
+	 	if (this.getValue() > otherTile.getValue() || this.getValue() == 0) {
 	 		return -1;
 	 	}
 	 	else {

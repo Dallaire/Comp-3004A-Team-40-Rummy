@@ -2,12 +2,12 @@ package Rummy.Rummy;
 
 import java.util.ArrayList;
 
-import org.junit.Test;
+//import org.junit.Test;
 
 import junit.framework.TestCase;
 
 public class TestMeldChecker extends TestCase {
-	@Test
+	
 	public void testCheckDifference() {
 		Tile t1= new Tile(Color.O, 10);
 		Tile t2= new Tile(Color.O, 9);
