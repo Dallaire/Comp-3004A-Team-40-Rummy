@@ -331,6 +331,10 @@ public final class Table {
 		return players.get(i);
 		
 	}
+	
+	static public ArrayList<Player> getPlayers(){
+		return players;
+	}
 	/**
 	 * Returns the number of players in the game
 	 * player - ArrayList of players
@@ -597,16 +601,18 @@ public final class Table {
 		jron.setFirstMeld(getFirst());
 		jron.setMelds(getMelds());
 		jron.setStock(getStock());
-		
+		jron.setThreeLess(false);
 	       for (Player x:players) 
 	        { 
 	    	   	// update threeLess for the ThirdStrategy
-	            if(players.get(3).getHand().size() - x.getHand().size() == 3)
+	            if(x instanceof ThirdStrategy)
 	            {
+	            	for (Player y: players) {
+	            		if (x.getHand().size() - y.getHand().size() >= 3)
+	            			jron.setThreeLess(true);
+	            	}
 	            	if(x.getHand().size() == 0)
 	            			setWinner(true);
-	            	threeLess = true;
-	            	jron.setThreeLess(threeLess);
 	            }
 	        } 
 		
