@@ -22,9 +22,9 @@ public class AppTest extends TestCase
     
     public void testDeck() {
     	Deck deck = new Deck();
-    	assertEquals(104, deck.getSize());
+    	assertEquals(106, deck.getSize());
     	assertNotNull(deck.geTile(0));
-    	assertEquals(103, deck.getSize());
+    	assertEquals(105, deck.getSize());
     }
     
     public void testPlayer() {
@@ -63,11 +63,11 @@ public class AppTest extends TestCase
 		Collections.sort(ai1.getHand(),new valueComparator());
     	ArrayList<Tile> temp=ai1.createRun(null);
     	ArrayList<Tile> meld=new ArrayList<Tile>();
-    	meld.add(new Tile(Color.B, 11));
-    	meld.add(new Tile(Color.B, 10));
-    	meld.add(new Tile(Color.B, 9));
     	meld.add(new Tile(Color.B, 8));
-    		 
+    	meld.add(new Tile(Color.B, 9));
+    	meld.add(new Tile(Color.B, 10));
+    	meld.add(new Tile(Color.B, 11));
+    	
 	  	for (int i = 0; i < meld.size(); i++) {   
 	  		assertEquals(meld.get(i).getValue(), temp.get(i).getValue());
 	  		assertEquals(meld.get(i).getColor(), temp.get(i).getColor());
