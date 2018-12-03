@@ -436,7 +436,8 @@ public final class Table {
 	static public void nextMove() {
 		// TODO Auto-generated method stub
 		whosTurn++;
-		whosTurn%=4;
+		if (whosTurn >= players.size())
+			whosTurn=0;
 		
 	}
 	
