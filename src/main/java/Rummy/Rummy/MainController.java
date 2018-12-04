@@ -36,7 +36,7 @@ public class MainController {
 	public TitledPane playerPanel;
 	public Button endButton;
 	public Button nextButton;
-	public ListView tableList;
+	public ListView<ListView<Tile>> tableList;
 	
 	static final DataFormat TILE_LIST = new DataFormat("TileList");
 
@@ -128,12 +128,34 @@ public class MainController {
 		}
 	}
 	
+	public void convertHand() {
+		Table.getPlayer(Table.getWhosTurn()).getHand().clear();
+		Table.getPlayer(Table.getWhosTurn()).getHand().addAll(playerHand.getItems());
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void convertTable() {
+		Table.getMelds().clear();
+		for (int i = 0; i < tableList.getItems().size(); i++) {
+			ArrayList<Tile> meld = new ArrayList<Tile>();
+			for (int j = 0; j < tableList.getItems().get(i).getItems().size(); j++) {
+				Tile t = tableList.getItems().get(i).getItems().get(j);
+				meld.add(t);
+				}
+			Table.addMeld(meld);
+		}
+		
+	}
+	
 	public void onClickEndTurn() {
 		timer.progressProperty().unbind();
 		nextButton.setDisable(false);
+		convertHand();
+		convertTable();
 	}
 	
 	public void onClickNextPlayer() {
+		Table.update();
 		Table.nextMove();
 		nextButton.setDisable(false);
 		playerPanel.setText("Current Player: " + Table.getPlayer(Table.getWhosTurn()).getName());
@@ -173,6 +195,19 @@ public class MainController {
 	public void onClickStartRigged() {
 		Table.setWhosTurn(0);
 		Table.update();
+		ArrayList<ArrayList<Tile>> melds = null;
+		if (Table.getPlayer(Table.getWhosTurn()) instanceof FirstStrategy) {
+			melds = Table.getPlayer(Table.getWhosTurn()).playTurn();
+			if(melds != null) Table.getMelds().addAll(melds);
+		}
+		else if (Table.getPlayer(Table.getWhosTurn()) instanceof SecondStrategy) {
+			melds = ((SecondStrategy) Table.getPlayer(Table.getWhosTurn())).playTurn2();
+			if(melds != null) Table.getMelds().addAll(melds);
+		}
+		else if (Table.getPlayer(Table.getWhosTurn()) instanceof ThirdStrategy) {
+			melds = ((ThirdStrategy) Table.getPlayer(Table.getWhosTurn())).playTurn2();
+			if(melds != null) Table.getMelds().addAll(melds);
+		}
 	}
 	
 	public void onClickStartUnrigged() {
@@ -183,7 +218,10 @@ public class MainController {
 		endButton.setDisable(false);
 		Table.update();
 		ArrayList<ArrayList<Tile>> melds = null;
-		if (Table.getPlayer(Table.getWhosTurn()) instanceof FirstStrategy) {
+		if (Table.getPlayer(Table.getWhosTurn()) instanceof PlayerStrategy) {
+			nextButton.setDisable(true);
+		}
+		else if (Table.getPlayer(Table.getWhosTurn()) instanceof FirstStrategy) {
 			melds = Table.getPlayer(Table.getWhosTurn()).playTurn();
 			if(melds != null) Table.getMelds().addAll(melds);
 		}
