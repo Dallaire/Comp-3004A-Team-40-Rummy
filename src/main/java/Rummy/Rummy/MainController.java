@@ -1,6 +1,7 @@
 package Rummy.Rummy;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -87,6 +88,7 @@ public class MainController {
 			ListView<Tile> meldContents = new ListView<Tile>();
 			meldContents.setOrientation(Orientation.HORIZONTAL);
 			meldContents.setPrefHeight(30);
+			Collections.sort(meld, new valueComparator());
 			for (Tile tile: meld) {
 				meldContents.getItems().add(tile);
 			}
@@ -127,6 +129,7 @@ public class MainController {
 	
 	public void populatePlayerHand() {
 		Player p = Table.getPlayer(Table.getWhosTurn());
+		Collections.sort(p.getHand(), new valueComparator());
 		playerHand.getItems().clear();
 		for (int i = 0; i<p.getHand().size(); i++) {
 			playerHand.getItems().add(p.getHand().get(i));
