@@ -100,7 +100,7 @@ public class StartPageController {
 			Table.getPlayers().add(new SecondStrategy("p4",true));
 		else if (p4.getValue() == "AI3")
 			Table.getPlayers().add(new ThirdStrategy("p4",true));
-		
+		for (Player p: Table.getPlayers()) System.out.println(p.getName() + " drew " + p.getRandomValue());
 		Collections.sort(Table.getPlayers(), new OrderComparator());
 		System.out.println(Table.getPlayers());
 		Main.showMainPage();

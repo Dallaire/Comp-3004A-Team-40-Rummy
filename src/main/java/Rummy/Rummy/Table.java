@@ -20,7 +20,7 @@ public final class Table {
 	
 	//Table variables
 	static private ArrayList<Player> players = new ArrayList<Player>();
-	static private Deck stock;
+	static private Deck stock = null;
 	static private ArrayList<ArrayList<Tile>> melds = new ArrayList<ArrayList<Tile>>();
 	static private boolean firstMeld = false;
 	static private boolean threeLess = false;
@@ -397,8 +397,9 @@ public final class Table {
 	 * @stock - a collection of Tiles
 	 * */
 	static public Tile getTile() {
-
-		return getStock().geTile(getStock().getSize()-1);
+		if (getStock() != null  && getStock().getSize() != 0)
+			return getStock().geTile(getStock().getSize()-1);
+		else return null;
 	}
 	
 	static public void displayStock() {
