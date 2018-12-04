@@ -65,13 +65,19 @@ public class MainController {
 	}
 	
 	public void onClickEndTurn() {
-		
+		timer.progressProperty().unbind();
 	}
 	
 	public void onClickNextPlayer() {
 		Table.nextMove();
 	}
 	
+	public void onClickStart() {
+		
+	}
+	
+	
+	//timerBinding, time and Task code adapted from Life FX Youtube channel video: JavaFX 8 Tutorial - Progress Bar - #20
 	public void timerBinding() {
 		timer.progressProperty().addListener(new ChangeListener<Number>() {
          @Override

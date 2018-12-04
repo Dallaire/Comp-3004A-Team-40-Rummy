@@ -58,7 +58,7 @@ public class Main extends Application{
 		controller.setRigginComboBoxes();
 		controller.populateInfoBox();
 		controller.timerBinding();
-		controller.time();
+		
 	}
 
 	
