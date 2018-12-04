@@ -84,7 +84,9 @@ public class Player implements Comparable<Player>{
 		}
 	}
 
-	
+	public void newRandomValue() {
+		this.randomValue = ThreadLocalRandom.current().nextInt(0, 14);
+	}
 	/**
 	 * sorts the hand
 	 * */

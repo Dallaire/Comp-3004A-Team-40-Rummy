@@ -7,9 +7,9 @@ import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TitledPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -21,12 +21,12 @@ public class MainController {
 	public ComboBox<String> COLOR_SELECTOR;
 	public ComboBox<Integer> NUMBER_SELECTOR;
 	public VBox infoBox;
-	public HBox playerHand;
+	public FlowPane playerHand;
 	public ProgressBar timer;
 	public TitledPane playerPanel;
 	public Button endButton;
 	public Button nextButton;
-	public ListView<HBox> tableList;
+	public VBox tableList;
 	
 	public void setRigginComboBoxes() {
 		COLOR_SELECTOR.getItems().addAll(
@@ -78,13 +78,14 @@ public class MainController {
 	}
 	
 	public void populateTableList() {
-		tableList.getItems().clear();
+		tableList.getChildren().clear();
 		for (ArrayList<Tile> meld: Table.getMelds()) {
 			HBox meldContents = new HBox();
+			meldContents.setSpacing(5);
 			for (Tile tile: meld) {
 				meldContents.getChildren().add(new Text(tile.toString()));
 			}
-			tableList.getItems().add(meldContents);
+			tableList.getChildren().add(meldContents);
 		}
 	}
 	
@@ -102,7 +103,19 @@ public class MainController {
 			nextButton.setDisable(true);
 		}		
 		else if (!endButton.isDisable()) {
-			Table.getPlayer(Table.getWhosTurn()).playTurn();
+			ArrayList<ArrayList<Tile>> melds = null;
+			if (Table.getPlayer(Table.getWhosTurn()) instanceof FirstStrategy) {
+				melds = Table.getPlayer(Table.getWhosTurn()).playTurn();
+				if(melds != null) Table.getMelds().addAll(melds);
+			}
+			else if (Table.getPlayer(Table.getWhosTurn()) instanceof SecondStrategy) {
+				melds = ((SecondStrategy) Table.getPlayer(Table.getWhosTurn())).playTurn2();
+				if(melds != null) Table.getMelds().addAll(melds);
+			}
+			else if (Table.getPlayer(Table.getWhosTurn()) instanceof ThirdStrategy) {
+				melds = ((ThirdStrategy) Table.getPlayer(Table.getWhosTurn())).playTurn2();
+				if(melds != null) Table.getMelds().addAll(melds);
+			}
 		}
 		
 	}
@@ -110,6 +123,8 @@ public class MainController {
 	public void populatePlayerHand() {
 		Player p = Table.getPlayer(Table.getWhosTurn());
 		playerHand.getChildren().clear();
+		playerHand.setHgap(5);
+		playerHand.setVgap(5);
 		for (int i = 0; i<p.getHand().size(); i++) {
 			playerHand.getChildren().add(new Text(p.getHand().get(i).toString()));
 		}
@@ -129,12 +144,19 @@ public class MainController {
 		populatePlayerHand();
 		endButton.setDisable(false);
 		Table.update();
-		if (Table.getPlayer(Table.getWhosTurn()) instanceof FirstStrategy)
-			Table.getPlayer(Table.getWhosTurn()).playTurn();
-		else if (Table.getPlayer(Table.getWhosTurn()) instanceof SecondStrategy)
-			((SecondStrategy) Table.getPlayer(Table.getWhosTurn())).playTurn2();
-		else if (Table.getPlayer(Table.getWhosTurn()) instanceof ThirdStrategy)
-			((ThirdStrategy) Table.getPlayer(Table.getWhosTurn())).playTurn2();
+		ArrayList<ArrayList<Tile>> melds = null;
+		if (Table.getPlayer(Table.getWhosTurn()) instanceof FirstStrategy) {
+			melds = Table.getPlayer(Table.getWhosTurn()).playTurn();
+			if(melds != null) Table.getMelds().addAll(melds);
+		}
+		else if (Table.getPlayer(Table.getWhosTurn()) instanceof SecondStrategy) {
+			melds = ((SecondStrategy) Table.getPlayer(Table.getWhosTurn())).playTurn2();
+			if(melds != null) Table.getMelds().addAll(melds);
+		}
+		else if (Table.getPlayer(Table.getWhosTurn()) instanceof ThirdStrategy) {
+			melds = ((ThirdStrategy) Table.getPlayer(Table.getWhosTurn())).playTurn2();
+			if(melds != null) Table.getMelds().addAll(melds);
+		}
 	}
 	
 	//timerBinding, time and Task code adapted from Life FX Youtube channel video: JavaFX 8 Tutorial - Progress Bar - #20
