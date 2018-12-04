@@ -48,13 +48,13 @@
         </TitledPane>
       </children>
     </HBox>
-    <TitledPane collapsible="false" prefHeight="200.0" prefWidth="200.0" text="Current Player Hand:" GridPane.columnIndex="1" GridPane.rowIndex="2">
+    <TitledPane collapsible="false" prefHeight="200.0" prefWidth="200.0" text="Current Player:" GridPane.columnIndex="1" GridPane.rowIndex="2">
       <content>
         <GridPane>
           <children>
             <HBox id="HBOX_PLAYERHAND" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2" />
-            <Button id="NEXTPLAYER_BUTTON" mnemonicParsing="false" text="Next player" GridPane.rowIndex="1" />
-            <Button id="ENDTURN_BUTTON" mnemonicParsing="false" text="End Turn" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button id="NEXTPLAYER_BUTTON" mnemonicParsing="false" text="Next player" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Button id="ENDTURN_BUTTON" mnemonicParsing="false" text="End Turn" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
           </children>
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -82,14 +82,27 @@
                 <Insets bottom="15.0" />
               </VBox.margin>
             </Button>
-            <Button id="No_Rig_Button" mnemonicParsing="false" text="No Rigging" />
+            <Button id="No_Rig_Button" mnemonicParsing="false" text="No Rigging">
+              <VBox.margin>
+                <Insets bottom="10.0" />
+              </VBox.margin>
+            </Button>
           </children>
         </VBox>
       </content>
     </TitledPane>
     <TitledPane collapsible="false" prefHeight="230.0" prefWidth="300.0" text="Player card Count">
       <content>
-        <VBox id="VBOX_CARDCOUNT" fx:id="infoBox" prefHeight="200.0" prefWidth="100.0" />
+        <VBox prefHeight="200.0" prefWidth="100.0">
+          <children>
+            <VBox id="VBOX_CARDCOUNT" fx:id="infoBox" prefHeight="200.0" prefWidth="100.0" />
+            <Button contentDisplay="LEFT" mnemonicParsing="false" text="Start Game" textAlignment="LEFT">
+              <VBox.margin>
+                <Insets bottom="10.0" left="110.0" />
+              </VBox.margin>
+            </Button>
+          </children>
+        </VBox>
       </content>
     </TitledPane>
   </children>
