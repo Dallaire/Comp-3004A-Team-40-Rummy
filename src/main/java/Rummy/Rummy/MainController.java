@@ -5,11 +5,15 @@ import java.util.ArrayList;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
+import javafx.geometry.Orientation;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TitledPane;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -21,12 +25,12 @@ public class MainController {
 	public ComboBox<String> COLOR_SELECTOR;
 	public ComboBox<Integer> NUMBER_SELECTOR;
 	public VBox infoBox;
-	public FlowPane playerHand;
+	public ListView playerHand;
 	public ProgressBar timer;
 	public TitledPane playerPanel;
 	public Button endButton;
 	public Button nextButton;
-	public VBox tableList;
+	public ListView tableList;
 	
 	public void setRigginComboBoxes() {
 		COLOR_SELECTOR.getItems().addAll(
@@ -78,14 +82,15 @@ public class MainController {
 	}
 	
 	public void populateTableList() {
-		tableList.getChildren().clear();
+		tableList.getItems().clear();
 		for (ArrayList<Tile> meld: Table.getMelds()) {
-			HBox meldContents = new HBox();
-			meldContents.setSpacing(5);
+			ListView<Tile> meldContents = new ListView<Tile>();
+			meldContents.setOrientation(Orientation.HORIZONTAL);
+			meldContents.setPrefHeight(30);
 			for (Tile tile: meld) {
-				meldContents.getChildren().add(new Text(tile.toString()));
+				meldContents.getItems().add(tile);
 			}
-			tableList.getChildren().add(meldContents);
+			tableList.getItems().add(meldContents);
 		}
 	}
 	
@@ -122,11 +127,9 @@ public class MainController {
 	
 	public void populatePlayerHand() {
 		Player p = Table.getPlayer(Table.getWhosTurn());
-		playerHand.getChildren().clear();
-		playerHand.setHgap(5);
-		playerHand.setVgap(5);
+		playerHand.getItems().clear();
 		for (int i = 0; i<p.getHand().size(); i++) {
-			playerHand.getChildren().add(new Text(p.getHand().get(i).toString()));
+			playerHand.getItems().add(p.getHand().get(i));
 		}
 		populateInfoBox();
 		populateTableList();
@@ -191,4 +194,5 @@ public class MainController {
                    }
                };
 	}
+	
 }
