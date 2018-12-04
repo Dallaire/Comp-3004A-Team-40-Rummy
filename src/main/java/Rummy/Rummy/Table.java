@@ -19,7 +19,7 @@ import java.io.*;
 public final class Table {
 	
 	//Table variables
-	static private ArrayList<Player> players;
+	static private ArrayList<Player> players = new ArrayList<Player>();
 	static private Deck stock;
 	static private ArrayList<ArrayList<Tile>> melds = new ArrayList<ArrayList<Tile>>();
 	static private boolean firstMeld = false;

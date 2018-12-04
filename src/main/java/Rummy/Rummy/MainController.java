@@ -9,6 +9,7 @@ public class MainController {
 	public ComboBox<String> COLOR_SELECTOR;
 	public ComboBox<Integer> NUMBER_SELECTOR;
 	
+	
 	public void setRigginComboBoxes() {
 		COLOR_SELECTOR.getItems().addAll(
 				"Joker",

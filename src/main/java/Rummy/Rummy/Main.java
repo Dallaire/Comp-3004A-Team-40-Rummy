@@ -51,12 +51,10 @@ public class Main extends Application{
 		FXMLLoader loader= new FXMLLoader();
 		
 		loader.setLocation(Main.class.getResource("MainUI.fxml"));
-		mainLayout  =loader.load();
+		Pane MainPage=loader.load();
 		MainController controller = loader.getController();
-		//mainLayout.getChildren().add(MainPage);
-		Scene scene =new Scene(mainLayout);
-		primaryStage.setScene(scene);
-		primaryStage.show();
+		mainLayout.getChildren().clear();
+		mainLayout.getChildren().add(MainPage);
 		controller.setRigginComboBoxes();
 		
 	}

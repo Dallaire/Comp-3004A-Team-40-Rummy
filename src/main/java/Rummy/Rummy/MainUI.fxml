@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="553.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="553.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="Rummy.Rummy.MainController">
   <children>
     <SplitPane dividerPositions="0.11171662125340599" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" GridPane.columnIndex="1" GridPane.rowSpan="2">
       <items>
@@ -73,11 +73,11 @@
           <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
               <children>
-                <ComboBox id="COLOR_SELECTOR" prefWidth="150.0" />
-                <ComboBox id="NUMBER_SELECTOR" prefWidth="150.0" />
+                <ComboBox fx:id="COLOR_SELECTOR" prefWidth="150.0" />
+                <ComboBox fx:id="NUMBER_SELECTOR" prefWidth="150.0" />
               </children>
             </HBox>
-            <Button id="DEAL_BUTTON" alignment="CENTER" mnemonicParsing="false" text="Deal">
+            <Button fx:id="DEAL_BUTTON" alignment="CENTER" mnemonicParsing="false" onAction="#onClickDeal" text="Deal">
               <VBox.margin>
                 <Insets bottom="15.0" />
               </VBox.margin>

@@ -97,12 +97,9 @@ public class StartPageController {
 			Table.getPlayers().add(new SecondStrategy("p4",true));
 		else if (p4.getValue() == "AI3")
 			Table.getPlayers().add(new ThirdStrategy("p4",true));
-					
+		
 		Main.showMainPage();
 	}
-//	private void startPage() throws IOException {
-//		main.showStartPage();
-//	}
 	
 	
 }
