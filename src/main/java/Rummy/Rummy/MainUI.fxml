@@ -42,6 +42,7 @@
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="297.0">
               <children>
                 <ProgressBar id="TIMER" fx:id="timer" disable="false" layoutX="55.0" layoutY="47.0" prefWidth="200.0" progress="1.0" style="" />
+                <Button layoutX="121.0" layoutY="77.0" mnemonicParsing="false" onAction="#time" text="Start timer" />
               </children>
             </AnchorPane>
           </content>
