@@ -1,10 +1,13 @@
 package Rummy.Rummy;
 
+import java.util.ArrayList;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.HBox;
@@ -23,6 +26,7 @@ public class MainController {
 	public TitledPane playerPanel;
 	public Button endButton;
 	public Button nextButton;
+	public ListView<HBox> tableList;
 	
 	public void setRigginComboBoxes() {
 		COLOR_SELECTOR.getItems().addAll(
@@ -73,6 +77,17 @@ public class MainController {
 		}
 	}
 	
+	public void populateTableList() {
+		tableList.getItems().clear();
+		for (ArrayList<Tile> meld: Table.getMelds()) {
+			HBox meldContents = new HBox();
+			for (Tile tile: meld) {
+				meldContents.getChildren().add(new Text(tile.toString()));
+			}
+			tableList.getItems().add(meldContents);
+		}
+	}
+	
 	public void onClickEndTurn() {
 		timer.progressProperty().unbind();
 		nextButton.setDisable(false);
@@ -80,11 +95,16 @@ public class MainController {
 	
 	public void onClickNextPlayer() {
 		Table.nextMove();
+		nextButton.setDisable(false);
 		playerPanel.setText("Current Player: " + Table.getPlayer(Table.getWhosTurn()).getName());
+		populatePlayerHand();
 		if (Table.getPlayer(Table.getWhosTurn()) instanceof PlayerStrategy) {
 			nextButton.setDisable(true);
+		}		
+		else if (!endButton.isDisable()) {
+			Table.getPlayer(Table.getWhosTurn()).playTurn();
 		}
-		populatePlayerHand();
+		
 	}
 	
 	public void populatePlayerHand() {
@@ -94,10 +114,12 @@ public class MainController {
 			playerHand.getChildren().add(new Text(p.getHand().get(i).toString()));
 		}
 		populateInfoBox();
+		populateTableList();
 	}
 	
 	public void onClickStartRigged() {
 		Table.setWhosTurn(0);
+		Table.update();
 	}
 	
 	public void onClickStartUnrigged() {
@@ -105,6 +127,14 @@ public class MainController {
 		Table.loadDeck();
 		Table.shareCards();
 		populatePlayerHand();
+		endButton.setDisable(false);
+		Table.update();
+		if (Table.getPlayer(Table.getWhosTurn()) instanceof FirstStrategy)
+			Table.getPlayer(Table.getWhosTurn()).playTurn();
+		else if (Table.getPlayer(Table.getWhosTurn()) instanceof SecondStrategy)
+			((SecondStrategy) Table.getPlayer(Table.getWhosTurn())).playTurn2();
+		else if (Table.getPlayer(Table.getWhosTurn()) instanceof ThirdStrategy)
+			((ThirdStrategy) Table.getPlayer(Table.getWhosTurn())).playTurn2();
 	}
 	
 	//timerBinding, time and Task code adapted from Life FX Youtube channel video: JavaFX 8 Tutorial - Progress Bar - #20

@@ -59,6 +59,7 @@ public class Main extends Application{
 		controller.populateInfoBox();
 		controller.timerBinding();
 		controller.playerPanel.setText(("Current Player: " + Table.getPlayer(Table.getWhosTurn()).getName()));
+		controller.endButton.setDisable(true);
 	}
 
 	
