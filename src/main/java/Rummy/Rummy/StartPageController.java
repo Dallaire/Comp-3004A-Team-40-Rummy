@@ -63,6 +63,41 @@ public class StartPageController {
 	
 	public void onClickstartPageOKbutton() throws IOException {
 		//TODO Populate Table.players
+		if (p1.getValue() == "Human")
+			Table.getPlayers().add(new PlayerStrategy("p1",true));
+		else if (p1.getValue() == "AI1")
+			Table.getPlayers().add(new FirstStrategy("p1",true));
+		else if (p1.getValue() == "AI2")
+			Table.getPlayers().add(new SecondStrategy("p1",true));
+		else if (p1.getValue() == "AI3")
+		
+		if (p2.getValue() == "Human")
+			Table.getPlayers().add(new PlayerStrategy("p2",true));
+		else if (p2.getValue() == "AI1")
+			Table.getPlayers().add(new FirstStrategy("p2",true));
+		else if (p2.getValue() == "AI2")
+			Table.getPlayers().add(new SecondStrategy("p2",true));
+		else if (p2.getValue() == "AI3")
+			Table.getPlayers().add(new ThirdStrategy("p2",true));
+		
+		if (p3.getValue() == "Human")
+			Table.getPlayers().add(new PlayerStrategy("p3",true));
+		else if (p3.getValue() == "AI1")
+			Table.getPlayers().add(new FirstStrategy("p3",true));
+		else if (p3.getValue() == "AI2")
+			Table.getPlayers().add(new SecondStrategy("p3",true));
+		else if (p3.getValue() == "AI3")
+			Table.getPlayers().add(new ThirdStrategy("p3",true));
+		
+		if (p4.getValue() == "Human")
+			Table.getPlayers().add(new PlayerStrategy("p4",true));
+		else if (p4.getValue() == "AI1")
+			Table.getPlayers().add(new FirstStrategy("p4",true));
+		else if (p4.getValue() == "AI2")
+			Table.getPlayers().add(new SecondStrategy("p4",true));
+		else if (p4.getValue() == "AI3")
+			Table.getPlayers().add(new ThirdStrategy("p4",true));
+					
 		Main.showMainPage();
 	}
 //	private void startPage() throws IOException {
