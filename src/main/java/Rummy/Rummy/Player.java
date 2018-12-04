@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Player implements Comparable<Player>{
 	//Properties
@@ -24,11 +25,13 @@ public class Player implements Comparable<Player>{
 	protected boolean playedFirst30 = false;
 	protected boolean hasPlayed = false;
 	protected boolean isLocal;
+	protected int randomValue;
 	
 	//Constructor
 	public Player(String aName, boolean isLocal) {
 		this.name = aName;
 		this.isLocal = isLocal;
+		this.randomValue = ThreadLocalRandom.current().nextInt(0, 14);
 	}
 	
 	
@@ -63,7 +66,9 @@ public class Player implements Comparable<Player>{
 			return false;
 		}
 	}
-	
+	public int getRandomValue() {
+		return randomValue;
+	}
 	//Setters
 	public void setFirst30(boolean first30) {
 		this.playedFirst30 = first30;
@@ -382,6 +387,8 @@ public class Player implements Comparable<Player>{
 		return -1;
 	}
 	
-	
+	public String toString() {
+		return this.getName();
+	}
 		
 }

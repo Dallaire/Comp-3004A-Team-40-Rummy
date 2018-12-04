@@ -1,6 +1,8 @@
 package Rummy.Rummy;
 
 import java.io.IOException;
+import java.util.Collections;
+
 import Rummy.Rummy.Main;
 import javax.management.openmbean.OpenDataException;
 
@@ -70,6 +72,7 @@ public class StartPageController {
 		else if (p1.getValue() == "AI2")
 			Table.getPlayers().add(new SecondStrategy("p1",true));
 		else if (p1.getValue() == "AI3")
+			Table.getPlayers().add(new ThirdStrategy("p1",true));
 		
 		if (p2.getValue() == "Human")
 			Table.getPlayers().add(new PlayerStrategy("p2",true));
@@ -98,6 +101,8 @@ public class StartPageController {
 		else if (p4.getValue() == "AI3")
 			Table.getPlayers().add(new ThirdStrategy("p4",true));
 		
+		Collections.sort(Table.getPlayers(), (a,b) -> Integer.compare(a.getRandomValue(),b.getRandomValue()));
+		System.out.println(Table.getPlayers());
 		Main.showMainPage();
 	}
 	
