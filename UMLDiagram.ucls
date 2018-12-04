@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="Rummy.Rummy.ThirdStrategy" project="Comp-3004A-Team-40-Rummy" 
+    file="/Comp-3004A-Team-40-Rummy/src/main/java/Rummy/Rummy/ThirdStrategy.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="136" width="290" x="544" y="1589"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="Rummy.Rummy.SecondStrategy" project="Comp-3004A-Team-40-Rummy" 
+    file="/Comp-3004A-Team-40-Rummy/src/main/java/Rummy/Rummy/SecondStrategy.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="136" width="290" x="874" y="1589"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="Rummy.Rummy.Deck" project="Comp-3004A-Team-40-Rummy" 
+    file="/Comp-3004A-Team-40-Rummy/src/main/java/Rummy/Rummy/Deck.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="216" width="232" x="2117" y="2005"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="Rummy.Rummy.PlayerStrategy" project="Comp-3004A-Team-40-Rummy" 
+    file="/Comp-3004A-Team-40-Rummy/src/main/java/Rummy/Rummy/PlayerStrategy.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="356" width="281" x="1204" y="1589"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="Rummy.Rummy.FirstStrategy" project="Comp-3004A-Team-40-Rummy" 
+    file="/Comp-3004A-Team-40-Rummy/src/main/java/Rummy/Rummy/FirstStrategy.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="116" width="281" x="1525" y="1589"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="Rummy.Rummy.FourthStrategy" project="Comp-3004A-Team-40-Rummy" 
+    file="/Comp-3004A-Team-40-Rummy/src/main/java/Rummy/Rummy/FourthStrategy.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="276" width="271" x="233" y="1589"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="Rummy.Rummy.StartPageController" project="Comp-3004A-Team-40-Rummy" 
+    file="/Comp-3004A-Team-40-Rummy/src/main/java/Rummy/Rummy/StartPageController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="236" width="254" x="233" y="-263"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="Rummy.Rummy.valueComparator" project="Comp-3004A-Team-40-Rummy" 
+    file="/Comp-3004A-Team-40-Rummy/src/main/java/Rummy/Rummy/valueComparator.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="116" width="175" x="929" y="-263"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="9" language="java" name="Rummy.Rummy.Color" project="Comp-3004A-Team-40-Rummy" 
+    file="/Comp-3004A-Team-40-Rummy/src/main/java/Rummy/Rummy/Color.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="176" width="171" x="233" y="2617"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="10" language="java" name="Rummy.Rummy.Tile" project="Comp-3004A-Team-40-Rummy" 
+    file="/Comp-3004A-Team-40-Rummy/src/main/java/Rummy/Rummy/Tile.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="316" width="187" x="1827" y="2261"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="11" language="java" name="Rummy.Rummy.Strategy" project="Comp-3004A-Team-40-Rummy" 
+    file="/Comp-3004A-Team-40-Rummy/src/main/java/Rummy/Rummy/Strategy.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="96" width="281" x="874" y="2005"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="12" language="java" name="Rummy.Rummy.MainController" project="Comp-3004A-Team-40-Rummy" 
+    file="/Comp-3004A-Team-40-Rummy/src/main/java/Rummy/Rummy/MainController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="696" width="362" x="527" y="-263"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="Rummy.Rummy.OrderComparator" project="Comp-3004A-Team-40-Rummy" 
+    file="/Comp-3004A-Team-40-Rummy/src/main/java/Rummy/Rummy/OrderComparator.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="116" width="209" x="1394" y="-263"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="Rummy.Rummy.Player" project="Comp-3004A-Team-40-Rummy" 
+    file="/Comp-3004A-Team-40-Rummy/src/main/java/Rummy/Rummy/Player.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="716" width="322" x="1618" y="833"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="Rummy.Rummy.Main" project="Comp-3004A-Team-40-Rummy" 
+    file="/Comp-3004A-Team-40-Rummy/src/main/java/Rummy/Rummy/Main.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="216" width="177" x="380" y="833"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="Rummy.Rummy.JRON" project="Comp-3004A-Team-40-Rummy" 
+    file="/Comp-3004A-Team-40-Rummy/src/main/java/Rummy/Rummy/JRON.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="376" width="468" x="1888" y="1589"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="Rummy.Rummy.MeldChecker" project="Comp-3004A-Team-40-Rummy" 
+    file="/Comp-3004A-Team-40-Rummy/src/main/java/Rummy/Rummy/MeldChecker.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="256" width="278" x="1643" y="-263"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="Rummy.Rummy.Table" project="Comp-3004A-Team-40-Rummy" 
+    file="/Comp-3004A-Team-40-Rummy/src/main/java/Rummy/Rummy/Table.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="1056" width="363" x="1961" y="-263"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="19">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="20" name="main"/>      
+      <multiplicity id="21" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="22">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="23" name="players"/>      
+      <multiplicity id="24" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="25">    
+    <bendpoint x="1970" y="833"/>    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="26" name="jron"/>      
+      <multiplicity id="27" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="28">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <realization id="29">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="11"/>  
+  </realization>  
+  <generalization id="30">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <realization id="31">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="11"/>  
+  </realization>  
+  <association id="32">    
+    <bendpoint x="1857" y="1589"/>    
+    <bendpoint x="1857" y="2005"/>    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="33" name="hand"/>      
+      <multiplicity id="34" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="35">    
+    <bendpoint x="2386" y="833"/>    
+    <bendpoint x="2386" y="1589"/>    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="36" name="stock"/>      
+      <multiplicity id="37" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="38">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="11"/>  
+  </realization>  
+  <association id="39">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="40" name="main"/>      
+      <multiplicity id="41" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="42">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="11"/>  
+  </realization>  
+  <generalization id="43">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <association id="44">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="45" name="tiles"/>      
+      <multiplicity id="46" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="47">    
+    <bendpoint x="1836" y="1589"/>    
+    <bendpoint x="1836" y="2005"/>    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="48" name="meld"/>      
+      <multiplicity id="49" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="50">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <association id="51">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="52" name="stock"/>      
+      <multiplicity id="53" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="54">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="55" name="color"/>      
+      <multiplicity id="56" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="57">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="11"/>  
+  </realization>  
+  <association id="58">    
+    <bendpoint x="242" y="2005"/>    
+    <bendpoint x="242" y="2261"/>    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="59" name="possibleRuns"/>      
+      <multiplicity id="60" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="61">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <association id="62">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="63" name="tableData"/>      
+      <multiplicity id="64" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
