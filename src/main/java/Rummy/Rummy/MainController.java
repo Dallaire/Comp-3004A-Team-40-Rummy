@@ -1,6 +1,8 @@
 package Rummy.Rummy;
 
 import javafx.scene.control.ComboBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 public class MainController {
 	public Main main;
@@ -8,7 +10,7 @@ public class MainController {
 	//game rigging items
 	public ComboBox<String> COLOR_SELECTOR;
 	public ComboBox<Integer> NUMBER_SELECTOR;
-	
+	public VBox infoBox;
 	
 	public void setRigginComboBoxes() {
 		COLOR_SELECTOR.getItems().addAll(
@@ -49,6 +51,12 @@ public class MainController {
 		if (COLOR_SELECTOR.getValue().equals("Blue"))
 			color = Color.B;
 		Table.getPlayer(Table.getWhosTurn()).addTile(new Tile (color, NUMBER_SELECTOR.getValue()));
+	}
+	
+	public void populateInfoBox() {
+		for (Player p: Table.getPlayers()) {
+			infoBox.getChildren().add(new Text(p.getName() + ": " + p.getHand().size()));
+		}
 	}
 	
 	public void onClickEndTurn() {

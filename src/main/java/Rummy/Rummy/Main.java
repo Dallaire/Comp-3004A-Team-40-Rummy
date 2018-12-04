@@ -56,6 +56,7 @@ public class Main extends Application{
 		mainLayout.getChildren().clear();
 		mainLayout.getChildren().add(MainPage);
 		controller.setRigginComboBoxes();
+		controller.populateInfoBox();
 		
 	}
 
