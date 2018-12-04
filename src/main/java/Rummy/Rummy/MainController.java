@@ -5,6 +5,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
@@ -16,6 +17,7 @@ public class MainController {
 	public ComboBox<Integer> NUMBER_SELECTOR;
 	public VBox infoBox;
 	public ProgressBar timer;
+	public TitledPane playerPanel;
 	
 	public void setRigginComboBoxes() {
 		COLOR_SELECTOR.getItems().addAll(
@@ -70,6 +72,7 @@ public class MainController {
 	
 	public void onClickNextPlayer() {
 		Table.nextMove();
+		playerPanel.setText("Current Player: " + Table.getPlayer(Table.getWhosTurn()).getName());
 	}
 	
 	public void onClickStart() {
