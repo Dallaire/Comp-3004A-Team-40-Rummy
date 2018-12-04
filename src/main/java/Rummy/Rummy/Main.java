@@ -39,8 +39,7 @@ public class Main extends Application{
 		mainLayout =loader.load();
 		
 		StartPageController controller= loader.getController();
-		//controller.main=
-		//mainLayout.getChildren((startPage);
+		
 		
 		Scene scene =new Scene(mainLayout);
 		primaryStage.setScene(scene);
@@ -52,15 +51,14 @@ public class Main extends Application{
 		FXMLLoader loader= new FXMLLoader();
 		
 		loader.setLocation(Main.class.getResource("MainUI.fxml"));
-		Pane MainPage=loader.load();
+		mainLayout  =loader.load();
+		MainController controller = loader.getController();
+		//mainLayout.getChildren().add(MainPage);
+		Scene scene =new Scene(mainLayout);
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		controller.setRigginComboBoxes();
 		
-		mainLayout.getChildren().add(MainPage);
-		//StartPageController controller= loader.getController();
-		//mainLayout.getChildren((startPage);
-		
-//		Scene scene =new Scene(MainPage);
-//		primaryStage.setScene(scene);
-//		primaryStage.show();
 	}
 
 	

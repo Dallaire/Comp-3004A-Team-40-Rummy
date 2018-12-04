@@ -358,6 +358,11 @@ public final class Table {
 		return melds.size();
 	}
 	
+	//get index of current player
+	static public int getWhosTurn() {
+		return whosTurn;
+	}
+	
 	/**
 	 *  Gets a meld by its index
 	 *  @i - index of tile

@@ -63,7 +63,7 @@ public class StartPageController {
 	
 	public void onClickstartPageOKbutton() throws IOException {
 		//TODO Populate Table.players
-		main.showMainPage();
+		Main.showMainPage();
 	}
 //	private void startPage() throws IOException {
 //		main.showStartPage();
