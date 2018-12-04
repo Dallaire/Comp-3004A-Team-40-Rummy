@@ -363,6 +363,9 @@ public final class Table {
 		return whosTurn;
 	}
 	
+	static public void setWhosTurn(int i) {
+		whosTurn = i;
+	}
 	/**
 	 *  Gets a meld by its index
 	 *  @i - index of tile

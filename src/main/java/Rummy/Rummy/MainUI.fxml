@@ -53,9 +53,9 @@
       <content>
         <GridPane>
           <children>
-            <HBox id="HBOX_PLAYERHAND" disable="false" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2" />
-            <Button id="NEXTPLAYER_BUTTON" mnemonicParsing="false" onAction="#onClickNextPlayer" text="Next player" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Button id="ENDTURN_BUTTON" mnemonicParsing="false" onAction="#onClickEndTurn" text="End Turn" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <HBox id="HBOX_PLAYERHAND" fx:id="playerHand" disable="false" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2" />
+            <Button id="NEXTPLAYER_BUTTON" fx:id="nextButton" mnemonicParsing="false" onAction="#onClickNextPlayer" text="Next player" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Button id="ENDTURN_BUTTON" fx:id="endButton" mnemonicParsing="false" onAction="#onClickEndTurn" text="End Turn" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
           </children>
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -83,7 +83,7 @@
                 <Insets bottom="15.0" />
               </VBox.margin>
             </Button>
-            <Button id="No_Rig_Button" mnemonicParsing="false" text="No Rigging">
+            <Button id="No_Rig_Button" mnemonicParsing="false" onAction="#onClickStartRigged" text="Start Rigged Game">
               <VBox.margin>
                 <Insets bottom="10.0" />
               </VBox.margin>
@@ -97,9 +97,9 @@
         <VBox prefHeight="200.0" prefWidth="100.0">
           <children>
             <VBox id="VBOX_CARDCOUNT" fx:id="infoBox" prefHeight="200.0" prefWidth="100.0" />
-            <Button id="START" contentDisplay="LEFT" mnemonicParsing="false" text="Start Game" textAlignment="LEFT">
+            <Button id="START" contentDisplay="LEFT" mnemonicParsing="false" onAction="#onClickStartUnrigged" text="Start Unrigged Game" textAlignment="LEFT">
               <VBox.margin>
-                <Insets bottom="10.0" left="110.0" />
+                <Insets bottom="10.0" left="85.0" />
               </VBox.margin>
             </Button>
           </children>
