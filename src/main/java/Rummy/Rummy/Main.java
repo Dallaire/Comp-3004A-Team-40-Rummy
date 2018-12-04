@@ -3,8 +3,11 @@ package Rummy.Rummy;
 import java.io.IOException;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -60,6 +63,26 @@ public class Main extends Application{
 		controller.timerBinding();
 		controller.playerPanel.setText(("Current Player: " + Table.getPlayer(Table.getWhosTurn()).getName()));
 		controller.endButton.setDisable(true);
+		controller.playerHand.setOnDragDetected(new EventHandler <MouseEvent>() {
+			public void handle(MouseEvent event) {
+				controller.dragDetected(event, controller.playerHand);
+			}
+		});
+		controller.playerHand.setOnDragDropped(new EventHandler <DragEvent>() {
+			public void handle(DragEvent event) {
+				controller.dragDropped(event, controller.playerHand);
+			}
+		});
+		controller.playerHand.setOnDragOver(new EventHandler <DragEvent>() {
+			public void handle(DragEvent event) {
+				controller.dragOver(event, controller.playerHand);
+			}
+		});
+		controller.playerHand.setOnDragDone(new EventHandler <DragEvent>() {
+			public void handle(DragEvent event) {
+				controller.dragDone(event, controller.playerHand);
+			}
+		});
 	}
 
 	

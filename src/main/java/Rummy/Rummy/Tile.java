@@ -1,7 +1,8 @@
 package Rummy.Rummy;
 
+import java.io.Serializable;
 
-public class Tile implements Comparable<Tile>{
+public class Tile implements Comparable<Tile>, Serializable {
 	private Color color;
 	//Ace =1, j-K = 11-13
 	private int value;

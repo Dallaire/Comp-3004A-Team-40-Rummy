@@ -2,16 +2,21 @@ package Rummy.Rummy;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
+import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TitledPane;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DataFormat;
+import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
@@ -32,6 +37,9 @@ public class MainController {
 	public Button endButton;
 	public Button nextButton;
 	public ListView tableList;
+	
+	static final DataFormat TILE_LIST = new DataFormat("TileList");
+
 	
 	public void setRigginComboBoxes() {
 		COLOR_SELECTOR.getItems().addAll(
@@ -84,14 +92,38 @@ public class MainController {
 	
 	public void populateTableList() {
 		tableList.getItems().clear();
-		for (ArrayList<Tile> meld: Table.getMelds()) {
+		for (int i =0; i<=Table.getMelds().size();i++) {
 			ListView<Tile> meldContents = new ListView<Tile>();
 			meldContents.setOrientation(Orientation.HORIZONTAL);
 			meldContents.setPrefHeight(30);
-			Collections.sort(meld, new valueComparator());
-			for (Tile tile: meld) {
-				meldContents.getItems().add(tile);
+			if(i == Table.getMelds().size()) {
+				ArrayList<Tile> meld = new ArrayList<Tile>();}
+			else {ArrayList<Tile> meld = Table.getMeld(i);
+				Collections.sort(meld, new valueComparator());
+				for (Tile tile: meld) {
+					meldContents.getItems().add(tile);
+				}
 			}
+			meldContents.setOnDragDetected(new EventHandler <MouseEvent>() {
+				public void handle(MouseEvent event) {
+					dragDetected(event,meldContents);
+				}
+			});
+			meldContents.setOnDragDropped(new EventHandler <DragEvent>() {
+				public void handle(DragEvent event) {
+					dragDropped(event, meldContents);
+				}
+			});
+			meldContents.setOnDragOver(new EventHandler <DragEvent>() {
+				public void handle(DragEvent event) {
+					dragOver(event, meldContents);
+				}
+			});
+			meldContents.setOnDragDone(new EventHandler <DragEvent>() {
+				public void handle(DragEvent event) {
+					dragDone(event, meldContents);
+				}
+			});
 			tableList.getItems().add(meldContents);
 		}
 	}
@@ -198,4 +230,57 @@ public class MainController {
                };
 	}
 	
+	public void dragDetected(MouseEvent event, ListView<Tile> listView) {
+		int selectCount = listView.getSelectionModel().getSelectedIndices().size();
+		if(selectCount == 0) {
+			event.consume();
+			return;}
+		Dragboard db = playerHand.startDragAndDrop(TransferMode.COPY_OR_MOVE);
+		ArrayList<Tile> selectedTiles = getSelectedTiles(listView);
+		ClipboardContent content = new ClipboardContent();
+		content.put(TILE_LIST, selectedTiles);
+		db.setContent(content);
+		event.consume();
+	}
+	
+	public void dragOver(DragEvent event, ListView<Tile> meld) {
+		Dragboard db = event.getDragboard();
+		if (event.getGestureSource() != meld && db.hasContent(TILE_LIST)) {
+			event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+		}
+		event.consume();
+	}
+	
+	public void dragDropped(DragEvent event, ListView<Tile> listView) {
+		boolean dragCompleted = false;
+		Dragboard db = event.getDragboard();
+		
+		if(db.hasContent(TILE_LIST)) {
+			ArrayList<Tile> t = (ArrayList<Tile>)db.getContent(TILE_LIST);
+			listView.getItems().addAll(t);
+			dragCompleted = true;
+		}
+		event.setDropCompleted(dragCompleted);
+		event.consume();
+	}
+	
+	public void dragDone(DragEvent event, ListView<Tile> listview) {
+		TransferMode tm = event.getTransferMode();
+		if (tm == TransferMode.MOVE);
+			removeSelectedTiles(listview);
+		event.consume();
+	}
+	
+	public ArrayList<Tile> getSelectedTiles(ListView<Tile> listView) {
+		ArrayList<Tile> list = new ArrayList<>(listView.getSelectionModel().getSelectedItems());
+		return list;
+	}
+	
+	public void removeSelectedTiles(ListView<Tile> listView) {
+		List<Tile> selected = new ArrayList<>();
+		for (Tile t: listView.getSelectionModel().getSelectedItems())
+			selected.add(t);
+		listView.getSelectionModel().clearSelection();
+		listView.getItems().removeAll(selected);
+	}
 }
