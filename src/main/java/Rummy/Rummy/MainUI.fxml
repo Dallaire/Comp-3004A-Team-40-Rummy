@@ -30,7 +30,7 @@
         </AnchorPane>
         <AnchorPane id="ANCHORPANE_TR" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
           <children>
-            <ListView prefHeight="370.0" prefWidth="298.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <ListView disable="false" prefHeight="370.0" prefWidth="298.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
           </children>
         </AnchorPane>
       </items>
@@ -41,7 +41,7 @@
           <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="297.0">
               <children>
-                <ProgressBar id="TIMER" layoutX="55.0" layoutY="47.0" prefWidth="200.0" progress="1.0" />
+                <ProgressBar id="TIMER" fx:id="timer" disable="false" layoutX="55.0" layoutY="47.0" prefWidth="200.0" progress="1.0" style="" />
               </children>
             </AnchorPane>
           </content>
@@ -52,9 +52,9 @@
       <content>
         <GridPane>
           <children>
-            <HBox id="HBOX_PLAYERHAND" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2" />
-            <Button id="NEXTPLAYER_BUTTON" mnemonicParsing="false" text="Next player" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Button id="ENDTURN_BUTTON" mnemonicParsing="false" text="End Turn" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <HBox id="HBOX_PLAYERHAND" disable="false" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2" />
+            <Button id="NEXTPLAYER_BUTTON" mnemonicParsing="false" onAction="#onClickNextPlayer" text="Next player" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Button id="ENDTURN_BUTTON" mnemonicParsing="false" onAction="#onClickEndTurn" text="End Turn" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
           </children>
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

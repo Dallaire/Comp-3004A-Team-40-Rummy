@@ -1,6 +1,10 @@
 package Rummy.Rummy;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Task;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
@@ -11,6 +15,7 @@ public class MainController {
 	public ComboBox<String> COLOR_SELECTOR;
 	public ComboBox<Integer> NUMBER_SELECTOR;
 	public VBox infoBox;
+	public ProgressBar timer;
 	
 	public void setRigginComboBoxes() {
 		COLOR_SELECTOR.getItems().addAll(
@@ -61,5 +66,41 @@ public class MainController {
 	
 	public void onClickEndTurn() {
 		
+	}
+	
+	public void onClickNextPlayer() {
+		Table.nextMove();
+	}
+	
+	public void timerBinding() {
+		timer.progressProperty().addListener(new ChangeListener<Number>() {
+         @Override
+         public void changed(ObservableValue<? extends Number> ov, Number t, Number t1) {
+             
+             if(t1.doubleValue()==0){
+                 return;
+             	}
+         	}
+		});
+	}
+	
+	public void time() {
+		Task task = taskCreator(120);
+        timer.progressProperty().unbind();
+        timer.progressProperty().bind(task.progressProperty());
+        new Thread(task).start();
+	}
+	
+	private Task taskCreator(int seconds){
+        return new Task() {
+                   @Override
+                   protected Object call() throws Exception {
+                       for(int i=0; i<seconds;i++){
+                        Thread.sleep(1000);
+                        updateProgress(i+1, seconds);                    
+                       }
+                       return true;
+                   }
+               };
 	}
 }
