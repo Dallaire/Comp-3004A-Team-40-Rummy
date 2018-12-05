@@ -205,8 +205,8 @@ public class MainController {
 		Table.update();
 		ArrayList<ArrayList<Tile>> melds = null;
 		startHand = Table.getPlayer(Table.getWhosTurn()).getHand();
-		System.out.println(startHand);
-		System.out.println(Table.getPlayer(Table.getWhosTurn()).getHand());
+//		System.out.println(startHand);
+//		System.out.println(Table.getPlayer(Table.getWhosTurn()).getHand());
 		if (Table.getPlayer(Table.getWhosTurn()) instanceof FirstStrategy) {
 			melds = Table.getPlayer(Table.getWhosTurn()).playTurn();
 			if(melds != null) Table.getMelds().addAll(melds);
