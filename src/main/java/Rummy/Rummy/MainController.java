@@ -184,8 +184,8 @@ public class MainController {
 			}
 		}
 		startHand = Table.getPlayer(Table.getWhosTurn()).getHand();
-		System.out.println(startHand);
-		System.out.println(Table.getPlayer(Table.getWhosTurn()).getHand());
+//		System.out.println(startHand);
+//		System.out.println(Table.getPlayer(Table.getWhosTurn()).getHand());
 		populatePlayerHand();
 	}
 	
