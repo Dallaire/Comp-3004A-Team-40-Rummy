@@ -253,6 +253,11 @@ public final class Table {
 		}
 
 	}
+	
+	public static JRON getJRON() {
+		return jron;
+	}
+	
 	/**
 	 * Determine the order in which the players will play
 	 * Each player draws a tile the highest goes first

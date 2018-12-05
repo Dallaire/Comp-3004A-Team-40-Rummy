@@ -30,6 +30,8 @@ public class MainController {
 	//game rigging items
 	public ComboBox<String> COLOR_SELECTOR;
 	public ComboBox<Integer> NUMBER_SELECTOR;
+	
+	//event items
 	public VBox infoBox;
 	public ListView playerHand;
 	public ProgressBar timer;
@@ -37,6 +39,8 @@ public class MainController {
 	public Button endButton;
 	public Button nextButton;
 	public ListView<ListView<Tile>> tableList;
+	
+	private ArrayList<Tile> startHand;
 	
 	static final DataFormat TILE_LIST = new DataFormat("TileList");
 
@@ -152,6 +156,7 @@ public class MainController {
 		nextButton.setDisable(false);
 		convertHand();
 		convertTable();
+		//momento();
 	}
 	
 	public void onClickNextPlayer() {
@@ -178,7 +183,10 @@ public class MainController {
 				if(melds != null) Table.getMelds().addAll(melds);
 			}
 		}
-		
+		startHand = Table.getPlayer(Table.getWhosTurn()).getHand();
+		System.out.println(startHand);
+		System.out.println(Table.getPlayer(Table.getWhosTurn()).getHand());
+		populatePlayerHand();
 	}
 	
 	public void populatePlayerHand() {
@@ -196,6 +204,9 @@ public class MainController {
 		Table.setWhosTurn(0);
 		Table.update();
 		ArrayList<ArrayList<Tile>> melds = null;
+		startHand = Table.getPlayer(Table.getWhosTurn()).getHand();
+		System.out.println(startHand);
+		System.out.println(Table.getPlayer(Table.getWhosTurn()).getHand());
 		if (Table.getPlayer(Table.getWhosTurn()) instanceof FirstStrategy) {
 			melds = Table.getPlayer(Table.getWhosTurn()).playTurn();
 			if(melds != null) Table.getMelds().addAll(melds);
@@ -208,6 +219,7 @@ public class MainController {
 			melds = ((ThirdStrategy) Table.getPlayer(Table.getWhosTurn())).playTurn2();
 			if(melds != null) Table.getMelds().addAll(melds);
 		}
+		
 	}
 	
 	public void onClickStartUnrigged() {
@@ -218,6 +230,9 @@ public class MainController {
 		endButton.setDisable(false);
 		Table.update();
 		ArrayList<ArrayList<Tile>> melds = null;
+		startHand = Table.getPlayer(Table.getWhosTurn()).getHand();
+		System.out.println(startHand);
+		System.out.println(Table.getPlayer(Table.getWhosTurn()).getHand());
 		if (Table.getPlayer(Table.getWhosTurn()) instanceof PlayerStrategy) {
 			nextButton.setDisable(true);
 		}
@@ -233,6 +248,7 @@ public class MainController {
 			melds = ((ThirdStrategy) Table.getPlayer(Table.getWhosTurn())).playTurn2();
 			if(melds != null) Table.getMelds().addAll(melds);
 		}
+		populatePlayerHand();
 	}
 	
 	//timerBinding, time and Task code adapted from Life FX Youtube channel video: JavaFX 8 Tutorial - Progress Bar - #20
@@ -320,5 +336,25 @@ public class MainController {
 			selected.add(t);
 		listView.getSelectionModel().clearSelection();
 		listView.getItems().removeAll(selected);
+	}
+	
+	public void momento() {
+		boolean valid = true;
+		for (ArrayList<Tile> meld : Table.getMelds()) {
+			if (!MeldChecker.checkHand(meld)) {
+				valid = false;
+				break;
+			}
+		}
+		if(!valid) {
+			Table.getMelds().clear();
+			Table.getMelds().addAll(Table.getJRON().getMelds());
+			Table.getPlayer(Table.getWhosTurn()).getHand().clear();
+			Table.getPlayer(Table.getWhosTurn()).getHand().addAll(startHand);
+			Table.setFirst30(Table.getJRON().getFirstMeld());
+			for (int i = 0; i<3; i++)
+				Table.getPlayer(Table.getWhosTurn()).addTile(Table.getTile());
+		}
+		Table.update();
 	}
 }
