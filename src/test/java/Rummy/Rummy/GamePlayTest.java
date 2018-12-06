@@ -98,34 +98,34 @@ public class GamePlayTest extends TestCase{
 	
 	/**
 	 * Check that the down casting works*/
-	public void testPlayerTypes() {
+	/*public void testPlayerTypes() {
 		
 		assertEquals(true, Table.getPlayer(0) instanceof PlayerStrategy);
 		assertEquals(false, Table.getPlayer(1) instanceof PlayerStrategy);
 		assertEquals(false, Table.getPlayer(2) instanceof PlayerStrategy);
 		assertEquals(false, Table.getPlayer(3) instanceof PlayerStrategy);
-	}
+	}*/
 	
 	/***/
-	public void testRemoveTile() {
+	/*public void testRemoveTile() {
 		
 		Table.init();
 		PlayerStrategy p1 = (PlayerStrategy) Table.getPlayer(0);
 		p1.printTiles();
 		
 		
-	}
+	}*/
 	
 	
-	public void testAllDrawFromStock() {
-		Table.initPass("pass");
+	/*public void testAllDrawFromStock() {
+		//Table.initPass("pass");
 		Table.playNext();
 		Table.playNext();
 		Table.playNext();
 		Table.playNext();
 
 		
-	}
+	}*/
 	
 	/**
 	 * Test that the player can pass on a turn*/
@@ -136,10 +136,10 @@ public class GamePlayTest extends TestCase{
 	
 	/**
 	 * Test file input mode*/
-	public void testPlayerFileMode() {
+	/*public void testPlayerFileMode() {
 		Table.init8("8a");
 		PlayerStrategy player = (PlayerStrategy) Table.getPlayer(0);
 		String mode = player.getMode();
 		assertEquals("file", mode);
-	}
+	}*/
 }

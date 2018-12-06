@@ -3,8 +3,11 @@ package Rummy.Rummy;
 import java.io.IOException;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -39,8 +42,7 @@ public class Main extends Application{
 		mainLayout =loader.load();
 		
 		StartPageController controller= loader.getController();
-		//controller.main=
-		//mainLayout.getChildren((startPage);
+		
 		
 		Scene scene =new Scene(mainLayout);
 		primaryStage.setScene(scene);
@@ -53,15 +55,34 @@ public class Main extends Application{
 		
 		loader.setLocation(Main.class.getResource("MainUI.fxml"));
 		Pane MainPage=loader.load();
-		
+		MainController controller = loader.getController();
+		mainLayout.getChildren().clear();
 		mainLayout.getChildren().add(MainPage);
-		//StartPageController controller= loader.getController();
-		//mainLayout.getChildren((startPage);
-		
-//		Scene scene =new Scene(MainPage);
-//		primaryStage.setScene(scene);
-//		primaryStage.show();
+		controller.setRigginComboBoxes();
+		controller.populateInfoBox();
+		controller.timerBinding();
+		controller.playerPanel.setText(("Current Player: " + Table.getPlayer(Table.getWhosTurn()).getName()));
+		controller.endButton.setDisable(true);
+		controller.playerHand.setOnDragDetected(new EventHandler <MouseEvent>() {
+			public void handle(MouseEvent event) {
+				controller.dragDetected(event, controller.playerHand);
+			}
+		});
+		controller.playerHand.setOnDragDropped(new EventHandler <DragEvent>() {
+			public void handle(DragEvent event) {
+				controller.dragDropped(event, controller.playerHand);
+			}
+		});
+		controller.playerHand.setOnDragOver(new EventHandler <DragEvent>() {
+			public void handle(DragEvent event) {
+				controller.dragOver(event, controller.playerHand);
+			}
+		});
+		controller.playerHand.setOnDragDone(new EventHandler <DragEvent>() {
+			public void handle(DragEvent event) {
+				controller.dragDone(event, controller.playerHand);
+			}
+		});
 	}
-
 	
 }

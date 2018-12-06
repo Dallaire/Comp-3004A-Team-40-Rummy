@@ -14,21 +14,24 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
-public class Player {
+public class Player implements Comparable<Player>{
 	//Properties
-	private ArrayList<Tile> hand = new ArrayList<Tile>();
-	private String name;
+	protected ArrayList<Tile> hand = new ArrayList<Tile>();
+	protected String name;
 	protected ArrayList<Tile> meld = new ArrayList<Tile>();
 	protected JRON tableData = null;
 	protected boolean playedFirst30 = false;
 	protected boolean hasPlayed = false;
-	private boolean isLocal;
+	protected boolean isLocal;
+	protected int randomValue;
 	
 	//Constructor
 	public Player(String aName, boolean isLocal) {
 		this.name = aName;
 		this.isLocal = isLocal;
+		this.randomValue = ThreadLocalRandom.current().nextInt(0, 14);
 	}
 	
 	
@@ -63,7 +66,9 @@ public class Player {
 			return false;
 		}
 	}
-	
+	public int getRandomValue() {
+		return randomValue;
+	}
 	//Setters
 	public void setFirst30(boolean first30) {
 		this.playedFirst30 = first30;
@@ -79,7 +84,9 @@ public class Player {
 		}
 	}
 
-	
+	public void newRandomValue() {
+		this.randomValue = ThreadLocalRandom.current().nextInt(0, 14);
+	}
 	/**
 	 * sorts the hand
 	 * */
@@ -120,27 +127,6 @@ public class Player {
 		for (int i = 0; i < meld.size(); i++) {
 			hand.add(meld.get(i));
 		}
-	}
-	/**
-	 * checks if the given meld is greater than of equal 30*/
-	
-	public void customFillHand() {
-		hand.add(new Tile(Color.B,1 ));
-		hand.add(new Tile(Color.B,2 ));
-		hand.add(new Tile(Color.O,6 ));
-		hand.add(new Tile(Color.O,7 ));
-		hand.add(new Tile(Color.O,8 ));
-		hand.add(new Tile(Color.O,12 ));
-		hand.add(new Tile(Color.G,5));
-		hand.add(new Tile(Color.G,7 ));
-		hand.add(new Tile(Color.G,8 ));
-		hand.add(new Tile(Color.R,1 ));
-		hand.add(new Tile(Color.R,4 ));
-		hand.add(new Tile(Color.R,8 ));
-		hand.add(new Tile(Color.R,9 ));
-		hand.add(new Tile(Color.R,10 ));
-		hand.add(new Tile(Color.R,11 ));
-		//hand.add(new Tile(Color.R,1 ));		
 	}
 	
 	/**
@@ -205,17 +191,27 @@ public class Player {
 		for (int i=0; i<hand.size()-1;i++) {
 			temp.add(tempHand.get(i));
 			for(int j=i+1;j<hand.size();j++) {
-				if(MeldChecker.checkColor(temp.get(temp.size()-1), tempHand.get(j))
+				if (temp.get(temp.size()-1).getValue() - tempHand.get(j).getValue() == -2 
+						&& temp.get(temp.size()-1).getColor() == tempHand.get(j).getColor()
+						&& tempHand.get(tempHand.size()-1).getValue() == 0) {
+					temp.add(tempHand.get(j));
+					tempHand.get(tempHand.size()-1).setMask(temp.get(temp.size()-1).getValue() + 1);
+					temp.add(tempHand.get(tempHand.size()-1));
+				}
+				
+				else if(temp.get(temp.size()-1).equals(tempHand.get(j))) {
+					continue;
+				}
+				else if(MeldChecker.checkColor(temp.get(temp.size()-1), tempHand.get(j))
 				&&MeldChecker.checkDifference(temp.get(temp.size()-1), tempHand.get(j))) {
 					if (!temp.contains(tempHand.get(j))) {
 						temp.add(tempHand.get(j));
 					}
 				}
-				else if(temp.get(temp.size()-1).equals(tempHand.get(j))) {
-					continue;
-				}
 			}
 			if(temp.size()>=3) {
+				Collections.sort(temp, new valueComparator());
+				System.out.println(temp);
 				if (hand.containsAll(tempHand)) {
 					hand.removeAll(temp);
 				} else {
@@ -313,8 +309,8 @@ public class Player {
 	/**
 	 * Print the tiles in the current players hand*/
 	public void printTiles() {
-		Collections.sort(hand,new valueComparator());
-		Collections.sort(hand,new colourCompataror());
+		//Collections.sort(hand,new valueComparator());
+		//Collections.sort(hand,new colourCompataror());
 		String meldsToString = hand.toString();
 		meldsToString = "{ " +  meldsToString.substring(1, meldsToString.length() -1) + " }";
 		System.out.println(this.name + "'s cards: " + meldsToString);
@@ -359,6 +355,21 @@ public class Player {
 	public boolean isLocal() {
 		// TODO Auto-generated method stub
 		return this.isLocal;
+	}
+
+
+	@Override
+	/**
+	 * Compares the player names to determine if a player is itself*/
+	public int compareTo(Player o) {
+		// TODO Auto-generated method stub
+		if(this.getName().equals(o.getName()))
+			return 0;
+		return -1;
+	}
+	
+	public String toString() {
+		return this.getName();
 	}
 		
 }

@@ -19,8 +19,8 @@ import java.io.*;
 public final class Table {
 	
 	//Table variables
-	static private ArrayList<Player> players;
-	static private Deck stock;
+	static private ArrayList<Player> players = new ArrayList<Player>();
+	static private Deck stock = null;
 	static private ArrayList<ArrayList<Tile>> melds = new ArrayList<ArrayList<Tile>>();
 	static private boolean firstMeld = false;
 	static private boolean threeLess = false;
@@ -60,6 +60,22 @@ public final class Table {
 		((PlayerStrategy) players.get(0)).setMode("file");
 		((PlayerStrategy) players.get(0)).setFile(f);
 		
+	}
+	
+	static public void initStrat4() {
+		//loadPlayers();
+		players = new ArrayList<Player>();
+		players.add(new FourthStrategy("AI4-1", true));
+		players.add(new FourthStrategy("AI4-2", true));
+		players.add(new ThirdStrategy("AI3-1", true));
+		players.add(new ThirdStrategy("AI3-2", true));
+		loadDeck();
+		//tileDraw();
+		shareCards();
+		update();
+		for (Player x: players) {
+			x.printTiles();
+		}
 	}
 	
 	/**
@@ -232,11 +248,16 @@ public final class Table {
 				players.add(new ThirdStrategy("AI3-"+i, true));	
 			} 
 			else {//create a StratFour
-				players.add(new SecondStrategy("AI4-"+i, true));	
+				players.add(new FourthStrategy("AI4-"+i, true));	
 			}
 		}
 
 	}
+	
+	public static JRON getJRON() {
+		return jron;
+	}
+	
 	/**
 	 * Determine the order in which the players will play
 	 * Each player draws a tile the highest goes first
@@ -286,6 +307,7 @@ public final class Table {
     	
     	System.out.println("End of tile draw");
     	System.out.println("------------------------------------ \n");
+    	stock.addTiles(tileMap);
 	}
 	
 	/**
@@ -314,6 +336,10 @@ public final class Table {
 		return players.get(i);
 		
 	}
+	
+	static public ArrayList<Player> getPlayers(){
+		return players;
+	}
 	/**
 	 * Returns the number of players in the game
 	 * player - ArrayList of players
@@ -337,6 +363,14 @@ public final class Table {
 		return melds.size();
 	}
 	
+	//get index of current player
+	static public int getWhosTurn() {
+		return whosTurn;
+	}
+	
+	static public void setWhosTurn(int i) {
+		whosTurn = i;
+	}
 	/**
 	 *  Gets a meld by its index
 	 *  @i - index of tile
@@ -368,8 +402,9 @@ public final class Table {
 	 * @stock - a collection of Tiles
 	 * */
 	static public Tile getTile() {
-
-		return getStock().geTile(getStock().getSize()-1);
+		if (getStock() != null  && getStock().getSize() != 0)
+			return getStock().geTile(getStock().getSize()-1);
+		else return null;
 	}
 	
 	static public void displayStock() {
@@ -415,7 +450,8 @@ public final class Table {
 	static public void nextMove() {
 		// TODO Auto-generated method stub
 		whosTurn++;
-		whosTurn%=4;
+		if (whosTurn >= players.size())
+			whosTurn=0;
 		
 	}
 	
@@ -580,16 +616,18 @@ public final class Table {
 		jron.setFirstMeld(getFirst());
 		jron.setMelds(getMelds());
 		jron.setStock(getStock());
-		
+		jron.setThreeLess(false);
 	       for (Player x:players) 
 	        { 
 	    	   	// update threeLess for the ThirdStrategy
-	            if(players.get(3).getHand().size() - x.getHand().size() == 3)
+	            if(x instanceof ThirdStrategy)
 	            {
+	            	for (Player y: players) {
+	            		if (x.getHand().size() - y.getHand().size() >= 3)
+	            			jron.setThreeLess(true);
+	            	}
 	            	if(x.getHand().size() == 0)
 	            			setWinner(true);
-	            	threeLess = true;
-	            	jron.setThreeLess(threeLess);
 	            }
 	        } 
 		

@@ -9,21 +9,34 @@ public class SecondStratTests extends TestCase {
 	public void testWait30() {
 		Table.init();
 		Table.getMelds().clear();
-		SecondStrategy player = (SecondStrategy)Table.getPlayer(2);
-		JRON jron = new JRON(Table.getMelds(),false,Table.getThreeLess(), "update", Table.getStock());
+		SecondStrategy player = null;
+		for (Player x:Table.getPlayers()) {
+			if (x instanceof SecondStrategy) {
+				player = (SecondStrategy)x;
+				break;
+			}
+		}
+		if (player != null) {		JRON jron = new JRON(Table.getMelds(),false,Table.getThreeLess(), "update", Table.getStock());
 		player.update(jron);
 		int handsize1 = player.getHand().size();
 		player.playTurn2();
 		int handsize2 = player.getHand().size();
 		assertTrue(Table.getMelds().isEmpty());
-		assertEquals(1, handsize2-handsize1);
+		assertEquals(1, handsize2-handsize1);}
 	}
 	
 	public void testPlay30isTrue() {
 		Table.init();
 		Table.getMelds().clear();
 		Table.setFirst30(true);
-		SecondStrategy player = (SecondStrategy)Table.getPlayer(2);
+		SecondStrategy player = null;
+		for (Player x:Table.getPlayers()) {
+			if (x instanceof SecondStrategy) {
+				player = (SecondStrategy)x;
+				break;
+			}
+		}
+		if (player != null) {
 		JRON jron = new JRON(Table.getMelds(),Table.getFirst(),Table.getThreeLess(), "update",Table.getStock());
 		player.update(jron);
 		int handsize1 = player.getHand().size();
@@ -34,7 +47,7 @@ public class SecondStratTests extends TestCase {
 			assertEquals(1, handsize2-handsize1);
 		}
 		else {
-			assertFalse(Table.getMelds().isEmpty());
+			assertFalse(Table.getMelds().isEmpty());}
 		}
 	}
 	
@@ -42,7 +55,14 @@ public class SecondStratTests extends TestCase {
 		Table.init();
 		Table.loadPlayers();
 		Table.getMelds().clear();
-		SecondStrategy player = (SecondStrategy)Table.getPlayer(2);
+		SecondStrategy player = null;
+		for (Player x:Table.getPlayers()) {
+			if (x instanceof SecondStrategy) {
+				player = (SecondStrategy)x;
+				break;
+			}
+		}
+		if (player != null) {
 		player.getHand().clear();
 		player.addTile(new Tile(Color.B, 1));
 		player.addTile(new Tile(Color.B, 2));
@@ -60,14 +80,21 @@ public class SecondStratTests extends TestCase {
 		player.setFirst30(true);
 		player.playTurn2();
 		
-		assertTrue(player.getHand().isEmpty());
+		assertTrue(player.getHand().isEmpty());}
 	}
 	
 	public void testPlayAllTilesWithTable() {
 		Table.init();
 		Table.loadPlayers();
 		Table.getMelds().clear();
-		SecondStrategy player = (SecondStrategy)Table.getPlayer(2);
+		SecondStrategy player = null;
+		for (Player x:Table.getPlayers()) {
+			if (x instanceof SecondStrategy) {
+				player = (SecondStrategy)x;
+				break;
+			}
+		}
+		if (player != null) {
 		player.getHand().clear();
 		player.addTile(new Tile(Color.B, 1));
 		player.addTile(new Tile(Color.B, 2));
@@ -90,6 +117,6 @@ public class SecondStratTests extends TestCase {
 		player.update(new JRON(new ArrayList<ArrayList<Tile>>(),true,false, "update", Table.getStock()));
 		player.setFirst30(true);
 		player.playTurn2();
-		assertTrue(player.getHand().isEmpty());
+		assertTrue(player.getHand().isEmpty());}
 	}
 }

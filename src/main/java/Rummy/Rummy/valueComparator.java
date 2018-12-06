@@ -12,9 +12,9 @@ public class valueComparator implements Comparator<Tile> {
 		 	Color c2 = o2.getColor();
 		 	int comp;
 		 	if (c1 == null) 
-		 		comp = -1;
-		 	else if (c2 == null)
 		 		comp = 1;
+		 	else if (c2 == null)
+		 		comp = -1;
 		 	else comp = c1.compareTo(c2);
 		 	
 		 	if (comp != 0) {return comp;}
@@ -23,6 +23,8 @@ public class valueComparator implements Comparator<Tile> {
 		 	if (i1 == 0) i1 = o1.getMask();
 		 	Integer i2 = o2.getValue();
 		 	if (i2 == 0) i2 = o2.getMask();
+		 	if(i1 == 0) return 1;
+		 	if (i2 == 0) return -1;
 	        return i1.compareTo(i2);
 	    }
 		

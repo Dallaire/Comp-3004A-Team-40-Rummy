@@ -7,7 +7,6 @@ import java.util.Random;
 
 public class Deck {
 	private ArrayList<Tile> tiles;
-	private Random rn = new Random();
 	
 	public Deck() {
 		this.tiles = new ArrayList<Tile>();
@@ -57,7 +56,14 @@ public class Deck {
 	public Tile getRandomTile() {
 		// TODO Auto-generated method stub
 		
-		return tiles.remove(rn.nextInt(14));
+		return tiles.remove(0);
+	}
+
+	public void addTiles(ArrayList<Tile> tileMap) {
+		// TODO Auto-generated method stub
+		for (Tile tile: tileMap)
+			tiles.add(tile);
+		
 	}
 
 	

@@ -1,11 +1,12 @@
 package Rummy.Rummy;
 
+import java.io.Serializable;
 
-public class Tile implements Comparable<Tile>{
+public class Tile implements Comparable<Tile>, Serializable {
 	private Color color;
 	//Ace =1, j-K = 11-13
 	private int value;
-	private int maskValue;
+	private int maskValue = 0;
 
 	public Tile(Color aColor, int aValue) {
 		this.color = aColor;
@@ -28,6 +29,7 @@ public class Tile implements Comparable<Tile>{
 	}
 	
 	public String toString() {
+		if (value == 0) return "J";
 		return color.toString() + String.valueOf(value);
 	}
 	
@@ -57,14 +59,16 @@ public class Tile implements Comparable<Tile>{
 	 	Color c2 = otherTile.getColor();
 	 	int comp = c1.compareTo(c2);
 	 	
+	 	// Compare by color if the ranks differ
 	 	if (comp != 0) {return comp;}
 	 	
-	 	//Compare the Tiles by value
+	 	//Compare the Tiles by value if the color is the same
 	 	if (this.getValue() > otherTile.getValue() || this.getValue() == 0) {
 	 		return -1;
 	 	}
+	 	// The colors are the same and the value is the same
 	 	else {
-	 		return 1;
+	 		return 0;
 	 	}	
 		
 	}
